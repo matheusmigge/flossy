@@ -11,6 +11,7 @@
 		56C33DF92B3CAA1000D8DEB7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C33DF82B3CAA1000D8DEB7 /* ContentView.swift */; };
 		56C33DFB2B3CAA1500D8DEB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56C33DFA2B3CAA1500D8DEB7 /* Assets.xcassets */; };
 		56C33DFF2B3CAA1500D8DEB7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56C33DFE2B3CAA1500D8DEB7 /* Preview Assets.xcassets */; };
+		56C33E082B3CAC8800D8DEB7 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C33E072B3CAC8800D8DEB7 /* ContentViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		56C33DFA2B3CAA1500D8DEB7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		56C33DFC2B3CAA1500D8DEB7 /* DidIFloss.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DidIFloss.entitlements; sourceTree = "<group>"; };
 		56C33DFE2B3CAA1500D8DEB7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		56C33E072B3CAC8800D8DEB7 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			children = (
 				56C33DF62B3CAA1000D8DEB7 /* DidIFlossApp.swift */,
 				56C33DF82B3CAA1000D8DEB7 /* ContentView.swift */,
+				56C33E072B3CAC8800D8DEB7 /* ContentViewModel.swift */,
 				56C33DFA2B3CAA1500D8DEB7 /* Assets.xcassets */,
 				56C33DFC2B3CAA1500D8DEB7 /* DidIFloss.entitlements */,
 				56C33DFD2B3CAA1500D8DEB7 /* Preview Content */,
@@ -141,6 +144,7 @@
 			files = (
 				56C33DF92B3CAA1000D8DEB7 /* ContentView.swift in Sources */,
 				56C33DF72B3CAA1000D8DEB7 /* DidIFlossApp.swift in Sources */,
+				56C33E082B3CAC8800D8DEB7 /* ContentViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

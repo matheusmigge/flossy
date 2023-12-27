@@ -8,14 +8,41 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject var viewModel = ContentViewModel()
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            
+            Text("Did I Floss?")
+                .font(.title)
+                .bold()
+                .padding(.top, 100)
+                .padding(.bottom, 20)
+
+                        
+            Text("Last time you flossed:")
+                .font(.caption)
+            Text("\(viewModel.formatedLastFloss)")
+
+            Spacer()
+                      
+            Text("How many times you flossed until now:")
+                .font(.caption2)
+            
+            Text("\(viewModel.formatedFlossCount)")
+                .font(.title)
+                .bold()
+            
+            Spacer()
+
+            
+            Button("I've flossed! 🎉") {
+                viewModel.flossButtonPressed()
+            }
+            .buttonStyle(.borderedProminent)
+            .padding(.bottom, 50)
         }
-        .padding()
     }
 }
 
