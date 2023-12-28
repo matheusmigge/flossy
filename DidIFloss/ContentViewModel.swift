@@ -9,23 +9,26 @@ import Foundation
 
 class ContentViewModel: ObservableObject {
     
+    let persistance: PersistanceManager = PersistanceManager()
+    
     // MARK: Published variables
     
-    @Published private var lastFloss: Date?
-    @Published private var flossCount: Int?
+    @Published private var lastFlossDate: Date?
+    @Published private var flossCount: Int
     
     // MARK: Init
     
-    init(lastFloss: Date? = nil, flossCount: Int? = nil) {
-        self.lastFloss = lastFloss
-        self.flossCount = flossCount
+    init() {
+        
+        self.lastFlossDate = persistance.getLastFlossDate()
+        self.flossCount = persistance.getFlossCount()
     }
     
     // MARK: Public variables and methods
     
     var formatedLastFloss: String {
         
-        guard let safeDate = lastFloss else {
+        guard let safeDate = lastFlossDate else {
             return "You haven't flossed yet!"
         }
         
@@ -48,25 +51,33 @@ class ContentViewModel: ObservableObject {
     
     var formatedFlossCount: String {
         
-        guard let safeFlossCount = flossCount else {
+        if flossCount == 0 {
             return "You haven't flossed yet!"
+        } else {
+            return "\(flossCount)"
         }
-        
-        return "\(safeFlossCount)"
-        
-        //        if let safeFlossCount = flossCount {
-        //            return "\(safeFlossCount)"
-        //        }
     }
     
     func flossButtonPressed() {
         
-        self.lastFloss = Date()
-        
-        if let safeFlossCount = flossCount {
-            self.flossCount = safeFlossCount + 1
-        } else {
-            self.flossCount = 1
+        self.updateInfo()
+        self.saveToPersistance()
+    }
+    
+    // MARK: Private methods
+    
+    private func updateInfo() {
+        self.lastFlossDate = Date()
+        self.flossCount += 1
+    }
+    
+    private func saveToPersistance() {
+        guard let safeLastFlossDate = lastFlossDate else {
+            print("Error: last floss date is null.")
+            return
         }
+        
+        persistance.saveFlossCount(flossCount)
+        persistance.saveLastFlossDate(date: safeLastFlossDate)
     }
 }
