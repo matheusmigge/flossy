@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		5625BFD52B439A5C006F88BD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5625BFD42B439A5C006F88BD /* README.md */; };
+		562749CC2B43A5C2004F37A0 /* Borel-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 562749CB2B43A5C1004F37A0 /* Borel-Regular.ttf */; };
+		562749D02B43AD61004F37A0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562749CF2B43AD61004F37A0 /* Constants.swift */; };
+		566FF8CB2B439FB70056644A /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566FF8CA2B439FB70056644A /* HomeScreenView.swift */; };
+		567999182B447E7A00941D75 /* ToothView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567999172B447E7A00941D75 /* ToothView.swift */; };
 		56C33DF72B3CAA1000D8DEB7 /* DidIFlossApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C33DF62B3CAA1000D8DEB7 /* DidIFlossApp.swift */; };
 		56C33DF92B3CAA1000D8DEB7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C33DF82B3CAA1000D8DEB7 /* ContentView.swift */; };
 		56C33DFB2B3CAA1500D8DEB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56C33DFA2B3CAA1500D8DEB7 /* Assets.xcassets */; };
@@ -18,6 +22,11 @@
 
 /* Begin PBXFileReference section */
 		5625BFD42B439A5C006F88BD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		562749CB2B43A5C1004F37A0 /* Borel-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Borel-Regular.ttf"; sourceTree = "<group>"; };
+		562749CE2B43A64C004F37A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		562749CF2B43AD61004F37A0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		566FF8CA2B439FB70056644A /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
+		567999172B447E7A00941D75 /* ToothView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToothView.swift; sourceTree = "<group>"; };
 		56C33DF32B3CAA1000D8DEB7 /* DidIFloss.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DidIFloss.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56C33DF62B3CAA1000D8DEB7 /* DidIFlossApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidIFlossApp.swift; sourceTree = "<group>"; };
 		56C33DF82B3CAA1000D8DEB7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -39,6 +48,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		562749CD2B43A603004F37A0 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				562749CB2B43A5C1004F37A0 /* Borel-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		567999192B4480A500941D75 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				56C33DF82B3CAA1000D8DEB7 /* ContentView.swift */,
+				566FF8CA2B439FB70056644A /* HomeScreenView.swift */,
+				5679991A2B4480C200941D75 /* Components */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5679991A2B4480C200941D75 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				567999172B447E7A00941D75 /* ToothView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		5679991B2B4480F400941D75 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				56C33E072B3CAC8800D8DEB7 /* ContentViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		56C33DEA2B3CAA1000D8DEB7 = {
 			isa = PBXGroup;
 			children = (
@@ -59,12 +102,15 @@
 		56C33DF52B3CAA1000D8DEB7 /* DidIFloss */ = {
 			isa = PBXGroup;
 			children = (
+				562749CE2B43A64C004F37A0 /* Info.plist */,
 				56C33DF62B3CAA1000D8DEB7 /* DidIFlossApp.swift */,
-				56C33DF82B3CAA1000D8DEB7 /* ContentView.swift */,
-				56C33E072B3CAC8800D8DEB7 /* ContentViewModel.swift */,
 				56C33E092B3CCA9E00D8DEB7 /* PersistanceManager.swift */,
+				567999192B4480A500941D75 /* Views */,
+				5679991B2B4480F400941D75 /* ViewModels */,
 				56C33DFA2B3CAA1500D8DEB7 /* Assets.xcassets */,
+				562749CF2B43AD61004F37A0 /* Constants.swift */,
 				56C33DFC2B3CAA1500D8DEB7 /* DidIFloss.entitlements */,
+				562749CD2B43A603004F37A0 /* Fonts */,
 				56C33DFD2B3CAA1500D8DEB7 /* Preview Content */,
 			);
 			path = DidIFloss;
@@ -136,6 +182,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				562749CC2B43A5C2004F37A0 /* Borel-Regular.ttf in Resources */,
 				5625BFD52B439A5C006F88BD /* README.md in Resources */,
 				56C33DFF2B3CAA1500D8DEB7 /* Preview Assets.xcassets in Resources */,
 				56C33DFB2B3CAA1500D8DEB7 /* Assets.xcassets in Resources */,
@@ -149,10 +196,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				567999182B447E7A00941D75 /* ToothView.swift in Sources */,
 				56C33DF92B3CAA1000D8DEB7 /* ContentView.swift in Sources */,
 				56C33DF72B3CAA1000D8DEB7 /* DidIFlossApp.swift in Sources */,
+				566FF8CB2B439FB70056644A /* HomeScreenView.swift in Sources */,
 				56C33E082B3CAC8800D8DEB7 /* ContentViewModel.swift in Sources */,
 				56C33E0A2B3CCA9E00D8DEB7 /* PersistanceManager.swift in Sources */,
+				562749D02B43AD61004F37A0 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +336,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DidIFloss/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Did I Floss?";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -305,7 +356,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Matheus-Migge.DidIFloss";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -325,6 +377,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DidIFloss/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Did I Floss?";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -344,7 +397,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Matheus-Migge.DidIFloss";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
