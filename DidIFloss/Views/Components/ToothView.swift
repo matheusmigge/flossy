@@ -35,13 +35,13 @@ struct ToothView: View {
                 .frame(height: 220)
                 .rotationEffect(.degrees(isRotating ? -10 : 10))
                 .animation(.easeInOut(duration: 3).repeatForever(autoreverses: true), value: isRotating)
-                .offset(x: isMoving ? 0 : -700)
+                .offset(x: isMoving ? 0 : -900)
                 .animation(.spring(.bouncy, blendDuration: 3), value: isMoving)
         }
         .ignoresSafeArea()
         .onAppear {
             isRotating = true
-            DispatchQueue.main.asyncAfter(deadline: .now()){
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1){
                 isMoving = true
             }
         }
