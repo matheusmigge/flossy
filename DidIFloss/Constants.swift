@@ -13,6 +13,7 @@ struct Constants {
         static let skyBlue = "sky-blue"
         static let lightYellow = "light-yellow"
         static let flamingoPink = "flamingo-pink"
+        static let greenyBlue = "greeny-blue"
     }
     
     struct FontNames {
@@ -29,4 +30,5 @@ extension Color {
     static let flossSkyBlue = Color(Constants.ColorNames.skyBlue)
     static let flossLightYellow = Color(Constants.ColorNames.lightYellow)
     static let flossFlamingoPink = Color(Constants.ColorNames.flamingoPink)
+    static let flossGreenyBlue = Color(Constants.ColorNames.greenyBlue)
 }
