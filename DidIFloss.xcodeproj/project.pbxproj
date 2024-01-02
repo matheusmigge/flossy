@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5625BFD52B439A5C006F88BD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5625BFD42B439A5C006F88BD /* README.md */; };
 		56C33DF72B3CAA1000D8DEB7 /* DidIFlossApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C33DF62B3CAA1000D8DEB7 /* DidIFlossApp.swift */; };
 		56C33DF92B3CAA1000D8DEB7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C33DF82B3CAA1000D8DEB7 /* ContentView.swift */; };
 		56C33DFB2B3CAA1500D8DEB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56C33DFA2B3CAA1500D8DEB7 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5625BFD42B439A5C006F88BD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		56C33DF32B3CAA1000D8DEB7 /* DidIFloss.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DidIFloss.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56C33DF62B3CAA1000D8DEB7 /* DidIFlossApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidIFlossApp.swift; sourceTree = "<group>"; };
 		56C33DF82B3CAA1000D8DEB7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -40,6 +42,7 @@
 		56C33DEA2B3CAA1000D8DEB7 = {
 			isa = PBXGroup;
 			children = (
+				5625BFD42B439A5C006F88BD /* README.md */,
 				56C33DF52B3CAA1000D8DEB7 /* DidIFloss */,
 				56C33DF42B3CAA1000D8DEB7 /* Products */,
 			);
@@ -133,6 +136,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5625BFD52B439A5C006F88BD /* README.md in Resources */,
 				56C33DFF2B3CAA1500D8DEB7 /* Preview Assets.xcassets in Resources */,
 				56C33DFB2B3CAA1500D8DEB7 /* Assets.xcassets in Resources */,
 			);
