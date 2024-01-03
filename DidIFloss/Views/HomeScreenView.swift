@@ -16,7 +16,7 @@ struct HomeScreenView: View {
                 
                 Color.flossSkyBlue
                 
-                toothExactlyPositions
+                toothDeterminedPositions
                 
                 homeScreenTextContent
                 
@@ -48,15 +48,15 @@ struct HomeScreenView: View {
             NavigationLink {
                 ContentView()
             } label: {
-                Text("enter")
+                Text("Enter")
                     .font(.system(size: 25))
                     .fontWeight(.black)
-                    .foregroundStyle(Color.black)
+                    .foregroundStyle(Color.flossSkyBlue)
                     .padding(.horizontal,80)
                     .padding(.vertical,20)
                     .background(Color.flossLightYellow)
                     .cornerRadius(20)
-                    .shadow(color: Color.primary.opacity(0.5), radius: 5)
+                    .shadow(color: Color.flossLightYellow, radius: 5)
             }
             .buttonStyle(.plain)
             
@@ -65,7 +65,7 @@ struct HomeScreenView: View {
         }
     }
     
-    var toothExactlyPositions: some View {
+    var toothDeterminedPositions: some View {
         ZStack {
             ToothView(style: .pink)
                 .offset(x: -170,y: -340)
@@ -94,8 +94,6 @@ struct HomeScreenView: View {
             ToothView(style: .pink)
                 .offset(x: 80,y: 400)
         }
-        
-        
     }
 }
 
