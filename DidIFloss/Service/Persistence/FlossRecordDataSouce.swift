@@ -11,7 +11,6 @@ import SwiftData
 @MainActor
 final class FlossRecordDataSouce: FlossRecordDataProvider {
     
-    
     let modelContainer: ModelContainer?
     
     static let shared = FlossRecordDataSouce()
@@ -57,6 +56,17 @@ final class FlossRecordDataSouce: FlossRecordDataProvider {
         context?.delete(record)
     }
     
+    @MainActor
+    func eraseRecords() {
+        Task {
+            let records = self.fetchRecords()
+            records.forEach { record in
+                self.removeRecord(record)
+            }
+
+        }
+    }
+    
 }
 
 protocol FlossRecordDataProvider {
@@ -65,4 +75,6 @@ protocol FlossRecordDataProvider {
     func fetchRecords() async -> [FlossRecord]
     
     func removeRecord(_ record: FlossRecord) async
+    
+    func eraseRecords() async
 }

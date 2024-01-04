@@ -20,8 +20,14 @@ class PersistanceManager: PersistanceManagerProtocol {
     }
     
     
+    func getLastFlossDate() -> Date? {
+        return userDefaults.value(forKey: UserDefaultsKeys.date) as? Date
+    }
+    
     func getFlossRecords() async -> [FlossRecord] {
-        return await flossRecordService.fetchRecords()
+        let records = await flossRecordService.fetchRecords()
+        
+        return records.sorted(by: {$0.date > $1.date})
     }
     
     
@@ -29,7 +35,6 @@ class PersistanceManager: PersistanceManagerProtocol {
         Task {
             await flossRecordService.removeRecord(record)
         }
-        
     }
     
     func saveLastFlossDate(date: Date) {
@@ -39,16 +44,11 @@ class PersistanceManager: PersistanceManagerProtocol {
         }
     }
 
-    func getLastFlossDate() -> Date? {
-        return userDefaults.value(forKey: UserDefaultsKeys.date) as? Date
-    }
-    
     func appendFlossRecord(_ record: FlossRecord) {
         Task {
             await flossRecordService.appendRecord(record)
         }
     }
-    
 
     func saveFlossCount(_ count: Int) {
         userDefaults.set(count, forKey: UserDefaultsKeys.count)
@@ -58,10 +58,14 @@ class PersistanceManager: PersistanceManagerProtocol {
         return userDefaults.integer(forKey: UserDefaultsKeys.count)
     }
     
+    func eraseData() {
+        userDefaults.set(0, forKey: UserDefaultsKeys.count)
+        userDefaults.set(nil, forKey: UserDefaultsKeys.date)
+        
+        Task {
+           await flossRecordService.eraseRecords()
+        }
+    }
+    
 }
-
-
-
-
-
 

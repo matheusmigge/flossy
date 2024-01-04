@@ -21,6 +21,8 @@ protocol PersistanceManagerProtocol {
     func appendFlossRecord(_ record: FlossRecord)
     
     func deleteFlossRecord(_ record: FlossRecord)
+    
+    func eraseData()
 }
 
 
