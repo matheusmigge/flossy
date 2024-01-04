@@ -6,12 +6,17 @@
 //
 
 import Foundation
+import SwiftUI
 
 class ContentViewModel: ObservableObject {
     
+    
     let persistance: PersistanceManager = PersistanceManager()
+    let recordService: FlossRecordDataSouce = FlossRecordDataSouce.shared
     
     // MARK: Published variables
+
+    @Published var records: [FlossRecord]
     
     @Published private var lastFlossDate: Date?
     @Published private var flossCount: Int
@@ -22,6 +27,8 @@ class ContentViewModel: ObservableObject {
         
         self.lastFlossDate = persistance.getLastFlossDate()
         self.flossCount = persistance.getFlossCount()
+        self.records = recordService.fetchItems()
+        
     }
     
     // MARK: Public variables and methods
@@ -64,9 +71,19 @@ class ContentViewModel: ObservableObject {
         self.saveToPersistance()
     }
     
+    public func dateFormtert(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .short
+        
+        return dateFormatter.string(from: date)
+    }
+    
     // MARK: Private methods
     
     private func updateInfo() {
+        self.recordService.appendItem(item: FlossRecord(date: .now))
+        self.records = recordService.fetchItems()
         self.lastFlossDate = Date()
         self.flossCount += 1
     }

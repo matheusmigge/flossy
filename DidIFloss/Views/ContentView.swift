@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+
     @StateObject var viewModel = ContentViewModel()
     
     var body: some View {
@@ -40,12 +40,25 @@ struct ContentView: View {
             Button("I've flossed! 🎉") {
                 viewModel.flossButtonPressed()
             }
+         
             .buttonStyle(.borderedProminent)
             .padding(.bottom, 50)
+        }
+        .toolbar {
+            NavigationLink {
+                List(viewModel.records, id: \.self) { record in
+                    Text(viewModel.dateFormtert(record.date))
+                }
+            } label: {
+                Text("Records")
+            }
         }
     }
 }
 
 #Preview {
-    ContentView()
+    NavigationView{
+        ContentView()
+    }
+   
 }
