@@ -6,51 +6,50 @@
 //
 
 import Foundation
+import SwiftUI
 
 class ContentViewModel: ObservableObject {
     
-    let persistance: PersistanceManager = PersistanceManager()
+    let persistance: PersistanceManagerProtocol
     
     // MARK: Published variables
-    
+
+    @Published var records: [FlossRecord] = []
     @Published private var lastFlossDate: Date?
-    @Published private var flossCount: Int
+    @Published private var flossCount: Int = 0
+    
     
     // MARK: Init
     
-    init() {
-        
-        self.lastFlossDate = persistance.getLastFlossDate()
-        self.flossCount = persistance.getFlossCount()
+    @MainActor
+    init(persistenceService: PersistanceManagerProtocol = PersistanceManager()) {
+        self.persistance = persistenceService
+    
+        self.loadRecords()
     }
+    
     
     // MARK: Public variables and methods
     
     var formatedLastFloss: String {
-        
         guard let safeDate = lastFlossDate else {
             return "You haven't flossed yet!"
         }
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .short
+        return dateFormater(safeDate)
+    }
+    
+    @MainActor
+    func loadRecords() {
+        self.lastFlossDate = persistance.getLastFlossDate()
+        self.flossCount = persistance.getFlossCount()
         
-        return dateFormatter.string(from: safeDate)
-        
-        //        if let safeDate = lastFloss {
-        //            let dateFormatter = DateFormatter()
-        //            dateFormatter.dateStyle = .medium
-        //            dateFormatter.timeStyle = .short
-        //
-        //            return dateFormatter.string(from: safeDate)
-        //        }
-        //
-        //        return "You haven't flossed yet!"
+        Task {
+            self.records = await persistance.getFlossRecords()
+        }
     }
     
     var formatedFlossCount: String {
-        
         if flossCount == 0 {
             return "You haven't flossed yet!"
         } else {
@@ -58,10 +57,18 @@ class ContentViewModel: ObservableObject {
         }
     }
     
+    @MainActor
     func flossButtonPressed() {
-        
         self.updateInfo()
         self.saveToPersistance()
+    }
+    
+    public func dateFormater(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .medium
+        
+        return dateFormatter.string(from: date)
     }
     
     // MARK: Private methods
@@ -71,6 +78,14 @@ class ContentViewModel: ObservableObject {
         self.flossCount += 1
     }
     
+    @MainActor
+    func eraseRecordsButtonPressed() {
+        persistance.eraseData()
+        loadRecords()
+    }
+    
+    
+    @MainActor
     private func saveToPersistance() {
         guard let safeLastFlossDate = lastFlossDate else {
             print("Error: last floss date is null.")
@@ -79,5 +94,7 @@ class ContentViewModel: ObservableObject {
         
         persistance.saveFlossCount(flossCount)
         persistance.saveLastFlossDate(date: safeLastFlossDate)
+        
+        loadRecords()
     }
 }

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C7E923B2B470DB00079525D /* UserDefaults+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923A2B470DB00079525D /* UserDefaults+Protocol.swift */; };
+		0C7E923D2B470DDB0079525D /* PersistenceManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */; };
+		0C7E923F2B470FD30079525D /* PersistenceManager+KEYS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923E2B470FD30079525D /* PersistenceManager+KEYS.swift */; };
+		0C8981F02B466223008CFD5D /* FlossRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8981EF2B466223008CFD5D /* FlossRecord.swift */; };
+		0C8981F42B4667AC008CFD5D /* FlossRecordDataSouce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8981F32B4667AC008CFD5D /* FlossRecordDataSouce.swift */; };
 		561DBA7C2B45DCF10052EE78 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBA7B2B45DCF10052EE78 /* BackgroundView.swift */; };
 		5625BFD52B439A5C006F88BD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5625BFD42B439A5C006F88BD /* README.md */; };
 		562749CC2B43A5C2004F37A0 /* Borel-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 562749CB2B43A5C1004F37A0 /* Borel-Regular.ttf */; };
@@ -22,6 +27,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C7E923A2B470DB00079525D /* UserDefaults+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Protocol.swift"; sourceTree = "<group>"; };
+		0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManagerProtocol.swift; sourceTree = "<group>"; };
+		0C7E923E2B470FD30079525D /* PersistenceManager+KEYS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistenceManager+KEYS.swift"; sourceTree = "<group>"; };
+		0C8981EF2B466223008CFD5D /* FlossRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecord.swift; sourceTree = "<group>"; };
+		0C8981F32B4667AC008CFD5D /* FlossRecordDataSouce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecordDataSouce.swift; sourceTree = "<group>"; };
 		561DBA7B2B45DCF10052EE78 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		5625BFD42B439A5C006F88BD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		562749CB2B43A5C1004F37A0 /* Borel-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Borel-Regular.ttf"; sourceTree = "<group>"; };
@@ -50,6 +60,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C7E92362B46FDD30079525D /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				0C7E923A2B470DB00079525D /* UserDefaults+Protocol.swift */,
+				0C8981F32B4667AC008CFD5D /* FlossRecordDataSouce.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		0C8981F12B4662F0008CFD5D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0C8981EF2B466223008CFD5D /* FlossRecord.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0C8981F22B466306008CFD5D /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				56C33E092B3CCA9E00D8DEB7 /* PersistanceManager.swift */,
+				0C7E923E2B470FD30079525D /* PersistenceManager+KEYS.swift */,
+				0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */,
+				0C7E92362B46FDD30079525D /* Persistence */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		562749CD2B43A603004F37A0 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,7 +145,8 @@
 			children = (
 				562749CE2B43A64C004F37A0 /* Info.plist */,
 				56C33DF62B3CAA1000D8DEB7 /* DidIFlossApp.swift */,
-				56C33E092B3CCA9E00D8DEB7 /* PersistanceManager.swift */,
+				0C8981F22B466306008CFD5D /* Service */,
+				0C8981F12B4662F0008CFD5D /* Model */,
 				567999192B4480A500941D75 /* Views */,
 				5679991B2B4480F400941D75 /* ViewModels */,
 				56C33DFA2B3CAA1500D8DEB7 /* Assets.xcassets */,
@@ -203,9 +242,14 @@
 				56C33DF92B3CAA1000D8DEB7 /* ContentView.swift in Sources */,
 				561DBA7C2B45DCF10052EE78 /* BackgroundView.swift in Sources */,
 				56C33DF72B3CAA1000D8DEB7 /* DidIFlossApp.swift in Sources */,
+				0C8981F02B466223008CFD5D /* FlossRecord.swift in Sources */,
 				566FF8CB2B439FB70056644A /* HomeScreenView.swift in Sources */,
+				0C7E923B2B470DB00079525D /* UserDefaults+Protocol.swift in Sources */,
+				0C8981F42B4667AC008CFD5D /* FlossRecordDataSouce.swift in Sources */,
+				0C7E923F2B470FD30079525D /* PersistenceManager+KEYS.swift in Sources */,
 				56C33E082B3CAC8800D8DEB7 /* ContentViewModel.swift in Sources */,
 				56C33E0A2B3CCA9E00D8DEB7 /* PersistanceManager.swift in Sources */,
+				0C7E923D2B470DDB0079525D /* PersistenceManagerProtocol.swift in Sources */,
 				562749D02B43AD61004F37A0 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,7 +380,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DidIFloss/Preview Content\"";
-				DEVELOPMENT_TEAM = P9D4UX94KC;
+				DEVELOPMENT_TEAM = 749Q737TF5;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -377,7 +421,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DidIFloss/Preview Content\"";
-				DEVELOPMENT_TEAM = P9D4UX94KC;
+				DEVELOPMENT_TEAM = 749Q737TF5;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
