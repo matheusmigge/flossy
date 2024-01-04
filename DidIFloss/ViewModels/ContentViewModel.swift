@@ -10,24 +10,26 @@ import SwiftUI
 
 class ContentViewModel: ObservableObject {
     
-    
-    let persistance: PersistanceManager = PersistanceManager()
-    let recordService: FlossRecordDataSouce = FlossRecordDataSouce.shared
+    let persistance: PersistanceManagerProtocol
     
     // MARK: Published variables
 
-    @Published var records: [FlossRecord]
+    @Published var records: [FlossRecord] = []
     
     @Published private var lastFlossDate: Date?
     @Published private var flossCount: Int
     
     // MARK: Init
     
-    init() {
-        
+    @MainActor
+    init(persistenceService: PersistanceManagerProtocol = PersistanceManager()) {
+        self.persistance = persistenceService
         self.lastFlossDate = persistance.getLastFlossDate()
         self.flossCount = persistance.getFlossCount()
-        self.records = recordService.fetchItems()
+        
+        Task {
+            self.records = await persistance.getFlossRecords()
+        }
         
     }
     
@@ -39,21 +41,8 @@ class ContentViewModel: ObservableObject {
             return "You haven't flossed yet!"
         }
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .short
-        
-        return dateFormatter.string(from: safeDate)
-        
-        //        if let safeDate = lastFloss {
-        //            let dateFormatter = DateFormatter()
-        //            dateFormatter.dateStyle = .medium
-        //            dateFormatter.timeStyle = .short
-        //
-        //            return dateFormatter.string(from: safeDate)
-        //        }
-        //
-        //        return "You haven't flossed yet!"
+        return dateFormtert(safeDate)
+
     }
     
     var formatedFlossCount: String {
@@ -65,8 +54,8 @@ class ContentViewModel: ObservableObject {
         }
     }
     
+    @MainActor
     func flossButtonPressed() {
-        
         self.updateInfo()
         self.saveToPersistance()
     }
@@ -82,12 +71,12 @@ class ContentViewModel: ObservableObject {
     // MARK: Private methods
     
     private func updateInfo() {
-        self.recordService.appendItem(item: FlossRecord(date: .now))
-        self.records = recordService.fetchItems()
         self.lastFlossDate = Date()
         self.flossCount += 1
     }
     
+    
+    @MainActor
     private func saveToPersistance() {
         guard let safeLastFlossDate = lastFlossDate else {
             print("Error: last floss date is null.")
@@ -96,5 +85,12 @@ class ContentViewModel: ObservableObject {
         
         persistance.saveFlossCount(flossCount)
         persistance.saveLastFlossDate(date: safeLastFlossDate)
+        
+        Task {
+            let record = FlossRecord()
+            persistance.appendFlossRecord(record)
+            self.records = await persistance.getFlossRecords()
+            
+        }
     }
 }

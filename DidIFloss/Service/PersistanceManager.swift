@@ -7,29 +7,61 @@
 
 import Foundation
 
-class PersistanceManager {
+class PersistanceManager: PersistanceManagerProtocol {
     
-    let dateKey: String = "LAST_FLOSS_DATE"
-    let countKey: String = "FLOSS_COUNT"
+    let userDefaults: UserDefaultsProtocol
+    let flossRecordService: FlossRecordDataProvider
     
-    // last floss date
-    // save
+    init(userDefaults: UserDefaultsProtocol = UserDefaults.standard,
+         flossRecordService: FlossRecordDataProvider = FlossRecordDataSouce.shared
+    ) {
+        self.userDefaults = userDefaults
+        self.flossRecordService = flossRecordService
+    }
+    
+    
+    func getFlossRecords() async -> [FlossRecord] {
+        return await flossRecordService.fetchRecords()
+    }
+    
+    
+    func deleteFlossRecord(_ record: FlossRecord) {
+        Task {
+            await flossRecordService.removeRecord(record)
+        }
+        
+    }
+    
     func saveLastFlossDate(date: Date) {
-        UserDefaults.standard.set(date, forKey: dateKey)
+        userDefaults.set(date, forKey: UserDefaultsKeys.date)
+        Task {
+            await flossRecordService.appendRecord(FlossRecord(date: .now))
+        }
     }
-    // read
+
     func getLastFlossDate() -> Date? {
-        return UserDefaults.standard.value(forKey: dateKey) as? Date
+        return userDefaults.value(forKey: UserDefaultsKeys.date) as? Date
     }
     
-    // floss count
-    // save
-    func saveFlossCount(_ count: Int) {
-        UserDefaults.standard.set(count, forKey: countKey)
+    func appendFlossRecord(_ record: FlossRecord) {
+        Task {
+            await flossRecordService.appendRecord(record)
+        }
     }
-    // read
+    
+
+    func saveFlossCount(_ count: Int) {
+        userDefaults.set(count, forKey: UserDefaultsKeys.count)
+    }
+
     func getFlossCount() -> Int {
-        return UserDefaults.standard.integer(forKey: countKey)
+        return userDefaults.integer(forKey: UserDefaultsKeys.count)
     }
     
 }
+
+
+
+
+
+

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C7E923B2B470DB00079525D /* UserDefaults+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923A2B470DB00079525D /* UserDefaults+Protocol.swift */; };
+		0C7E923D2B470DDB0079525D /* PersistenceManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */; };
+		0C7E923F2B470FD30079525D /* PersistenceManager+KEYS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923E2B470FD30079525D /* PersistenceManager+KEYS.swift */; };
 		0C8981F02B466223008CFD5D /* FlossRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8981EF2B466223008CFD5D /* FlossRecord.swift */; };
 		0C8981F42B4667AC008CFD5D /* FlossRecordDataSouce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8981F32B4667AC008CFD5D /* FlossRecordDataSouce.swift */; };
 		561DBA7C2B45DCF10052EE78 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBA7B2B45DCF10052EE78 /* BackgroundView.swift */; };
@@ -24,6 +27,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C7E923A2B470DB00079525D /* UserDefaults+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Protocol.swift"; sourceTree = "<group>"; };
+		0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManagerProtocol.swift; sourceTree = "<group>"; };
+		0C7E923E2B470FD30079525D /* PersistenceManager+KEYS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistenceManager+KEYS.swift"; sourceTree = "<group>"; };
 		0C8981EF2B466223008CFD5D /* FlossRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecord.swift; sourceTree = "<group>"; };
 		0C8981F32B4667AC008CFD5D /* FlossRecordDataSouce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecordDataSouce.swift; sourceTree = "<group>"; };
 		561DBA7B2B45DCF10052EE78 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
@@ -54,6 +60,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C7E92362B46FDD30079525D /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				0C7E923A2B470DB00079525D /* UserDefaults+Protocol.swift */,
+				0C8981F32B4667AC008CFD5D /* FlossRecordDataSouce.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
 		0C8981F12B4662F0008CFD5D /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -66,7 +81,9 @@
 			isa = PBXGroup;
 			children = (
 				56C33E092B3CCA9E00D8DEB7 /* PersistanceManager.swift */,
-				0C8981F32B4667AC008CFD5D /* FlossRecordDataSouce.swift */,
+				0C7E923E2B470FD30079525D /* PersistenceManager+KEYS.swift */,
+				0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */,
+				0C7E92362B46FDD30079525D /* Persistence */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -227,9 +244,12 @@
 				56C33DF72B3CAA1000D8DEB7 /* DidIFlossApp.swift in Sources */,
 				0C8981F02B466223008CFD5D /* FlossRecord.swift in Sources */,
 				566FF8CB2B439FB70056644A /* HomeScreenView.swift in Sources */,
+				0C7E923B2B470DB00079525D /* UserDefaults+Protocol.swift in Sources */,
 				0C8981F42B4667AC008CFD5D /* FlossRecordDataSouce.swift in Sources */,
+				0C7E923F2B470FD30079525D /* PersistenceManager+KEYS.swift in Sources */,
 				56C33E082B3CAC8800D8DEB7 /* ContentViewModel.swift in Sources */,
 				56C33E0A2B3CCA9E00D8DEB7 /* PersistanceManager.swift in Sources */,
+				0C7E923D2B470DDB0079525D /* PersistenceManagerProtocol.swift in Sources */,
 				562749D02B43AD61004F37A0 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
