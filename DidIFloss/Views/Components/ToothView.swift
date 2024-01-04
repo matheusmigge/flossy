@@ -10,8 +10,9 @@ import SwiftUI
 struct ToothView: View {
     
     @State var isRotating: Bool = false
-    @State var isMoving: Bool = false
+
     var style: Style
+    var size: CGFloat
     
     enum Style: String {
         case pink
@@ -32,23 +33,18 @@ struct ToothView: View {
             Image(style.imageName)
                 .resizable()
                 .scaledToFit()
-                .frame(height: 220)
-                .rotationEffect(.degrees(isRotating ? -10 : 10))
+                .frame(height: size)
+                .rotationEffect(.degrees(isRotating ? -30 : 30))
                 .animation(.easeInOut(duration: 3).repeatForever(autoreverses: true), value: isRotating)
-                .offset(x: isMoving ? 0 : -900)
-                .animation(.spring(.bouncy, blendDuration: 3), value: isMoving)
         }
         .ignoresSafeArea()
         .onAppear {
             isRotating = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1){
-                isMoving = true
-            }
         }
         .rotationEffect(.degrees(Double.random(in: 0...360)))
     }
 }
 
 #Preview {
-    ToothView(style: .pink)
+    ToothView(style: .pink, size: 120)
 }
