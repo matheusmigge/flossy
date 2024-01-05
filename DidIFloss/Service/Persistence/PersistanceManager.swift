@@ -33,9 +33,8 @@ class PersistanceManager: PersistanceManagerProtocol {
             print("Failed to load Data")
             return []
         }
-       
+
     }
-    
     
     func deleteFlossRecord(_ record: FlossRecord) {
         Task {

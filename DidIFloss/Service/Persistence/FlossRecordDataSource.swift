@@ -9,14 +9,6 @@ import Foundation
 import SwiftData
 
 
-protocol FlossRecordDataProvider {
-    @MainActor func appendRecord(_ record: FlossRecord)
-    @MainActor func fetchRecords() async throws -> [FlossRecord]
-    @MainActor func removeRecord(_ record: FlossRecord)
-    @MainActor func eraseRecords() async
-}
-
-
 @MainActor
 final class FlossRecordDataSource: FlossRecordDataProvider {
     
