@@ -33,7 +33,6 @@ class PersistanceManager: PersistanceManagerProtocol {
             print("Failed to load Data")
             return []
         }
-
     }
     
     func deleteFlossRecord(_ record: FlossRecord) {
@@ -45,9 +44,7 @@ class PersistanceManager: PersistanceManagerProtocol {
     @MainActor 
     func saveLastFlossDate(date: Date) {
         userDefaults.set(date, forKey: UserDefaultsKeys.date)
-
         flossRecordService.appendRecord(FlossRecord(date: .now))
-        
     }
 
     @MainActor
@@ -71,6 +68,5 @@ class PersistanceManager: PersistanceManagerProtocol {
            await flossRecordService.eraseRecords()
         }
     }
-    
 }
 
