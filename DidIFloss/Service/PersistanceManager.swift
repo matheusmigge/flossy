@@ -13,7 +13,7 @@ class PersistanceManager: PersistanceManagerProtocol {
     let flossRecordService: FlossRecordDataProvider
     
     init(userDefaults: UserDefaultsProtocol = UserDefaults.standard,
-         flossRecordService: FlossRecordDataProvider = FlossRecordDataSouce.shared
+         flossRecordService: FlossRecordDataProvider = FlossRecordDataSource.shared
     ) {
         self.userDefaults = userDefaults
         self.flossRecordService = flossRecordService
@@ -25,9 +25,15 @@ class PersistanceManager: PersistanceManagerProtocol {
     }
     
     func getFlossRecords() async -> [FlossRecord] {
-        let records = await flossRecordService.fetchRecords()
-        
-        return records.sorted(by: {$0.date > $1.date})
+        do {
+            let records = try await flossRecordService.fetchRecords()
+            
+            return records.sorted(by: {$0.date > $1.date})
+        } catch {
+            print("Failed to load Data")
+            return []
+        }
+       
     }
     
     
@@ -37,17 +43,17 @@ class PersistanceManager: PersistanceManagerProtocol {
         }
     }
     
+    @MainActor 
     func saveLastFlossDate(date: Date) {
         userDefaults.set(date, forKey: UserDefaultsKeys.date)
-        Task {
-            await flossRecordService.appendRecord(FlossRecord(date: .now))
-        }
+
+        flossRecordService.appendRecord(FlossRecord(date: .now))
+        
     }
 
+    @MainActor
     func appendFlossRecord(_ record: FlossRecord) {
-        Task {
-            await flossRecordService.appendRecord(record)
-        }
+        flossRecordService.appendRecord(record)
     }
 
     func saveFlossCount(_ count: Int) {
