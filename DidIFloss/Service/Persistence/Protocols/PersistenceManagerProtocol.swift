@@ -14,8 +14,6 @@ protocol PersistanceManagerProtocol {
     
     func getFlossRecords() async -> [FlossRecord]
     
-    func appendFlossRecord(_ record: FlossRecord)
-    
     func deleteFlossRecord(_ record: FlossRecord)
     
     func eraseData()

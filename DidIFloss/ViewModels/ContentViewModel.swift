@@ -62,8 +62,8 @@ class ContentViewModel: ObservableObject {
     }
     
     public func flossButtonPressed() {
-        
         self.saveToPersistance()
+        
     }
     
     public func dateFormater(_ date: Date) -> String {

@@ -9,7 +9,6 @@ import Foundation
 import SwiftData
 
 
-@MainActor
 final class FlossRecordDataSource: FlossRecordDataProvider {
     
     private let modelContainer: ModelContainer
@@ -19,9 +18,8 @@ final class FlossRecordDataSource: FlossRecordDataProvider {
         modelContainer.mainContext
     }
     
-    static let shared = FlossRecordDataSource()
     
-    private init() {
+    init() {
         do {
             self.modelContainer = try ModelContainer(for: FlossRecord.self)
         } catch {
@@ -29,7 +27,9 @@ final class FlossRecordDataSource: FlossRecordDataProvider {
         }
     }
     
-    func appendRecord(_ record: FlossRecord) {
+    func appendRecord(_ date: Date) {
+        let record = FlossRecord(date: date)
+        
         Task {
             context.insert(record)
             do {
@@ -53,14 +53,16 @@ final class FlossRecordDataSource: FlossRecordDataProvider {
         context.delete(record)
     }
 
-    func eraseRecords() async {
-        do {
-            let records = try await fetchRecords()
-            for record in records {
-                removeRecord(record)
+    func eraseRecords() {
+        Task {
+            do {
+                let records = try await fetchRecords()
+                for record in records {
+                    await removeRecord(record)
+                }
+            } catch {
+                print("Error while erasing records: \(error.localizedDescription)")
             }
-        } catch {
-            print("Error while erasing records: \(error.localizedDescription)")
         }
     }
 }

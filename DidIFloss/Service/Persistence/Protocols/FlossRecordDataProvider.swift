@@ -9,8 +9,8 @@ import Foundation
 
 
 protocol FlossRecordDataProvider {
-    @MainActor func appendRecord(_ record: FlossRecord)
+    @MainActor func appendRecord(_ date: Date)
     @MainActor func fetchRecords() async throws -> [FlossRecord]
     @MainActor func removeRecord(_ record: FlossRecord)
-    @MainActor func eraseRecords() async
+    func eraseRecords()
 }

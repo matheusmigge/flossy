@@ -13,7 +13,7 @@ class PersistanceManager: PersistanceManagerProtocol {
     let flossRecordService: FlossRecordDataProvider
     
     init(userDefaults: UserDefaultsProtocol = UserDefaults.standard,
-         flossRecordService: FlossRecordDataProvider = FlossRecordDataSource.shared
+         flossRecordService: FlossRecordDataProvider = FlossRecordDataSourceMock()
     ) {
         self.userDefaults = userDefaults
         self.flossRecordService = flossRecordService
@@ -45,22 +45,14 @@ class PersistanceManager: PersistanceManagerProtocol {
         userDefaults.set(date, forKey: UserDefaultsKeys.date)
         
         Task {
-            await flossRecordService.appendRecord(FlossRecord(date: .now))
-        }
-    }
-
-    func appendFlossRecord(_ record: FlossRecord) {
-        Task {
-            await flossRecordService.appendRecord(record)
+            await flossRecordService.appendRecord(date)
         }
     }
     
     func eraseData() {
         userDefaults.set(nil, forKey: UserDefaultsKeys.date)
-        
-        Task {
-           await flossRecordService.eraseRecords()
-        }
+        flossRecordService.eraseRecords()
+
     }
 }
 
