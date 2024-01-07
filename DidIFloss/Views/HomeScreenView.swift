@@ -55,7 +55,7 @@ struct HomeScreenView: View {
             .shadow(color: Color.black.opacity(0.5), radius: 5)
             
             Button {
-                withAnimation(.linear(duration: 1)) {
+                withAnimation(.linear(duration: 0.5)) {
                     self.currentContent = .content
                 }
             } label: {
