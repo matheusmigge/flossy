@@ -9,20 +9,36 @@ import SwiftUI
 
 struct HomeScreenView: View {
     
+    enum Contents {
+        case home,content
+    }
+    
+    @State var currentContent: Contents = .home
+    
     var body: some View {
-        NavigationView {
-            ZStack {
-                
-                BackgroundView()
-                homeScreenTextContent
+        GeometryReader { screen in
+            NavigationView {
+                ZStack {
+                    
+                    BackgroundView()
+                    
+                    switch currentContent {
+                    case .home:
+                        homeScreenTextContent
+                    case .content:
+                        ContentView()
+                            .frame(
+                                width: screen.size.width * 0.8,
+                                height: screen.size.height * 0.8)
+                    }
+                }
             }
-            .ignoresSafeArea()
         }
     }
     
     var homeScreenTextContent: some View {
         
-        VStack (spacing: 220) {
+        VStack(spacing: 220) {
             Spacer()
             
             VStack(spacing: -50) {
@@ -38,10 +54,12 @@ struct HomeScreenView: View {
             .rotationEffect(.degrees(7))
             .shadow(color: Color.black.opacity(0.5), radius: 5)
             
-            NavigationLink {
-                ContentView()
+            Button {
+                withAnimation(.linear(duration: 1)) {
+                    self.currentContent = .content
+                }
             } label: {
-                Text("enter")
+                Text("Enter")
                     .font(.system(size: 25))
                     .fontWeight(.black)
                     .foregroundStyle(Color.black)

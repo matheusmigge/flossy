@@ -9,60 +9,50 @@ import SwiftUI
 
 struct ContentView: View {
     
+    enum Contents {
+        case empty, content
+    }
+    
+    @State var currentContent: Contents = .empty
+    
     @StateObject var viewModel = ContentViewModel()
     
     var body: some View {
-        VStack {
-            
-            Text("Did I Floss?")
-                .font(.title)
-                .bold()
-                .padding(.top, 100)
-                .padding(.bottom, 20)
-            
-            
-            Text("Last time you flossed:")
-                .font(.caption)
-            Text("\(viewModel.formatedLastFloss)")
-            
-            Spacer()
-            
-            Text("How many times you flossed until now:")
-                .font(.caption2)
-            
-            Text("\(viewModel.formatedFlossCount)")
-                .font(.title)
-                .bold()
-            
-            Spacer()
-            
-            
-            Button("I've flossed! 🎉") {
-                viewModel.flossButtonPressed()
-            }
-            
-            .buttonStyle(.borderedProminent)
-            .padding(.bottom, 50)
-        }
-        .toolbar {
-            NavigationLink {
-                List {
-                    Button {
-                        viewModel.eraseRecordsButtonPressed()
-                    } label: {
-                        Text("Erase all")
-                    }
-                    
-                    ForEach(viewModel.records, id:\.self) { record in
-                        Text(viewModel.dateFormater(record.date))
-                    }
+        GeometryReader { screen in
+            VStack {
+                
+                Text("Did I Floss?")
+                    .font(.title)
+                    .bold()
+                    .padding(.top, 100)
+                    .padding(.bottom, 20)
+                
+                
+                Text("Last time you flossed:")
+                    .font(.caption)
+                Text("\(viewModel.formatedLastFloss)")
+                
+                Spacer()
+                
+                Text("How many times you flossed until now:")
+                    .font(.caption2)
+                
+                Text("\(viewModel.formatedFlossCount)")
+                    .font(.title)
+                    .bold()
+                
+                Spacer()
+                
+                
+                Button("I've flossed! 🎉") {
+                    viewModel.flossButtonPressed()
                 }
+                .buttonStyle(.borderedProminent)
+                .padding(.bottom, 50)
             }
-        label: {
-            Text("Records")
-            
-        }
- 
+            .frame(width: screen.size.width, height: screen.size.height)
+            .background(.ultraThinMaterial)
+            .cornerRadius(20)
         }
     }
 }
