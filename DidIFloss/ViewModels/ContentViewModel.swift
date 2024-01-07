@@ -15,8 +15,14 @@ class ContentViewModel: ObservableObject {
     // MARK: Published variables
 
     @Published var records: [FlossRecord] = []
-    @Published private var lastFlossDate: Date?
-    @Published private var flossCount: Int = 0
+    
+    private var lastFlossDate: Date? {
+        self.records.first?.date
+    }
+    
+    private var flossCount: Int {
+        self.records.count
+    }
     
     
     // MARK: Init
@@ -41,9 +47,6 @@ class ContentViewModel: ObservableObject {
     
     @MainActor
     func loadRecords() {
-        self.lastFlossDate = persistance.getLastFlossDate()
-        self.flossCount = persistance.getFlossCount()
-        
         Task {
             self.records = await persistance.getFlossRecords()
         }
@@ -57,9 +60,8 @@ class ContentViewModel: ObservableObject {
         }
     }
     
-    @MainActor
-    func flossButtonPressed() {
-        self.updateInfo()
+    public func flossButtonPressed() {
+        
         self.saveToPersistance()
     }
     
@@ -73,28 +75,18 @@ class ContentViewModel: ObservableObject {
     
     // MARK: Private methods
     
-    private func updateInfo() {
-        self.lastFlossDate = Date()
-        self.flossCount += 1
-    }
-    
-    @MainActor
     func eraseRecordsButtonPressed() {
-        persistance.eraseData()
-        loadRecords()
+        Task {
+            persistance.eraseData()
+            await loadRecords()
+        }
     }
     
-    
-    @MainActor
     private func saveToPersistance() {
-        guard let safeLastFlossDate = lastFlossDate else {
-            print("Error: last floss date is null.")
-            return
+        persistance.saveLastFlossDate(date: .now)
+        
+        Task {
+            await loadRecords()
         }
-        
-        persistance.saveFlossCount(flossCount)
-        persistance.saveLastFlossDate(date: safeLastFlossDate)
-        
-        loadRecords()
     }
 }
