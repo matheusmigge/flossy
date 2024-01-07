@@ -13,7 +13,7 @@ class PersistanceManager: PersistanceManagerProtocol {
     let flossRecordService: FlossRecordDataProvider
     
     init(userDefaults: UserDefaultsProtocol = UserDefaults.standard,
-         flossRecordService: FlossRecordDataProvider = FlossRecordDataSourceMock()
+         flossRecordService: FlossRecordDataProvider = FlossRecordDataSource()
     ) {
         self.userDefaults = userDefaults
         self.flossRecordService = flossRecordService
