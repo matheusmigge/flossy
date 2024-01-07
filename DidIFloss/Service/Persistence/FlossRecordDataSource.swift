@@ -29,7 +29,6 @@ final class FlossRecordDataSource: FlossRecordDataProvider {
     
     func appendRecord(_ date: Date) {
         let record = FlossRecord(date: date)
-        print(record.date)
         
         DispatchQueue.main.async {
             self.context.insert(record)
@@ -41,13 +40,13 @@ final class FlossRecordDataSource: FlossRecordDataProvider {
         }
     }
     
-    func fetchRecords(result: @escaping ([FlossRecord]) -> Void) {
+    func fetchRecords(result: @escaping (Result<[FlossRecord], Error>) -> Void) {
         DispatchQueue.main.async {
             do {
                 let records = try self.context.fetch(FetchDescriptor<FlossRecord>())
-                result(records)
+                result(.success(records))
             } catch {
-                print("Failed to fetch records: \(error.localizedDescription)")
+                result(.failure(error))
             }
         }
     }
@@ -59,9 +58,14 @@ final class FlossRecordDataSource: FlossRecordDataProvider {
     }
     
     func eraseRecords() {
-        fetchRecords { fetchedRecords in
-            fetchedRecords.forEach {
-                self.removeRecord($0)
+        fetchRecords { [weak self] result in
+            switch result {
+            case .success(let records):
+                records.forEach {
+                    self?.removeRecord($0)
+                }
+            case .failure(let failure):
+               print("Failed to erase Data")
             }
         }
     }

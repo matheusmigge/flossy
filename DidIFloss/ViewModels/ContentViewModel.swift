@@ -43,7 +43,7 @@ class ContentViewModel: ObservableObject {
         
         return dateFormater(safeDate)
     }
-
+    
     func loadRecords() {
         DispatchQueue.main.async { [weak self] in
             self?.persistance.getFlossRecords { result in

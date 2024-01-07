@@ -25,11 +25,21 @@ class PersistanceManager: PersistanceManagerProtocol {
     }
     
     func getFlossRecords(handler: @escaping ([FlossRecord]) -> Void) {
-        var records: [FlossRecord] = []
         
         flossRecordService.fetchRecords { result in
-            records = result
-            handler(records)
+            switch result {
+            case .success(let fetchedRecords):
+                handler(fetchedRecords)
+                
+            case .failure(let error):
+                print("Failed to fecth Records from Service -> Error: \(error)")
+                print("Trying to get last data in userDefaults")
+                
+                guard let lastDate = self.getLastFlossDate() else { return }
+                
+                let flossRecord = FlossRecord(date: lastDate)
+                handler([flossRecord])
+            }
         }
     }
     
