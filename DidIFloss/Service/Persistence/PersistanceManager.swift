@@ -41,27 +41,21 @@ class PersistanceManager: PersistanceManagerProtocol {
         }
     }
     
-    @MainActor 
     func saveLastFlossDate(date: Date) {
         userDefaults.set(date, forKey: UserDefaultsKeys.date)
-        flossRecordService.appendRecord(FlossRecord(date: .now))
+        
+        Task {
+            await flossRecordService.appendRecord(FlossRecord(date: .now))
+        }
     }
 
-    @MainActor
     func appendFlossRecord(_ record: FlossRecord) {
-        flossRecordService.appendRecord(record)
-    }
-
-    func saveFlossCount(_ count: Int) {
-        userDefaults.set(count, forKey: UserDefaultsKeys.count)
-    }
-
-    func getFlossCount() -> Int {
-        return userDefaults.integer(forKey: UserDefaultsKeys.count)
+        Task {
+            await flossRecordService.appendRecord(record)
+        }
     }
     
     func eraseData() {
-        userDefaults.set(0, forKey: UserDefaultsKeys.count)
         userDefaults.set(nil, forKey: UserDefaultsKeys.date)
         
         Task {

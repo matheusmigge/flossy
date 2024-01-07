@@ -13,7 +13,7 @@ class ContentViewModel: ObservableObject {
     let persistance: PersistanceManagerProtocol
     
     // MARK: Published variables
-
+    
     @Published var records: [FlossRecord] = []
     
     private var lastFlossDate: Date? {
@@ -27,11 +27,13 @@ class ContentViewModel: ObservableObject {
     
     // MARK: Init
     
-    @MainActor
     init(persistenceService: PersistanceManagerProtocol = PersistanceManager()) {
         self.persistance = persistenceService
-    
-        self.loadRecords()
+        
+        Task {
+            await self.loadRecords()
+        }
+        
     }
     
     
@@ -46,10 +48,9 @@ class ContentViewModel: ObservableObject {
     }
     
     @MainActor
-    func loadRecords() {
-        Task {
-            self.records = await persistance.getFlossRecords()
-        }
+    func loadRecords() async {
+        self.records = await persistance.getFlossRecords()
+        
     }
     
     var formatedFlossCount: String {
@@ -76,8 +77,9 @@ class ContentViewModel: ObservableObject {
     // MARK: Private methods
     
     func eraseRecordsButtonPressed() {
+        persistance.eraseData()
+        
         Task {
-            persistance.eraseData()
             await loadRecords()
         }
     }

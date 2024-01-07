@@ -12,10 +12,6 @@ protocol PersistanceManagerProtocol {
     
     func getLastFlossDate() -> Date?
     
-    func saveFlossCount(_ count: Int)
-    
-    func getFlossCount() -> Int
-    
     func getFlossRecords() async -> [FlossRecord]
     
     func appendFlossRecord(_ record: FlossRecord)
