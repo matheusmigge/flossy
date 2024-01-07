@@ -21,21 +21,19 @@ struct ContentView: View {
         GeometryReader { screen in
             VStack {
                 
-                Text("Did I Floss?")
-                    .font(.title)
-                    .bold()
-                    .padding(.top, 100)
-                    .padding(.bottom, 20)
-                
-                
                 Text("Last time you flossed:")
                     .font(.caption)
+                    .padding(.top, 100)
+                    
                 Text("\(viewModel.formatedLastFloss)")
+                    .font(.subheadline)
+                    .bold()
+                    .padding(.bottom, 20)
                 
                 Spacer()
                 
                 Text("How many times you flossed until now:")
-                    .font(.caption2)
+                    .font(.caption)
                 
                 Text("\(viewModel.formatedFlossCount)")
                     .font(.title)
