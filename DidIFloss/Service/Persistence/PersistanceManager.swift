@@ -24,29 +24,23 @@ class PersistanceManager: PersistanceManagerProtocol {
         return userDefaults.value(forKey: UserDefaultsKeys.date) as? Date
     }
     
-    func getFlossRecords() async -> [FlossRecord] {
-        do {
-            let records = try await flossRecordService.fetchRecords()
-            
-            return records.sorted(by: {$0.date > $1.date})
-        } catch {
-            print("Failed to load Data")
-            return []
+    func getFlossRecords(handler: @escaping ([FlossRecord]) -> Void) {
+        var records: [FlossRecord] = []
+        
+        flossRecordService.fetchRecords { result in
+            records = result
+            handler(records)
         }
     }
     
     func deleteFlossRecord(_ record: FlossRecord) {
-        Task {
-            await flossRecordService.removeRecord(record)
-        }
+        flossRecordService.removeRecord(record)
     }
     
     func saveLastFlossDate(date: Date) {
         userDefaults.set(date, forKey: UserDefaultsKeys.date)
         
-        Task {
-            await flossRecordService.appendRecord(date)
-        }
+        flossRecordService.appendRecord(date)
     }
     
     func eraseData() {

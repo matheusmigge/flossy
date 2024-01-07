@@ -45,8 +45,10 @@ class ContentViewModel: ObservableObject {
     }
 
     func loadRecords() {
-        Task {
-            self.records = await persistance.getFlossRecords()
+        DispatchQueue.main.async { [weak self] in
+            self?.persistance.getFlossRecords { result in
+                self?.records = result
+            }
         }
     }
     

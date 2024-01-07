@@ -12,7 +12,7 @@ protocol PersistanceManagerProtocol {
     
     func getLastFlossDate() -> Date?
     
-    func getFlossRecords() async -> [FlossRecord]
+    func getFlossRecords(handler: @escaping ([FlossRecord]) -> Void)
     
     func deleteFlossRecord(_ record: FlossRecord)
     

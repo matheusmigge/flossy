@@ -29,43 +29,43 @@ final class FlossRecordDataSource: FlossRecordDataProvider {
     
     func appendRecord(_ date: Date) {
         let record = FlossRecord(date: date)
+        print(record.date)
         
-        Task {
-            context.insert(record)
+        DispatchQueue.main.async {
+            self.context.insert(record)
             do {
-                try context.save()
+                try self.context.save()
             } catch {
                 print("Failed to save context: \(error.localizedDescription)")
             }
         }
     }
-
-    func fetchRecords() async throws -> [FlossRecord] {
-        do {
-            return try context.fetch(FetchDescriptor<FlossRecord>())
-        } catch {
-            print("Failed to fetch records: \(error.localizedDescription)")
-            throw error
+    
+    func fetchRecords(result: @escaping ([FlossRecord]) -> Void) {
+        DispatchQueue.main.async {
+            do {
+                let records = try self.context.fetch(FetchDescriptor<FlossRecord>())
+                result(records)
+            } catch {
+                print("Failed to fetch records: \(error.localizedDescription)")
+            }
         }
     }
-
+    
     func removeRecord(_ record: FlossRecord) {
-        context.delete(record)
+        DispatchQueue.main.async { [weak self] in
+            self?.context.delete(record)
+        }
     }
-
+    
     func eraseRecords() {
-        Task {
-            do {
-                let records = try await fetchRecords()
-                for record in records {
-                    await removeRecord(record)
-                }
-            } catch {
-                print("Error while erasing records: \(error.localizedDescription)")
+        fetchRecords { fetchedRecords in
+            fetchedRecords.forEach {
+                self.removeRecord($0)
             }
         }
     }
 }
-    
+
 
 
