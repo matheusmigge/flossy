@@ -64,8 +64,9 @@ final class FlossRecordDataSource: FlossRecordDataProvider {
                 records.forEach {
                     self?.removeRecord($0)
                 }
-            case .failure(let failure):
-               print("Failed to erase Data")
+            case .failure(let error):
+               print("Failed to erase Data -> Error: \(error)")
+            
             }
         }
     }
