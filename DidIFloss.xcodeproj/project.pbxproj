@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C4177A22B4C795A00E8976B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4177A12B4C795A00E8976B /* NotificationManager.swift */; };
+		0C4177A42B4C7B8500E8976B /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4177A32B4C7B8500E8976B /* Notification.swift */; };
 		0C7E923B2B470DB00079525D /* UserDefaults+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923A2B470DB00079525D /* UserDefaults+Protocol.swift */; };
 		0C7E923D2B470DDB0079525D /* PersistenceManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */; };
 		0C7E923F2B470FD30079525D /* PersistenceManager+KEYS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923E2B470FD30079525D /* PersistenceManager+KEYS.swift */; };
@@ -28,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C4177A12B4C795A00E8976B /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		0C4177A32B4C7B8500E8976B /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		0C7E923A2B470DB00079525D /* UserDefaults+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Protocol.swift"; sourceTree = "<group>"; };
 		0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManagerProtocol.swift; sourceTree = "<group>"; };
 		0C7E923E2B470FD30079525D /* PersistenceManager+KEYS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistenceManager+KEYS.swift"; sourceTree = "<group>"; };
@@ -62,6 +66,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C4177A02B4C794A00E8976B /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				0C4177A12B4C795A00E8976B /* NotificationManager.swift */,
+				0C4177A32B4C7B8500E8976B /* Notification.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
 		0C7E92362B46FDD30079525D /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +107,7 @@
 		0C8981F22B466306008CFD5D /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				0C4177A02B4C794A00E8976B /* Notification */,
 				0C7E92362B46FDD30079525D /* Persistence */,
 			);
 			path = Service;
@@ -253,6 +267,7 @@
 				56C33DF92B3CAA1000D8DEB7 /* ContentView.swift in Sources */,
 				561DBA7C2B45DCF10052EE78 /* BackgroundView.swift in Sources */,
 				56C33DF72B3CAA1000D8DEB7 /* DidIFlossApp.swift in Sources */,
+				0C4177A42B4C7B8500E8976B /* Notification.swift in Sources */,
 				0C8981F02B466223008CFD5D /* FlossRecord.swift in Sources */,
 				566FF8CB2B439FB70056644A /* HomeScreenView.swift in Sources */,
 				0C7E923B2B470DB00079525D /* UserDefaults+Protocol.swift in Sources */,
@@ -261,6 +276,7 @@
 				0C7E923F2B470FD30079525D /* PersistenceManager+KEYS.swift in Sources */,
 				56C33E082B3CAC8800D8DEB7 /* ContentViewModel.swift in Sources */,
 				56C33E0A2B3CCA9E00D8DEB7 /* PersistanceManager.swift in Sources */,
+				0C4177A22B4C795A00E8976B /* NotificationManager.swift in Sources */,
 				0C7E923D2B470DDB0079525D /* PersistenceManagerProtocol.swift in Sources */,
 				562749D02B43AD61004F37A0 /* Constants.swift in Sources */,
 			);
