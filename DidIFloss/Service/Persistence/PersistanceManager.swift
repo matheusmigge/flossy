@@ -13,7 +13,7 @@ class PersistanceManager: PersistanceManagerProtocol {
     let flossRecordService: FlossRecordDataProvider
     
     init(userDefaults: UserDefaultsProtocol = UserDefaults.standard,
-         flossRecordService: FlossRecordDataProvider = FlossRecordDataSource.shared
+         flossRecordService: FlossRecordDataProvider = FlossRecordDataSource()
     ) {
         self.userDefaults = userDefaults
         self.flossRecordService = flossRecordService
@@ -24,49 +24,39 @@ class PersistanceManager: PersistanceManagerProtocol {
         return userDefaults.value(forKey: UserDefaultsKeys.date) as? Date
     }
     
-    func getFlossRecords() async -> [FlossRecord] {
-        do {
-            let records = try await flossRecordService.fetchRecords()
-            
-            return records.sorted(by: {$0.date > $1.date})
-        } catch {
-            print("Failed to load Data")
-            return []
+    func getFlossRecords(handler: @escaping ([FlossRecord]) -> Void) {
+        
+        flossRecordService.fetchRecords { result in
+            switch result {
+            case .success(let fetchedRecords):
+                handler(fetchedRecords)
+                
+            case .failure(let error):
+                print("Failed to fecth Records from Service -> Error: \(error)")
+                print("Trying to get last data in userDefaults")
+                
+                guard let lastDate = self.getLastFlossDate() else { return }
+                
+                let flossRecord = FlossRecord(date: lastDate)
+                handler([flossRecord])
+            }
         }
     }
     
     func deleteFlossRecord(_ record: FlossRecord) {
-        Task {
-            await flossRecordService.removeRecord(record)
-        }
+        flossRecordService.removeRecord(record)
     }
     
-    @MainActor 
     func saveLastFlossDate(date: Date) {
         userDefaults.set(date, forKey: UserDefaultsKeys.date)
-        flossRecordService.appendRecord(FlossRecord(date: .now))
-    }
-
-    @MainActor
-    func appendFlossRecord(_ record: FlossRecord) {
-        flossRecordService.appendRecord(record)
-    }
-
-    func saveFlossCount(_ count: Int) {
-        userDefaults.set(count, forKey: UserDefaultsKeys.count)
-    }
-
-    func getFlossCount() -> Int {
-        return userDefaults.integer(forKey: UserDefaultsKeys.count)
+        
+        flossRecordService.appendRecord(date)
     }
     
     func eraseData() {
-        userDefaults.set(0, forKey: UserDefaultsKeys.count)
         userDefaults.set(nil, forKey: UserDefaultsKeys.date)
-        
-        Task {
-           await flossRecordService.eraseRecords()
-        }
+        flossRecordService.eraseRecords()
+
     }
 }
 

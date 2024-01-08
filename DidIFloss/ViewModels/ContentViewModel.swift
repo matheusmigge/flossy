@@ -13,18 +13,23 @@ class ContentViewModel: ObservableObject {
     let persistance: PersistanceManagerProtocol
     
     // MARK: Published variables
-
+    
     @Published var records: [FlossRecord] = []
-    @Published private var lastFlossDate: Date?
-    @Published private var flossCount: Int = 0
+    
+    private var lastFlossDate: Date? {
+        self.records.first?.date
+    }
+    
+    private var flossCount: Int {
+        self.records.count
+    }
     
     
     // MARK: Init
     
-    @MainActor
     init(persistenceService: PersistanceManagerProtocol = PersistanceManager()) {
         self.persistance = persistenceService
-    
+        
         self.loadRecords()
     }
     
@@ -39,13 +44,11 @@ class ContentViewModel: ObservableObject {
         return dateFormater(safeDate)
     }
     
-    @MainActor
     func loadRecords() {
-        self.lastFlossDate = persistance.getLastFlossDate()
-        self.flossCount = persistance.getFlossCount()
-        
-        Task {
-            self.records = await persistance.getFlossRecords()
+        DispatchQueue.main.async { [weak self] in
+            self?.persistance.getFlossRecords { result in
+                self?.records = result
+            }
         }
     }
     
@@ -57,10 +60,9 @@ class ContentViewModel: ObservableObject {
         }
     }
     
-    @MainActor
-    func flossButtonPressed() {
-        self.updateInfo()
+    public func flossButtonPressed() {
         self.saveToPersistance()
+        
     }
     
     public func dateFormater(_ date: Date) -> String {
@@ -73,27 +75,14 @@ class ContentViewModel: ObservableObject {
     
     // MARK: Private methods
     
-    private func updateInfo() {
-        self.lastFlossDate = Date()
-        self.flossCount += 1
-    }
-    
-    @MainActor
     func eraseRecordsButtonPressed() {
         persistance.eraseData()
+        
         loadRecords()
     }
     
-    
-    @MainActor
     private func saveToPersistance() {
-        guard let safeLastFlossDate = lastFlossDate else {
-            print("Error: last floss date is null.")
-            return
-        }
-        
-        persistance.saveFlossCount(flossCount)
-        persistance.saveLastFlossDate(date: safeLastFlossDate)
+        persistance.saveLastFlossDate(date: .now)
         
         loadRecords()
     }

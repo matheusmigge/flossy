@@ -9,7 +9,6 @@ import Foundation
 import SwiftData
 
 
-@MainActor
 final class FlossRecordDataSource: FlossRecordDataProvider {
     
     private let modelContainer: ModelContainer
@@ -19,9 +18,8 @@ final class FlossRecordDataSource: FlossRecordDataProvider {
         modelContainer.mainContext
     }
     
-    static let shared = FlossRecordDataSource()
     
-    private init() {
+    init() {
         do {
             self.modelContainer = try ModelContainer(for: FlossRecord.self)
         } catch {
@@ -29,41 +27,50 @@ final class FlossRecordDataSource: FlossRecordDataProvider {
         }
     }
     
-    func appendRecord(_ record: FlossRecord) {
-        Task {
-            context.insert(record)
+    func appendRecord(_ date: Date) {
+        let record = FlossRecord(date: date)
+        
+        DispatchQueue.main.async {
+            self.context.insert(record)
             do {
-                try context.save()
+                try self.context.save()
             } catch {
                 print("Failed to save context: \(error.localizedDescription)")
             }
         }
     }
-
-    func fetchRecords() async throws -> [FlossRecord] {
-        do {
-            return try context.fetch(FetchDescriptor<FlossRecord>())
-        } catch {
-            print("Failed to fetch records: \(error.localizedDescription)")
-            throw error
+    
+    func fetchRecords(result: @escaping (Result<[FlossRecord], Error>) -> Void) {
+        DispatchQueue.main.async {
+            do {
+                let records = try self.context.fetch(FetchDescriptor<FlossRecord>())
+                result(.success(records))
+            } catch {
+                result(.failure(error))
+            }
         }
     }
-
+    
     func removeRecord(_ record: FlossRecord) {
-        context.delete(record)
+        DispatchQueue.main.async { [weak self] in
+            self?.context.delete(record)
+        }
     }
-
-    func eraseRecords() async {
-        do {
-            let records = try await fetchRecords()
-            for record in records {
-                removeRecord(record)
+    
+    func eraseRecords() {
+        fetchRecords { [weak self] result in
+            switch result {
+            case .success(let records):
+                records.forEach {
+                    self?.removeRecord($0)
+                }
+            case .failure(let error):
+               print("Failed to erase Data -> Error: \(error)")
+            
             }
-        } catch {
-            print("Error while erasing records: \(error.localizedDescription)")
         }
     }
 }
-    
+
 
 
