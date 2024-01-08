@@ -17,7 +17,7 @@ class ContentViewModel: ObservableObject {
     @Published var records: [FlossRecord] = []
     
     private var lastFlossDate: Date? {
-        self.records.first?.date
+        self.records.last?.date
     }
     
     private var flossCount: Int {

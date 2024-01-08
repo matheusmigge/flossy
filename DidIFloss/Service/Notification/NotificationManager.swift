@@ -40,6 +40,5 @@ struct NotificationManager {
         }
     }
     
-   
 }
 
