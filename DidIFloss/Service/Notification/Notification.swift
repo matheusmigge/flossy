@@ -8,7 +8,7 @@
 import Foundation
 import UserNotifications
 
-enum Notification: Identifiable {
+enum Notification: Identifiable, CaseIterable {
     
     case twoDays
     case oneWeek
@@ -60,7 +60,7 @@ enum Notification: Identifiable {
         }
     }
     
-    var repeats: Bool {
+    var shouldRepeat: Bool {
         switch self {
         case .twoDays:
             return false
