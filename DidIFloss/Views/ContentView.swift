@@ -14,6 +14,7 @@ struct ContentView: View {
     }
     
     @State var currentContent: Contents = .empty
+    @State var showAlert = false
     
     @StateObject var viewModel = ContentViewModel()
     
@@ -42,11 +43,21 @@ struct ContentView: View {
                 Spacer()
                 
                 
-                Button("I've flossed! 🎉") {
-                    viewModel.flossButtonPressed()
+                Button("Enter log") {
+                    showAlert = true
                 }
                 .buttonStyle(.borderedProminent)
                 .padding(.bottom, 50)
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text("Have you really flossed?"),
+                        primaryButton: .destructive(Text("Dismiss")),
+                        secondaryButton:
+                            .default(Text("I've flossed! ").bold()) {
+                                viewModel.flossButtonPressed()
+                            }
+                    )
+                }
             }
             .frame(width: screen.size.width, height: screen.size.height)
             .background(.ultraThinMaterial)
