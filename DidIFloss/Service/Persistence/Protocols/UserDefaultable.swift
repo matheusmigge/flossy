@@ -18,11 +18,11 @@ import Foundation
 ///
 /// ## Example
 /// ```swift
-/// class MockUserDefaults: UserDefaultsProtocol {
-///     // Implement the methods required by the UserDefaultsProtocol
+/// class MockUserDefaults: UserDefaultable {
+///     // Implement the methods required by the UserDefaultable
 /// }
 /// ```
-public protocol UserDefaultsProtocol {
+public protocol UserDefaultable {
     /// Sets the value of the specified default key.
     ///
     /// - Parameters:
@@ -43,8 +43,8 @@ public protocol UserDefaultsProtocol {
     func value(forKey: String) -> Any?
 }
 
-/// An extension of UserDefaults adopting the UserDefaultsProtocol.
+/// An extension of UserDefaults adopting the UserDefaultable.
 ///
-/// This extension makes UserDefaults conform to UserDefaultsProtocol,
+/// This extension makes UserDefaults conform to UserDefaultable,
 /// allowing you to use UserDefaults or any custom implementation conforming to UserDefaultsProtocol interchangeably.
-extension UserDefaults: UserDefaultsProtocol {}
+extension UserDefaults: UserDefaultable {}
