@@ -1,5 +1,5 @@
 //
-//  UserDefaults+Protocol.swift
+//  UserDefaultablel.swift
 //  DidIFloss
 //
 //  Created by Lucas Migge on 04/01/24.
@@ -42,9 +42,3 @@ public protocol UserDefaultable {
     /// - Returns: The value associated with the specified key.
     func value(forKey: String) -> Any?
 }
-
-/// An extension of UserDefaults adopting the UserDefaultable.
-///
-/// This extension makes UserDefaults conform to UserDefaultable,
-/// allowing you to use UserDefaults or any custom implementation conforming to UserDefaultsProtocol interchangeably.
-extension UserDefaults: UserDefaultable {}

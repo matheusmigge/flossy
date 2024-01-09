@@ -9,10 +9,10 @@ import Foundation
 
 class PersistanceManager: PersistanceManagerProtocol {
     
-    let userDefaults: UserDefaultsProtocol
+    let userDefaults: UserDefaultable
     let flossRecordService: FlossRecordDataProvider
     
-    init(userDefaults: UserDefaultsProtocol = UserDefaults.standard,
+    init(userDefaults: UserDefaultable = UserDefaults.standard,
          flossRecordService: FlossRecordDataProvider = FlossRecordDataSource()
     ) {
         self.userDefaults = userDefaults

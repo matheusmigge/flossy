@@ -9,7 +9,7 @@ import Foundation
 import UserNotifications
 
 extension Notification {
-    struct FlossReminder: NotificationType {
+    struct FlossReminder: NotificationModel {
         let id: String
         let titleMessage: String
         var subTitle: String?
