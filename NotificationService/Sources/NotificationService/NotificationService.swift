@@ -60,12 +60,12 @@ public struct NotificationService {
         }
     }
     
-    /// Schedules a notification based on the provided `Notification` type.
+    /// Schedules a notification based on the provided `NotificationModel` type.
     ///
-    /// - Parameter notification: The `Notification` type to schedule.
+    /// - Parameter notification: The `NotificationModel` type to schedule.
     ///
     /// Creates a `UNNotificationRequest` and schedules it using the shared notification center.
-    private static func scheduleNotification(type notification: NotificationModel) {
+    public static func scheduleNotification(type notification: NotificationModel) {
         let content = notification.content
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: notification.timeInterval,
