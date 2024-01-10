@@ -1,5 +1,5 @@
 //
-//  UserDefaults+Protocol.swift
+//  UserDefaultablel.swift
 //  DidIFloss
 //
 //  Created by Lucas Migge on 04/01/24.
@@ -18,11 +18,11 @@ import Foundation
 ///
 /// ## Example
 /// ```swift
-/// class MockUserDefaults: UserDefaultsProtocol {
-///     // Implement the methods required by the UserDefaultsProtocol
+/// class MockUserDefaults: UserDefaultable {
+///     // Implement the methods required by the UserDefaultable
 /// }
 /// ```
-public protocol UserDefaultsProtocol {
+public protocol UserDefaultable {
     /// Sets the value of the specified default key.
     ///
     /// - Parameters:
@@ -42,9 +42,3 @@ public protocol UserDefaultsProtocol {
     /// - Returns: The value associated with the specified key.
     func value(forKey: String) -> Any?
 }
-
-/// An extension of UserDefaults adopting the UserDefaultsProtocol.
-///
-/// This extension makes UserDefaults conform to UserDefaultsProtocol,
-/// allowing you to use UserDefaults or any custom implementation conforming to UserDefaultsProtocol interchangeably.
-extension UserDefaults: UserDefaultsProtocol {}

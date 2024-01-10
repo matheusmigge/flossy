@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import NotificationService
 
 class ContentViewModel: ObservableObject {
     
@@ -17,7 +18,7 @@ class ContentViewModel: ObservableObject {
     @Published var records: [FlossRecord] = []
     
     private var lastFlossDate: Date? {
-        self.records.first?.date
+        self.records.last?.date
     }
     
     private var flossCount: Int {
@@ -62,6 +63,7 @@ class ContentViewModel: ObservableObject {
     
     public func flossButtonPressed() {
         self.saveToPersistance()
+        NotificationService.scheduleFlossRemindersNotifications()
         
     }
     

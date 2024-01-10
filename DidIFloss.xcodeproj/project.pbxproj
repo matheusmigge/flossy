@@ -3,16 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C7E923B2B470DB00079525D /* UserDefaults+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923A2B470DB00079525D /* UserDefaults+Protocol.swift */; };
+		0C4177AA2B4CF9CB00E8976B /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4177A92B4CF9CB00E8976B /* UserDefaults.swift */; };
+		0C7E923B2B470DB00079525D /* UserDefaultable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923A2B470DB00079525D /* UserDefaultable.swift */; };
 		0C7E923D2B470DDB0079525D /* PersistenceManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */; };
 		0C7E923F2B470FD30079525D /* PersistenceManager+KEYS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923E2B470FD30079525D /* PersistenceManager+KEYS.swift */; };
 		0C7E92462B479E170079525D /* FlossRecordDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E92452B479E170079525D /* FlossRecordDataProvider.swift */; };
 		0C8981F02B466223008CFD5D /* FlossRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8981EF2B466223008CFD5D /* FlossRecord.swift */; };
 		0C8981F42B4667AC008CFD5D /* FlossRecordDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8981F32B4667AC008CFD5D /* FlossRecordDataSource.swift */; };
+		0CF8BD3F2B4DAD8500EB16B5 /* NotificationService in Frameworks */ = {isa = PBXBuildFile; productRef = 0CF8BD3E2B4DAD8500EB16B5 /* NotificationService */; };
 		561DBA7C2B45DCF10052EE78 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBA7B2B45DCF10052EE78 /* BackgroundView.swift */; };
 		5625BFD52B439A5C006F88BD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5625BFD42B439A5C006F88BD /* README.md */; };
 		562749CC2B43A5C2004F37A0 /* Borel-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 562749CB2B43A5C1004F37A0 /* Borel-Regular.ttf */; };
@@ -28,12 +30,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0C7E923A2B470DB00079525D /* UserDefaults+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Protocol.swift"; sourceTree = "<group>"; };
+		0C4177A92B4CF9CB00E8976B /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		0C7E923A2B470DB00079525D /* UserDefaultable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultable.swift; sourceTree = "<group>"; };
 		0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManagerProtocol.swift; sourceTree = "<group>"; };
 		0C7E923E2B470FD30079525D /* PersistenceManager+KEYS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistenceManager+KEYS.swift"; sourceTree = "<group>"; };
 		0C7E92452B479E170079525D /* FlossRecordDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecordDataProvider.swift; sourceTree = "<group>"; };
 		0C8981EF2B466223008CFD5D /* FlossRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecord.swift; sourceTree = "<group>"; };
 		0C8981F32B4667AC008CFD5D /* FlossRecordDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecordDataSource.swift; sourceTree = "<group>"; };
+		0CF8BD3C2B4DACE800EB16B5 /* NotificationService */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = NotificationService; sourceTree = "<group>"; };
 		561DBA7B2B45DCF10052EE78 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		5625BFD42B439A5C006F88BD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		562749CB2B43A5C1004F37A0 /* Borel-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Borel-Regular.ttf"; sourceTree = "<group>"; };
@@ -56,18 +60,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CF8BD3F2B4DAD8500EB16B5 /* NotificationService in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C4177A82B4CF9B000E8976B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0C4177A92B4CF9CB00E8976B /* UserDefaults.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		0C7E92362B46FDD30079525D /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
 				56C33E092B3CCA9E00D8DEB7 /* PersistanceManager.swift */,
 				0C7E923E2B470FD30079525D /* PersistenceManager+KEYS.swift */,
 				0C8981F32B4667AC008CFD5D /* FlossRecordDataSource.swift */,
+				0C4177A82B4CF9B000E8976B /* Extensions */,
 				0C7E92472B479E3A0079525D /* Protocols */,
 			);
 			path = Persistence;
@@ -76,7 +90,7 @@
 		0C7E92472B479E3A0079525D /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				0C7E923A2B470DB00079525D /* UserDefaults+Protocol.swift */,
+				0C7E923A2B470DB00079525D /* UserDefaultable.swift */,
 				0C7E92452B479E170079525D /* FlossRecordDataProvider.swift */,
 				0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */,
 			);
@@ -139,6 +153,7 @@
 			children = (
 				5625BFD42B439A5C006F88BD /* README.md */,
 				56C33DF52B3CAA1000D8DEB7 /* DidIFloss */,
+				0CF8BD3C2B4DACE800EB16B5 /* NotificationService */,
 				56C33DF42B3CAA1000D8DEB7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -193,6 +208,9 @@
 			dependencies = (
 			);
 			name = DidIFloss;
+			packageProductDependencies = (
+				0CF8BD3E2B4DAD8500EB16B5 /* NotificationService */,
+			);
 			productName = DidIFloss;
 			productReference = 56C33DF32B3CAA1000D8DEB7 /* DidIFloss.app */;
 			productType = "com.apple.product-type.application";
@@ -221,6 +239,9 @@
 				Base,
 			);
 			mainGroup = 56C33DEA2B3CAA1000D8DEB7;
+			packageReferences = (
+				0CF8BD3D2B4DAD8500EB16B5 /* XCLocalSwiftPackageReference "NotificationService" */,
+			);
 			productRefGroup = 56C33DF42B3CAA1000D8DEB7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -255,12 +276,13 @@
 				56C33DF72B3CAA1000D8DEB7 /* DidIFlossApp.swift in Sources */,
 				0C8981F02B466223008CFD5D /* FlossRecord.swift in Sources */,
 				566FF8CB2B439FB70056644A /* HomeScreenView.swift in Sources */,
-				0C7E923B2B470DB00079525D /* UserDefaults+Protocol.swift in Sources */,
+				0C7E923B2B470DB00079525D /* UserDefaultable.swift in Sources */,
 				0C7E92462B479E170079525D /* FlossRecordDataProvider.swift in Sources */,
 				0C8981F42B4667AC008CFD5D /* FlossRecordDataSource.swift in Sources */,
 				0C7E923F2B470FD30079525D /* PersistenceManager+KEYS.swift in Sources */,
 				56C33E082B3CAC8800D8DEB7 /* ContentViewModel.swift in Sources */,
 				56C33E0A2B3CCA9E00D8DEB7 /* PersistanceManager.swift in Sources */,
+				0C4177AA2B4CF9CB00E8976B /* UserDefaults.swift in Sources */,
 				0C7E923D2B470DDB0079525D /* PersistenceManagerProtocol.swift in Sources */,
 				562749D02B43AD61004F37A0 /* Constants.swift in Sources */,
 			);
@@ -487,6 +509,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		0CF8BD3D2B4DAD8500EB16B5 /* XCLocalSwiftPackageReference "NotificationService" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = NotificationService;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0CF8BD3E2B4DAD8500EB16B5 /* NotificationService */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NotificationService;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 56C33DEB2B3CAA1000D8DEB7 /* Project object */;
 }
