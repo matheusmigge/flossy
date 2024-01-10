@@ -59,53 +59,51 @@ public struct NotificationModel {
     ///
     /// - Note: Default options should be suitable for most use cases.
     public var sound: UNNotificationSound = .default
-   
+    
     
     /// Initializes a notification with a time interval specified in seconds.
-      ///
-      /// - Parameters:
-      ///   - id: A unique identifier for the notification type.
-      ///   - titleMessage: The primary message displayed in the notification. Prefer a concise string.
-      ///   - bodyMessage: The main description of the notification.
-      ///   - subTitle: An optional secondary message for the notification.
-      ///   - timerInSeconds: Time interval in seconds for triggering the notification.
-      ///   - shouldRepeat: Indicates whether the notification should repeat based on the specified time interval.
-      ///   - sound: The sound associated with the notification when displayed.
-      ///
-      /// - Note: Provide a unique identifier for each notification to manage removal from the schedule later on.
-      public init(id: String, titleMessage: String, bodyMessage: String, subTitle: String? = nil, timerInSeconds: TimeInterval, shouldRepeat: Bool = false, sound: UNNotificationSound = .default) {
-          self.id = id
-          self.titleMessage = titleMessage
-          self.bodyMessage = bodyMessage
-          self.subTitle = subTitle
-          self.timeInterval = timerInSeconds
-          self.shouldRepeat = shouldRepeat
-          self.sound = sound
-      }
-      
-      /// Initializes a notification with a time interval specified in hours.
-      ///
-      /// - Parameters:
-      ///   - id: A unique identifier for the notification type.
-      ///   - titleMessage: The primary message displayed in the notification. Prefer a concise string.
-      ///   - bodyMessage: The main description of the notification.
-      ///   - subTitle: An optional secondary message for the notification.
-      ///   - timerInHours: Time interval in hours for triggering the notification.
-      ///   - shouldRepeat: Indicates whether the notification should repeat based on the specified time interval.
-      ///   - sound: The sound associated with the notification when displayed.
-      ///
-      /// - Note: Provide a unique identifier for each notification to manage removal from the schedule later on.
-      public init(id: String, titleMessage: String, bodyMessage: String, subTitle: String? = nil, timerInHours: TimeInterval, shouldRepeat: Bool = false, sound: UNNotificationSound = .default) {
-          self.id = id
-          self.titleMessage = titleMessage
-          self.bodyMessage = bodyMessage
-          self.subTitle = subTitle
-          self.timeInterval = timerInHours * 3600
-          self.shouldRepeat = shouldRepeat
-          self.sound = sound
-      }
+    ///
+    /// - Parameters:
+    ///   - id: A unique identifier for the notification type.
+    ///   - titleMessage: The primary message displayed in the notification. Prefer a concise string.
+    ///   - bodyMessage: The main description of the notification.
+    ///   - subTitle: An optional secondary message for the notification.
+    ///   - timerInSeconds: Time interval in seconds for triggering the notification.
+    ///   - shouldRepeat: Indicates whether the notification should repeat based on the specified time interval.
+    ///   - sound: The sound associated with the notification when displayed.
+    ///
+    /// - Note: Provide a unique identifier for each notification to manage removal from the schedule later on.
+    public init(id: String, titleMessage: String, bodyMessage: String, subTitle: String? = nil, timerInSeconds: TimeInterval, shouldRepeat: Bool = false, sound: UNNotificationSound = .default) {
+        self.id = id
+        self.titleMessage = titleMessage
+        self.bodyMessage = bodyMessage
+        self.subTitle = subTitle
+        self.timeInterval = timerInSeconds
+        self.shouldRepeat = shouldRepeat
+        self.sound = sound
+    }
     
-    
+    /// Initializes a notification with a time interval specified in hours.
+    ///
+    /// - Parameters:
+    ///   - id: A unique identifier for the notification type.
+    ///   - titleMessage: The primary message displayed in the notification. Prefer a concise string.
+    ///   - bodyMessage: The main description of the notification.
+    ///   - subTitle: An optional secondary message for the notification.
+    ///   - timerInHours: Time interval in hours for triggering the notification.
+    ///   - shouldRepeat: Indicates whether the notification should repeat based on the specified time interval.
+    ///   - sound: The sound associated with the notification when displayed.
+    ///
+    /// - Note: Provide a unique identifier for each notification to manage removal from the schedule later on.
+    public init(id: String, titleMessage: String, bodyMessage: String, subTitle: String? = nil, timerInHours: TimeInterval, shouldRepeat: Bool = false, sound: UNNotificationSound = .default) {
+        self.id = id
+        self.titleMessage = titleMessage
+        self.bodyMessage = bodyMessage
+        self.subTitle = subTitle
+        self.timeInterval = timerInHours * 3600
+        self.shouldRepeat = shouldRepeat
+        self.sound = sound
+    }
     
     /// Builds a `UNNotificationContent` object based on the model information.
     ///
