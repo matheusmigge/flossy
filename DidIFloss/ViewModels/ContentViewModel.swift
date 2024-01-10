@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import NotificationService
 
 class ContentViewModel: ObservableObject {
     
@@ -62,7 +63,7 @@ class ContentViewModel: ObservableObject {
     
     public func flossButtonPressed() {
         self.saveToPersistance()
-        Notification.Service.scheduleFlossRemindersNotifications()
+        NotificationService.scheduleFlossRemindersNotifications()
         
     }
     

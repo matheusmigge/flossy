@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NotificationService
 
 
 @main
@@ -22,7 +23,7 @@ struct DidIFlossApp: App {
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        Notification.Service.requestAuthorizationToNotificate(provisional: true)
+        NotificationService.requestAuthorizationToNotificate(provisional: true)
         
         return true
     }

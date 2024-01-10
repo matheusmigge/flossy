@@ -3,21 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C4177A22B4C795A00E8976B /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4177A12B4C795A00E8976B /* Notification.swift */; };
-		0C4177A42B4C7B8500E8976B /* FlossReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4177A32B4C7B8500E8976B /* FlossReminder.swift */; };
-		0C4177A72B4CF0FE00E8976B /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4177A62B4CF0FE00E8976B /* NotificationModel.swift */; };
 		0C4177AA2B4CF9CB00E8976B /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4177A92B4CF9CB00E8976B /* UserDefaults.swift */; };
-		0C4177AD2B4CFA5900E8976B /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4177AC2B4CFA5900E8976B /* Service.swift */; };
 		0C7E923B2B470DB00079525D /* UserDefaultable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923A2B470DB00079525D /* UserDefaultable.swift */; };
 		0C7E923D2B470DDB0079525D /* PersistenceManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */; };
 		0C7E923F2B470FD30079525D /* PersistenceManager+KEYS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923E2B470FD30079525D /* PersistenceManager+KEYS.swift */; };
 		0C7E92462B479E170079525D /* FlossRecordDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E92452B479E170079525D /* FlossRecordDataProvider.swift */; };
 		0C8981F02B466223008CFD5D /* FlossRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8981EF2B466223008CFD5D /* FlossRecord.swift */; };
 		0C8981F42B4667AC008CFD5D /* FlossRecordDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8981F32B4667AC008CFD5D /* FlossRecordDataSource.swift */; };
+		0CF8BD3F2B4DAD8500EB16B5 /* NotificationService in Frameworks */ = {isa = PBXBuildFile; productRef = 0CF8BD3E2B4DAD8500EB16B5 /* NotificationService */; };
 		561DBA7C2B45DCF10052EE78 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBA7B2B45DCF10052EE78 /* BackgroundView.swift */; };
 		5625BFD52B439A5C006F88BD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5625BFD42B439A5C006F88BD /* README.md */; };
 		562749CC2B43A5C2004F37A0 /* Borel-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 562749CB2B43A5C1004F37A0 /* Borel-Regular.ttf */; };
@@ -33,17 +30,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0C4177A12B4C795A00E8976B /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
-		0C4177A32B4C7B8500E8976B /* FlossReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossReminder.swift; sourceTree = "<group>"; };
-		0C4177A62B4CF0FE00E8976B /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		0C4177A92B4CF9CB00E8976B /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
-		0C4177AC2B4CFA5900E8976B /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		0C7E923A2B470DB00079525D /* UserDefaultable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultable.swift; sourceTree = "<group>"; };
 		0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManagerProtocol.swift; sourceTree = "<group>"; };
 		0C7E923E2B470FD30079525D /* PersistenceManager+KEYS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistenceManager+KEYS.swift"; sourceTree = "<group>"; };
 		0C7E92452B479E170079525D /* FlossRecordDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecordDataProvider.swift; sourceTree = "<group>"; };
 		0C8981EF2B466223008CFD5D /* FlossRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecord.swift; sourceTree = "<group>"; };
 		0C8981F32B4667AC008CFD5D /* FlossRecordDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecordDataSource.swift; sourceTree = "<group>"; };
+		0CF8BD3C2B4DACE800EB16B5 /* NotificationService */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = NotificationService; sourceTree = "<group>"; };
 		561DBA7B2B45DCF10052EE78 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		5625BFD42B439A5C006F88BD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		562749CB2B43A5C1004F37A0 /* Borel-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Borel-Regular.ttf"; sourceTree = "<group>"; };
@@ -66,45 +60,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CF8BD3F2B4DAD8500EB16B5 /* NotificationService in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0C4177A02B4C794A00E8976B /* Notification */ = {
-			isa = PBXGroup;
-			children = (
-				0C4177A12B4C795A00E8976B /* Notification.swift */,
-				0C4177AB2B4CFA4300E8976B /* Service */,
-				0C4177A52B4CF0EE00E8976B /* Model */,
-			);
-			path = Notification;
-			sourceTree = "<group>";
-		};
-		0C4177A52B4CF0EE00E8976B /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				0C4177A32B4C7B8500E8976B /* FlossReminder.swift */,
-				0C4177A62B4CF0FE00E8976B /* NotificationModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		0C4177A82B4CF9B000E8976B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				0C4177A92B4CF9CB00E8976B /* UserDefaults.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		0C4177AB2B4CFA4300E8976B /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				0C4177AC2B4CFA5900E8976B /* Service.swift */,
-			);
-			path = Service;
 			sourceTree = "<group>";
 		};
 		0C7E92362B46FDD30079525D /* Persistence */ = {
@@ -140,7 +108,6 @@
 		0C8981F22B466306008CFD5D /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				0C4177A02B4C794A00E8976B /* Notification */,
 				0C7E92362B46FDD30079525D /* Persistence */,
 			);
 			path = Service;
@@ -186,6 +153,7 @@
 			children = (
 				5625BFD42B439A5C006F88BD /* README.md */,
 				56C33DF52B3CAA1000D8DEB7 /* DidIFloss */,
+				0CF8BD3C2B4DACE800EB16B5 /* NotificationService */,
 				56C33DF42B3CAA1000D8DEB7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -240,6 +208,9 @@
 			dependencies = (
 			);
 			name = DidIFloss;
+			packageProductDependencies = (
+				0CF8BD3E2B4DAD8500EB16B5 /* NotificationService */,
+			);
 			productName = DidIFloss;
 			productReference = 56C33DF32B3CAA1000D8DEB7 /* DidIFloss.app */;
 			productType = "com.apple.product-type.application";
@@ -268,6 +239,9 @@
 				Base,
 			);
 			mainGroup = 56C33DEA2B3CAA1000D8DEB7;
+			packageReferences = (
+				0CF8BD3D2B4DAD8500EB16B5 /* XCLocalSwiftPackageReference "NotificationService" */,
+			);
 			productRefGroup = 56C33DF42B3CAA1000D8DEB7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -300,21 +274,17 @@
 				56C33DF92B3CAA1000D8DEB7 /* ContentView.swift in Sources */,
 				561DBA7C2B45DCF10052EE78 /* BackgroundView.swift in Sources */,
 				56C33DF72B3CAA1000D8DEB7 /* DidIFlossApp.swift in Sources */,
-				0C4177A42B4C7B8500E8976B /* FlossReminder.swift in Sources */,
 				0C8981F02B466223008CFD5D /* FlossRecord.swift in Sources */,
 				566FF8CB2B439FB70056644A /* HomeScreenView.swift in Sources */,
 				0C7E923B2B470DB00079525D /* UserDefaultable.swift in Sources */,
 				0C7E92462B479E170079525D /* FlossRecordDataProvider.swift in Sources */,
 				0C8981F42B4667AC008CFD5D /* FlossRecordDataSource.swift in Sources */,
-				0C4177AD2B4CFA5900E8976B /* Service.swift in Sources */,
 				0C7E923F2B470FD30079525D /* PersistenceManager+KEYS.swift in Sources */,
 				56C33E082B3CAC8800D8DEB7 /* ContentViewModel.swift in Sources */,
 				56C33E0A2B3CCA9E00D8DEB7 /* PersistanceManager.swift in Sources */,
-				0C4177A22B4C795A00E8976B /* Notification.swift in Sources */,
 				0C4177AA2B4CF9CB00E8976B /* UserDefaults.swift in Sources */,
 				0C7E923D2B470DDB0079525D /* PersistenceManagerProtocol.swift in Sources */,
 				562749D02B43AD61004F37A0 /* Constants.swift in Sources */,
-				0C4177A72B4CF0FE00E8976B /* NotificationModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,6 +509,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		0CF8BD3D2B4DAD8500EB16B5 /* XCLocalSwiftPackageReference "NotificationService" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = NotificationService;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0CF8BD3E2B4DAD8500EB16B5 /* NotificationService */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NotificationService;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 56C33DEB2B3CAA1000D8DEB7 /* Project object */;
 }
