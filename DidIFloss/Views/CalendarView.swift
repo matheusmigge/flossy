@@ -24,21 +24,67 @@ extension Date {
     
 }
 
+extension Calendar {
+    
+    static func getDaysOfTheMonth(for date: Date) -> [Date] {
+        let calendar = Calendar.current
+        
+        var days = [Date]()
+        
+        guard let monthInterval = calendar.dateInterval(of: .month, for: date) else { return [] }
+        guard let rangeOfDaysInMonth = calendar.range(of: .day, in: .month, for: date) else { return [] }
+        
+        let firstDayOfMonth = monthInterval.start
+        let weekdayOfFirstDay = calendar.component(.weekday, from: firstDayOfMonth)
+      
+
+        // Adicione dias do mês anterior para preencher a primeira semana se necessário
+        let numberOfDaysFromPreviousMonth = weekdayOfFirstDay - calendar.firstWeekday
+        if numberOfDaysFromPreviousMonth > 0 {
+            let previousMonthEndDate = calendar.date(byAdding: .day, value: -1, to: firstDayOfMonth)!
+            for day in (1 - numberOfDaysFromPreviousMonth)...0 {
+                guard let dayDate = calendar.date(byAdding: .day, value: day, to: previousMonthEndDate) else { return [] }
+                days.append(dayDate)
+            }
+        }
+
+        // Adicione dias do mês atual
+        rangeOfDaysInMonth.forEach { day in
+            guard let dayDate = calendar.date(bySetting: .day, value: day - 1, of: firstDayOfMonth) else { return }
+            days.append(dayDate)
+        }
+
+
+        // Adicione dias do mês seguinte para preencher a última semana se necessário
+        let lastDayOfMonth = monthInterval.end
+        let numberOfDaysFromNextMonth = 7 - days.count % 7
+        if numberOfDaysFromNextMonth < 7 {
+            for day in 1...numberOfDaysFromNextMonth {
+                guard let dayDate = calendar.date(byAdding: .day, value: day - 1, to: lastDayOfMonth) else { return [] }
+                days.append(dayDate)
+            }
+        }
+
+        return days
+    }
+    
+}
+
 extension CalendarView {
     class ViewModel: ObservableObject {
+        
+        @Published var currentCalendar: Date = Date()
+        
         
         var calendar: Calendar {
             Calendar.current
         }
         
         let daysOfTheWeek = Calendar.current.shortWeekdaySymbols
-        let today = Date()
-    
-        @Published var currentCalendar: Date = Date()
         
         var hasNextMonth: Bool {
             let next = calendar.date(byAdding: .month, value: 1, to: currentCalendar) ?? Date()
-            return next <= today
+            return next <= .now
         }
         
         func nextMonth() {
@@ -54,66 +100,15 @@ extension CalendarView {
         func isToday(_ date: Date) -> Bool {
             return calendar.isDateInToday(date)
         }
-        
-        func getDaysOfTheMonth(for date: Date) -> [Date] {
-            
-            guard let month = calendar.dateInterval(of: .month, for: date) else { return [] }
-            
-            guard let range = calendar.range(of: .day, in: .month, for: date) else { return [] }
-            
-            var days = [Date]()
-            
-            range.forEach { int in
-                guard let day = calendar.date(byAdding: .day, value: int - 1, to: month.start) else { return }
-                days.append(day)
-            }
-            return days
-        }
     
-        
-        
-        func getDaysOfTheMonthh(for date: Date) -> [Date] {
-            guard let monthInterval = calendar.dateInterval(of: .month, for: date) else { return [] }
-
-            let firstDayOfMonth = monthInterval.start
-            let weekdayOfFirstDay = calendar.component(.weekday, from: firstDayOfMonth)
-            let numberOfDaysInMonth = calendar.range(of: .day, in: .month, for: date)?.count ?? 0
-
-            var days = [Date]()
-
-            // Adicione dias do mês anterior para preencher a primeira semana se necessário
-            let numberOfDaysFromPreviousMonth = weekdayOfFirstDay - calendar.firstWeekday
-            if numberOfDaysFromPreviousMonth > 0 {
-                let previousMonthEndDate = calendar.date(byAdding: .day, value: -1, to: firstDayOfMonth)!
-                for day in (1 - numberOfDaysFromPreviousMonth)...0 {
-                    guard let dayDate = calendar.date(byAdding: .day, value: day, to: previousMonthEndDate) else { return [] }
-                    days.append(dayDate)
-                }
-            }
-
-            // Adicione dias do mês atual
-            for day in 1...numberOfDaysInMonth {
-                guard let dayDate = calendar.date(bySetting: .day, value: day, of: firstDayOfMonth) else { return [] }
-                days.append(dayDate)
-            }
-
-            // Adicione dias do mês seguinte para preencher a última semana se necessário
-            let lastDayOfMonth = monthInterval.end
-            let numberOfDaysFromNextMonth = 7 - days.count % 7
-            if numberOfDaysFromNextMonth > 0 {
-                for day in 1...numberOfDaysFromNextMonth {
-                    guard let dayDate = calendar.date(byAdding: .day, value: day, to: lastDayOfMonth) else { return [] }
-                    days.append(dayDate)
-                }
-            }
-
-            return days
+        var daysCalendar: [Date] {
+            return Calendar.getDaysOfTheMonth(for: currentCalendar)
         }
+        
         
         func isFromCurrentMonth(_ date: Date) -> Bool {
-            return date.month == today.month
+            return calendar.isDate(date, equalTo: Date(), toGranularity: .month)
         }
-
     }
 }
 
@@ -121,7 +116,7 @@ struct CalendarView: View {
     
     @StateObject var viewModel: ViewModel = ViewModel()
     
-    let gridColums: [GridItem] = Array(repeating: GridItem(.flexible(minimum: 20, maximum: 50)), count: 7)
+    let gridColums: [GridItem] = Array(repeating: GridItem(.flexible(minimum: 15, maximum: 50)), count: 7)
     
     func dayColor(_ date: Date) -> Color {
         if viewModel.isToday(date) {
@@ -162,13 +157,13 @@ struct CalendarView: View {
                 
             }
         
-            LazyVGrid(columns: gridColums, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 5, content: {
+            LazyVGrid(columns: gridColums, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 15, content: {
                 
                 ForEach(viewModel.daysOfTheWeek, id: \.self) { day in
                         Text(day)
                 }
                 
-                ForEach(viewModel.getDaysOfTheMonthh(for: viewModel.currentCalendar), id: \.self) { date in
+                ForEach(viewModel.daysCalendar, id: \.self) { date in
                     Text(date.day)
                         .foregroundStyle(dayColor(date))
                 }
