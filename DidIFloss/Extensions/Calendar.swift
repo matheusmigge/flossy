@@ -8,9 +8,12 @@
 import Foundation
 
 extension Calendar {
+    
+    static private var calendar: Calendar {
+        self.current
+    }
+    
     static func getDaysOfTheMonth(for date: Date) -> [Date] {
-        let calendar = Calendar.current
-        
         var days = [Date]()
         
         guard let monthInterval = calendar.dateInterval(of: .month, for: date) else { return [] }
@@ -18,7 +21,7 @@ extension Calendar {
         
         let firstDayOfMonth = monthInterval.start
         let weekdayOfFirstDay = calendar.component(.weekday, from: firstDayOfMonth)
-      
+        
         // Adds the last days of previuos month if needed to complete first week row
         let numberOfDaysFromPreviousMonth = weekdayOfFirstDay - calendar.firstWeekday
         if numberOfDaysFromPreviousMonth > 0 {
@@ -28,13 +31,13 @@ extension Calendar {
                 days.append(dayDate)
             }
         }
-
+        
         // Adds days of given month
         rangeOfDaysInMonth.forEach { day in
             guard let dayDate = calendar.date(bySetting: .day, value: day - 1, of: firstDayOfMonth) else { return }
             days.append(dayDate)
         }
-
+        
         // Adds first days of next month if needed to complete last week row
         let lastDayOfMonth = monthInterval.end
         let numberOfDaysFromNextMonth = 7 - days.count % 7
@@ -44,7 +47,24 @@ extension Calendar {
                 days.append(dayDate)
             }
         }
+        
+        return days
+    }
+    
 
+    
+    static func getDaysOfTheWeek(for date: Date) -> [Date] {
+    
+        var days: [Date] = []
+        
+        guard let weekInterval = calendar.dateInterval(of: .weekOfYear, for: date) else { return days }
+        let firstDayOfTheWeek = weekInterval.start
+        
+        for index in 0...7 {
+            guard let day = calendar.date(byAdding: .day, value: index, to: firstDayOfTheWeek) else { return days }
+            days.append(day)
+        }
+        
         return days
     }
 }

@@ -33,7 +33,7 @@ public struct NotificationService {
         
         center.requestAuthorization(options: requestOptions) { granted, error in
             if granted {
-                print("\(provisional ? "Provisional" : "Full") Notification permission granted")
+//                print("\(provisional ? "Provisional" : "Full") Notification permission granted")
             } else {
                 print("\(provisional ? "Provisional" : "Full") Notification permission denied")
                 if let error = error {

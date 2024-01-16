@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-struct CalendarMonthView: View {
+struct CalendarView: View {
     
     @Namespace private var selectedDateNameSpace
     @StateObject var viewModel: ViewModel
@@ -26,7 +26,7 @@ struct CalendarMonthView: View {
             return .red
         }
         
-        if viewModel.isFromCurrentMonth(date) {
+        if viewModel.isFromCurrentCalendarSet(date) {
             return .primary
         }
         
@@ -37,33 +37,39 @@ struct CalendarMonthView: View {
         VStack {
             calendarHeader
             
-            calendarGrid
-            
+            switch viewModel.style {
+            case .month:
+                calendarGrid
+            case .week:
+                EmptyView()
+            }
+        
         }
         .padding()
     }
     
+    
     private var calendarHeader: some View {
         HStack {
             Button {
-                viewModel.previousMonth()
+                viewModel.previousCalendarSet()
             } label: {
                 Image(systemName: "chevron.backward")
             }
             
             Spacer()
             
-            Text(viewModel.currentCalendar.dayAndMonthFormatted)
+            Text(viewModel.dateLabel)
                 .font(.headline)
             
             Spacer()
             
             Button {
-                viewModel.nextMonth()
+                viewModel.nextCalendarSet()
             } label: {
                 Image(systemName: "chevron.forward")
             }
-            .opacity(viewModel.hasNextMonth ? 1 : 0)
+            .opacity(viewModel.hasNexCalendar ? 1 : 0)
             
         }
         .padding(.horizontal)
@@ -104,7 +110,7 @@ struct CalendarMonthView: View {
                     .monospaced()
             }
             
-            ForEach(viewModel.daysCalendar, id: \.self) { date in
+            ForEach(viewModel.daysCalendarSet, id: \.self) { date in
                 Text(date.dayFormatted)
                     .foregroundStyle(dayColor(date))
                     .background {
@@ -128,7 +134,13 @@ struct CalendarMonthView: View {
     }
 }
 
-extension CalendarMonthView {
+extension CalendarView {
+    enum Style {
+        case month, week
+    }
+}
+
+extension CalendarView {
     class ViewModel: ObservableObject {
         
         @Published var currentCalendar: Date = .now
@@ -137,10 +149,13 @@ extension CalendarMonthView {
         
         @Published var records: [Date]
         
-        init(currentCalendar: Date = .now, selecteDate: Date = .now, records: [Date]) {
+        var style: Style
+        
+        init(currentCalendar: Date = .now, selecteDate: Date = .now, records: [Date], style: Style = .week) {
             self.currentCalendar = currentCalendar
             self.selecteDate = selecteDate
             self.records = records
+            self.style = style
         }
         
         var filterdRecords: [Date] {
@@ -157,30 +172,54 @@ extension CalendarMonthView {
             calendar.shortWeekdaySymbols
         }
         
-        var daysCalendar: [Date] {
-            return Calendar.getDaysOfTheMonth(for: currentCalendar)
+        var daysCalendarSet: [Date] {
+            switch style {
+            case .month:
+                return Calendar.getDaysOfTheMonth(for: currentCalendar)
+            case .week:
+                return Calendar.getDaysOfTheWeek(for: currentCalendar)
+            }
+           
         }
         
-        var hasNextMonth: Bool {
-            let next = calendar.date(byAdding: .month, value: 1, to: currentCalendar) ?? Date()
-            return next <= .now
-        }
-        
-        func nextMonth() {
-            if hasNextMonth {
-                currentCalendar = calendar.date(byAdding: .month, value: 1, to: currentCalendar) ?? Date()
+        var dateLabel: String {
+            switch style {
+            case .month:
+                return currentCalendar.dayAndMonthFormatted
+            case .week:
+                let firstDayOfWeek = daysCalendarSet.first?.dayFormatted ?? "XX"
+                let lastDayOfWeek = daysCalendarSet.last?.dayFormatted ?? "XX"
+                
+                return "\(firstDayOfWeek) - \(lastDayOfWeek) \(currentCalendar.monthFornatted)"
             }
         }
         
-        func previousMonth() {
-            currentCalendar = calendar.date(byAdding: .month, value: -1, to: currentCalendar) ?? Date()
+        var hasNexCalendar: Bool {
+            let dateComponent: Calendar.Component = style == .month ? .month : .weekOfYear
+            
+            let next = calendar.date(byAdding: dateComponent, value: 1, to: currentCalendar) ?? Date()
+            return next <= .now
+        }
+        
+        func nextCalendarSet() {
+            if hasNexCalendar {
+                let calendarComponent: Calendar.Component = style == .week ? .weekOfYear : .month
+                
+                currentCalendar = calendar.date(byAdding: calendarComponent, value: 1, to: currentCalendar) ?? Date()
+            }
+        }
+        
+        func previousCalendarSet() {
+            let calendarComponent: Calendar.Component = style == .week ? .weekOfYear : .month
+            
+            currentCalendar = calendar.date(byAdding: calendarComponent, value: -1, to: currentCalendar) ?? Date()
         }
         
         func isToday(_ date: Date) -> Bool {
             return calendar.isDateInToday(date)
         }
         
-        func isFromCurrentMonth(_ date: Date) -> Bool {
+        func isFromCurrentCalendarSet(_ date: Date) -> Bool {
             return calendar.isDate(date, equalTo: Date(), toGranularity: .month)
         }
         
@@ -201,12 +240,17 @@ extension CalendarMonthView {
                 .filter({calendar.isDate($0, equalTo: date, toGranularity: .day)})
                 .count
         }
+        
+        // week
+        
+        
+        
     }
 }
 
 
 #Preview {
-    CalendarMonthView(recordDates: [
+    CalendarView(recordDates: [
         Date(), Date(), Date(),
         Calendar.current.date(byAdding: .day, value: -1, to: .now)!,
         Calendar.current.date(byAdding: .day, value: -1, to: .now)!,
