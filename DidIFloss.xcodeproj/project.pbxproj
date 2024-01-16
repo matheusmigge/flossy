@@ -15,6 +15,8 @@
 		0C88C7772B5322540040494D /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C88C7762B5322540040494D /* CalendarView.swift */; };
 		0C8981F02B466223008CFD5D /* FlossRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8981EF2B466223008CFD5D /* FlossRecord.swift */; };
 		0C8981F42B4667AC008CFD5D /* FlossRecordDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8981F32B4667AC008CFD5D /* FlossRecordDataSource.swift */; };
+		0CEB25CE2B56FF5300B14298 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB25CD2B56FF5300B14298 /* Date.swift */; };
+		0CEB25D02B56FF5A00B14298 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB25CF2B56FF5A00B14298 /* Calendar.swift */; };
 		0CF8BD3F2B4DAD8500EB16B5 /* NotificationService in Frameworks */ = {isa = PBXBuildFile; productRef = 0CF8BD3E2B4DAD8500EB16B5 /* NotificationService */; };
 		561DBA7C2B45DCF10052EE78 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBA7B2B45DCF10052EE78 /* BackgroundView.swift */; };
 		5625BFD52B439A5C006F88BD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5625BFD42B439A5C006F88BD /* README.md */; };
@@ -39,6 +41,8 @@
 		0C88C7762B5322540040494D /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		0C8981EF2B466223008CFD5D /* FlossRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecord.swift; sourceTree = "<group>"; };
 		0C8981F32B4667AC008CFD5D /* FlossRecordDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecordDataSource.swift; sourceTree = "<group>"; };
+		0CEB25CD2B56FF5300B14298 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		0CEB25CF2B56FF5A00B14298 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		0CF8BD3C2B4DACE800EB16B5 /* NotificationService */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = NotificationService; sourceTree = "<group>"; };
 		561DBA7B2B45DCF10052EE78 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		5625BFD42B439A5C006F88BD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -115,6 +119,15 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		0CEB25CC2B56FF4200B14298 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0CEB25CD2B56FF5300B14298 /* Date.swift */,
+				0CEB25CF2B56FF5A00B14298 /* Calendar.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		562749CD2B43A603004F37A0 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,7 +140,6 @@
 			isa = PBXGroup;
 			children = (
 				56C33DF82B3CAA1000D8DEB7 /* ContentView.swift */,
-				0C88C7762B5322540040494D /* CalendarView.swift */,
 				566FF8CA2B439FB70056644A /* HomeScreenView.swift */,
 				5679991A2B4480C200941D75 /* Components */,
 			);
@@ -137,6 +149,7 @@
 		5679991A2B4480C200941D75 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				0C88C7762B5322540040494D /* CalendarView.swift */,
 				567999172B447E7A00941D75 /* ToothView.swift */,
 				561DBA7B2B45DCF10052EE78 /* BackgroundView.swift */,
 			);
@@ -174,6 +187,7 @@
 			children = (
 				562749CE2B43A64C004F37A0 /* Info.plist */,
 				56C33DF62B3CAA1000D8DEB7 /* DidIFlossApp.swift */,
+				0CEB25CC2B56FF4200B14298 /* Extensions */,
 				0C8981F22B466306008CFD5D /* Service */,
 				0C8981F12B4662F0008CFD5D /* Model */,
 				567999192B4480A500941D75 /* Views */,
@@ -274,11 +288,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				567999182B447E7A00941D75 /* ToothView.swift in Sources */,
+				0CEB25D02B56FF5A00B14298 /* Calendar.swift in Sources */,
 				56C33DF92B3CAA1000D8DEB7 /* ContentView.swift in Sources */,
 				0C88C7772B5322540040494D /* CalendarView.swift in Sources */,
 				561DBA7C2B45DCF10052EE78 /* BackgroundView.swift in Sources */,
 				56C33DF72B3CAA1000D8DEB7 /* DidIFlossApp.swift in Sources */,
 				0C8981F02B466223008CFD5D /* FlossRecord.swift in Sources */,
+				0CEB25CE2B56FF5300B14298 /* Date.swift in Sources */,
 				566FF8CB2B439FB70056644A /* HomeScreenView.swift in Sources */,
 				0C7E923B2B470DB00079525D /* UserDefaultable.swift in Sources */,
 				0C7E92462B479E170079525D /* FlossRecordDataProvider.swift in Sources */,
