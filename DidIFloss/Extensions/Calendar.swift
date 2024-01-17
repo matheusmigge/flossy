@@ -60,7 +60,7 @@ extension Calendar {
         guard let weekInterval = calendar.dateInterval(of: .weekOfYear, for: date) else { return days }
         let firstDayOfTheWeek = weekInterval.start
         
-        for index in 0...7 {
+        for index in 0..<7 {
             guard let day = calendar.date(byAdding: .day, value: index, to: firstDayOfTheWeek) else { return days }
             days.append(day)
         }

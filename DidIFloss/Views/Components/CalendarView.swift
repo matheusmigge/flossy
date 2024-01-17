@@ -13,11 +13,12 @@ struct CalendarView: View {
     @Namespace private var selectedDateNameSpace
     @StateObject var viewModel: ViewModel
     
-    init(recordDates: [Date]) {
-        self._viewModel = StateObject(wrappedValue: ViewModel(records: recordDates))
+    init(recordDates: [Date], style: Style) {
+        self._viewModel = StateObject(wrappedValue: ViewModel(records: recordDates,
+                                                              style: style))
     }
     
-    let gridColums: [GridItem] = Array(repeating:
+    static let gridColums: [GridItem] = Array(repeating:
                                         GridItem(.flexible(minimum: 15, maximum: 50)),
                                        count: 7)
     
@@ -37,13 +38,7 @@ struct CalendarView: View {
         VStack {
             calendarHeader
             
-            switch viewModel.style {
-            case .month:
-                calendarGrid
-            case .week:
-                EmptyView()
-            }
-        
+            calendarGrid
         }
         .padding()
     }
@@ -102,8 +97,44 @@ struct CalendarView: View {
         }
     }
     
+    @ViewBuilder
+    func dayMonthCalendarGridView(for date: Date) -> some View {
+        Text(date.dayFormatted)
+            .foregroundStyle(dayColor(date))
+            .background {
+                if viewModel.isSelectedDate(date) {
+                    Circle()
+                        .fill(Color.skyBlue)
+                        .frame(width: 30, height: 30)
+                        .matchedGeometryEffect(id: "selectedDateNameSpace", in: selectedDateNameSpace)
+                }
+            }
+            .overlay {
+                FlossIndicatorView(for: date)
+            }
+            .onTapGesture {
+                withAnimation {
+                    viewModel.dayOfCalendarPressed(date)
+                }
+            }
+    }
+    
+    @ViewBuilder
+    func dayWeekCalenderGridView(for date: Date) -> some View {
+        if viewModel.hasDayFlossRecords(for: date) {
+            Image(systemName: "checkmark.circle.fill")
+                .resizable()
+                .foregroundStyle(.greenyBlue)
+                .frame(width: 30, height: 30)
+        } else {
+            Circle()
+                .stroke(lineWidth: 2)
+                .frame(width: 30, height: 30)
+        }
+    }
+    
     private var calendarGrid: some View {
-        LazyVGrid(columns: gridColums, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 15, content: {
+        LazyVGrid(columns: Self.gridColums, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 15, content: {
             
             ForEach(viewModel.daysOfTheWeek, id: \.self) { day in
                 Text(day)
@@ -111,24 +142,14 @@ struct CalendarView: View {
             }
             
             ForEach(viewModel.daysCalendarSet, id: \.self) { date in
-                Text(date.dayFormatted)
-                    .foregroundStyle(dayColor(date))
-                    .background {
-                        if viewModel.isSelectedDate(date) {
-                            Circle()
-                                .fill(Color.skyBlue)
-                                .frame(width: 30, height: 30)
-                                .matchedGeometryEffect(id: "selectedDateNameSpace", in: selectedDateNameSpace)
-                        }
-                    }
-                    .overlay {
-                        FlossIndicatorView(for: date)
-                    }
-                    .onTapGesture {
-                        withAnimation {
-                            viewModel.dayOfCalendarPressed(date)
-                        }
-                    }
+                switch viewModel.style {
+                case .month:
+                    dayMonthCalendarGridView(for: date)
+                case .week:
+                    dayWeekCalenderGridView(for: date)
+                    
+                }
+                
             }
         })
     }
@@ -149,9 +170,9 @@ extension CalendarView {
         
         @Published var records: [Date]
         
-        var style: Style
+        @Published var style: Style
         
-        init(currentCalendar: Date = .now, selecteDate: Date = .now, records: [Date], style: Style = .week) {
+        init(currentCalendar: Date = .now, selecteDate: Date = .now, records: [Date], style: Style) {
             self.currentCalendar = currentCalendar
             self.selecteDate = selecteDate
             self.records = records
@@ -241,9 +262,12 @@ extension CalendarView {
                 .count
         }
         
-        // week
-        
-        
+        func hasDayFlossRecords(for date: Date) -> Bool {
+            let recordsCount = records
+                .filter({calendar.isDate($0, equalTo: date, toGranularity: .day)})
+                .count
+            return recordsCount > 0
+        }
         
     }
 }
@@ -252,8 +276,6 @@ extension CalendarView {
 #Preview {
     CalendarView(recordDates: [
         Date(), Date(), Date(),
-        Calendar.current.date(byAdding: .day, value: -1, to: .now)!,
-        Calendar.current.date(byAdding: .day, value: -1, to: .now)!,
         Calendar.current.date(byAdding: .day, value: -2, to: .now)!
-    ])
+    ], style: .week)
 }
