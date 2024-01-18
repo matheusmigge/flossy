@@ -206,12 +206,12 @@ extension CalendarView {
         var dateLabel: String {
             switch style {
             case .month:
-                return currentCalendar.dayAndMonthFormatted
+                return currentCalendar.monthFormatted
             case .week:
                 let firstDayOfWeek = daysCalendarSet.first?.dayFormatted ?? "XX"
                 let lastDayOfWeek = daysCalendarSet.last?.dayFormatted ?? "XX"
                 
-                return "\(firstDayOfWeek) - \(lastDayOfWeek) \(currentCalendar.monthFornatted)"
+                return "\(firstDayOfWeek) - \(lastDayOfWeek) \(currentCalendar.monthFormatted)"
             }
         }
         
@@ -277,5 +277,5 @@ extension CalendarView {
     CalendarView(recordDates: [
         Date(), Date(), Date(),
         Calendar.current.date(byAdding: .day, value: -2, to: .now)!
-    ], style: .week)
+    ], style: .month)
 }
