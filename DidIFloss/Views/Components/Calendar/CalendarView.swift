@@ -203,7 +203,7 @@ extension CalendarView {
             let firstDayOfWeek = daysCalendarSet.first?.dayFormatted ?? "XX"
             let lastDayOfWeek = daysCalendarSet.last?.dayFormatted ?? "XX"
             
-            return "\(firstDayOfWeek) - \(lastDayOfWeek) \(currentCalendar.monthFornatted)"
+            return "\(firstDayOfWeek) - \(lastDayOfWeek) \(currentCalendar.monthFormatted)"
         }
     }
     
