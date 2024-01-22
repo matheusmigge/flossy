@@ -17,6 +17,7 @@
 		0C8981F42B4667AC008CFD5D /* FlossRecordDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8981F32B4667AC008CFD5D /* FlossRecordDataSource.swift */; };
 		0CEB25CE2B56FF5300B14298 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB25CD2B56FF5300B14298 /* Date.swift */; };
 		0CEB25D02B56FF5A00B14298 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB25CF2B56FF5A00B14298 /* Calendar.swift */; };
+		0CEB25D32B5EE37200B14298 /* CalendarViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB25D22B5EE37200B14298 /* CalendarViewProtocol.swift */; };
 		0CF8BD3F2B4DAD8500EB16B5 /* NotificationService in Frameworks */ = {isa = PBXBuildFile; productRef = 0CF8BD3E2B4DAD8500EB16B5 /* NotificationService */; };
 		561DBA7C2B45DCF10052EE78 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBA7B2B45DCF10052EE78 /* BackgroundView.swift */; };
 		5625BFD52B439A5C006F88BD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5625BFD42B439A5C006F88BD /* README.md */; };
@@ -43,6 +44,7 @@
 		0C8981F32B4667AC008CFD5D /* FlossRecordDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecordDataSource.swift; sourceTree = "<group>"; };
 		0CEB25CD2B56FF5300B14298 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		0CEB25CF2B56FF5A00B14298 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
+		0CEB25D22B5EE37200B14298 /* CalendarViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewProtocol.swift; sourceTree = "<group>"; };
 		0CF8BD3C2B4DACE800EB16B5 /* NotificationService */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = NotificationService; sourceTree = "<group>"; };
 		561DBA7B2B45DCF10052EE78 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		5625BFD42B439A5C006F88BD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -128,6 +130,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		0CEB25D12B5EE36100B14298 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				0C88C7762B5322540040494D /* CalendarView.swift */,
+				0CEB25D22B5EE37200B14298 /* CalendarViewProtocol.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
 		562749CD2B43A603004F37A0 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,7 +160,7 @@
 		5679991A2B4480C200941D75 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				0C88C7762B5322540040494D /* CalendarView.swift */,
+				0CEB25D12B5EE36100B14298 /* Calendar */,
 				567999172B447E7A00941D75 /* ToothView.swift */,
 				561DBA7B2B45DCF10052EE78 /* BackgroundView.swift */,
 			);
@@ -300,6 +311,7 @@
 				0C7E92462B479E170079525D /* FlossRecordDataProvider.swift in Sources */,
 				0C8981F42B4667AC008CFD5D /* FlossRecordDataSource.swift in Sources */,
 				0C7E923F2B470FD30079525D /* PersistenceManager+KEYS.swift in Sources */,
+				0CEB25D32B5EE37200B14298 /* CalendarViewProtocol.swift in Sources */,
 				56C33E082B3CAC8800D8DEB7 /* ContentViewModel.swift in Sources */,
 				56C33E0A2B3CCA9E00D8DEB7 /* PersistanceManager.swift in Sources */,
 				0C4177AA2B4CF9CB00E8976B /* UserDefaults.swift in Sources */,
