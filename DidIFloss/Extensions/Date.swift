@@ -8,9 +8,9 @@
 import Foundation
 
 extension Date {
-    var monthFornatted: String {
+    var monthFormatted: String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM yy"
+        formatter.dateFormat = "MMMM yyyy"
         
         return formatter.string(from: self)
     }
