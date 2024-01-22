@@ -33,6 +33,10 @@ struct ContentView: View {
                 
                 Spacer()
                 
+                CalendarView(records: $viewModel.records, style: .week)
+                
+                Spacer()
+                
                 Text("How many times you flossed until now:")
                     .font(.caption)
                 
