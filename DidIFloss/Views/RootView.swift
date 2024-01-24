@@ -9,22 +9,27 @@ import SwiftUI
 
 struct RootView: View {
     
-    @State var isShowingLaunchScreen: Bool = true
+    @State var state: Content = .launchScreen
     
-    func viewDidApper() {
-        withAnimation(.easeInOut(duration: 1)) {
-            isShowingLaunchScreen = false
+    enum Content {
+        case content, launchScreen
+    }
+    
+    func lauchScreenAnimationDone() {
+        withAnimation(.smooth) {
+            state = .content
         }
     }
     
     var body: some View {
         ZStack {
-            ContentView()
-            
-            if isShowingLaunchScreen {
-                LaunchScreenView(animationOver: {
-                    viewDidApper()
-                })
+            switch state {
+            case .content:
+                HomeView()
+            case .launchScreen:
+                LaunchScreenView {
+                    lauchScreenAnimationDone()
+                }
             }
         }
     }

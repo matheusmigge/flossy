@@ -9,15 +9,15 @@ import SwiftUI
 
 struct LaunchScreenView: View {
     
-    @State private var isAnimating: Bool = false
     var animationOver: () -> Void
     
     var body: some View {
         ZStack {
+            Color.flossLightYellow
+            
             BackgroundView()
             
             wellcomeLabel
-                .scaleEffect(isAnimating ? 40 : 1)
             
         }
         .ignoresSafeArea()
@@ -43,16 +43,12 @@ struct LaunchScreenView: View {
     }
     
     private func startAnimation() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            withAnimation(.easeInOut(duration: 1)) {
-                isAnimating = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    animationOver()
-                }
-            }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            animationOver()
         }
     }
 }
+
 
 #Preview {
     LaunchScreenView(animationOver: {})

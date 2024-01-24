@@ -37,7 +37,6 @@ struct HomeView: View {
                 .listRowInsets(.init(top: -10, leading: -10, bottom: -10, trailing: -10))
                 
                 VStack {
-                    
                     HStack {
                         ZStack {
                             Text("5 dias seguidos!")
@@ -74,11 +73,11 @@ struct HomeView: View {
                 
                 CalendarView(records: $flossRecords, style: .week)
                 
-                
                 Section {
                     BannerView()
                 }.listRowInsets(.init(top: -20, leading: -20, bottom: -20, trailing: -20))
             }
+            .buttonStyle(.borderless)
             
             .onAppear() {
                 let persistance = PersistanceManager()

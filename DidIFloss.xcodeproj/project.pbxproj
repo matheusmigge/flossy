@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0C196DFF2B614E7600EDD0B3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C196DFE2B614E7600EDD0B3 /* Launch Screen.storyboard */; };
 		0C196E012B61555D00EDD0B3 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C196E002B61555C00EDD0B3 /* RootView.swift */; };
+		0C2FE44C2B619C0B00BAC3E8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2FE44B2B619C0B00BAC3E8 /* HomeView.swift */; };
+		0C2FE44F2B619C3600BAC3E8 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2FE44D2B619C3600BAC3E8 /* BannerView.swift */; };
+		0C2FE4502B619C3600BAC3E8 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2FE44E2B619C3600BAC3E8 /* LogoView.swift */; };
 		0C4177AA2B4CF9CB00E8976B /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4177A92B4CF9CB00E8976B /* UserDefaults.swift */; };
 		0C7E923B2B470DB00079525D /* UserDefaultable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923A2B470DB00079525D /* UserDefaultable.swift */; };
 		0C7E923D2B470DDB0079525D /* PersistenceManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */; };
@@ -38,6 +41,9 @@
 /* Begin PBXFileReference section */
 		0C196DFE2B614E7600EDD0B3 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		0C196E002B61555C00EDD0B3 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		0C2FE44B2B619C0B00BAC3E8 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		0C2FE44D2B619C3600BAC3E8 /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
+		0C2FE44E2B619C3600BAC3E8 /* LogoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		0C4177A92B4CF9CB00E8976B /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		0C7E923A2B470DB00079525D /* UserDefaultable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultable.swift; sourceTree = "<group>"; };
 		0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManagerProtocol.swift; sourceTree = "<group>"; };
@@ -154,6 +160,7 @@
 		567999192B4480A500941D75 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0C2FE44B2B619C0B00BAC3E8 /* HomeView.swift */,
 				56C33DF82B3CAA1000D8DEB7 /* ContentView.swift */,
 				566FF8CA2B439FB70056644A /* LaunchScreenView.swift */,
 				0C196E002B61555C00EDD0B3 /* RootView.swift */,
@@ -166,6 +173,8 @@
 			isa = PBXGroup;
 			children = (
 				0CEB25D12B5EE36100B14298 /* Calendar */,
+				0C2FE44E2B619C3600BAC3E8 /* LogoView.swift */,
+				0C2FE44D2B619C3600BAC3E8 /* BannerView.swift */,
 				567999172B447E7A00941D75 /* ToothView.swift */,
 				561DBA7B2B45DCF10052EE78 /* BackgroundView.swift */,
 			);
@@ -311,8 +320,10 @@
 				0C88C7772B5322540040494D /* CalendarView.swift in Sources */,
 				0C196E012B61555D00EDD0B3 /* RootView.swift in Sources */,
 				561DBA7C2B45DCF10052EE78 /* BackgroundView.swift in Sources */,
+				0C2FE4502B619C3600BAC3E8 /* LogoView.swift in Sources */,
 				56C33DF72B3CAA1000D8DEB7 /* DidIFlossApp.swift in Sources */,
 				0C8981F02B466223008CFD5D /* FlossRecord.swift in Sources */,
+				0C2FE44F2B619C3600BAC3E8 /* BannerView.swift in Sources */,
 				0CEB25CE2B56FF5300B14298 /* Date.swift in Sources */,
 				566FF8CB2B439FB70056644A /* LaunchScreenView.swift in Sources */,
 				0C7E923B2B470DB00079525D /* UserDefaultable.swift in Sources */,
@@ -320,6 +331,7 @@
 				0C8981F42B4667AC008CFD5D /* FlossRecordDataSource.swift in Sources */,
 				0C7E923F2B470FD30079525D /* PersistenceManager+KEYS.swift in Sources */,
 				0CEB25D32B5EE37200B14298 /* CalendarViewProtocol.swift in Sources */,
+				0C2FE44C2B619C0B00BAC3E8 /* HomeView.swift in Sources */,
 				56C33E082B3CAC8800D8DEB7 /* ContentViewModel.swift in Sources */,
 				56C33E0A2B3CCA9E00D8DEB7 /* PersistanceManager.swift in Sources */,
 				0C4177AA2B4CF9CB00E8976B /* UserDefaults.swift in Sources */,
