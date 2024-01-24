@@ -12,10 +12,10 @@ struct RootView: View {
     @State var isShowingLaunchScreen: Bool = true
     
     func viewDidApper() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            withAnimation(.easeInOut(duration: 1)) {
-                isShowingLaunchScreen = false
-            }
+        
+        withAnimation(.easeInOut(duration: 1)) {
+            isShowingLaunchScreen = false
+            
         }
     }
     
@@ -24,10 +24,10 @@ struct RootView: View {
             ContentView()
             
             if isShowingLaunchScreen {
-                LaunchScreenView()
-                    .onAppear {
-                       viewDidApper()
-                    }
+                LaunchScreenView(animationOver: {
+                    viewDidApper()
+                })
+                
             }
         }
     }

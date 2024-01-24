@@ -9,16 +9,29 @@ import SwiftUI
 
 struct LaunchScreenView: View {
     
+    @State var isAnimating: Bool = false
+    var animationOver: () -> Void
+    
     var body: some View {
         ZStack {
             
             BackgroundView()
             
             homeScreenTextContent
+                .scaleEffect(isAnimating ? 3 : 1)
             
             
         }
         .ignoresSafeArea()
+        .onAppear {
+            withAnimation(.easeInOut(duration: 2)) {
+                isAnimating = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    animationOver()
+                }
+                                              }
+           
+        }
     }
     
     var homeScreenTextContent: some View {
@@ -62,5 +75,5 @@ struct LaunchScreenView: View {
 }
 
 #Preview {
-    LaunchScreenView()
+    LaunchScreenView(animationOver: {})
 }
