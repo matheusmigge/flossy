@@ -12,10 +12,8 @@ struct RootView: View {
     @State var isShowingLaunchScreen: Bool = true
     
     func viewDidApper() {
-        
         withAnimation(.easeInOut(duration: 1)) {
             isShowingLaunchScreen = false
-            
         }
     }
     
@@ -27,7 +25,6 @@ struct RootView: View {
                 LaunchScreenView(animationOver: {
                     viewDidApper()
                 })
-                
             }
         }
     }

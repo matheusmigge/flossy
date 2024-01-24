@@ -1,5 +1,5 @@
 //
-//  HomeScreenView.swift
+//  LaunchScreenView.swift
 //  DidIFloss
 //
 //  Created by Matheus Migge on 01/01/24.
@@ -16,7 +16,7 @@ struct LaunchScreenView: View {
         ZStack {
             BackgroundView()
             
-            homeScreenTextContent
+            wellcomeLabel
                 .scaleEffect(isAnimating ? 40 : 1)
             
         }
@@ -26,7 +26,7 @@ struct LaunchScreenView: View {
         }
     }
     
-    private var homeScreenTextContent: some View {
+    private var wellcomeLabel: some View {
         VStack(spacing: -50) {
             Text("did I")
             Text("floss?")
@@ -43,15 +43,15 @@ struct LaunchScreenView: View {
     }
     
     private func startAnimation() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                withAnimation(.easeInOut(duration: 1)) {
-                    isAnimating = true
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                        animationOver()
-                    }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            withAnimation(.easeInOut(duration: 1)) {
+                isAnimating = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    animationOver()
                 }
             }
         }
+    }
 }
 
 #Preview {
