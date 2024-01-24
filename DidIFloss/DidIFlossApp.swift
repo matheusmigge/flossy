@@ -15,7 +15,7 @@ struct DidIFlossApp: App {
     
     var body: some Scene {
         WindowGroup {
-            HomeScreenView()
+            RootView()
         }
     }
 }
