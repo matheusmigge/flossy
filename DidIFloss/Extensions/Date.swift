@@ -39,7 +39,7 @@ extension Date {
     
     var dayOfTheWeek: String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "EEE"
+        formatter.dateFormat = "EE"
         
         return formatter.string(from: self)
     }

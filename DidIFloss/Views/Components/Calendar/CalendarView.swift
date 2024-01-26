@@ -23,7 +23,7 @@ struct CalendarView: View {
     weak var delegate: CalendarViewDelegate?
     
     let gridColums: [GridItem] = Array(repeating:
-                                        GridItem(.flexible(minimum: 10, maximum: 50)), count: 7)
+                                        GridItem(.flexible(minimum: 15, maximum: 50)), count: 7)
     
     init(records: Binding<[FlossRecord]>, style: Style, delegate: CalendarViewDelegate? = nil) {
         self._records = records
@@ -85,16 +85,18 @@ struct CalendarView: View {
     private var daysOfTheWeekMonthView: some View {
         ForEach(self.daysOfTheWeek, id: \.self) { day in
             Text(day)
+                .foregroundStyle(.secondary)
                 .monospaced()
         }
     }
     
     private var weekCalendarGrid: some View {
-        LazyVGrid(columns: self.gridColums, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 15, content: {
+        HStack(spacing: 5) {
             ForEach(self.daysCalendarSet, id: \.self) { day in
                 VStack {
                     Text(day.dayOfTheWeek)
                         .monospaced()
+                        .font(.callout)
                     
                     Group {
                         if self.hasDayFlossRecords(for: day) {
@@ -120,7 +122,7 @@ struct CalendarView: View {
                     }
                 }
             }
-        })
+        }
     }
     
     @ViewBuilder
@@ -203,7 +205,6 @@ extension CalendarView {
         case .week:
             return Calendar.getDaysOfTheWeek(for: currentCalendar)
         }
-        
     }
     
     var dateLabel: String {
@@ -282,7 +283,6 @@ extension CalendarView {
         safeDelegate.didSelectDate(date)
         withAnimation {
             dateFocused = date == dateFocused ? nil : date
-            
         }
     }
     
