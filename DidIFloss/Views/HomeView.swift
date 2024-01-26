@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    @Namespace var animation
     
     enum Contents {
         case noLogsRecorded, someLogRecorded
@@ -17,15 +18,13 @@ struct HomeView: View {
     @State var flossRecords: [FlossRecord] = []
     
     var body: some View {
-        
+        NavigationStack {
             List {
                 Section {
                     BannerView()
                 }.listRowInsets(.init(top: -20, leading: -20, bottom: -20, trailing: -20))
                 
-                
                 ZStack {
-                    
                     Rectangle()
                         .foregroundStyle(.flamingoPink)
                     
@@ -60,7 +59,6 @@ struct HomeView: View {
                         Text("Nenhum log???")
                             .font(.title)
                     
-                        
                     case .someLogRecorded:
                         VStack {
                             Text("Muito bem!! Você já está há 5 dias seguidos passando fio dental. Continue assim!")
@@ -85,20 +83,27 @@ struct HomeView: View {
                     self.flossRecords = records
                 }
             }
-        
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Image(systemName: "plus")
-            }
-            ToolbarItem(placement: .topBarLeading) {
-                Image(systemName: "calendar")
+            
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Image(systemName: "plus")
+                }
+                ToolbarItem(placement: .topBarLeading) {
+                    NavigationLink {
+                        LogRecordsView(viewModel: ContentViewModel())
+                        
+                    } label: {
+                        Image(systemName: "calendar")
+                    }
+                    .foregroundStyle(.primary)
+                }
             }
         }
+        .tint(Color.primary)
     }
 }
 
 #Preview {
-    NavigationView {
-        HomeView()
-    }
+    HomeView()
+    
 }

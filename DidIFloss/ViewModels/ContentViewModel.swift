@@ -13,6 +13,8 @@ class ContentViewModel: ObservableObject {
     
     let persistance: PersistanceManagerProtocol
     
+    @Published var selectedDate: Date?
+    
     // MARK: Published variables
     
     @Published var records: [FlossRecord] = []
@@ -87,5 +89,34 @@ class ContentViewModel: ObservableObject {
         persistance.saveLastFlossDate(date: .now)
         
         loadRecords()
+    }
+}
+
+
+// code for LogRecordsView
+extension ContentViewModel: CalendarViewDelegate {
+    func didSelectDate(_ date: Date) {
+        withAnimation {
+            selectedDate = selectedDate == date ? nil : date
+        }
+    }
+    
+    func removeRecordAt(indexSet: IndexSet) {
+        records.remove(atOffsets: indexSet)
+        guard let index = indexSet.first else { return }
+        persistance.deleteFlossRecord(records[index])
+    }
+    
+    func removeRecord(_ record: FlossRecord) {
+        records.removeAll { $0 == record }
+        persistance.deleteFlossRecord(record)
+    }
+    
+    var sectionRecords: [FlossRecord] {
+        if let date = selectedDate {
+            return records.filter { Calendar.current.isDate($0.date, inSameDayAs: date) }
+        } else {
+            return records
+        }
     }
 }
