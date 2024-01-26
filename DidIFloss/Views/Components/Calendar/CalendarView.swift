@@ -14,7 +14,7 @@ struct CalendarView: View {
     
     @State var currentCalendar: Date = .now
     
-    @State var selecteDate: Date = .now
+    @State var dateFocused: Date?
     
     @Binding var records: [FlossRecord]
     
@@ -41,7 +41,7 @@ struct CalendarView: View {
         .padding()
     }
     
-
+    
     private var calendarHeader: some View {
         HStack {
             Button {
@@ -129,10 +129,7 @@ struct CalendarView: View {
                     FlossIndicatorView(for: date)
                 }
                 .onTapGesture {
-                    delegate?.didSelectDate(date)
-                    withAnimation {
-                        self.dayOfCalendarPressed(date)
-                    }
+                    didTapOnDate(date)
                 }
         }
     }
@@ -152,10 +149,7 @@ struct CalendarView: View {
                 }
             }
             .onTapGesture {
-                delegate?.didSelectDate(date)
-                withAnimation {
-                    self.dayOfCalendarPressed(date)
-                }
+                didTapOnDate(date)
             }
         }
     }
@@ -198,7 +192,7 @@ extension CalendarView {
     var dateLabel: String {
         switch style {
         case .month:
-            return selecteDate.dayAndMonthFormatted
+            return dateFocused?.dayAndMonthFormatted ?? Date().dayAndMonthFormatted
         case .week:
             let firstDayOfWeek = daysCalendarSet.first?.dayFormatted ?? "XX"
             let lastDayOfWeek = daysCalendarSet.last?.dayFormatted ?? "XX"
@@ -236,12 +230,8 @@ extension CalendarView {
         return calendar.isDate(date, equalTo: Date(), toGranularity: .month)
     }
     
-    func dayOfCalendarPressed(_ date: Date) {
-        selecteDate = date
-    }
-    
     func isSelectedDate(_ date: Date) -> Bool {
-        calendar.isDate(date, equalTo: selecteDate, toGranularity: .day)
+        calendar.isDate(date, equalTo: dateFocused ?? Date(), toGranularity: .day)
     }
     
     func numberOfFlossRecords(for date: Date) -> Int {
@@ -267,6 +257,17 @@ extension CalendarView {
         }
         
         return .secondary
+    }
+    
+    private func didTapOnDate(_ date: Date) {
+        guard let safeDelegate = delegate else { return }
+        
+        safeDelegate.didSelectDate(date)
+        withAnimation {
+            dateFocused = date == dateFocused ? nil : date
+
+        }
+        
     }
 }
 
