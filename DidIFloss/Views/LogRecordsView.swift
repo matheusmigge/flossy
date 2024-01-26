@@ -7,32 +7,6 @@
 
 import SwiftUI
 
-extension ContentViewModel: CalendarViewDelegate {
-    func didSelectDate(_ date: Date) {
-        withAnimation {
-            selectedDate = selectedDate == date ? nil : date
-        }
-    }
-    
-    func removeRecordAt(indexSet: IndexSet) {
-        records.remove(atOffsets: indexSet)
-        //        guard let index = indexSet.first else { return }
-        //        persistance.deleteFlossRecord(records[index])
-    }
-    
-    func removeRecord(_ record: FlossRecord) {
-        records.removeAll { $0 == record }
-        //        persistance.deleteFlossRecord(record)
-    }
-    
-    var sectionRecords: [FlossRecord] {
-        if let date = selectedDate {
-            return records.filter { Calendar.current.isDate($0.date, inSameDayAs: date) }
-        } else {
-            return records
-        }
-    }
-}
 
 struct LogRecordsView: View {
     
@@ -54,7 +28,13 @@ struct LogRecordsView: View {
                 }
             }
         }
+        //        .scrollContentBackground(.hidden)
+        //        .background(content: {
+        //            Color.flossFlamingoPink
+        //                .ignoresSafeArea()
+        //        })
         .buttonStyle(.borderless)
+        .navigationTitle("Records")
     }
     
     var sectionLabel: String {
@@ -97,7 +77,6 @@ struct LogRecordsView: View {
                         Text("Delete")
                     }
                 })
-            
         }
         .onDelete(perform: { indexSet in
             viewModel.removeRecordAt(indexSet: indexSet)
@@ -106,5 +85,7 @@ struct LogRecordsView: View {
 }
 
 #Preview {
-    LogRecordsView(viewModel: ContentViewModel())
+    NavigationStack {
+        LogRecordsView(viewModel: ContentViewModel())
+    }
 }
