@@ -14,8 +14,6 @@ struct LogRecordsView: View {
     
     var body: some View {
         List {
-
-            
             Section("Calendar") {
                 CalendarView(records: $viewModel.records,
                              style: .month,
@@ -36,14 +34,7 @@ struct LogRecordsView: View {
                 BannerView()
             }
             .listRowInsets(.init(top: -20, leading: -20, bottom: -20, trailing: -20))
-
-            
         }
-        //        .scrollContentBackground(.hidden)
-        //        .background(content: {
-        //            Color.flossFlamingoPink
-        //                .ignoresSafeArea()
-        //        })
         .buttonStyle(.borderless)
         .navigationTitle("Records")
     }
