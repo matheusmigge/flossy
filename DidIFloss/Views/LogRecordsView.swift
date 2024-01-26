@@ -14,19 +14,30 @@ struct LogRecordsView: View {
     
     var body: some View {
         List {
+
+            
             Section("Calendar") {
                 CalendarView(records: $viewModel.records,
                              style: .month,
                              delegate: viewModel)
             }
             
-            Section(sectionLabel) {
+            Section {
                 if viewModel.sectionRecords.isEmpty {
                     noRecordsView
                 } else {
                     recordsListView
                 }
+            } header: {
+                Text(sectionLabel)
             }
+            
+            Section {
+                BannerView()
+            }
+            .listRowInsets(.init(top: -20, leading: -20, bottom: -20, trailing: -20))
+
+            
         }
         //        .scrollContentBackground(.hidden)
         //        .background(content: {
