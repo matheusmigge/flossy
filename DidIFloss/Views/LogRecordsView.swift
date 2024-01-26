@@ -69,7 +69,7 @@ struct LogRecordsView: View {
     
     private var recordsListView: some View {
         ForEach(viewModel.sectionRecords) { record in
-            Text(record.date.dayAndMonthFormatted)
+            Text(record.date.minuteHourDayMonthFormatted)
                 .contextMenu(menuItems: {
                     Button(role: .destructive) {
                         viewModel.removeRecord(record)

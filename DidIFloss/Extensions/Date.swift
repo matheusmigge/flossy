@@ -28,4 +28,19 @@ extension Date {
         
         return formatter.string(from: self)
     }
+    
+    var minuteHourDayMonthFormatted: String {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        formatter.dateStyle = .short
+
+        return formatter.string(from: self)
+    }
+    
+    var dayOfTheWeek: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEE"
+        
+        return formatter.string(from: self)
+    }
 }

@@ -23,7 +23,7 @@ struct CalendarView: View {
     weak var delegate: CalendarViewDelegate?
     
     let gridColums: [GridItem] = Array(repeating:
-                                        GridItem(.flexible(minimum: 15, maximum: 50)), count: 7)
+                                        GridItem(.flexible(minimum: 10, maximum: 50)), count: 7)
     
     init(records: Binding<[FlossRecord]>, style: Style, delegate: CalendarViewDelegate? = nil) {
         self._records = records
@@ -35,8 +35,12 @@ struct CalendarView: View {
         VStack {
             calendarHeader
             
-            calendarGrid
-            
+            switch style {
+            case .month:
+                monthCalendarGrid
+            case .week:
+                weekCalendarGrid
+            }
         }
         .padding()
     }
@@ -68,20 +72,53 @@ struct CalendarView: View {
         .padding(.horizontal)
     }
     
-    private var calendarGrid: some View {
+    private var monthCalendarGrid: some View {
         LazyVGrid(columns: self.gridColums, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 15, content: {
             
-            ForEach(self.daysOfTheWeek, id: \.self) { day in
-                Text(day)
-                    .monospaced()
-            }
+            daysOfTheWeekMonthView
             
-            switch style {
-            case .month:
-                dayMonthCalendarGridView
-            case .week:
-                dayWeekCalenderGridView
-                
+            dayMonthCalendarGridView
+            
+        })
+    }
+    
+    private var daysOfTheWeekMonthView: some View {
+        ForEach(self.daysOfTheWeek, id: \.self) { day in
+            Text(day)
+                .monospaced()
+        }
+    }
+    
+    private var weekCalendarGrid: some View {
+        LazyVGrid(columns: self.gridColums, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 15, content: {
+            ForEach(self.daysCalendarSet, id: \.self) { day in
+                VStack {
+                    Text(day.dayOfTheWeek)
+                        .monospaced()
+                    
+                    Group {
+                        if self.hasDayFlossRecords(for: day) {
+                            Image(systemName: "checkmark.circle.fill")
+                                .resizable()
+                                .foregroundStyle(.greenyBlue)
+                                .frame(width: 30, height: 30)
+                        } else {
+                            Circle()
+                                .stroke(lineWidth: 2)
+                                .frame(width: 30, height: 30)
+                        }
+                    }
+                    .onTapGesture {
+                        didTapOnDate(day)
+                    }
+                }
+                .padding(5)
+                .background {
+                    if shouldDayOfTheWeekBePink(day) {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color.flossLightYellow)
+                    }
+                }
             }
         })
     }
@@ -131,26 +168,6 @@ struct CalendarView: View {
                 .onTapGesture {
                     didTapOnDate(date)
                 }
-        }
-    }
-    
-    var dayWeekCalenderGridView: some View {
-        ForEach(self.daysCalendarSet, id: \.self) { date in
-            Group {
-                if self.hasDayFlossRecords(for: date) {
-                    Image(systemName: "checkmark.circle.fill")
-                        .resizable()
-                        .foregroundStyle(.greenyBlue)
-                        .frame(width: 30, height: 30)
-                } else {
-                    Circle()
-                        .stroke(lineWidth: 2)
-                        .frame(width: 30, height: 30)
-                }
-            }
-            .onTapGesture {
-                didTapOnDate(date)
-            }
         }
     }
 }
@@ -265,13 +282,16 @@ extension CalendarView {
         safeDelegate.didSelectDate(date)
         withAnimation {
             dateFocused = date == dateFocused ? nil : date
-
+            
         }
-        
+    }
+    
+    private func shouldDayOfTheWeekBePink(_ date: Date) -> Bool {
+        Calendar.current.isDate(date, inSameDayAs: Date())
     }
 }
 
 
 #Preview {
-    CalendarView(records: .constant([]), style: .month)
+    CalendarView(records: .constant([]), style: .week)
 }
