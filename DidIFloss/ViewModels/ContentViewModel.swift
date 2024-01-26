@@ -12,6 +12,7 @@ import NotificationService
 class ContentViewModel: ObservableObject {
     
     let persistance: PersistanceManagerProtocol
+    @Published var selectedDate: Date?
     
     // MARK: Published variables
     
