@@ -12,6 +12,17 @@ extension ContentViewModel: CalendarViewDelegate {
         selectedDate = selectedDate == date ? nil : date
     }
     
+    func removeRecordAt(indexSet: IndexSet) {
+        records.remove(atOffsets: indexSet)
+//        guard let index = indexSet.first else { return }
+//        persistance.deleteFlossRecord(records[index])
+    }
+    
+    func removeRecord(_ record: FlossRecord) {
+        records.removeAll { $0 == record }
+//        persistance.deleteFlossRecord(record)
+    }
+    
     var sectionRecords: [FlossRecord] {
         if let date = selectedDate {
             return records.filter { Calendar.current.isDate($0.date, inSameDayAs: date) }
@@ -46,7 +57,18 @@ struct LogRecordsView: View {
                 } else {
                     ForEach(viewModel.sectionRecords) { record in
                         Text(record.date.dayAndMonthFormatted)
+                            .contextMenu(menuItems: {
+                                Button(role: .destructive) {
+                                    viewModel.removeRecord(record)
+                                } label: {
+                                    Text("Delete")
+                                }
+                            })
+                        
                     }
+                    .onDelete(perform: { indexSet in
+                        viewModel.removeRecordAt(indexSet: indexSet)
+                    })
                 }
             }
         }
