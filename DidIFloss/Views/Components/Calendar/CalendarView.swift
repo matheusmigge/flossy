@@ -38,11 +38,12 @@ struct CalendarView: View {
             switch style {
             case .month:
                 monthCalendarGrid
+                    .padding()
             case .week:
                 weekCalendarGrid
             }
         }
-        .padding()
+        
     }
     
     
