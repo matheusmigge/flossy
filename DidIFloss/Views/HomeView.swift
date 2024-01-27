@@ -113,17 +113,11 @@ struct HomeView: View {
             }
             .buttonStyle(.borderless)
             
-            .onAppear() {
-                let persistance = PersistanceManager()
-                persistance.getFlossRecords { records in
-                    self.flossRecords = records
-                }
-            }
-            
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Image(systemName: "plus")
                 }
+                
                 ToolbarItem(placement: .topBarLeading) {
                     NavigationLink {
                         LogRecordsView(viewModel: ContentViewModel())
