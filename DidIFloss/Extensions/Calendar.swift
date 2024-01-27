@@ -67,4 +67,24 @@ extension Calendar {
         
         return days
     }
+    
+    static func createDate(year: Int, month: Int, day: Int, hour: Int, minute: Int) -> Date {
+        var components = DateComponents()
+        components.year = year
+        components.month = month
+        components.day = day
+        components.hour = hour
+        components.minute = minute
+        
+        let calendar = Calendar.current
+        return calendar.date(from: components) ?? Date()
+    }
+    
+    static var today: Date {
+        Date()
+    }
+    
+    static var yesterday: Date {
+        Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+    }
 }

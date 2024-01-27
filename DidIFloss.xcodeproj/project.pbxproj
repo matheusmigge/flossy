@@ -29,6 +29,7 @@
 		5625BFD52B439A5C006F88BD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5625BFD42B439A5C006F88BD /* README.md */; };
 		562749CC2B43A5C2004F37A0 /* Borel-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 562749CB2B43A5C1004F37A0 /* Borel-Regular.ttf */; };
 		562749D02B43AD61004F37A0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562749CF2B43AD61004F37A0 /* Constants.swift */; };
+		563008442B61A7EE00290875 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563008432B61A7EE00290875 /* HomeViewModel.swift */; };
 		566FF8CB2B439FB70056644A /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566FF8CA2B439FB70056644A /* LaunchScreenView.swift */; };
 		567999182B447E7A00941D75 /* ToothView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567999172B447E7A00941D75 /* ToothView.swift */; };
 		56C33DF72B3CAA1000D8DEB7 /* DidIFlossApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C33DF62B3CAA1000D8DEB7 /* DidIFlossApp.swift */; };
@@ -63,6 +64,7 @@
 		562749CB2B43A5C1004F37A0 /* Borel-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Borel-Regular.ttf"; sourceTree = "<group>"; };
 		562749CE2B43A64C004F37A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		562749CF2B43AD61004F37A0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		563008432B61A7EE00290875 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		566FF8CA2B439FB70056644A /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		567999172B447E7A00941D75 /* ToothView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToothView.swift; sourceTree = "<group>"; };
 		56C33DF32B3CAA1000D8DEB7 /* DidIFloss.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DidIFloss.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -188,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				56C33E072B3CAC8800D8DEB7 /* ContentViewModel.swift */,
+				563008432B61A7EE00290875 /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -215,11 +218,11 @@
 			children = (
 				562749CE2B43A64C004F37A0 /* Info.plist */,
 				56C33DF62B3CAA1000D8DEB7 /* DidIFlossApp.swift */,
+				567999192B4480A500941D75 /* Views */,
+				5679991B2B4480F400941D75 /* ViewModels */,
 				0CEB25CC2B56FF4200B14298 /* Extensions */,
 				0C8981F22B466306008CFD5D /* Service */,
 				0C8981F12B4662F0008CFD5D /* Model */,
-				567999192B4480A500941D75 /* Views */,
-				5679991B2B4480F400941D75 /* ViewModels */,
 				56C33DFA2B3CAA1500D8DEB7 /* Assets.xcassets */,
 				0C196DFE2B614E7600EDD0B3 /* Launch Screen.storyboard */,
 				562749CF2B43AD61004F37A0 /* Constants.swift */,
@@ -337,6 +340,7 @@
 				0CEB25D32B5EE37200B14298 /* CalendarViewProtocol.swift in Sources */,
 				0C2FE44C2B619C0B00BAC3E8 /* HomeView.swift in Sources */,
 				56C33E082B3CAC8800D8DEB7 /* ContentViewModel.swift in Sources */,
+				563008442B61A7EE00290875 /* HomeViewModel.swift in Sources */,
 				56C33E0A2B3CCA9E00D8DEB7 /* PersistanceManager.swift in Sources */,
 				0C4177AA2B4CF9CB00E8976B /* UserDefaults.swift in Sources */,
 				0C7E923D2B470DDB0079525D /* PersistenceManagerProtocol.swift in Sources */,
@@ -473,7 +477,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"DidIFloss/Preview Content\"";
-				DEVELOPMENT_TEAM = 749Q737TF5;
+				DEVELOPMENT_TEAM = P9D4UX94KC;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -516,7 +520,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"DidIFloss/Preview Content\"";
-				DEVELOPMENT_TEAM = 749Q737TF5;
+				DEVELOPMENT_TEAM = P9D4UX94KC;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
