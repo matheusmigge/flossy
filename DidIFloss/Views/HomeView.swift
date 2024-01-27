@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    @Namespace var animation
     
     @StateObject var viewModel: HomeViewModel = HomeViewModel()
     
@@ -20,7 +21,7 @@ struct HomeView: View {
     }
     
     var body: some View {
-        
+        NavigationStack {
             List {
                 Section {
                     BannerView()
@@ -91,7 +92,6 @@ struct HomeView: View {
                         Text("NO LOGS ⚠️")
                             .font(.title)
                         
-                        
                     case .positiveStreak:
                         VStack {
                             Text("POSITIVE STREAK ✅")
@@ -112,20 +112,34 @@ struct HomeView: View {
                 }.listRowInsets(.init(top: -20, leading: -20, bottom: -20, trailing: -20))
             }
             .buttonStyle(.borderless)
-        
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Image(systemName: "plus")
+            
+            .onAppear() {
+                let persistance = PersistanceManager()
+                persistance.getFlossRecords { records in
+                    self.flossRecords = records
+                }
             }
-            ToolbarItem(placement: .topBarLeading) {
-                Image(systemName: "calendar")
+            
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Image(systemName: "plus")
+                }
+                ToolbarItem(placement: .topBarLeading) {
+                    NavigationLink {
+                        LogRecordsView(viewModel: ContentViewModel())
+                        
+                    } label: {
+                        Image(systemName: "calendar")
+                    }
+                    .foregroundStyle(.primary)
+                }
             }
         }
+        .tint(Color.primary)
     }
 }
 
 #Preview {
-    NavigationView {
-        HomeView()
-    }
+    HomeView()
+    
 }

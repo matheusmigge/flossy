@@ -14,7 +14,7 @@ struct CalendarView: View {
     
     @State var currentCalendar: Date = .now
     
-    @State var selecteDate: Date = .now
+    @State var dateFocused: Date?
     
     @Binding var records: [FlossRecord]
     
@@ -35,13 +35,17 @@ struct CalendarView: View {
         VStack {
             calendarHeader
             
-            calendarGrid
-            
+            switch style {
+            case .month:
+                monthCalendarGrid
+            case .week:
+                weekCalendarGrid
+            }
         }
         .padding()
     }
     
-
+    
     private var calendarHeader: some View {
         HStack {
             Button {
@@ -68,22 +72,57 @@ struct CalendarView: View {
         .padding(.horizontal)
     }
     
-    private var calendarGrid: some View {
+    private var monthCalendarGrid: some View {
         LazyVGrid(columns: self.gridColums, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 15, content: {
             
-            ForEach(self.daysOfTheWeek, id: \.self) { day in
-                Text(day)
-                    .monospaced()
-            }
+            daysOfTheWeekMonthView
             
-            switch style {
-            case .month:
-                dayMonthCalendarGridView
-            case .week:
-                dayWeekCalenderGridView
-                
-            }
+            dayMonthCalendarGridView
+            
         })
+    }
+    
+    private var daysOfTheWeekMonthView: some View {
+        ForEach(self.daysOfTheWeek, id: \.self) { day in
+            Text(day)
+                .foregroundStyle(.secondary)
+                .monospaced()
+        }
+    }
+    
+    private var weekCalendarGrid: some View {
+        HStack(spacing: 5) {
+            ForEach(self.daysCalendarSet, id: \.self) { day in
+                VStack {
+                    Text(day.dayOfTheWeek)
+                        .monospaced()
+                        .font(.callout)
+                    
+                    Group {
+                        if self.hasDayFlossRecords(for: day) {
+                            Image(systemName: "checkmark.circle.fill")
+                                .resizable()
+                                .foregroundStyle(.greenyBlue)
+                                .frame(width: 30, height: 30)
+                        } else {
+                            Circle()
+                                .stroke(lineWidth: 2)
+                                .frame(width: 30, height: 30)
+                        }
+                    }
+                    .onTapGesture {
+                        didTapOnDate(day)
+                    }
+                }
+                .padding(5)
+                .background {
+                    if shouldDayOfTheWeekBePink(day) {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color.flossLightYellow)
+                    }
+                }
+            }
+        }
     }
     
     @ViewBuilder
@@ -129,34 +168,8 @@ struct CalendarView: View {
                     FlossIndicatorView(for: date)
                 }
                 .onTapGesture {
-                    delegate?.didSelectDate(date)
-                    withAnimation {
-                        self.dayOfCalendarPressed(date)
-                    }
+                    didTapOnDate(date)
                 }
-        }
-    }
-    
-    var dayWeekCalenderGridView: some View {
-        ForEach(self.daysCalendarSet, id: \.self) { date in
-            Group {
-                if self.hasDayFlossRecords(for: date) {
-                    Image(systemName: "checkmark.circle.fill")
-                        .resizable()
-                        .foregroundStyle(.greenyBlue)
-                        .frame(width: 30, height: 30)
-                } else {
-                    Circle()
-                        .stroke(lineWidth: 2)
-                        .frame(width: 30, height: 30)
-                }
-            }
-            .onTapGesture {
-                delegate?.didSelectDate(date)
-                withAnimation {
-                    self.dayOfCalendarPressed(date)
-                }
-            }
         }
     }
 }
@@ -192,13 +205,12 @@ extension CalendarView {
         case .week:
             return Calendar.getDaysOfTheWeek(for: currentCalendar)
         }
-        
     }
     
     var dateLabel: String {
         switch style {
         case .month:
-            return selecteDate.dayAndMonthFormatted
+            return dateFocused?.dayAndMonthFormatted ?? Date().dayAndMonthFormatted
         case .week:
             let firstDayOfWeek = daysCalendarSet.first?.dayFormatted ?? "XX"
             let lastDayOfWeek = daysCalendarSet.last?.dayFormatted ?? "XX"
@@ -236,12 +248,8 @@ extension CalendarView {
         return calendar.isDate(date, equalTo: Date(), toGranularity: .month)
     }
     
-    func dayOfCalendarPressed(_ date: Date) {
-        selecteDate = date
-    }
-    
     func isSelectedDate(_ date: Date) -> Bool {
-        calendar.isDate(date, equalTo: selecteDate, toGranularity: .day)
+        calendar.isDate(date, equalTo: dateFocused ?? Date(), toGranularity: .day)
     }
     
     func numberOfFlossRecords(for date: Date) -> Int {
@@ -268,9 +276,22 @@ extension CalendarView {
         
         return .secondary
     }
+    
+    private func didTapOnDate(_ date: Date) {
+        guard let safeDelegate = delegate else { return }
+        
+        safeDelegate.didSelectDate(date)
+        withAnimation {
+            dateFocused = date == dateFocused ? nil : date
+        }
+    }
+    
+    private func shouldDayOfTheWeekBePink(_ date: Date) -> Bool {
+        Calendar.current.isDate(date, inSameDayAs: Date())
+    }
 }
 
 
 #Preview {
-    CalendarView(records: .constant([]), style: .month)
+    CalendarView(records: .constant([]), style: .week)
 }
