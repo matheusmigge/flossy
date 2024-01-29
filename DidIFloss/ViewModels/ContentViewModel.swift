@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import NotificationService
+import Notification
 
 class ContentViewModel: ObservableObject {
     

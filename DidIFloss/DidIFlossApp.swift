@@ -6,8 +6,7 @@
 //
 
 import SwiftUI
-import NotificationService
-
+import Notification
 
 @main
 struct DidIFlossApp: App {
