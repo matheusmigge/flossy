@@ -65,7 +65,7 @@ class ContentViewModel: ObservableObject {
     
     public func flossButtonPressed() {
         self.saveToPersistance()
-        NotificationService.scheduleFlossRemindersNotifications()
+        NotificationService.current().scheduleFlossRemindersNotifications()
         
     }
     

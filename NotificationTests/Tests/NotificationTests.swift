@@ -7,23 +7,22 @@
 
 import XCTest
 @testable import Notification
-import UserNotifications
 
 final class NotificationTests: XCTestCase {
     
-
+    var service: NotificationService?
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        self.service = NotificationService(center: UNUserNoticationCenterMock())
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
-        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+
     }
 
     func testExample() throws {
-        NotificationService.
+        
     }
 
     func testPerformanceExample() throws {

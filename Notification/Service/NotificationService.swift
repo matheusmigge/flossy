@@ -15,9 +15,15 @@ import UserNotifications
 /// and manage floss reminders.
 public struct NotificationService {
     
-    /// The shared instance of `UNUserNotificationCenter` for managing notifications.
-    static private var center: UNUserNotificationCenter {
-        UNUserNotificationCenter.current()
+    internal init(center: UNUserNoticationCenterable = UNUserNotificationCenter.current()) {
+        self.center = center
+    }
+    
+    private let center: UNUserNoticationCenterable
+    
+    /// The static methid for accesing NotificationService
+    static public func current() -> NotificationService {
+        NotificationService()
     }
     
     /// Requests user authorization for notifications.
@@ -26,7 +32,7 @@ public struct NotificationService {
     ///
     /// Requests authorization to display alerts, play sounds, and update the badge icon.
     /// If `provisional` is true, also requests provisional authorization for quiet notifications.
-    static public func requestAuthorizationToNotificate(provisional: Bool = true) {
+    public func requestAuthorizationToNotificate(provisional: Bool = true) {
         var requestOptions: UNAuthorizationOptions {
             provisional ? [.alert, .sound, .badge, .provisional] : [.alert, .sound, .badge]
         }
@@ -48,7 +54,7 @@ public struct NotificationService {
     /// - Parameter completion: A closure that receives a boolean indicating whether the app has notification authorization.
     ///
     /// Calls the completion handler with `true` if the app has authorization, otherwise with `false`.
-    static private func checkNotificationAuthorization(completion: @escaping (Bool) -> Void) {
+    private func checkNotificationAuthorization(completion: @escaping (Bool) -> Void) {
         center.getNotificationSettings { settings in
             let status = settings.authorizationStatus
             
@@ -65,7 +71,7 @@ public struct NotificationService {
     /// - Parameter notification: The `NotificationModel` type to schedule.
     ///
     /// Creates a `UNNotificationRequest` and schedules it using the shared notification center.
-    public static func scheduleNotification(type notification: NotificationModel) {
+    public func scheduleNotification(type notification: NotificationModel) {
         let content = notification.content
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: notification.timeInterval,
@@ -87,7 +93,7 @@ public struct NotificationService {
     /// Schedules floss reminders notifications based on the defined notifications.
     ///
     /// Clears existing floss reminders notifications and schedules new ones if the app has notification authorization.
-    static public func scheduleFlossRemindersNotifications() {
+    public func scheduleFlossRemindersNotifications() {
         self.clearAllFlossRemindersNotifications()
         
         self.checkNotificationAuthorization { hasPermission in
@@ -106,10 +112,11 @@ public struct NotificationService {
     /// Clears all pending floss reminders notifications.
     ///
     /// Removes all pending notification requests associated with floss reminders.
-    static public func clearAllFlossRemindersNotifications() {
+    public func clearAllFlossRemindersNotifications() {
         let notificationsIds = FlossReminder.getAllNotifications().map { $0.id }
         center.removePendingNotificationRequests(withIdentifiers: notificationsIds)
     }
+    
 }
 
 
