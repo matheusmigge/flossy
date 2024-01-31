@@ -22,9 +22,9 @@ class HomeViewModel: ObservableObject {
         
     ]
     
-    var persistance: PersistanceManagerProtocol
+    var persistance: PersistenceManagerProtocol
     
-    init(persistance: PersistanceManagerProtocol = PersistanceManager()) {
+    init(persistance: PersistenceManagerProtocol = PersistanceManager()) {
         
         self.persistance = persistance
         //        persistance.getFlossRecords { [weak self] records in
