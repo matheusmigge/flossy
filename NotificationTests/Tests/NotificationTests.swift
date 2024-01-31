@@ -10,26 +10,78 @@ import XCTest
 
 final class NotificationTests: XCTestCase {
     
-    var service: NotificationService?
+    var center: UNUserNotificationCenterMock!
+    var notificationService: NotificationService!
     
     override func setUpWithError() throws {
-        self.service = NotificationService(center: UNUserNoticationCenterMock())
+        self.center = UNUserNotificationCenterMock()
+        self.notificationService = NotificationService(center: center)
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
 
     }
 
-    func testExample() throws {
+    func testAddNotificationsCallsCenter() {
+        center.hasAuthorization = true
+        let notification = NotificationModel.example
         
+        self.notificationService.scheduleNotification(type: notification)
+
+        XCTAssertTrue(center.didCallAddNotification)
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+    func testAddNotificationAppendsNotificationSchedule() {
+        center.hasAuthorization = true
+        center.scheduledNotificationIds = []
+        let notification = NotificationModel.example
+        
+        self.notificationService.scheduleNotification(type: notification)
 
+        XCTAssertFalse(center.scheduledNotificationIds.isEmpty)
+    }
+    
+    
+    func testRequestAuthCallsCenterRequestAuth() {
+        center.didCallRequestAuth = false
+        
+        notificationService.requestAuthorizationToNotificate()
+        
+        XCTAssertTrue(center.didCallRequestAuth)
+    }
+    
+    func testRemovePendingNotificationCallsCenterWithIdentifier() {
+        let notificationIdentifier = "test"
+        
+        notificationService.center.removePendingNotificationRequests(withIdentifiers: [notificationIdentifier])
+        
+        XCTAssertTrue(center.didAskToRemoveRequestOfIdentifiers.contains(notificationIdentifier))
+    }
+    
+    func testScheduleFlossRemindersAppendsToScheduleCenter() {
+        let notificationsIds = FlossReminder.getAllNotifications().map { $0.id }
+        
+        notificationService.scheduleFlossRemindersNotifications()
+        
+        XCTAssertEqual(notificationsIds, center.scheduledNotificationIds)
+    }
+    
+    func testRemoveAllPendingFlossRemindersScheduled() {
+        let notificationsIds = FlossReminder.getAllNotifications().map { $0.id }
+        notificationService.scheduleFlossRemindersNotifications()
+        
+        notificationService.clearAllFlossRemindersNotifications()
+        
+        XCTAssertEqual(notificationsIds, center.didAskToRemoveRequestOfIdentifiers)
+    }
+    
+    func testRemoveAllPendingNotificationsSchedules() {
+        let notificationIds = ["test1", "test2", "test3"]
+        center.scheduledNotificationIds = notificationIds
+        
+        notificationService.clearAllPendingNotifications()
+        
+        XCTAssertTrue(center.scheduledNotificationIds.isEmpty)
+    }
+    
 }

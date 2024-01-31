@@ -15,16 +15,21 @@ import UserNotifications
 /// and manage floss reminders.
 public struct NotificationService {
     
-    internal init(center: UNUserNoticationCenterable = UNUserNotificationCenter.current()) {
+    // MARK: init
+    
+    init(center: UNUserNotificationCenterable = UNUserNotificationCenter.current()) {
         self.center = center
     }
     
-    private let center: UNUserNoticationCenterable
+    let center: UNUserNotificationCenterable
     
-    /// The static methid for accesing NotificationService
+    /// The standard method for utilizing NotificationService
     static public func current() -> NotificationService {
         NotificationService()
     }
+    
+    
+    // MARK: Auth
     
     /// Requests user authorization for notifications.
     ///
@@ -49,22 +54,8 @@ public struct NotificationService {
         }
     }
     
-    /// Checks if the app has notification authorization.
-    ///
-    /// - Parameter completion: A closure that receives a boolean indicating whether the app has notification authorization.
-    ///
-    /// Calls the completion handler with `true` if the app has authorization, otherwise with `false`.
-    private func checkNotificationAuthorization(completion: @escaping (Bool) -> Void) {
-        center.getNotificationSettings { settings in
-            let status = settings.authorizationStatus
-            
-            if status == .authorized || status == .provisional {
-                completion(true)
-            } else {
-                completion(false)
-            }
-        }
-    }
+    // MARK: Generic functions
+    
     
     /// Schedules a notification based on the provided `NotificationModel` type.
     ///
@@ -81,7 +72,7 @@ public struct NotificationService {
                                             content: content,
                                             trigger: trigger)
         
-        center.add(request) { (error) in
+        center.add(request) { error in
             if let error = error {
                 print("Error scheduling notification: \(error)")
             } else {
@@ -90,22 +81,18 @@ public struct NotificationService {
         }
     }
     
+    // MARK: FlossReminders
+    
     /// Schedules floss reminders notifications based on the defined notifications.
     ///
     /// Clears existing floss reminders notifications and schedules new ones if the app has notification authorization.
     public func scheduleFlossRemindersNotifications() {
         self.clearAllFlossRemindersNotifications()
         
-        self.checkNotificationAuthorization { hasPermission in
-            if hasPermission {
-                let notifications = FlossReminder.getAllNotifications()
-                
-                notifications.forEach { notification in
-                    self.scheduleNotification(type: notification)
-                }
-            } else {
-                print("Notification Failed To Schedule: Permission Denied")
-            }
+        let notifications = FlossReminder.getAllNotifications()
+        
+        notifications.forEach { notification in
+            self.scheduleNotification(type: notification)
         }
     }
     
@@ -115,6 +102,14 @@ public struct NotificationService {
     public func clearAllFlossRemindersNotifications() {
         let notificationsIds = FlossReminder.getAllNotifications().map { $0.id }
         center.removePendingNotificationRequests(withIdentifiers: notificationsIds)
+    }
+    
+    
+    /// Clears all pending notifications scheduled
+    ///
+    /// Removes all pending notification requests. Please use with caution
+    public func clearAllPendingNotifications() {
+        center.removeAllPendingNotificationRequests()
     }
     
 }

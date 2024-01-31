@@ -11,7 +11,7 @@ import Notification
 
 class ContentViewModel: ObservableObject {
     
-    let persistance: PersistanceManagerProtocol
+    let persistence: PersistenceManagerProtocol
     
     @Published var selectedDate: Date?
     
@@ -30,8 +30,8 @@ class ContentViewModel: ObservableObject {
     
     // MARK: Init
     
-    init(persistenceService: PersistanceManagerProtocol = PersistanceManager()) {
-        self.persistance = persistenceService
+    init(persistenceService: PersistenceManagerProtocol = PersistanceManager()) {
+        self.persistence = persistenceService
         
         self.loadRecords()
     }
@@ -49,7 +49,7 @@ class ContentViewModel: ObservableObject {
     
     func loadRecords() {
         DispatchQueue.main.async { [weak self] in
-            self?.persistance.getFlossRecords { result in
+            self?.persistence.getFlossRecords { result in
                 self?.records = result
             }
         }
@@ -64,7 +64,7 @@ class ContentViewModel: ObservableObject {
     }
     
     public func flossButtonPressed() {
-        self.saveToPersistance()
+        self.saveToPersistence()
         NotificationService.current().scheduleFlossRemindersNotifications()
         
     }
@@ -80,13 +80,13 @@ class ContentViewModel: ObservableObject {
     // MARK: Private methods
     
     func eraseRecordsButtonPressed() {
-        persistance.eraseData()
+        persistence.eraseData()
         
         loadRecords()
     }
     
-    private func saveToPersistance() {
-        persistance.saveLastFlossDate(date: .now)
+    private func saveToPersistence() {
+        persistence.saveLastFlossDate(date: .now)
         
         loadRecords()
     }
@@ -104,12 +104,12 @@ extension ContentViewModel: CalendarViewDelegate {
     func removeRecordAt(indexSet: IndexSet) {
         records.remove(atOffsets: indexSet)
         guard let index = indexSet.first else { return }
-        persistance.deleteFlossRecord(records[index])
+        persistence.deleteFlossRecord(records[index])
     }
     
     func removeRecord(_ record: FlossRecord) {
         records.removeAll { $0 == record }
-        persistance.deleteFlossRecord(record)
+        persistence.deleteFlossRecord(record)
     }
     
     var sectionRecords: [FlossRecord] {

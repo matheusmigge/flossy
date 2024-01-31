@@ -25,7 +25,7 @@ import Foundation
 /// }
 /// ```
 
-protocol PersistanceManagerProtocol {
+protocol PersistenceManagerProtocol {
     /// Saves the provided date as the last floss date.
     ///
     /// - Parameter date: The date to be saved as the last floss date.

@@ -8,23 +8,35 @@
 import UserNotifications
 @testable import Notification
 
-class UNUserNoticationCenterMock: UNUserNoticationCenterable {
+class UNUserNotificationCenterMock: UNUserNotificationCenterable {
     
+    var hasAuthorization: Bool = true
     var didCallAddNotification: Bool = false
+    var didCallRequestAuth: Bool = false
+    var didAskToRemoveRequestOfIdentifiers: [String] = []
+    var scheduledNotificationIds: [String] = []
+    
     
     func add(_ request: UNNotificationRequest, withCompletionHandler completionHandler: ((Error?) -> Void)?) {
         didCallAddNotification = true
+        
+        if hasAuthorization {
+            scheduledNotificationIds.append(request.identifier)
+        } else {
+            completionHandler?(NSError() as Error)
+        }
+        
     }
     
     func requestAuthorization(options: UNAuthorizationOptions, completionHandler: @escaping (Bool, Error?) -> Void) {
-        
+        didCallRequestAuth = true
     }
     
-    func getNotificationSettings(completionHandler: @escaping (UNNotificationSettings) -> Void) {
-        
-    }
+    
     
     func removePendingNotificationRequests(withIdentifiers identifiers: [String]) {
+        didAskToRemoveRequestOfIdentifiers = identifiers
+        
         
     }
     
@@ -33,6 +45,6 @@ class UNUserNoticationCenterMock: UNUserNoticationCenterable {
     }
     
     func removeAllPendingNotificationRequests() {
-        
+        scheduledNotificationIds.removeAll()
     }
 }

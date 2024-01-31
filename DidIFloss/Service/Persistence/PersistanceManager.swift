@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PersistanceManager: PersistanceManagerProtocol {
+class PersistanceManager: PersistenceManagerProtocol {
     
     let userDefaults: UserDefaultable
     let flossRecordService: FlossRecordDataProvider

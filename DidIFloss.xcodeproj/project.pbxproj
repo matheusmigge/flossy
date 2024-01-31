@@ -23,6 +23,7 @@
 		0C8981F42B4667AC008CFD5D /* FlossRecordDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8981F32B4667AC008CFD5D /* FlossRecordDataSource.swift */; };
 		0CB9509A2B681D5E0085E3D6 /* UNUserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB950992B681D5E0085E3D6 /* UNUserNotificationCenter.swift */; };
 		0CB9509E2B6821B60085E3D6 /* UNUserNotificationMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB9509D2B6821B60085E3D6 /* UNUserNotificationMock.swift */; };
+		0CB950A02B682C1A0085E3D6 /* NotificantionModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB9509F2B682C1A0085E3D6 /* NotificantionModelMock.swift */; };
 		0CCEE1E52B67EBDC0084C9DC /* NotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCEE1E42B67EBDC0084C9DC /* NotificationTests.swift */; };
 		0CCEE1E92B67EBDC0084C9DC /* Notification.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCEE1D42B67EBDB0084C9DC /* Notification.framework */; };
 		0CCEE1F82B67EC500084C9DC /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCEE1CB2B67EBAD0084C9DC /* NotificationModel.swift */; };
@@ -103,6 +104,7 @@
 		0C8981F32B4667AC008CFD5D /* FlossRecordDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecordDataSource.swift; sourceTree = "<group>"; };
 		0CB950992B681D5E0085E3D6 /* UNUserNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNUserNotificationCenter.swift; sourceTree = "<group>"; };
 		0CB9509D2B6821B60085E3D6 /* UNUserNotificationMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNUserNotificationMock.swift; sourceTree = "<group>"; };
+		0CB9509F2B682C1A0085E3D6 /* NotificantionModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificantionModelMock.swift; sourceTree = "<group>"; };
 		0CCEE1C92B67EBAD0084C9DC /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		0CCEE1CA2B67EBAD0084C9DC /* FlossReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossReminder.swift; sourceTree = "<group>"; };
 		0CCEE1CB2B67EBAD0084C9DC /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				0CB9509D2B6821B60085E3D6 /* UNUserNotificationMock.swift */,
+				0CB9509F2B682C1A0085E3D6 /* NotificantionModelMock.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CB950A02B682C1A0085E3D6 /* NotificantionModelMock.swift in Sources */,
 				0CB9509E2B6821B60085E3D6 /* UNUserNotificationMock.swift in Sources */,
 				0CCEE1E52B67EBDC0084C9DC /* NotificationTests.swift in Sources */,
 			);
