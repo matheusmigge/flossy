@@ -1,5 +1,5 @@
 //
-//  CelebrationView.swift
+//  ConfettiPieceView.swift
 //  DidIFloss
 //
 //  Created by Lucas Migge on 01/02/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ConfettiPiece: View {
+struct ConfettiPieceView: View {
     
     static let confettiColors: [Color] = [.red, .blue, .green, .orange, .purple, .yellow]
     
@@ -42,30 +42,6 @@ struct ConfettiPiece: View {
     }
 }
 
-struct CelebrationView: View {
-    
-    let confettiCount = 30
-    @State var isAnimating: Bool = false
-    
-    var body: some View {
-        ZStack {
-            ForEach(0..<confettiCount, id: \.self) { index in
-                ConfettiPiece()
-                    .offset(x: isAnimating ? CGFloat.random(in: -250...250) : -0,
-                            y: isAnimating ?  CGFloat.random(in: -350...350) : 400)
-                    .rotationEffect(isAnimating ? .degrees(Double.random(in: -45...45)) : .degrees(0))
-                
-            }
-        }
-        .ignoresSafeArea()
-        .onAppear {
-            withAnimation(.easeInOut(duration: 2)) {
-                isAnimating = true
-            }
-        }
-    }
-}
-
 #Preview {
-    CelebrationView()
+    ConfettiPieceView()
 }

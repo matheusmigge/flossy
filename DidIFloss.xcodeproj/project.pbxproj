@@ -25,6 +25,8 @@
 		0CB342352B6BD43900B68277 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB342342B6BD43900B68277 /* OnboardingView.swift */; };
 		0CB342372B6C0AF600B68277 /* OnboardingRowInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB342362B6C0AF600B68277 /* OnboardingRowInfoModel.swift */; };
 		0CB3423B2B6C2EDF00B68277 /* CelebrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB3423A2B6C2EDF00B68277 /* CelebrationView.swift */; };
+		0CB3423E2B6C43DC00B68277 /* ConfettiPieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB3423D2B6C43DC00B68277 /* ConfettiPieceView.swift */; };
+		0CB342402B6C43F300B68277 /* CelebrationViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB3423F2B6C43F300B68277 /* CelebrationViewDelegate.swift */; };
 		0CB9509A2B681D5E0085E3D6 /* UNUserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB950992B681D5E0085E3D6 /* UNUserNotificationCenter.swift */; };
 		0CB9509E2B6821B60085E3D6 /* UNUserNotificationMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB9509D2B6821B60085E3D6 /* UNUserNotificationMock.swift */; };
 		0CB950A02B682C1A0085E3D6 /* NotificantionModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB9509F2B682C1A0085E3D6 /* NotificantionModelMock.swift */; };
@@ -110,6 +112,8 @@
 		0CB342342B6BD43900B68277 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		0CB342362B6C0AF600B68277 /* OnboardingRowInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRowInfoModel.swift; sourceTree = "<group>"; };
 		0CB3423A2B6C2EDF00B68277 /* CelebrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrationView.swift; sourceTree = "<group>"; };
+		0CB3423D2B6C43DC00B68277 /* ConfettiPieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiPieceView.swift; sourceTree = "<group>"; };
+		0CB3423F2B6C43F300B68277 /* CelebrationViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrationViewDelegate.swift; sourceTree = "<group>"; };
 		0CB950992B681D5E0085E3D6 /* UNUserNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNUserNotificationCenter.swift; sourceTree = "<group>"; };
 		0CB9509D2B6821B60085E3D6 /* UNUserNotificationMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNUserNotificationMock.swift; sourceTree = "<group>"; };
 		0CB9509F2B682C1A0085E3D6 /* NotificantionModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificantionModelMock.swift; sourceTree = "<group>"; };
@@ -212,6 +216,16 @@
 				0C7E92362B46FDD30079525D /* Persistence */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		0CB3423C2B6C439400B68277 /* Celebration */ = {
+			isa = PBXGroup;
+			children = (
+				0CB3423A2B6C2EDF00B68277 /* CelebrationView.swift */,
+				0CB3423F2B6C43F300B68277 /* CelebrationViewDelegate.swift */,
+				0CB3423D2B6C43DC00B68277 /* ConfettiPieceView.swift */,
+			);
+			path = Celebration;
 			sourceTree = "<group>";
 		};
 		0CB950962B67EE140085E3D6 /* Model */ = {
@@ -319,12 +333,12 @@
 		5679991A2B4480C200941D75 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				0CB3423C2B6C439400B68277 /* Celebration */,
 				0CEB25D12B5EE36100B14298 /* Calendar */,
 				0C2FE44E2B619C3600BAC3E8 /* LogoView.swift */,
 				0C2FE44D2B619C3600BAC3E8 /* BannerView.swift */,
 				567999172B447E7A00941D75 /* ToothView.swift */,
 				561DBA7B2B45DCF10052EE78 /* BackgroundView.swift */,
-				0CB3423A2B6C2EDF00B68277 /* CelebrationView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -580,10 +594,12 @@
 				56C33E082B3CAC8800D8DEB7 /* ContentViewModel.swift in Sources */,
 				563008442B61A7EE00290875 /* HomeViewModel.swift in Sources */,
 				56C33E0A2B3CCA9E00D8DEB7 /* PersistanceManager.swift in Sources */,
+				0CB3423E2B6C43DC00B68277 /* ConfettiPieceView.swift in Sources */,
 				0C4177AA2B4CF9CB00E8976B /* UserDefaults.swift in Sources */,
 				0C7E923D2B470DDB0079525D /* PersistenceManagerProtocol.swift in Sources */,
 				0CB3423B2B6C2EDF00B68277 /* CelebrationView.swift in Sources */,
 				562749D02B43AD61004F37A0 /* Constants.swift in Sources */,
+				0CB342402B6C43F300B68277 /* CelebrationViewDelegate.swift in Sources */,
 				0CB342332B6B0C0400B68277 /* AddLogView.swift in Sources */,
 				0CB342352B6BD43900B68277 /* OnboardingView.swift in Sources */,
 			);
