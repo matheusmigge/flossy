@@ -11,6 +11,7 @@ struct HomeView: View {
     @Namespace var animation
     
     @StateObject var viewModel: HomeViewModel = HomeViewModel()
+    @State var presentingSheet: Bool = false
     
     var currentStreakState: HomeViewModel.State {
         viewModel.streakStatus
@@ -115,7 +116,11 @@ struct HomeView: View {
             
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Image(systemName: "plus")
+                    Button {
+                        presentingSheet.toggle()
+                    } label: {
+                        Image(systemName: "plus")
+                    }
                 }
                 
                 ToolbarItem(placement: .topBarLeading) {
@@ -125,11 +130,19 @@ struct HomeView: View {
                     } label: {
                         Image(systemName: "calendar")
                     }
-                    .foregroundStyle(.primary)
                 }
             }
         }
-        .tint(Color.primary)
+        .sheet(isPresented: $presentingSheet) {
+            addLogView()
+                .presentationDetents([.fraction(0.75), .large])
+                .presentationBackgroundInteraction(.enabled)
+                .presentationCornerRadius(25)
+                .presentationBackground(Material.regular)
+
+            
+        }
+
     }
 }
 
