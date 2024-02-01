@@ -27,6 +27,7 @@
 		0CB3423B2B6C2EDF00B68277 /* CelebrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB3423A2B6C2EDF00B68277 /* CelebrationView.swift */; };
 		0CB3423E2B6C43DC00B68277 /* ConfettiPieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB3423D2B6C43DC00B68277 /* ConfettiPieceView.swift */; };
 		0CB342402B6C43F300B68277 /* CelebrationViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB3423F2B6C43F300B68277 /* CelebrationViewDelegate.swift */; };
+		0CB3424C2B6C4E5C00B68277 /* AddLogViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB3424B2B6C4E5C00B68277 /* AddLogViewDelegate.swift */; };
 		0CB9509A2B681D5E0085E3D6 /* UNUserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB950992B681D5E0085E3D6 /* UNUserNotificationCenter.swift */; };
 		0CB9509E2B6821B60085E3D6 /* UNUserNotificationMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB9509D2B6821B60085E3D6 /* UNUserNotificationMock.swift */; };
 		0CB950A02B682C1A0085E3D6 /* NotificantionModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB9509F2B682C1A0085E3D6 /* NotificantionModelMock.swift */; };
@@ -114,6 +115,7 @@
 		0CB3423A2B6C2EDF00B68277 /* CelebrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrationView.swift; sourceTree = "<group>"; };
 		0CB3423D2B6C43DC00B68277 /* ConfettiPieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiPieceView.swift; sourceTree = "<group>"; };
 		0CB3423F2B6C43F300B68277 /* CelebrationViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrationViewDelegate.swift; sourceTree = "<group>"; };
+		0CB3424B2B6C4E5C00B68277 /* AddLogViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLogViewDelegate.swift; sourceTree = "<group>"; };
 		0CB950992B681D5E0085E3D6 /* UNUserNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNUserNotificationCenter.swift; sourceTree = "<group>"; };
 		0CB9509D2B6821B60085E3D6 /* UNUserNotificationMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNUserNotificationMock.swift; sourceTree = "<group>"; };
 		0CB9509F2B682C1A0085E3D6 /* NotificantionModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificantionModelMock.swift; sourceTree = "<group>"; };
@@ -205,7 +207,6 @@
 			isa = PBXGroup;
 			children = (
 				0C8981EF2B466223008CFD5D /* FlossRecord.swift */,
-				0CB342362B6C0AF600B68277 /* OnboardingRowInfoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -256,6 +257,56 @@
 			isa = PBXGroup;
 			children = (
 				0CEB25D22B5EE37200B14298 /* CalendarViewDelegate.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		0CB342452B6C4D8C00B68277 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				0CB342472B6C4DBF00B68277 /* Model */,
+				0CB342462B6C4DA600B68277 /* View */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		0CB342462B6C4DA600B68277 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0CB342342B6BD43900B68277 /* OnboardingView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0CB342472B6C4DBF00B68277 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0CB342362B6C0AF600B68277 /* OnboardingRowInfoModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0CB342482B6C4E3600B68277 /* AddFlossRecord */ = {
+			isa = PBXGroup;
+			children = (
+				0CB3424A2B6C4E4800B68277 /* Protocol */,
+				0CB342492B6C4E4200B68277 /* View */,
+			);
+			path = AddFlossRecord;
+			sourceTree = "<group>";
+		};
+		0CB342492B6C4E4200B68277 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0CB342322B6B0C0400B68277 /* AddLogView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0CB3424A2B6C4E4800B68277 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				0CB3424B2B6C4E5C00B68277 /* AddLogViewDelegate.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -350,13 +401,13 @@
 		567999192B4480A500941D75 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0CB342342B6BD43900B68277 /* OnboardingView.swift */,
-				0CB342322B6B0C0400B68277 /* AddLogView.swift */,
 				0C2FE44B2B619C0B00BAC3E8 /* HomeView.swift */,
 				56C33DF82B3CAA1000D8DEB7 /* ContentView.swift */,
 				0C2FE4512B635C4600BAC3E8 /* LogRecordsView.swift */,
 				566FF8CA2B439FB70056644A /* LaunchScreenView.swift */,
 				0C196E002B61555C00EDD0B3 /* RootView.swift */,
+				0CB342482B6C4E3600B68277 /* AddFlossRecord */,
+				0CB342452B6C4D8C00B68277 /* Onboarding */,
 				5679991A2B4480C200941D75 /* Components */,
 			);
 			path = Views;
@@ -623,6 +674,7 @@
 				0C7E923F2B470FD30079525D /* PersistenceManager+KEYS.swift in Sources */,
 				0CEB25D32B5EE37200B14298 /* CalendarViewDelegate.swift in Sources */,
 				0C2FE44C2B619C0B00BAC3E8 /* HomeView.swift in Sources */,
+				0CB3424C2B6C4E5C00B68277 /* AddLogViewDelegate.swift in Sources */,
 				56C33E082B3CAC8800D8DEB7 /* ContentViewModel.swift in Sources */,
 				563008442B61A7EE00290875 /* HomeViewModel.swift in Sources */,
 				56C33E0A2B3CCA9E00D8DEB7 /* PersistanceManager.swift in Sources */,
