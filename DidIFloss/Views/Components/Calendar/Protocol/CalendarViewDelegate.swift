@@ -1,5 +1,5 @@
 //
-//  CalendarViewProtocol.swift
+//  CalendarViewDelegate.swift
 //  DidIFloss
 //
 //  Created by Lucas Migge on 22/01/24.
