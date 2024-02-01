@@ -115,7 +115,11 @@ struct HomeView: View {
             
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Image(systemName: "plus")
+                    Button {
+                        viewModel.plusButtonPressed()
+                    } label: {
+                        Image(systemName: "plus")
+                    }
                 }
                 
                 ToolbarItem(placement: .topBarLeading) {
@@ -125,11 +129,12 @@ struct HomeView: View {
                     } label: {
                         Image(systemName: "calendar")
                     }
-                    .foregroundStyle(.primary)
                 }
             }
         }
-        .tint(Color.primary)
+        .sheet(isPresented: $viewModel.isPresentingAddLogSheet) {
+            AddLogView(delegate: self.viewModel)
+        }
     }
 }
 

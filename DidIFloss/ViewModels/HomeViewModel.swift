@@ -9,7 +9,7 @@ import Foundation
 
 class HomeViewModel: ObservableObject {
     
-    
+    @Published var isPresentingAddLogSheet: Bool = false
     
     // MARK: Floss records
     
@@ -143,3 +143,15 @@ class HomeViewModel: ObservableObject {
     
 }
 
+extension HomeViewModel: AddLogViewDelegate {
+    func addLogRecord(date: Date) {
+//        persistance.saveLastFlossDate(date: date)
+//        self.loadData()
+        isPresentingAddLogSheet = false
+        
+    }
+    
+    func plusButtonPressed() {
+        isPresentingAddLogSheet = true
+    }
+}
