@@ -50,4 +50,8 @@ protocol PersistenceManagerProtocol {
     ///
     /// Use this method to clear all persisted floss-related information.
     func eraseData()
+    
+    
+    func checkIfIsNewUser() -> Bool
+    
 }

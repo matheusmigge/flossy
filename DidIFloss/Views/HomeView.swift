@@ -132,8 +132,16 @@ struct HomeView: View {
                 }
             }
         }
-        .sheet(isPresented: $viewModel.isPresentingAddLogSheet) {
-            AddLogView(delegate: self.viewModel)
+        .sheet(item: $viewModel.sheetView, content: { sheet in
+            switch sheet {
+            case .welcomeSheet:
+                OnboardingView()
+            case .addLogSheet:
+                AddLogView(delegate: self.viewModel)
+            }
+        })
+        .onAppear {
+            viewModel.viewDidApper()
         }
     }
 }
