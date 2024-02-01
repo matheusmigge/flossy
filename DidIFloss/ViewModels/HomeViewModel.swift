@@ -9,8 +9,7 @@ import Foundation
 
 class HomeViewModel: ObservableObject {
     
-    @Published var isPresentingAddLogSheet: Bool = false
-    @Published var isPresentingOnboardingSheet = false
+    @Published var sheetView: Sheet?
     
     // MARK: Floss records
     
@@ -147,7 +146,7 @@ class HomeViewModel: ObservableObject {
         // should show onboard?
         if persistence.checkIfIsNewUser() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.isPresentingOnboardingSheet = true
+                self.sheetView = .addLogSheet
             }
         }
     }
@@ -157,11 +156,22 @@ extension HomeViewModel: AddLogViewDelegate {
     func addLogRecord(date: Date) {
 //        persistance.saveLastFlossDate(date: date)
 //        self.loadData()
-        isPresentingAddLogSheet = false
+        sheetView = nil
         
     }
     
     func plusButtonPressed() {
-        isPresentingAddLogSheet = true
+        sheetView = .addLogSheet
+    }
+}
+
+
+extension HomeViewModel {
+    enum Sheet: String, Identifiable {
+        case welcomeSheet, addLogSheet
+        
+        var id: String {
+            self.rawValue
+        }
     }
 }

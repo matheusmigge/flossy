@@ -28,7 +28,6 @@ struct OnboardingView: View {
                 
             }
             
-            
             Button {
                 dismiss()
             } label: {
