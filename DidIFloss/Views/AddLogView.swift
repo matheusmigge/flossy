@@ -41,17 +41,18 @@ struct AddLogView: View {
                                 RoundedRectangle(cornerRadius: 10)
                                     .fill(Color.greenyBlue)
                             }
-                            .padding()
+                            
                     }
                 }
+                .padding(.horizontal)
                 .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button {
-                            dismiss()
-                        } label: {
-                            Text("Dismiss")
-                        }
-                    }
+//                    ToolbarItem(placement: .topBarLeading) {
+//                        Button {
+//                            dismiss()
+//                        } label: {
+//                            Text("Dismiss")
+//                        }
+//                    }
                     
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
@@ -62,9 +63,15 @@ struct AddLogView: View {
                         }
                     }
                 }
+     
             }
         }
+        .presentationDetents([.fraction(0.75), .large])
+        .presentationBackgroundInteraction(.enabled)
+        .presentationCornerRadius(25)
+        .presentationBackground(Material.regular)
     }
+
 }
 
 #Preview {

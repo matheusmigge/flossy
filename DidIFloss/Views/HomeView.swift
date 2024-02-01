@@ -134,13 +134,7 @@ struct HomeView: View {
         }
         .sheet(isPresented: $viewModel.isPresentingAddLogSheet) {
             AddLogView(delegate: self.viewModel)
-                .presentationDetents([.fraction(0.75), .large])
-                .presentationBackgroundInteraction(.enabled)
-                .presentationCornerRadius(25)
-                .presentationBackground(Material.regular)
-
         }
-
     }
 }
 
