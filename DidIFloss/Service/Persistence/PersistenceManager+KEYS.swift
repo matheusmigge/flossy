@@ -15,5 +15,8 @@ extension PersistanceManager {
         
         /// Key of floss global count
         static let count: String = "FLOSS_COUNT"
+        
+        // Key storing if should show a onboarding
+        static let didUserAlreadyUseApp: String = "DID_USER_ALREADY_USE_APP"
     }
 }

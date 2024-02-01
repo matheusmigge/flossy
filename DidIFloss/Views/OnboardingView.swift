@@ -65,7 +65,9 @@ struct OnboardingView: View {
             .buttonStyle(.borderedProminent)
         }
         .padding()
-        
+        .presentationBackgroundInteraction(.enabled)
+        .presentationCornerRadius(25)
+        .presentationBackground(Material.regular)
     }
     
     
@@ -83,7 +85,8 @@ struct OnboardingView: View {
                     
                     Text(feature.message)
                         .font(.callout)
-                        .foregroundStyle(.secondary)
+                        .fontWeight(.light)
+                        .foregroundStyle(.primary)
                     
                 }
                 .multilineTextAlignment(.leading)

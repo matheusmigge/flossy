@@ -41,4 +41,10 @@ public protocol UserDefaultable {
     /// - Parameter forKey: The key for which to retrieve the associated value.
     /// - Returns: The value associated with the specified key.
     func value(forKey: String) -> Any?
+    
+    
+    
+    
+    
+    func bool(forKey: String) -> Bool
 }

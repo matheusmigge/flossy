@@ -12,7 +12,7 @@ class PersistanceManager: PersistenceManagerProtocol {
     let userDefaults: UserDefaultable
     let flossRecordService: FlossRecordDataProvider
     
-    init(userDefaults: UserDefaultable = UserDefaults.standard,
+    init(userDefaults: UserDefaults = UserDefaults.standard,
          flossRecordService: FlossRecordDataProvider = FlossRecordDataSource()
     ) {
         self.userDefaults = userDefaults
@@ -57,6 +57,18 @@ class PersistanceManager: PersistenceManagerProtocol {
         userDefaults.set(nil, forKey: UserDefaultsKeys.date)
         flossRecordService.eraseRecords()
 
+    }
+    
+    func checkIfIsNewUser() -> Bool {
+        let isNewUser = !userDefaults.bool(forKey: UserDefaultsKeys.didUserAlreadyUseApp)
+        
+        if isNewUser {
+            userDefaults.set(true, forKey: UserDefaultsKeys.didUserAlreadyUseApp)
+            return true
+            
+        } else {
+            return false
+        }
     }
 }
 

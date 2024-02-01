@@ -140,6 +140,9 @@ struct HomeView: View {
         }) {
             OnboardingView()
         }
+        .onAppear {
+            viewModel.viewDidApper()
+        }
     
   
     }

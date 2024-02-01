@@ -10,7 +10,7 @@ import Foundation
 class HomeViewModel: ObservableObject {
     
     @Published var isPresentingAddLogSheet: Bool = false
-    @Published var isPresentingOnboardingSheet = true
+    @Published var isPresentingOnboardingSheet = false
     
     // MARK: Floss records
     
@@ -23,14 +23,15 @@ class HomeViewModel: ObservableObject {
         
     ]
     
-    var persistance: PersistenceManagerProtocol
+    var persistence: PersistenceManagerProtocol
     
-    init(persistance: PersistenceManagerProtocol = PersistanceManager()) {
+    init(persistence: PersistenceManagerProtocol = PersistanceManager()) {
         
-        self.persistance = persistance
-        //        persistance.getFlossRecords { [weak self] records in
+        self.persistence = persistence
+        //        persistence.getFlossRecords { [weak self] records in
         //            self?.flossRecords = records
         //        }
+        
     }
     
     // MARK: Streak status
@@ -142,6 +143,14 @@ class HomeViewModel: ObservableObject {
         }
     }
     
+    func viewDidApper() {
+        // should show onboard?
+        if persistence.checkIfIsNewUser() {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.isPresentingOnboardingSheet = true
+            }
+        }
+    }
 }
 
 extension HomeViewModel: AddLogViewDelegate {
