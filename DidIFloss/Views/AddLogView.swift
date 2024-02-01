@@ -7,10 +7,17 @@
 
 import SwiftUI
 
-struct addLogView: View {
+protocol AddLogViewDelegate: AnyObject {
+    func addLogRecord(date: Date)
+    
+}
+
+struct AddLogView: View {
     @Environment(\.dismiss) var dismiss
     
     @State var selectedDate: Date = .now
+    
+    weak var delegate: AddLogViewDelegate?
     
     var body: some View {
         NavigationView {
@@ -22,7 +29,8 @@ struct addLogView: View {
                         .tint(.greenyBlue)
                     
                     Button {
-                        dismiss()
+                        delegate?.addLogRecord(date: self.selectedDate)
+                        
                     } label: {
                         Text("Add")
                             .bold()
@@ -39,7 +47,7 @@ struct addLogView: View {
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Button {
-                            
+                            dismiss()
                         } label: {
                             Text("Dismiss")
                         }
@@ -47,9 +55,9 @@ struct addLogView: View {
                     
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
-                            
+                            delegate?.addLogRecord(date: self.selectedDate)
                         } label: {
-                            Text("Done")
+                            Text("Add")
                                 .bold()
                         }
                     }
@@ -60,5 +68,5 @@ struct addLogView: View {
 }
 
 #Preview {
-    addLogView()
+    AddLogView()
 }
