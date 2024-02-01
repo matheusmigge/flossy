@@ -135,6 +135,13 @@ struct HomeView: View {
         .sheet(isPresented: $viewModel.isPresentingAddLogSheet) {
             AddLogView(delegate: self.viewModel)
         }
+        .sheet(isPresented: $viewModel.isPresentingOnboardingSheet, onDismiss: {
+//            viewModel.OnboardingDismiss()
+        }) {
+            OnboardingView()
+        }
+    
+  
     }
 }
 

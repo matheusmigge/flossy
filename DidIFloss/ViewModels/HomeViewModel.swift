@@ -10,6 +10,7 @@ import Foundation
 class HomeViewModel: ObservableObject {
     
     @Published var isPresentingAddLogSheet: Bool = false
+    @Published var isPresentingOnboardingSheet = true
     
     // MARK: Floss records
     
