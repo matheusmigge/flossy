@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-protocol AddLogViewDelegate: AnyObject {
-    func addLogRecord(date: Date)
-    
-}
 
 struct AddLogView: View {
     @Environment(\.dismiss) var dismiss

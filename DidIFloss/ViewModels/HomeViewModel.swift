@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import SwiftUI
 
 class HomeViewModel: ObservableObject {
     
     @Published var sheetView: Sheet?
+    @Published var showingCelebration: Bool = false
     
     // MARK: Floss records
     
@@ -157,6 +159,7 @@ extension HomeViewModel: AddLogViewDelegate {
 //        persistance.saveLastFlossDate(date: date)
 //        self.loadData()
         sheetView = nil
+        showingCelebration = true
         
     }
     
@@ -165,6 +168,13 @@ extension HomeViewModel: AddLogViewDelegate {
     }
 }
 
+extension HomeViewModel: CelebrationViewDelegate {
+    func didCompleteAnimation() {
+        withAnimation {
+            showingCelebration = false
+        }
+    }
+}
 
 extension HomeViewModel {
     enum Sheet: String, Identifiable {

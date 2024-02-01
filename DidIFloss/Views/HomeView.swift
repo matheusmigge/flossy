@@ -112,7 +112,11 @@ struct HomeView: View {
                 }.listRowInsets(.init(top: -20, leading: -20, bottom: -20, trailing: -20))
             }
             .buttonStyle(.borderless)
-            
+            .overlay {
+                if viewModel.showingCelebration {
+                    CelebrationView(delegate: self.viewModel)
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
