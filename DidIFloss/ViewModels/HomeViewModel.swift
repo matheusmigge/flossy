@@ -19,7 +19,7 @@ class HomeViewModel: ObservableObject {
     
     var persistence: PersistenceManagerProtocol
     
-    init(persistence: PersistenceManagerProtocol = PersistanceManager()) {
+    init(persistence: PersistenceManagerProtocol = PersistanceManager.shared) {
         
         self.persistence = persistence
         
@@ -207,7 +207,6 @@ extension HomeViewModel: AddLogViewDelegate {
         self.loadData()
         sheetView = nil
         showingCelebration = true
-        
     }
     
     func plusButtonPressed() {

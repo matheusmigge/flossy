@@ -18,7 +18,6 @@ final class FlossRecordDataSource: FlossRecordDataProvider {
         modelContainer.mainContext
     }
     
-    
     init() {
         do {
             self.modelContainer = try ModelContainer(for: FlossRecord.self)
@@ -33,6 +32,7 @@ final class FlossRecordDataSource: FlossRecordDataProvider {
         DispatchQueue.main.async {
             self.context.insert(record)
             do {
+                print("save context print")
                 try self.context.save()
             } catch {
                 print("Failed to save context: \(error.localizedDescription)")

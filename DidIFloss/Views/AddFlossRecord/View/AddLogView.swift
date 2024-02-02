@@ -63,7 +63,6 @@ struct AddLogView: View {
             }
         }
         .presentationDetents([.fraction(0.75), .large])
-        .presentationBackgroundInteraction(.enabled)
         .presentationCornerRadius(25)
         .presentationBackground(Material.regular)
     }

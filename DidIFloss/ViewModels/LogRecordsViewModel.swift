@@ -16,7 +16,7 @@ class LogRecordsViewModel: ObservableObject {
     
     @Published var records: [FlossRecord] = []
     
-    init(persistenceService: PersistenceManagerProtocol = PersistanceManager()) {
+    init(persistenceService: PersistenceManagerProtocol = PersistanceManager.shared) {
         self.persistence = persistenceService
         
     }
@@ -44,12 +44,14 @@ extension LogRecordsViewModel: CalendarViewDelegate {
     func removeRecordAt(indexSet: IndexSet) {
         records.remove(atOffsets: indexSet)
         guard let index = indexSet.first else { return }
-        persistence.deleteFlossRecord(records[index])
+        persistence.deleteFlossRecord(sectionRecords[index])
+        loadRecords()
     }
     
     func removeRecord(_ record: FlossRecord) {
         records.removeAll { $0 == record }
         persistence.deleteFlossRecord(record)
+        loadRecords()
     }
     
     var sectionRecords: [FlossRecord] {
