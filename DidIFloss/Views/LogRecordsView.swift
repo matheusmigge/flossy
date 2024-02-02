@@ -10,6 +10,7 @@ import SwiftUI
 
 struct LogRecordsView: View {
     
+    @Environment(\.colorScheme) var colorScheme
     @StateObject var viewModel: LogRecordsViewModel = LogRecordsViewModel()
     
     var body: some View {
@@ -18,6 +19,7 @@ struct LogRecordsView: View {
                 CalendarView(records: $viewModel.records,
                              style: .month,
                              delegate: viewModel)
+                .padding(.vertical, 7)
             }
             
             Section {
@@ -28,6 +30,10 @@ struct LogRecordsView: View {
                 }
             } header: {
                 Text(sectionLabel)
+            } footer: {
+                if !viewModel.sectionRecords.isEmpty {
+                    Text("You can delete a record by swiping or holding on it")
+                }
             }
             
             Section {
@@ -42,7 +48,7 @@ struct LogRecordsView: View {
         .navigationTitle("Records")
     }
     
-    var sectionLabel: String {
+    private var sectionLabel: String {
         if let date = viewModel.selectedDate {
             return "Records for \(date.dayAndMonthFormatted)"
         } else {
@@ -74,7 +80,7 @@ struct LogRecordsView: View {
     
     private var recordsListView: some View {
         ForEach(viewModel.sectionRecords) { record in
-            Text(record.date.minuteHourDayMonthFormatted)
+            contentRow(date: record.date)
                 .contextMenu(menuItems: {
                     Button(role: .destructive) {
                         viewModel.removeRecord(record)
@@ -86,6 +92,27 @@ struct LogRecordsView: View {
         .onDelete(perform: { indexSet in
             viewModel.removeRecordAt(indexSet: indexSet)
         })
+    }
+    
+    @ViewBuilder
+    private func contentRow(date: Date) -> some View {
+        HStack(alignment: .center) {
+            HStack {
+                Image(systemName: "calendar")
+                    .foregroundColor(colorScheme == .light ? .flossGreenyBlue : .flossFlamingoPink)
+                
+                Text(date.dayAndMonthAndYearFormatted)
+            }
+            
+            Spacer()
+            
+            HStack {
+                Image(systemName: "clock")
+                    .foregroundColor(colorScheme == .light ? .flossGreenyBlue : .flossFlamingoPink)
+                
+                Text(date.minuteAndHourFormatted)
+            }
+        }
     }
 }
 
