@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import SwiftUI
 
 class HomeViewModel: ObservableObject {
     
-    
+    @Published var sheetView: Sheet?
+    @Published var showingCelebration: Bool = false
     
     // MARK: Floss records
     
@@ -22,14 +24,15 @@ class HomeViewModel: ObservableObject {
         
     ]
     
-    var persistance: PersistanceManagerProtocol
+    var persistence: PersistenceManagerProtocol
     
-    init(persistance: PersistanceManagerProtocol = PersistanceManager()) {
+    init(persistence: PersistenceManagerProtocol = PersistanceManager()) {
         
-        self.persistance = persistance
-        //        persistance.getFlossRecords { [weak self] records in
+        self.persistence = persistence
+        //        persistence.getFlossRecords { [weak self] records in
         //            self?.flossRecords = records
         //        }
+        
     }
     
     // MARK: Streak status
@@ -141,6 +144,7 @@ class HomeViewModel: ObservableObject {
         }
     }
     
+<<<<<<< HEAD
     // MARK: Warning Banner content
     
     var warningBannerContent: WarningBannerModel {
@@ -184,5 +188,46 @@ class HomeViewModel: ObservableObject {
         }
     }
     
+=======
+    func viewDidApper() {
+        // should show onboard?
+        if persistence.checkIfIsNewUser() {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.sheetView = .addLogSheet
+            }
+        }
+    }
+>>>>>>> main
 }
 
+extension HomeViewModel: AddLogViewDelegate {
+    func addLogRecord(date: Date) {
+//        persistance.saveLastFlossDate(date: date)
+//        self.loadData()
+        sheetView = nil
+        showingCelebration = true
+        
+    }
+    
+    func plusButtonPressed() {
+        sheetView = .addLogSheet
+    }
+}
+
+extension HomeViewModel: CelebrationViewDelegate {
+    func didCompleteAnimation() {
+        withAnimation {
+            showingCelebration = false
+        }
+    }
+}
+
+extension HomeViewModel {
+    enum Sheet: String, Identifiable {
+        case welcomeSheet, addLogSheet
+        
+        var id: String {
+            self.rawValue
+        }
+    }
+}

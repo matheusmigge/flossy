@@ -39,9 +39,19 @@ struct HomeView: View {
                 BannerSectionView()
             }
             .listSectionSpacing(25)
+            .buttonStyle(.borderless)
+            .overlay {
+                if viewModel.showingCelebration {
+                    CelebrationView(delegate: self.viewModel)
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Image(systemName: "plus")
+                    Button {
+                        viewModel.plusButtonPressed()
+                    } label: {
+                        Image(systemName: "plus")
+                    }
                 }
                 
                 ToolbarItem(placement: .topBarLeading) {
@@ -51,11 +61,20 @@ struct HomeView: View {
                     } label: {
                         Image(systemName: "calendar")
                     }
-                    .foregroundStyle(.primary)
                 }
             }
         }
-        .tint(Color.primary)
+        .sheet(item: $viewModel.sheetView, content: { sheet in
+            switch sheet {
+            case .welcomeSheet:
+                OnboardingView()
+            case .addLogSheet:
+                AddLogView(delegate: self.viewModel)
+            }
+        })
+        .onAppear {
+            viewModel.viewDidApper()
+        }
     }
 }
 
