@@ -31,7 +31,7 @@ struct LogRecordsView: View {
             }
             
             Section {
-                BannerView()
+                BannerSectionView()
             }
             .listRowInsets(.init(top: -20, leading: -20, bottom: -20, trailing: -20))
         }

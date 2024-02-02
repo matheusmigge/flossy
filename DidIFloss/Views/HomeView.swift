@@ -23,96 +23,22 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             List {
-                Section {
-                    BannerView()
-                }.listRowInsets(.init(top: -20, leading: -20, bottom: -20, trailing: -20))
+                BannerSectionView()
                 
-                ZStack {
-                    Rectangle()
-                        .foregroundStyle(.flamingoPink)
-                    
-                    switch viewModel.streakStatus {
-                        
-                    case .noLogsRecorded:
-                        Text("NO LOGS ⚠️")
-                            .padding(20)
-                            .foregroundStyle(.primary)
-                            .font(.caption)
-                        
-                        
-                    case .positiveStreak:
-                        VStack {
-                            if viewModel.userHasLoggedToday {
-                                
-                                Text("🫡 O de hoje tá pago!")
-                                    .padding(20)
-                                    .foregroundStyle(.primary)
-                                    .font(.caption)
-                            } else {
-                                
-                                Text("⚠️ Você ainda não passou fio dental hoje. Cuidado para não perder o seu combo!")
-                                    .padding(20)
-                                    .foregroundStyle(.primary)
-                                    .font(.caption)
-                            }
-                            
-                        }
-                    case .negativeStreak:
-                        Text("NEGATIVE STREAK ❌")
-                            .padding(20)
-                            .foregroundStyle(.primary)
-                            .font(.caption)
-                    }
-                }
-                .listRowInsets(.init(top: -10, leading: -10, bottom: -10, trailing: -10))
+                WarningBannerView(model: viewModel.warningBannerContent)
                 
-                VStack {
-                    HStack {
-                        Spacer()
-                        ZStack {
-                            Text("\(dayStreak) dias seguidos!")
-                                .font(.system(size: 35))
-                                .fontWeight(.black)
-                                .foregroundStyle(.lightYellow)
-                            
-                            Text("\(dayStreak) dias seguidos!")
-                                .font(.system(size: 35))
-                                .fontWeight(.black)
-                                .offset(x: 3, y: -3)
-                                .foregroundStyle(.flamingoPink)
-                        }
-                        Spacer()
-                    }
-                    .padding(.top)
-                    .foregroundStyle(Color("sky-blue"))
-                    
-                    switch viewModel.streakStatus {
-                        
-                    case .noLogsRecorded:
-                        Text("NO LOGS ⚠️")
-                            .font(.title)
-                        
-                    case .positiveStreak:
-                        VStack {
-                            Text("POSITIVE STREAK ✅")
-                                .font(.caption)
-                                .multilineTextAlignment(.center)
-                        }
-                    case .negativeStreak:
-                        Text("NEGATIVE STREAK ❌")
-                            .font(.title)
-                    }
-                }
-                .listRowSeparator(.hidden)
-                
-                CalendarView(records: $viewModel.flossRecords, style: .week)
+                StreakBoardView(model: viewModel.streakBoardContent)
+                    .padding(.vertical)
+                    .listRowSeparator(.hidden)
                 
                 Section {
-                    BannerView()
-                }.listRowInsets(.init(top: -20, leading: -20, bottom: -20, trailing: -20))
+                    CalendarView(records: $viewModel.flossRecords, style: .week)
+                        .padding(.vertical, 7.5)
+                }
+                
+                BannerSectionView()
             }
-            .buttonStyle(.borderless)
-            
+            .listSectionSpacing(25)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Image(systemName: "plus")

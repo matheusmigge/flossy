@@ -9,12 +9,6 @@ import Foundation
 import SwiftUI
 
 struct Constants {
-    struct ColorNames {
-        static let skyBlue = "sky-blue"
-        static let lightYellow = "light-yellow"
-        static let flamingoPink = "flamingo-pink"
-        static let greenyBlue = "greeny-blue"
-    }
     
     struct FontNames {
         static let borel = "Borel-Regular"
@@ -27,8 +21,16 @@ struct Constants {
 }
 
 extension Color {
-    static let flossSkyBlue = Color(Constants.ColorNames.skyBlue)
-    static let flossLightYellow = Color(Constants.ColorNames.lightYellow)
-    static let flossFlamingoPink = Color(Constants.ColorNames.flamingoPink)
-    static let flossGreenyBlue = Color(Constants.ColorNames.greenyBlue)
+    
+    private struct ColorNames {
+        static let skyBlue = "sky-blue"
+        static let lightYellow = "light-yellow"
+        static let flamingoPink = "flamingo-pink"
+        static let greenyBlue = "greeny-blue"
+    }
+    
+    static let flossSkyBlue = Color(ColorNames.skyBlue)
+    static let flossLightYellow = Color(ColorNames.lightYellow)
+    static let flossFlamingoPink = Color(ColorNames.flamingoPink)
+    static let flossGreenyBlue = Color(ColorNames.greenyBlue)
 }

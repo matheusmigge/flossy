@@ -15,10 +15,10 @@ class HomeViewModel: ObservableObject {
     
     @Published var flossRecords: [FlossRecord] = [
         
-        FlossRecord(date: Calendar.createDate(year: 2024, month: 1, day: 23, hour: 6, minute: 00)),
-        FlossRecord(date: Calendar.createDate(year: 2024, month: 1, day: 24, hour: 6, minute: 00)),
-        FlossRecord(date: Calendar.createDate(year: 2024, month: 1, day: 25, hour: 6, minute: 00)),
-                FlossRecord(date: .now),
+        FlossRecord(date: Calendar.createDate(year: 2024, month: 1, day: 29, hour: 6, minute: 00)),
+//        FlossRecord(date: Calendar.createDate(year: 2024, month: 1, day: 30, hour: 6, minute: 00)),
+//        FlossRecord(date: Calendar.createDate(year: 2024, month: 1, day: 31, hour: 6, minute: 00)),
+//                FlossRecord(date: .now),
         
     ]
     
@@ -138,6 +138,49 @@ class HomeViewModel: ObservableObject {
         } else {
             
             return false
+        }
+    }
+    
+    // MARK: Warning Banner content
+    
+    var warningBannerContent: WarningBannerModel {
+        
+        switch streakStatus {
+            
+        case .noLogsRecorded:
+            WarningBannerModel(backgroundColor: .greenyBlue, text: "Seja bem vindo(a) ao Did I Floss! ☀️", textColor: .white)
+            
+        case .positiveStreak:
+            if userHasLoggedToday {
+                WarningBannerModel(backgroundColor: .greenyBlue, text: "O de hoje tá pago! 🫡", textColor: .white)
+            } else {
+                WarningBannerModel(backgroundColor: .lightYellow, text: "Você ainda não usou o fio dental hoje. Cuidado para não perder o seu combo! ⚠️", textColor: .black)
+            }
+            
+        case .negativeStreak:
+            WarningBannerModel(backgroundColor: .flamingoPink, text: "Estamos sentindo sua falta! 😭", textColor: .black)
+        }
+    }
+    
+    // MARK: Streak Board content
+    
+    var streakBoardContent: StreakBoardModel {
+        switch streakStatus {
+        case .noLogsRecorded:
+            StreakBoardModel(titleColor: .greenyBlue, titleText: "Comece seu combo hoje!", captionText: "Até quantos dias seguidos você consegue se manter passando o fio dental? 👀")
+        case .positiveStreak:
+            
+            if streakCount == 1 {
+                StreakBoardModel(titleColor: .greenyBlue, titleText: "Combo iniciado!", captionText: "Continue passando o fio dental todos os dias para manter o seu combo.")
+            } else {
+                StreakBoardModel(titleColor: .greenyBlue, titleText: "\(streakCount) dias seguidos!", captionText: "É isso aí! Até quantos dias você consegue manter o combo? 👀")
+            }
+        case .negativeStreak:
+            if streakCount == 1 {
+                StreakBoardModel(titleColor: .flamingoPink, titleText: "Combo perdido!", captionText: "Oh não! Você estava indo tão bem... Tem 5 minutinhos para passar o fio dental e recomeçar o seu combo? 👀")
+            } else {
+                StreakBoardModel(titleColor: .flamingoPink, titleText: "\(streakCount) dias seguidos!", captionText: "Parece que você está acumulando um combo de dias seguidos sem passar o fio dental! 😭 ")
+            }
         }
     }
     
