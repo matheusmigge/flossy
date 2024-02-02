@@ -48,7 +48,7 @@ struct LogRecordsView: View {
         .navigationTitle("Records")
     }
     
-    var sectionLabel: String {
+    private var sectionLabel: String {
         if let date = viewModel.selectedDate {
             return "Records for \(date.dayAndMonthFormatted)"
         } else {
@@ -95,7 +95,7 @@ struct LogRecordsView: View {
     }
     
     @ViewBuilder
-    func contentRow(date: Date) -> some View {
+    private func contentRow(date: Date) -> some View {
         HStack(alignment: .center) {
             HStack {
                 Image(systemName: "calendar")
