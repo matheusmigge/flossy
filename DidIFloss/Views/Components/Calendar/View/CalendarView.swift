@@ -22,7 +22,7 @@ struct CalendarView: View {
     
     weak var delegate: CalendarViewDelegate?
     
-    let gridColums: [GridItem] = Array(repeating:
+    let gridColumns: [GridItem] = Array(repeating:
                                         GridItem(.flexible(minimum: 15, maximum: 50)), count: 7)
     
     init(records: Binding<[FlossRecord]>, style: Style, delegate: CalendarViewDelegate? = nil) {
@@ -38,7 +38,7 @@ struct CalendarView: View {
             switch style {
             case .month:
                 monthCalendarGrid
-                    .padding()
+                    .padding(.top, 5)
             case .week:
                 weekCalendarGrid
             }
@@ -67,14 +67,14 @@ struct CalendarView: View {
             } label: {
                 Image(systemName: "chevron.forward")
             }
-            .opacity(self.hasNexCalendar ? 1 : 0)
+            .opacity(self.hasNextCalendar ? 1 : 0)
             
         }
         .padding(.horizontal)
     }
     
     private var monthCalendarGrid: some View {
-        LazyVGrid(columns: self.gridColums, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 15, content: {
+        LazyVGrid(columns: self.gridColumns, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 15, content: {
             
             daysOfTheWeekMonthView
             
@@ -119,7 +119,7 @@ struct CalendarView: View {
                 .background {
                     if shouldDayOfTheWeekBePink(day) {
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.flossLightYellow)
+                            .fill(Color.flossFlamingoPink)
                     }
                 }
             }
@@ -183,7 +183,7 @@ extension CalendarView {
 
 extension CalendarView {
     
-    var filterdRecords: [Date] {
+    var filteredRecords: [Date] {
         records.filter { record in
             self.isSelectedDate(record.date)
         }.map { record in
@@ -211,7 +211,7 @@ extension CalendarView {
     var dateLabel: String {
         switch style {
         case .month:
-            return dateFocused?.dayAndMonthFormatted ?? Date().dayAndMonthFormatted
+            return dateFocused?.monthFormatted ?? currentCalendar.monthFormatted
         case .week:
             let firstDayOfWeek = daysCalendarSet.first?.dayFormatted ?? "XX"
             let lastDayOfWeek = daysCalendarSet.last?.dayFormatted ?? "XX"
@@ -220,7 +220,7 @@ extension CalendarView {
         }
     }
     
-    var hasNexCalendar: Bool {
+    var hasNextCalendar: Bool {
         let dateComponent: Calendar.Component = style == .month ? .month : .weekOfYear
         
         let next = calendar.date(byAdding: dateComponent, value: 1, to: currentCalendar) ?? Date()
@@ -228,7 +228,7 @@ extension CalendarView {
     }
     
     func nextCalendarSet() {
-        if hasNexCalendar {
+        if hasNextCalendar {
             let calendarComponent: Calendar.Component = style == .week ? .weekOfYear : .month
             
             currentCalendar = calendar.date(byAdding: calendarComponent, value: 1, to: currentCalendar) ?? Date()

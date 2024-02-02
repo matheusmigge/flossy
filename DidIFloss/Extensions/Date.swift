@@ -29,6 +29,13 @@ extension Date {
         return formatter.string(from: self)
     }
     
+    var dayAndMonthAndYearFormatted: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMMM yyyy"
+        
+        return formatter.string(from: self)
+    }
+    
     var minuteHourDayMonthFormatted: String {
         let formatter = DateFormatter()
         formatter.timeStyle = .short

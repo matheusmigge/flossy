@@ -20,8 +20,8 @@ import Foundation
 ///
 /// ## Example
 /// ```swift
-/// class MyPersistenceManager: PersistanceManagerProtocol {
-///     // Implement the methods required by the PersistanceManagerProtocol
+/// class MyPersistenceManager: PersistenceManagerProtocol {
+///     // Implement the methods required by the PersistenceManagerProtocol
 /// }
 /// ```
 

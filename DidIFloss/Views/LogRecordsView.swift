@@ -18,6 +18,7 @@ struct LogRecordsView: View {
                 CalendarView(records: $viewModel.records,
                              style: .month,
                              delegate: viewModel)
+                .padding(.vertical, 7)
             }
             
             Section {
@@ -28,6 +29,10 @@ struct LogRecordsView: View {
                 }
             } header: {
                 Text(sectionLabel)
+            } footer: {
+                if !viewModel.sectionRecords.isEmpty {
+                    Text("You can delete a record by swiping or holding on it")
+                }
             }
             
             Section {
