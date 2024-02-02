@@ -15,25 +15,16 @@ class HomeViewModel: ObservableObject {
     
     // MARK: Floss records
     
-    @Published var flossRecords: [FlossRecord] = [
-        
-        FlossRecord(date: Calendar.createDate(year: 2024, month: 1, day: 29, hour: 6, minute: 00)),
-//        FlossRecord(date: Calendar.createDate(year: 2024, month: 1, day: 30, hour: 6, minute: 00)),
-//        FlossRecord(date: Calendar.createDate(year: 2024, month: 1, day: 31, hour: 6, minute: 00)),
-//                FlossRecord(date: .now),
-        
-    ]
+    @Published var flossRecords: [FlossRecord] = []
     
     var persistence: PersistenceManagerProtocol
     
     init(persistence: PersistenceManagerProtocol = PersistanceManager()) {
         
         self.persistence = persistence
-        //        persistence.getFlossRecords { [weak self] records in
-        //            self?.flossRecords = records
-        //        }
         
     }
+
     
     // MARK: Streak status
     
@@ -187,8 +178,13 @@ class HomeViewModel: ObservableObject {
         }
     }
     
+    
+    // MARK: Did Apper
 
     func viewDidApper() {
+       
+        self.loadData()
+        
         // should show onboard?
         if persistence.checkIfIsNewUser() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -196,13 +192,19 @@ class HomeViewModel: ObservableObject {
             }
         }
     }
+    
+    func loadData() {
+        persistence.getFlossRecords { [weak self] records in
+            self?.flossRecords = records
+        }
+    }
 
 }
 
 extension HomeViewModel: AddLogViewDelegate {
     func addLogRecord(date: Date) {
-//        persistance.saveLastFlossDate(date: date)
-//        self.loadData()
+        persistence.saveLastFlossDate(date: date)
+        self.loadData()
         sheetView = nil
         showingCelebration = true
         
