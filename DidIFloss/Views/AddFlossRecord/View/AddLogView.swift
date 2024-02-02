@@ -13,7 +13,7 @@ struct AddLogView: View {
     
     @State var selectedDate: Date = .now
     
-    weak var delegate: AddLogViewDelegate?
+    weak var delegate: AddLogDelegate?
     
     var body: some View {
         NavigationView {

@@ -8,8 +8,7 @@
 import Foundation
 
 /// Interface for alerting viewModel of changes in data
-protocol FlossRecordObserver: AnyObject {
-    
+protocol PersistenceObserver: AnyObject {
     func hadChangesInFlossRecordDataBase() 
     
 }

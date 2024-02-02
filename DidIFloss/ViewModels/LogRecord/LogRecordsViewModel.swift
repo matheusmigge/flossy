@@ -12,7 +12,7 @@ class LogRecordsViewModel: ObservableObject {
     
     @Published var selectedDate: Date?
     
-    let persistence: PersistenceManagerProtocol
+    weak var persistence: PersistenceManagerProtocol?
     
     @Published var records: [FlossRecord] = []
     
@@ -21,36 +21,31 @@ class LogRecordsViewModel: ObservableObject {
         
     }
     
-    func loadRecords() {
-
-        self.persistence.getFlossRecords { [weak self] result in
+    private func loadRecords() {
+        guard let safePersistence = persistence else { return }
+        
+        safePersistence.getFlossRecords { [weak self] result in
             self?.records = result
         }
     }
     
     func viewDidApper() {
         self.loadRecords()
-        print("View did Appear - LogRecords")
-    }
-}
-
-
-extension LogRecordsViewModel: CalendarViewDelegate {
-    func didSelectDate(_ date: Date) {
-        withAnimation {
-            selectedDate = selectedDate == date ? nil : date
-        }
     }
     
     func removeRecordAt(indexSet: IndexSet) {
+        guard let safePersistence = persistence else { return }
+        
         guard let index = indexSet.first else { return }
-        persistence.deleteFlossRecord(sectionRecords[index])
+        safePersistence.deleteFlossRecord(sectionRecords[index])
         loadRecords()
     }
     
     func removeRecord(_ record: FlossRecord) {
+        guard let safePersistence = persistence else { return }
+        
         records.removeAll { $0 == record }
-        persistence.deleteFlossRecord(record)
+        safePersistence.deleteFlossRecord(record)
         loadRecords()
     }
     
@@ -62,3 +57,4 @@ extension LogRecordsViewModel: CalendarViewDelegate {
         }
     }
 }
+

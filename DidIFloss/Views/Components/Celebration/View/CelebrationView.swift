@@ -13,9 +13,9 @@ struct CelebrationView: View {
     private let confettiCount: Int
     @State var isAnimating: Bool = false
     
-    weak var delegate: CelebrationViewDelegate?
+    weak var delegate: CelebrationDelegate?
     
-    init(confettiCount: Int = 30, delegate: CelebrationViewDelegate? = nil) {
+    init(confettiCount: Int = 30, delegate: CelebrationDelegate? = nil) {
         self.confettiCount = confettiCount
         self.delegate = delegate
     }

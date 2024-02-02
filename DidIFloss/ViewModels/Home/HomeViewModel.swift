@@ -17,22 +17,17 @@ class HomeViewModel: ObservableObject {
     
     @Published var flossRecords: [FlossRecord] = []
     
-    var persistence: PersistenceManagerProtocol
+    weak var persistence: PersistenceManagerProtocol?
     
     init(persistence: PersistenceManagerProtocol = PersistenceManager.shared) {
-        
         self.persistence = persistence
-        self.persistence.observer = self
+        self.persistence?.observer = self
         
     }
 
     
     // MARK: Streak status
-    
-    enum State {
-        case noLogsRecorded, positiveStreak, negativeStreak
-    }
-    
+
     var streakStatus: State {
         
         if let lastLogDate = flossRecords.last?.date {
@@ -183,21 +178,22 @@ class HomeViewModel: ObservableObject {
     // MARK: Did Apper
 
     func viewDidApper() {
-       
         self.loadData()
         self.checkForOnboarding()
-        print("View did Appear - HomeView")
+        
     }
     
-    private func loadData() {
-        persistence.getFlossRecords { [weak self] records in
+    func loadData() {
+        persistence?.getFlossRecords { [weak self] records in
             self?.flossRecords = records
         }
     }
     
     private func checkForOnboarding() {
         // should show onboard?
-        if persistence.checkIfIsNewUser() {
+        guard let safePersistence = persistence else { return }
+        
+        if safePersistence.checkIfIsNewUser() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.sheetView = .welcomeSheet
             }
@@ -206,39 +202,3 @@ class HomeViewModel: ObservableObject {
 
 }
 
-extension HomeViewModel: AddLogViewDelegate {
-    func addLogRecord(date: Date) {
-        persistence.saveLastFlossDate(date: date)
-        self.loadData()
-        sheetView = nil
-        showingCelebration = true
-    }
-    
-    func plusButtonPressed() {
-        sheetView = .addLogSheet
-    }
-}
-
-extension HomeViewModel: CelebrationViewDelegate {
-    func didCompleteAnimation() {
-        withAnimation(.easeOut(duration: 2)) {
-            showingCelebration = false
-        }
-    }
-}
-
-extension HomeViewModel: FlossRecordObserver {
-    func hadChangesInFlossRecordDataBase() {
-        self.loadData()
-    }
-}
-
-extension HomeViewModel {
-    enum Sheet: String, Identifiable {
-        case welcomeSheet, addLogSheet
-        
-        var id: String {
-            self.rawValue
-        }
-    }
-}

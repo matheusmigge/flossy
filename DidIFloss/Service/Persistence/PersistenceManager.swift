@@ -12,7 +12,7 @@ class PersistenceManager: PersistenceManagerProtocol {
     let userDefaults: UserDefaultable
     let flossRecordService: FlossRecordDataProvider
     
-    var observer: FlossRecordObserver?
+    weak var observer: PersistenceObserver?
     
     static let shared: PersistenceManager = PersistenceManager()
     
