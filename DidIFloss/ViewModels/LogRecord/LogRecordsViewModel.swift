@@ -50,10 +50,12 @@ class LogRecordsViewModel: ObservableObject {
     }
     
     var sectionRecords: [FlossRecord] {
+        let descendingSortedRecords = records.sorted(by: {$0.date > $1.date})
+        
         if let date = selectedDate {
-            return records.filter { Calendar.current.isDate($0.date, inSameDayAs: date) }
+            return descendingSortedRecords.filter { Calendar.current.isDate($0.date, inSameDayAs: date) }
         } else {
-            return records
+            return descendingSortedRecords
         }
     }
 }
