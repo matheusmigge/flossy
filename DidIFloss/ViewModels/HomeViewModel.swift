@@ -144,7 +144,6 @@ class HomeViewModel: ObservableObject {
         }
     }
     
-<<<<<<< HEAD
     // MARK: Warning Banner content
     
     var warningBannerContent: WarningBannerModel {
@@ -188,7 +187,7 @@ class HomeViewModel: ObservableObject {
         }
     }
     
-=======
+
     func viewDidApper() {
         // should show onboard?
         if persistence.checkIfIsNewUser() {
@@ -197,7 +196,7 @@ class HomeViewModel: ObservableObject {
             }
         }
     }
->>>>>>> main
+
 }
 
 extension HomeViewModel: AddLogViewDelegate {
