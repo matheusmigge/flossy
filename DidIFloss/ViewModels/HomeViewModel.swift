@@ -192,7 +192,7 @@ class HomeViewModel: ObservableObject {
         // should show onboard?
         if persistence.checkIfIsNewUser() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.sheetView = .addLogSheet
+                self.sheetView = .welcomeSheet
             }
         }
     }
@@ -215,7 +215,7 @@ extension HomeViewModel: AddLogViewDelegate {
 
 extension HomeViewModel: CelebrationViewDelegate {
     func didCompleteAnimation() {
-        withAnimation {
+        withAnimation(.easeOut(duration: 2)) {
             showingCelebration = false
         }
     }

@@ -37,7 +37,7 @@ struct CelebrationView: View {
                 isAnimating = true
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 delegate?.didCompleteAnimation()
             }
         }

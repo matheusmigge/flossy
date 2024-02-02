@@ -34,10 +34,9 @@ struct ConfettiPieceView: View {
                 .rotationEffect(.degrees(isAnimating ? Double.random(in: 0...360) : initialRotation))
         }
         .onAppear {
-            withAnimation(.easeInOut(duration: Double.random(in: 1...2)).repeatForever(autoreverses: true)) {
+            withAnimation(.easeInOut(duration: Double.random(in: 1...3))) {
                 isAnimating = true
             }
-            
         }
     }
 }
