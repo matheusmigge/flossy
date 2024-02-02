@@ -40,7 +40,14 @@ extension Date {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
         formatter.dateStyle = .short
-
+        
+        return formatter.string(from: self)
+    }
+    
+    var minuteAndHourFormatted: String {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        
         return formatter.string(from: self)
     }
     

@@ -10,6 +10,7 @@ import SwiftUI
 
 struct LogRecordsView: View {
     
+    @Environment(\.colorScheme) var colorScheme
     @StateObject var viewModel: LogRecordsViewModel = LogRecordsViewModel()
     
     var body: some View {
@@ -79,7 +80,7 @@ struct LogRecordsView: View {
     
     private var recordsListView: some View {
         ForEach(viewModel.sectionRecords) { record in
-            Text(record.date.minuteHourDayMonthFormatted)
+            contentRow(date: record.date)
                 .contextMenu(menuItems: {
                     Button(role: .destructive) {
                         viewModel.removeRecord(record)
@@ -91,6 +92,27 @@ struct LogRecordsView: View {
         .onDelete(perform: { indexSet in
             viewModel.removeRecordAt(indexSet: indexSet)
         })
+    }
+    
+    @ViewBuilder
+    func contentRow(date: Date) -> some View {
+        HStack(alignment: .center) {
+            HStack {
+                Image(systemName: "calendar")
+                    .foregroundColor(colorScheme == .light ? .flossGreenyBlue : .flossFlamingoPink)
+                
+                Text(date.dayAndMonthAndYearFormatted)
+            }
+            
+            Spacer()
+            
+            HStack {
+                Image(systemName: "clock")
+                    .foregroundColor(colorScheme == .light ? .flossGreenyBlue : .flossFlamingoPink)
+                
+                Text(date.minuteAndHourFormatted)
+            }
+        }
     }
 }
 
