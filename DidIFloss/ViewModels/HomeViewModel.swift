@@ -19,9 +19,10 @@ class HomeViewModel: ObservableObject {
     
     var persistence: PersistenceManagerProtocol
     
-    init(persistence: PersistenceManagerProtocol = PersistanceManager.shared) {
+    init(persistence: PersistenceManagerProtocol = PersistenceManager.shared) {
         
         self.persistence = persistence
+        self.persistence.observer = self
         
     }
 
@@ -184,18 +185,22 @@ class HomeViewModel: ObservableObject {
     func viewDidApper() {
        
         self.loadData()
-        
+        self.checkForOnboarding()
+        print("View did Appear - HomeView")
+    }
+    
+    private func loadData() {
+        persistence.getFlossRecords { [weak self] records in
+            self?.flossRecords = records
+        }
+    }
+    
+    private func checkForOnboarding() {
         // should show onboard?
         if persistence.checkIfIsNewUser() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.sheetView = .welcomeSheet
             }
-        }
-    }
-    
-    func loadData() {
-        persistence.getFlossRecords { [weak self] records in
-            self?.flossRecords = records
         }
     }
 
@@ -219,6 +224,12 @@ extension HomeViewModel: CelebrationViewDelegate {
         withAnimation(.easeOut(duration: 2)) {
             showingCelebration = false
         }
+    }
+}
+
+extension HomeViewModel: FlossRecordObserver {
+    func hadChangesInFlossRecordDataBase() {
+        self.loadData()
     }
 }
 

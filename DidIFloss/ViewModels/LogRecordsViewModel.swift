@@ -16,7 +16,7 @@ class LogRecordsViewModel: ObservableObject {
     
     @Published var records: [FlossRecord] = []
     
-    init(persistenceService: PersistenceManagerProtocol = PersistanceManager.shared) {
+    init(persistenceService: PersistenceManagerProtocol = PersistenceManager.shared) {
         self.persistence = persistenceService
         
     }
@@ -30,6 +30,7 @@ class LogRecordsViewModel: ObservableObject {
     
     func viewDidApper() {
         self.loadRecords()
+        print("View did Appear - LogRecords")
     }
 }
 
@@ -42,7 +43,6 @@ extension LogRecordsViewModel: CalendarViewDelegate {
     }
     
     func removeRecordAt(indexSet: IndexSet) {
-        records.remove(atOffsets: indexSet)
         guard let index = indexSet.first else { return }
         persistence.deleteFlossRecord(sectionRecords[index])
         loadRecords()

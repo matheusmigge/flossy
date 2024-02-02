@@ -54,4 +54,6 @@ protocol PersistenceManagerProtocol {
     
     func checkIfIsNewUser() -> Bool
     
+    var observer: FlossRecordObserver? { get set }
+    
 }

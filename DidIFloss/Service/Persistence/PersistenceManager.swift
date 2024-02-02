@@ -7,12 +7,14 @@
 
 import Foundation
 
-class PersistanceManager: PersistenceManagerProtocol {
+class PersistenceManager: PersistenceManagerProtocol {
     
     let userDefaults: UserDefaultable
     let flossRecordService: FlossRecordDataProvider
     
-    static let shared: PersistanceManager = PersistanceManager()
+    var observer: FlossRecordObserver?
+    
+    static let shared: PersistenceManager = PersistenceManager()
     
     private init(userDefaults: UserDefaults = UserDefaults.standard,
          flossRecordService: FlossRecordDataProvider = FlossRecordDataSource()
@@ -47,13 +49,13 @@ class PersistanceManager: PersistenceManagerProtocol {
     
     func deleteFlossRecord(_ record: FlossRecord) {
         flossRecordService.removeRecord(record)
+        observer?.hadChangesInFlossRecordDataBase()
     }
     
     func saveLastFlossDate(date: Date) {
         userDefaults.set(date, forKey: UserDefaultsKeys.date)
         
         flossRecordService.appendRecord(date)
-        print("entrou no manager")
     }
     
     func eraseData() {

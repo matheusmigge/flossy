@@ -17,7 +17,7 @@ struct LaunchScreenView: View {
             
             BackgroundView()
             
-            wellcomeLabel
+            welcomeLabel
             
         }
         .ignoresSafeArea()
@@ -26,7 +26,7 @@ struct LaunchScreenView: View {
         }
     }
     
-    private var wellcomeLabel: some View {
+    private var welcomeLabel: some View {
         VStack(spacing: -50) {
             Text("did I")
             Text("floss?")

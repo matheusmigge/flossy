@@ -21,6 +21,7 @@
 		0C88C7772B5322540040494D /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C88C7762B5322540040494D /* CalendarView.swift */; };
 		0C8981F02B466223008CFD5D /* FlossRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8981EF2B466223008CFD5D /* FlossRecord.swift */; };
 		0C8981F42B4667AC008CFD5D /* FlossRecordDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8981F32B4667AC008CFD5D /* FlossRecordDataSource.swift */; };
+		0C90A2F52B6D796800015298 /* FlossRecordObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C90A2F42B6D796800015298 /* FlossRecordObserver.swift */; };
 		0C916C4B2B6C70570041FE3B /* LogRecordsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C916C4A2B6C70570041FE3B /* LogRecordsViewModel.swift */; };
 		0C916C4C2B6C75600041FE3B /* Notification.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCEE1D42B67EBDB0084C9DC /* Notification.framework */; };
 		0C916C4D2B6C75600041FE3B /* Notification.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCEE1D42B67EBDB0084C9DC /* Notification.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -56,7 +57,7 @@
 		56C33DF72B3CAA1000D8DEB7 /* DidIFlossApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C33DF62B3CAA1000D8DEB7 /* DidIFlossApp.swift */; };
 		56C33DFB2B3CAA1500D8DEB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56C33DFA2B3CAA1500D8DEB7 /* Assets.xcassets */; };
 		56C33DFF2B3CAA1500D8DEB7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56C33DFE2B3CAA1500D8DEB7 /* Preview Assets.xcassets */; };
-		56C33E0A2B3CCA9E00D8DEB7 /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C33E092B3CCA9E00D8DEB7 /* PersistanceManager.swift */; };
+		56C33E0A2B3CCA9E00D8DEB7 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C33E092B3CCA9E00D8DEB7 /* PersistenceManager.swift */; };
 		56FB7AFC2B699BE8009082EE /* WarningBannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FB7AFB2B699BE8009082EE /* WarningBannerModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -124,6 +125,7 @@
 		0C88C7762B5322540040494D /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		0C8981EF2B466223008CFD5D /* FlossRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecord.swift; sourceTree = "<group>"; };
 		0C8981F32B4667AC008CFD5D /* FlossRecordDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecordDataSource.swift; sourceTree = "<group>"; };
+		0C90A2F42B6D796800015298 /* FlossRecordObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecordObserver.swift; sourceTree = "<group>"; };
 		0C916C4A2B6C70570041FE3B /* LogRecordsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogRecordsViewModel.swift; sourceTree = "<group>"; };
 		0CB342322B6B0C0400B68277 /* AddLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLogView.swift; sourceTree = "<group>"; };
 		0CB342342B6BD43900B68277 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -160,7 +162,7 @@
 		56C33DFA2B3CAA1500D8DEB7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		56C33DFC2B3CAA1500D8DEB7 /* DidIFloss.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DidIFloss.entitlements; sourceTree = "<group>"; };
 		56C33DFE2B3CAA1500D8DEB7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		56C33E092B3CCA9E00D8DEB7 /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
+		56C33E092B3CCA9E00D8DEB7 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		56FB7AFB2B699BE8009082EE /* WarningBannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningBannerModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -194,6 +196,7 @@
 		0C4177A82B4CF9B000E8976B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				0C7E923E2B470FD30079525D /* PersistenceManager+KEYS.swift */,
 				0C4177A92B4CF9CB00E8976B /* UserDefaults.swift */,
 			);
 			path = Extensions;
@@ -202,8 +205,7 @@
 		0C7E92362B46FDD30079525D /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				56C33E092B3CCA9E00D8DEB7 /* PersistanceManager.swift */,
-				0C7E923E2B470FD30079525D /* PersistenceManager+KEYS.swift */,
+				56C33E092B3CCA9E00D8DEB7 /* PersistenceManager.swift */,
 				0C8981F32B4667AC008CFD5D /* FlossRecordDataSource.swift */,
 				0C4177A82B4CF9B000E8976B /* Extensions */,
 				0C7E92472B479E3A0079525D /* Protocols */,
@@ -217,6 +219,7 @@
 				0C7E923A2B470DB00079525D /* UserDefaultable.swift */,
 				0C7E92452B479E170079525D /* FlossRecordDataProvider.swift */,
 				0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */,
+				0C90A2F42B6D796800015298 /* FlossRecordObserver.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 		0C8981F12B4662F0008CFD5D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				562749CF2B43AD61004F37A0 /* Constants.swift */,
 				0C8981EF2B466223008CFD5D /* FlossRecord.swift */,
 				56FB7AFB2B699BE8009082EE /* WarningBannerModel.swift */,
 				564891A82B6C4E050008F323 /* StreakBoardModel.swift */,
@@ -497,7 +501,6 @@
 				0C8981F12B4662F0008CFD5D /* Model */,
 				56C33DFA2B3CAA1500D8DEB7 /* Assets.xcassets */,
 				0C196DFE2B614E7600EDD0B3 /* Launch Screen.storyboard */,
-				562749CF2B43AD61004F37A0 /* Constants.swift */,
 				56C33DFC2B3CAA1500D8DEB7 /* DidIFloss.entitlements */,
 				562749CD2B43A603004F37A0 /* Fonts */,
 				56C33DFD2B3CAA1500D8DEB7 /* Preview Content */,
@@ -706,11 +709,12 @@
 				0C7E923F2B470FD30079525D /* PersistenceManager+KEYS.swift in Sources */,
 				0C916C4B2B6C70570041FE3B /* LogRecordsViewModel.swift in Sources */,
 				0CEB25D32B5EE37200B14298 /* CalendarViewDelegate.swift in Sources */,
+				0C90A2F52B6D796800015298 /* FlossRecordObserver.swift in Sources */,
 				0C2FE44C2B619C0B00BAC3E8 /* HomeView.swift in Sources */,
 				0CB3424C2B6C4E5C00B68277 /* AddLogViewDelegate.swift in Sources */,
 				563008442B61A7EE00290875 /* HomeViewModel.swift in Sources */,
 				5669DCE62B654A64005A0E22 /* WarningBannerView.swift in Sources */,
-				56C33E0A2B3CCA9E00D8DEB7 /* PersistanceManager.swift in Sources */,
+				56C33E0A2B3CCA9E00D8DEB7 /* PersistenceManager.swift in Sources */,
 				0CB3423E2B6C43DC00B68277 /* ConfettiPieceView.swift in Sources */,
 				0C4177AA2B4CF9CB00E8976B /* UserDefaults.swift in Sources */,
 				0C7E923D2B470DDB0079525D /* PersistenceManagerProtocol.swift in Sources */,
