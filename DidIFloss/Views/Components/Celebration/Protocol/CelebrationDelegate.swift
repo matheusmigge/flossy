@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol CelebrationViewDelegate: AnyObject {
+protocol CelebrationDelegate: AnyObject {
     func didCompleteAnimation()
     
 }

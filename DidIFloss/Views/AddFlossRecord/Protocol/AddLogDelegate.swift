@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol AddLogViewDelegate: AnyObject {
+protocol AddLogDelegate: AnyObject {
     func addLogRecord(date: Date)
     
 }

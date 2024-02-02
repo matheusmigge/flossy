@@ -49,6 +49,7 @@ struct HomeView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         viewModel.plusButtonPressed()
+
                     } label: {
                         Image(systemName: "plus")
                     }
@@ -56,7 +57,7 @@ struct HomeView: View {
                 
                 ToolbarItem(placement: .topBarLeading) {
                     NavigationLink {
-                        LogRecordsView(viewModel: ContentViewModel())
+                        LogRecordsView()
                         
                     } label: {
                         Image(systemName: "calendar")

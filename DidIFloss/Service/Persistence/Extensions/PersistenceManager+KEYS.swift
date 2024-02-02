@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension PersistanceManager {
+extension PersistenceManager {
     /// Holds the key for acessing persisted data in userDefaults
     struct UserDefaultsKeys {
         /// Key of the data of last floss

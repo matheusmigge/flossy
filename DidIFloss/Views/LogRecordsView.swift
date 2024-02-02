@@ -10,7 +10,7 @@ import SwiftUI
 
 struct LogRecordsView: View {
     
-    @ObservedObject var viewModel: ContentViewModel
+    @StateObject var viewModel: LogRecordsViewModel = LogRecordsViewModel()
     
     var body: some View {
         List {
@@ -34,6 +34,9 @@ struct LogRecordsView: View {
                 BannerSectionView()
             }
             .listRowInsets(.init(top: -20, leading: -20, bottom: -20, trailing: -20))
+        }
+        .onAppear {
+            viewModel.viewDidApper()
         }
         .buttonStyle(.borderless)
         .navigationTitle("Records")
@@ -88,6 +91,6 @@ struct LogRecordsView: View {
 
 #Preview {
     NavigationStack {
-        LogRecordsView(viewModel: ContentViewModel())
+        LogRecordsView()
     }
 }

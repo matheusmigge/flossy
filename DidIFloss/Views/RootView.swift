@@ -15,7 +15,7 @@ struct RootView: View {
         case content, launchScreen
     }
     
-    func lauchScreenAnimationDone() {
+    func launchScreenAnimationDone() {
         withAnimation(.smooth) {
             state = .content
         }
@@ -28,7 +28,7 @@ struct RootView: View {
                 HomeView()
             case .launchScreen:
                 LaunchScreenView {
-                    lauchScreenAnimationDone()
+                    launchScreenAnimationDone()
                 }
             }
         }

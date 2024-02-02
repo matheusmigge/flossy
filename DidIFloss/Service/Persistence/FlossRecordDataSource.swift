@@ -18,7 +18,6 @@ final class FlossRecordDataSource: FlossRecordDataProvider {
         modelContainer.mainContext
     }
     
-    
     init() {
         do {
             self.modelContainer = try ModelContainer(for: FlossRecord.self)

@@ -7,12 +7,16 @@
 
 import Foundation
 
-class PersistanceManager: PersistenceManagerProtocol {
+class PersistenceManager: PersistenceManagerProtocol {
     
     let userDefaults: UserDefaultable
     let flossRecordService: FlossRecordDataProvider
     
-    init(userDefaults: UserDefaults = UserDefaults.standard,
+    weak var observer: PersistenceObserver?
+    
+    static let shared: PersistenceManager = PersistenceManager()
+    
+    private init(userDefaults: UserDefaults = UserDefaults.standard,
          flossRecordService: FlossRecordDataProvider = FlossRecordDataSource()
     ) {
         self.userDefaults = userDefaults
@@ -45,6 +49,7 @@ class PersistanceManager: PersistenceManagerProtocol {
     
     func deleteFlossRecord(_ record: FlossRecord) {
         flossRecordService.removeRecord(record)
+        observer?.hadChangesInFlossRecordDataBase()
     }
     
     func saveLastFlossDate(date: Date) {

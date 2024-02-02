@@ -25,7 +25,7 @@ import Foundation
 /// }
 /// ```
 
-protocol PersistenceManagerProtocol {
+protocol PersistenceManagerProtocol: AnyObject {
     /// Saves the provided date as the last floss date.
     ///
     /// - Parameter date: The date to be saved as the last floss date.
@@ -53,5 +53,7 @@ protocol PersistenceManagerProtocol {
     
     
     func checkIfIsNewUser() -> Bool
+    
+    var observer: PersistenceObserver? { get set }
     
 }

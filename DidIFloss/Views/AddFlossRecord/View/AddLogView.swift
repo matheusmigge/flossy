@@ -13,7 +13,7 @@ struct AddLogView: View {
     
     @State var selectedDate: Date = .now
     
-    weak var delegate: AddLogViewDelegate?
+    weak var delegate: AddLogDelegate?
     
     var body: some View {
         NavigationView {
@@ -63,7 +63,6 @@ struct AddLogView: View {
             }
         }
         .presentationDetents([.fraction(0.75), .large])
-        .presentationBackgroundInteraction(.enabled)
         .presentationCornerRadius(25)
         .presentationBackground(Material.regular)
     }
