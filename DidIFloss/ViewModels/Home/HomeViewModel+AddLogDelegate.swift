@@ -16,8 +16,5 @@ extension HomeViewModel: AddLogDelegate {
         sheetView = nil
         showingCelebration = true
     }
-    
-    func plusButtonPressed() {
-        sheetView = .addLogSheet
-    }
+
 }

@@ -199,6 +199,12 @@ class HomeViewModel: ObservableObject {
             }
         }
     }
+    
+    func plusButtonPressed() {
+        if !showingCelebration {
+            sheetView = .addLogSheet
+        }
+    }
 
 }
 
