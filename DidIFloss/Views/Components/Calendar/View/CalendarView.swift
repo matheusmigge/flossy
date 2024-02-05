@@ -246,11 +246,12 @@ extension CalendarView {
     }
     
     func isFromCurrentCalendarSet(_ date: Date) -> Bool {
-        return calendar.isDate(date, equalTo: Date(), toGranularity: .month)
+        return calendar.isDate(date, equalTo: currentCalendar, toGranularity: .month)
     }
     
     func isSelectedDate(_ date: Date) -> Bool {
-        calendar.isDate(date, equalTo: dateFocused ?? Date(), toGranularity: .day)
+        guard let safeDateFocused = dateFocused else { return false}
+        return calendar.isDate(date, equalTo: safeDateFocused, toGranularity: .day)
     }
     
     func numberOfFlossRecords(for date: Date) -> Int {
@@ -294,5 +295,5 @@ extension CalendarView {
 
 
 #Preview {
-    CalendarView(records: .constant([]), style: .week)
+    CalendarView(records: .constant([]), style: .month)
 }
