@@ -69,6 +69,9 @@ struct HomeView: View {
             switch sheet {
             case .welcomeSheet:
                 OnboardingView()
+                    .onDisappear {
+                        viewModel.onboardingOver()
+                    }
             case .addLogSheet:
                 AddLogView(delegate: self.viewModel)
             }
