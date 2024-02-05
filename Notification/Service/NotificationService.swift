@@ -87,7 +87,7 @@ public struct NotificationService {
     ///
     /// Clears existing floss reminders notifications and schedules new ones if the app has notification authorization.
     public func scheduleFlossRemindersNotifications() {
-        self.clearAllFlossRemindersNotifications()
+        self.clearAllPendingFlossRemindersNotifications()
         
         let notifications = FlossReminder.getAllNotifications()
         
@@ -99,7 +99,7 @@ public struct NotificationService {
     /// Clears all pending floss reminders notifications.
     ///
     /// Removes all pending notification requests associated with floss reminders.
-    public func clearAllFlossRemindersNotifications() {
+    public func clearAllPendingFlossRemindersNotifications() {
         let notificationsIds = FlossReminder.getAllNotifications().map { $0.id }
         center.removePendingNotificationRequests(withIdentifiers: notificationsIds)
     }

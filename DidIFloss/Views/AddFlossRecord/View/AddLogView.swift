@@ -15,6 +15,10 @@ struct AddLogView: View {
     
     weak var delegate: AddLogDelegate?
     
+    var isSelectedDateValid: Bool {
+        selectedDate < .now
+    }
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -23,6 +27,8 @@ struct AddLogView: View {
                     DatePicker("datePicker", selection: $selectedDate)
                         .datePickerStyle(.graphical)
                         .tint(.greenyBlue)
+                    
+                
                     
                     Button {
                         delegate?.addLogRecord(date: self.selectedDate)
@@ -39,6 +45,17 @@ struct AddLogView: View {
                             }
                             
                     }
+                    .disabled(!isSelectedDateValid)
+                    .opacity(isSelectedDateValid ? 1 : 0.75)
+                    .overlay {
+                        if !isSelectedDateValid {
+                            Text("You may not add records in the future ")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                                .offset(y: -50)
+                        }
+                    }
+                    
                 }
                 .padding(.horizontal)
                 .toolbar {
@@ -57,6 +74,7 @@ struct AddLogView: View {
                             Text("Add")
                                 .bold()
                         }
+                        .disabled(!isSelectedDateValid)
                     }
                 }
      
