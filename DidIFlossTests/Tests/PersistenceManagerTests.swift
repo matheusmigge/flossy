@@ -93,6 +93,19 @@ final class PersistenceManagerTests: XCTestCase {
         XCTAssertEqual(flossDataProvider.didCallAddFlossRecordOn, date)
     }
     
+    func testRetroactiveSaveFlossDateDontUpdateLastFlossDate() {
+        let longDate: Date = .distantPast
+        let recentDate: Date = .now
+        let recentLog = FlossRecord(date: recentDate)
+        userDefaults.lastFlossDate = recentDate
+        flossDataProvider.records = [recentLog]
+        
+        persistenceManager.saveFlossDate(date: longDate)
+        
+        XCTAssertEqual(persistenceManager.getLastFlossDate(), recentDate)
+        
+    }
+    
     func testCheckIfNewUserReturnsTrueIfFirstTimeInApp() {
         userDefaults.didUserAlreadyUseApp = false
         

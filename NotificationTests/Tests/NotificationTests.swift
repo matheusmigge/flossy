@@ -70,7 +70,7 @@ final class NotificationTests: XCTestCase {
         let notificationsIds = FlossReminder.getAllNotifications().map { $0.id }
         notificationService.scheduleFlossRemindersNotifications()
         
-        notificationService.clearAllFlossRemindersNotifications()
+        notificationService.clearAllPendingFlossRemindersNotifications()
         
         XCTAssertEqual(notificationsIds, center.didAskToRemoveRequestOfIdentifiers)
     }

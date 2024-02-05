@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Notification
 import SwiftUI
 
 class HomeViewModel: ObservableObject {
@@ -198,6 +199,10 @@ class HomeViewModel: ObservableObject {
                 self.sheetView = .welcomeSheet
             }
         }
+    }
+    
+    func onboardingOver() {
+        NotificationService.current().requestAuthorizationToNotificate(provisional: false)
     }
     
     func plusButtonPressed() {

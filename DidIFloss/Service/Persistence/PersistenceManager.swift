@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Notification
 
 class PersistenceManager: PersistenceManagerProtocol {
     
@@ -27,6 +28,12 @@ class PersistenceManager: PersistenceManagerProtocol {
     
     func getLastFlossDate() -> Date? {
         return userDefaults.value(forKey: UserDefaultsKeys.date) as? Date
+    }
+    
+    private func updateLastFlossDate(_ date: Date?) {
+        self.userDefaults.set(date, forKey: UserDefaultsKeys.date)
+        NotificationService.current().scheduleFlossRemindersNotifications()
+        
     }
     
     func getFlossRecords(handler: @escaping ([FlossRecord]) -> Void) {
@@ -55,7 +62,7 @@ class PersistenceManager: PersistenceManagerProtocol {
             flossRecordService.fetchRecords { [weak self] result in
                 let data = try? result.get()
                 let previousLog = data?.last
-                self?.userDefaults.set(previousLog?.date, forKey: UserDefaultsKeys.date)
+                self?.updateLastFlossDate(previousLog?.date)
             }
         }
         
@@ -63,7 +70,13 @@ class PersistenceManager: PersistenceManagerProtocol {
     }
     
     func saveFlossDate(date: Date) {
-        userDefaults.set(date, forKey: UserDefaultsKeys.date)
+        if let lastFlossDate = getLastFlossDate() {
+            if date > lastFlossDate {
+               updateLastFlossDate(date)
+            }
+        } else {
+            updateLastFlossDate(date)
+        }
         
         flossRecordService.appendRecord(date)
     }
