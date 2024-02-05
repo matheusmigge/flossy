@@ -16,6 +16,7 @@
 		0C4177AA2B4CF9CB00E8976B /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4177A92B4CF9CB00E8976B /* UserDefaults.swift */; };
 		0C79CE892B710276001EFC7C /* CalendarView+MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C79CE882B710276001EFC7C /* CalendarView+MonthView.swift */; };
 		0C79CE8B2B710289001EFC7C /* CalendarView+WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C79CE8A2B710289001EFC7C /* CalendarView+WeekView.swift */; };
+		0C79CE8E2B710821001EFC7C /* FlossRecord+Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C79CE8D2B710821001EFC7C /* FlossRecord+Sample.swift */; };
 		0C7E923B2B470DB00079525D /* UserDefaultable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923A2B470DB00079525D /* UserDefaultable.swift */; };
 		0C7E923D2B470DDB0079525D /* PersistenceManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */; };
 		0C7E923F2B470FD30079525D /* PersistenceManager+KEYS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923E2B470FD30079525D /* PersistenceManager+KEYS.swift */; };
@@ -127,6 +128,7 @@
 		0C4177A92B4CF9CB00E8976B /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		0C79CE882B710276001EFC7C /* CalendarView+MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarView+MonthView.swift"; sourceTree = "<group>"; };
 		0C79CE8A2B710289001EFC7C /* CalendarView+WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarView+WeekView.swift"; sourceTree = "<group>"; };
+		0C79CE8D2B710821001EFC7C /* FlossRecord+Sample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FlossRecord+Sample.swift"; sourceTree = "<group>"; };
 		0C7E923A2B470DB00079525D /* UserDefaultable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultable.swift; sourceTree = "<group>"; };
 		0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManagerProtocol.swift; sourceTree = "<group>"; };
 		0C7E923E2B470FD30079525D /* PersistenceManager+KEYS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistenceManager+KEYS.swift"; sourceTree = "<group>"; };
@@ -216,6 +218,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		0C79CE8C2B710806001EFC7C /* FlossRecord */ = {
+			isa = PBXGroup;
+			children = (
+				0C8981EF2B466223008CFD5D /* FlossRecord.swift */,
+				0C79CE8D2B710821001EFC7C /* FlossRecord+Sample.swift */,
+			);
+			path = FlossRecord;
+			sourceTree = "<group>";
+		};
 		0C7E92362B46FDD30079525D /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
@@ -242,7 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				562749CF2B43AD61004F37A0 /* Constants.swift */,
-				0C8981EF2B466223008CFD5D /* FlossRecord.swift */,
+				0C79CE8C2B710806001EFC7C /* FlossRecord */,
 				56FB7AFB2B699BE8009082EE /* WarningBannerModel.swift */,
 				564891A82B6C4E050008F323 /* StreakBoardModel.swift */,
 			);
@@ -734,6 +745,7 @@
 				56FB7AFC2B699BE8009082EE /* WarningBannerModel.swift in Sources */,
 				0CB342372B6C0AF600B68277 /* OnboardingRowInfoModel.swift in Sources */,
 				0C79CE892B710276001EFC7C /* CalendarView+MonthView.swift in Sources */,
+				0C79CE8E2B710821001EFC7C /* FlossRecord+Sample.swift in Sources */,
 				0C2FE4502B619C3600BAC3E8 /* LogoView.swift in Sources */,
 				56C33DF72B3CAA1000D8DEB7 /* DidIFlossApp.swift in Sources */,
 				0C90A2F92B6D81BE00015298 /* LogRecordsViewModel+CalendarDelegate.swift in Sources */,
