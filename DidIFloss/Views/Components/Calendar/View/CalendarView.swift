@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CalendarView: View {
     
-    @Namespace private var selectedDateNameSpace
+    @Namespace internal var selectedDateNameSpace
     
     @State var currentCalendar: Date = .now
     
@@ -23,7 +23,7 @@ struct CalendarView: View {
     weak var delegate: CalendarViewDelegate?
     
     let gridColumns: [GridItem] = Array(repeating:
-                                        GridItem(.flexible(minimum: 15, maximum: 50)), count: 7)
+                                            GridItem(.flexible(minimum: 15, maximum: 50)), count: 7)
     
     init(records: Binding<[FlossRecord]>, style: Style, delegate: CalendarViewDelegate? = nil) {
         self._records = records
@@ -47,7 +47,7 @@ struct CalendarView: View {
     }
     
     
-    private var calendarHeader: some View {
+    var calendarHeader: some View {
         HStack {
             Button {
                 self.previousCalendarSet()
@@ -73,58 +73,8 @@ struct CalendarView: View {
         .padding(.horizontal)
     }
     
-    private var monthCalendarGrid: some View {
-        LazyVGrid(columns: self.gridColumns, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 15, content: {
-            
-            daysOfTheWeekMonthView
-            
-            dayMonthCalendarGridView
-            
-        })
-    }
     
-    private var daysOfTheWeekMonthView: some View {
-        ForEach(self.daysOfTheWeek, id: \.self) { day in
-            Text(day)
-                .foregroundStyle(.secondary)
-                .monospaced()
-        }
-    }
     
-    private var weekCalendarGrid: some View {
-        HStack(spacing: 5) {
-            ForEach(self.daysCalendarSet, id: \.self) { day in
-                VStack {
-                    Text(day.dayOfTheWeek)
-                        .monospaced()
-                        .font(.callout)
-                    
-                    Group {
-                        if self.hasDayFlossRecords(for: day) {
-                            Image(systemName: "checkmark.circle.fill")
-                                .resizable()
-                                .foregroundStyle(.greenyBlue)
-                                .frame(width: 30, height: 30)
-                        } else {
-                            Circle()
-                                .stroke(lineWidth: 2)
-                                .frame(width: 30, height: 30)
-                        }
-                    }
-                    .onTapGesture {
-                        didTapOnDate(day)
-                    }
-                }
-                .padding(5)
-                .background {
-                    if shouldDayOfTheWeekBePink(day) {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.flossFlamingoPink)
-                    }
-                }
-            }
-        }
-    }
     
     @ViewBuilder
     func FlossIndicatorView(for date: Date) -> some View {
@@ -150,27 +100,6 @@ struct CalendarView: View {
                     .frame(width: 5)
                     .offset(y: 14)
             }
-        }
-    }
-    
-    var dayMonthCalendarGridView: some View {
-        ForEach(self.daysCalendarSet, id: \.self) { date in
-            Text(date.dayFormatted)
-                .foregroundStyle(dayColor(date))
-                .background {
-                    if self.isSelectedDate(date) {
-                        Circle()
-                            .fill(Color.skyBlue)
-                            .frame(width: 30, height: 30)
-                            .matchedGeometryEffect(id: "selectedDateNameSpace", in: selectedDateNameSpace)
-                    }
-                }
-                .overlay {
-                    FlossIndicatorView(for: date)
-                }
-                .onTapGesture {
-                    didTapOnDate(date)
-                }
         }
     }
 }
@@ -246,11 +175,12 @@ extension CalendarView {
     }
     
     func isFromCurrentCalendarSet(_ date: Date) -> Bool {
-        return calendar.isDate(date, equalTo: Date(), toGranularity: .month)
+        return calendar.isDate(date, equalTo: currentCalendar, toGranularity: .month)
     }
     
     func isSelectedDate(_ date: Date) -> Bool {
-        calendar.isDate(date, equalTo: dateFocused ?? Date(), toGranularity: .day)
+        guard let safeDateFocused = dateFocused else { return false}
+        return calendar.isDate(date, equalTo: safeDateFocused, toGranularity: .day)
     }
     
     func numberOfFlossRecords(for date: Date) -> Int {
@@ -278,7 +208,11 @@ extension CalendarView {
         return .secondary
     }
     
-    private func didTapOnDate(_ date: Date) {
+    func shouldDayOfTheWeekBePink(_ date: Date) -> Bool {
+        Calendar.current.isDate(date, inSameDayAs: Date())
+    }
+    
+    internal func didTapOnDate(_ date: Date) {
         guard let safeDelegate = delegate else { return }
         
         safeDelegate.didSelectDate(date)
@@ -286,13 +220,9 @@ extension CalendarView {
             dateFocused = date == dateFocused ? nil : date
         }
     }
-    
-    private func shouldDayOfTheWeekBePink(_ date: Date) -> Bool {
-        Calendar.current.isDate(date, inSameDayAs: Date())
-    }
 }
 
 
 #Preview {
-    CalendarView(records: .constant([]), style: .week)
+    CalendarView(records: .constant([]), style: .month)
 }
