@@ -41,16 +41,25 @@ class PersistenceManager: PersistenceManagerProtocol {
                 print("Failed to fecth Records from Service -> Error: \(error)")
                 print("Trying to get last data in userDefaults")
                 
-                guard let lastDate = self.getLastFlossDate() else { return }
-                
-                let flossRecord = FlossRecord(date: lastDate)
-                handler([flossRecord])
+                handler([])
             }
         }
     }
     
     func deleteFlossRecord(_ record: FlossRecord) {
+        let lasFlossDate = getLastFlossDate()
         flossRecordService.removeRecord(record)
+        
+        if record.date == lasFlossDate {
+            userDefaults.set(nil, forKey: UserDefaultsKeys.date)
+            
+            flossRecordService.fetchRecords { [weak self] result in
+                let data = try? result.get()
+                let previousLog = data?.last
+                self?.userDefaults.set(previousLog?.date, forKey: UserDefaultsKeys.date)
+            }
+        }
+        
         observer?.hadChangesInFlossRecordDataBase()
     }
     
@@ -63,7 +72,7 @@ class PersistenceManager: PersistenceManagerProtocol {
     func eraseData() {
         userDefaults.set(nil, forKey: UserDefaultsKeys.date)
         flossRecordService.eraseRecords()
-
+        
     }
     
     func checkIfIsNewUser() -> Bool {
