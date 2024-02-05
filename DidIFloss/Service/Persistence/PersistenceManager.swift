@@ -14,11 +14,13 @@ class PersistenceManager: PersistenceManagerProtocol {
     
     weak var observer: PersistenceObserver?
     
-    static let shared: PersistenceManager = PersistenceManager()
+    public static let shared: PersistenceManager = PersistenceManager(userDefaults: UserDefaults.standard,
+                                                                      flossRecordService: FlossRecordDataSource())
     
-    private init(userDefaults: UserDefaults = UserDefaults.standard,
-         flossRecordService: FlossRecordDataProvider = FlossRecordDataSource()
-    ) {
+    
+    // beware! Should only be one FlossRecordDataSource to maintain persistence container single instance
+    // prefer use of shared instante to use a persistenceManager
+    public init(userDefaults: UserDefaultable, flossRecordService: FlossRecordDataProvider) {
         self.userDefaults = userDefaults
         self.flossRecordService = flossRecordService
     }

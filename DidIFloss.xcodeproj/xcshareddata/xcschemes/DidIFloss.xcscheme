@@ -26,8 +26,13 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      shouldAutocreateTestPlan = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <TestPlans>
+         <TestPlanReference
+            reference = "container:DidIFlossTests/DidIFloss.xctestplan"
+            default = "YES">
+         </TestPlanReference>
+      </TestPlans>
       <Testables>
          <TestableReference
             skipped = "NO"
@@ -59,6 +64,17 @@
                BlueprintIdentifier = "0CCEE1DC2B67EBDC0084C9DC"
                BuildableName = "NotificationTests.xctest"
                BlueprintName = "NotificationTests"
+               ReferencedContainer = "container:DidIFloss.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0C2EF6582B710E0300AFF9D4"
+               BuildableName = "DidIFlossTests.xctest"
+               BlueprintName = "DidIFlossTests"
                ReferencedContainer = "container:DidIFloss.xcodeproj">
             </BuildableReference>
          </TestableReference>

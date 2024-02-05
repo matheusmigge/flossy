@@ -25,7 +25,7 @@ import Foundation
 /// }
 /// ```
 
-protocol FlossRecordDataProvider {
+public protocol FlossRecordDataProvider {
     /// Appends a new floss record with the given date.
     ///
     /// - Parameter date: The date when the flossing activity occurred.

@@ -9,10 +9,10 @@ import Foundation
 import SwiftData
 
 @Model
-class FlossRecord: Identifiable {
-    let id: String
-    let date: Date
-    var detail: Detail
+public class FlossRecord: Identifiable {
+    public let id: String
+    public let date: Date
+    public var detail: Detail
     
     init(id: String = UUID().uuidString,
          date: Date = .now,
@@ -22,7 +22,7 @@ class FlossRecord: Identifiable {
         self.detail = detail
     }
     
-    enum Detail: Codable, CaseIterable {
+    public enum Detail: Codable, CaseIterable {
         case floss, brush, mouthwash
 
     }
