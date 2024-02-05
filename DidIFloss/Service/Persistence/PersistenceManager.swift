@@ -17,7 +17,6 @@ class PersistenceManager: PersistenceManagerProtocol {
     public static let shared: PersistenceManager = PersistenceManager(userDefaults: UserDefaults.standard,
                                                                       flossRecordService: FlossRecordDataSource())
     
-    
     // beware! Should only be one FlossRecordDataSource to maintain persistence container single instance
     // prefer use of shared instante to use a persistenceManager
     public init(userDefaults: UserDefaultable, flossRecordService: FlossRecordDataProvider) {
@@ -63,7 +62,7 @@ class PersistenceManager: PersistenceManagerProtocol {
         observer?.hadChangesInFlossRecordDataBase()
     }
     
-    func saveLastFlossDate(date: Date) {
+    func saveFlossDate(date: Date) {
         userDefaults.set(date, forKey: UserDefaultsKeys.date)
         
         flossRecordService.appendRecord(date)
@@ -71,6 +70,7 @@ class PersistenceManager: PersistenceManagerProtocol {
     
     func eraseData() {
         userDefaults.set(nil, forKey: UserDefaultsKeys.date)
+        userDefaults.set(false, forKey: UserDefaultsKeys.didUserAlreadyUseApp)
         flossRecordService.eraseRecords()
         
     }

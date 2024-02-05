@@ -16,8 +16,17 @@ final class UserDefaultsMock: UserDefaultable {
     
     func set(_ value: Any?, forKey: String) {
         didCallSet = true
-        if let date = value as? Date {
-            lastFlossDate = date
+        
+        let dateKey = PersistenceManager.UserDefaultsKeys.date
+        if forKey == dateKey {
+            guard let safeDate = value as? Date? else { return }
+            lastFlossDate = safeDate
+        }
+        
+        let previousUserKey = PersistenceManager.UserDefaultsKeys.didUserAlreadyUseApp
+        if forKey == previousUserKey {
+            guard let safeValue = value as? Bool else { return }
+            didUserAlreadyUseApp = safeValue
         }
     }
     

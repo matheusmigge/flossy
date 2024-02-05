@@ -14,7 +14,8 @@ final class FlossRecordDataProviderMock: FlossRecordDataProvider {
     
     var shouldFetchRecordsBeSuccessful: Bool = true
     var hasBeenNotifiedOfChangesByDelegate: Bool = false
-    var didCallRemoveFlossRecord: FlossRecord?
+    var didCallRemoveFlossRecordOn: FlossRecord?
+    var didCallAddFlossRecordOn: Date?
     var records: [FlossRecord] = []
     
     private let modelContainer: ModelContainer
@@ -37,6 +38,7 @@ final class FlossRecordDataProviderMock: FlossRecordDataProvider {
     }
     
     func appendRecord(_ date: Date) {
+        didCallAddFlossRecordOn = date
         
     }
     
@@ -52,12 +54,12 @@ final class FlossRecordDataProviderMock: FlossRecordDataProvider {
     }
     
     func removeRecord(_ record: DidIFloss.FlossRecord) {
-        didCallRemoveFlossRecord = record
+        didCallRemoveFlossRecordOn = record
         records = records.filter({$0 != record})
     }
     
     func eraseRecords() {
-        
+        records.removeAll()
     }
     
     

@@ -57,7 +57,7 @@ final class PersistenceManagerTests: XCTestCase {
         
         persistenceManager.deleteFlossRecord(log)
         
-        XCTAssertEqual(log, flossDataProvider.didCallRemoveFlossRecord)
+        XCTAssertEqual(log, flossDataProvider.didCallRemoveFlossRecordOn)
         
     }
     
@@ -86,18 +86,46 @@ final class PersistenceManagerTests: XCTestCase {
     }
 
     func testSaveFlossDateCallsPersistedMethodDependency() {
+        let date = Date()
         
+        persistenceManager.saveFlossDate(date: date)
+        
+        XCTAssertEqual(flossDataProvider.didCallAddFlossRecordOn, date)
     }
     
     func testCheckIfNewUserReturnsTrueIfFirstTimeInApp() {
+        userDefaults.didUserAlreadyUseApp = false
         
+        XCTAssertTrue(persistenceManager.checkIfIsNewUser())
     }
         
     func testCheckIfNewUserReturnFalseIfUserAlreadyUseApp() {
         
+        userDefaults.didUserAlreadyUseApp = false
+        
+        // first use
+        _ = persistenceManager.checkIfIsNewUser()
+        // second use
+        let isNewUser = persistenceManager.checkIfIsNewUser()
+        
+        XCTAssertFalse(isNewUser)
+        
     }
     
     func testEraseAllDataRemovesAllUserPersistedData() {
+        let longDate: Date = .distantPast
+        let recentDate: Date = .now
+        let previousLog = FlossRecord(date: longDate)
+        let recentLog = FlossRecord(date: recentDate)
+        flossDataProvider.records = [previousLog, recentLog]
+        userDefaults.lastFlossDate = recentDate
+        userDefaults.didUserAlreadyUseApp = true
+        
+        persistenceManager.eraseData()
+        
+        XCTAssertTrue(flossDataProvider.records.isEmpty)
+        XCTAssertNil(userDefaults.lastFlossDate)
+        XCTAssertFalse(userDefaults.didUserAlreadyUseApp)
         
     }
 
