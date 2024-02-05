@@ -40,16 +40,16 @@ final class FlossRecordDataSource: FlossRecordDataProvider {
     }
     
     func fetchRecords(result: @escaping (Result<[FlossRecord], Error>) -> Void) {
-        DispatchQueue.main.async {
-            do {
-                let records = try self.context.fetch(FetchDescriptor<FlossRecord>())
-                result(.success(records))
-            } catch {
-                result(.failure(error))
-            }
-        }
-    }
-    
+          DispatchQueue.main.async {
+              do {
+                  let records = try self.context.fetch(FetchDescriptor<FlossRecord>())
+                  result(.success(records))
+              } catch {
+                  result(.failure(error))
+              }
+          }
+      }
+
     func removeRecord(_ record: FlossRecord) {
         DispatchQueue.main.async { [weak self] in
             self?.context.delete(record)

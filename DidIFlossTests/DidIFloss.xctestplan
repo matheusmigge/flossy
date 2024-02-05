@@ -1,0 +1,37 @@
+{
+  "configurations" : [
+    {
+      "id" : "D9B783FD-014F-4011-B739-0A8BF5ABA508",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:DidIFloss.xcodeproj",
+      "identifier" : "56C33DF22B3CAA1000D8DEB7",
+      "name" : "DidIFloss"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:DidIFloss.xcodeproj",
+        "identifier" : "0CCEE1DC2B67EBDC0084C9DC",
+        "name" : "NotificationTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:DidIFloss.xcodeproj",
+        "identifier" : "0C2EF6582B710E0300AFF9D4",
+        "name" : "DidIFlossTests"
+      }
+    }
+  ],
+  "version" : 1
+}

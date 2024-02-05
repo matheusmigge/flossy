@@ -29,7 +29,7 @@ protocol PersistenceManagerProtocol: AnyObject {
     /// Saves the provided date as the last floss date.
     ///
     /// - Parameter date: The date to be saved as the last floss date.
-    func saveLastFlossDate(date: Date)
+    func saveFlossDate(date: Date)
     
     /// Retrieves the last saved floss date.
     ///

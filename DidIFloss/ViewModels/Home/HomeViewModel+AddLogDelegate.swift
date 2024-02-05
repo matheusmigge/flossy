@@ -11,7 +11,7 @@ extension HomeViewModel: AddLogDelegate {
     func addLogRecord(date: Date) {
         guard let safePersistence = persistence else { return }
         
-        safePersistence.saveLastFlossDate(date: date)
+        safePersistence.saveFlossDate(date: date)
         self.loadData()
         sheetView = nil
         showingCelebration = true

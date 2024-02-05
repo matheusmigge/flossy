@@ -14,11 +14,12 @@ class PersistenceManager: PersistenceManagerProtocol {
     
     weak var observer: PersistenceObserver?
     
-    static let shared: PersistenceManager = PersistenceManager()
+    public static let shared: PersistenceManager = PersistenceManager(userDefaults: UserDefaults.standard,
+                                                                      flossRecordService: FlossRecordDataSource())
     
-    private init(userDefaults: UserDefaults = UserDefaults.standard,
-         flossRecordService: FlossRecordDataProvider = FlossRecordDataSource()
-    ) {
+    // beware! Should only be one FlossRecordDataSource to maintain persistence container single instance
+    // prefer use of shared instante to use a persistenceManager
+    public init(userDefaults: UserDefaultable, flossRecordService: FlossRecordDataProvider) {
         self.userDefaults = userDefaults
         self.flossRecordService = flossRecordService
     }
@@ -39,20 +40,29 @@ class PersistenceManager: PersistenceManagerProtocol {
                 print("Failed to fecth Records from Service -> Error: \(error)")
                 print("Trying to get last data in userDefaults")
                 
-                guard let lastDate = self.getLastFlossDate() else { return }
-                
-                let flossRecord = FlossRecord(date: lastDate)
-                handler([flossRecord])
+                handler([])
             }
         }
     }
     
     func deleteFlossRecord(_ record: FlossRecord) {
+        let lasFlossDate = getLastFlossDate()
         flossRecordService.removeRecord(record)
+        
+        if record.date == lasFlossDate {
+            userDefaults.set(nil, forKey: UserDefaultsKeys.date)
+            
+            flossRecordService.fetchRecords { [weak self] result in
+                let data = try? result.get()
+                let previousLog = data?.last
+                self?.userDefaults.set(previousLog?.date, forKey: UserDefaultsKeys.date)
+            }
+        }
+        
         observer?.hadChangesInFlossRecordDataBase()
     }
     
-    func saveLastFlossDate(date: Date) {
+    func saveFlossDate(date: Date) {
         userDefaults.set(date, forKey: UserDefaultsKeys.date)
         
         flossRecordService.appendRecord(date)
@@ -60,8 +70,9 @@ class PersistenceManager: PersistenceManagerProtocol {
     
     func eraseData() {
         userDefaults.set(nil, forKey: UserDefaultsKeys.date)
+        userDefaults.set(false, forKey: UserDefaultsKeys.didUserAlreadyUseApp)
         flossRecordService.eraseRecords()
-
+        
     }
     
     func checkIfIsNewUser() -> Bool {
