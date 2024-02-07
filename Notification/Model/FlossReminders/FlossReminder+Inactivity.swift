@@ -1,58 +1,17 @@
 //
-//  Notification.swift
-//  DidIFloss
+//  FlossReminder+Inactivity.swift
+//  Notification
 //
-//  Created by Lucas Migge on 08/01/24.
+//  Created by Lucas Migge on 07/02/24.
 //
 
 import Foundation
 import UserNotifications
 
-struct FlossReminder {
-    
-    static func getAllInactivityReminderModels() -> [NotificationModel] {
-        
-        let periods = InactivityReminder.Period.allCases
-        
-        return periods.map { type in
-            InactivityReminder.createInactivityNotification(period: type)
-        }
-        
-    }
-    
-    static func getAllInactivityReminderIds() -> [String] {
-        
-        let periods = InactivityReminder.Period.allCases
-        
-        return periods.map { $0.id }
-        
-    }
-    
-    static func getDailyStreakReminderId() -> String {
-        return DailyStreakReminder.notificationId
-    }
-    
-}
 
 extension FlossReminder {
     
-    struct DailyStreakReminder {
-        
-        static let notificationId: String = "dailyStreakNotification"
-        
-        static func createDailyStreakReminderModel(daysOnStreak days: Int) -> NotificationModel {
-            return NotificationModel(id: notificationId,
-                                     titleMessage: "You are amazing! Keep going",
-                                     bodyMessage: "You are \(days) on streak. Don't forget to floss today",
-                                     trigger: UNNotificationTrigger.tomorrowAtNight())
-        }
-        
-    }
-}
-
-extension FlossReminder {
-    
-    struct InactivityReminder {
+    struct Inactivity {
         enum Period: String, Identifiable, CaseIterable {
             case threeDays
             case oneWeek
@@ -89,4 +48,3 @@ extension FlossReminder {
         }
     }
 }
-
