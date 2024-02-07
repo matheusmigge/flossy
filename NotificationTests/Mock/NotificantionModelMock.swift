@@ -12,12 +12,12 @@ import UserNotifications
 
 extension NotificationModel {
     static var example: NotificationModel {
-        NotificationModel(id: "test", titleMessage: "testTitle", bodyMessage: "testMessage", timerInHours: 2)
+        NotificationModel(id: "test", titleMessage: "testTitle", bodyMessage: "testMessage", trigger: UNNotificationTrigger.afterDays(days: 2))
     }
     
     static var exampleRequest: UNNotificationRequest {
         let notification = Self.example
-        return UNNotificationRequest(identifier: notification.id, content: notification.content, trigger: UNTimeIntervalNotificationTrigger(timeInterval: notification.timeInterval, repeats: false))
+        return UNNotificationRequest(identifier: notification.id, content: notification.content, trigger: notification.trigger)
 
     }
 }

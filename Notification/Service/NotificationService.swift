@@ -65,8 +65,7 @@ public struct NotificationService {
     public func scheduleNotification(type notification: NotificationModel) {
         let content = notification.content
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: notification.timeInterval,
-                                                        repeats: notification.shouldRepeat)
+        let trigger = notification.trigger
         
         let request = UNNotificationRequest(identifier: notification.id,
                                             content: content,
@@ -89,7 +88,7 @@ public struct NotificationService {
     public func scheduleFlossRemindersNotifications() {
         self.clearAllPendingFlossRemindersNotifications()
         
-        let notifications = FlossReminder.getAllNotifications()
+        let notifications = FlossReminder.getAllInactivityReminderModels()
         
         notifications.forEach { notification in
             self.scheduleNotification(type: notification)
@@ -100,7 +99,7 @@ public struct NotificationService {
     ///
     /// Removes all pending notification requests associated with floss reminders.
     public func clearAllPendingFlossRemindersNotifications() {
-        let notificationsIds = FlossReminder.getAllNotifications().map { $0.id }
+        let notificationsIds = FlossReminder.getAllInactivityReminderModels().map { $0.id }
         center.removePendingNotificationRequests(withIdentifiers: notificationsIds)
     }
     

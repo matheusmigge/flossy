@@ -8,36 +8,85 @@
 import Foundation
 import UserNotifications
 
-
 struct FlossReminder {
     
-    static func getAllNotifications() -> [NotificationModel] {
-        return [self.twoDays, self.oneWeek, self.twoWeek]
+    static func getAllInactivityReminderModels() -> [NotificationModel] {
+        
+        let periods = InactivityReminder.Period.allCases
+        
+        return periods.map { type in
+            InactivityReminder.createInactivityNotification(period: type)
+        }
+        
     }
     
+    static func getAllInactivityReminderIds() -> [String] {
+        
+        let periods = InactivityReminder.Period.allCases
+        
+        return periods.map { $0.id }
+        
+    }
     
-    static let twoDays = NotificationModel(id: "twoDaysInactivityNotification",
-                                           titleMessage: "Don't lose track! 🦷",
-                                           bodyMessage:  "You are doing great! Don't forget to floss today and register it",
-                                           timerInSeconds: 172800,
-                                           shouldRepeat: false
-    )
-    
-    static let oneWeek = NotificationModel(id: "oneWeekInactivityNotification",
-                                           titleMessage: "It's been a week... 🗓️",
-                                           bodyMessage:  "We are missing you! How about we floss today?",
-                                           timerInSeconds: 604800,
-                                           shouldRepeat: false
-    )
-    
-    static let twoWeek = NotificationModel(id: "twoWeekInactivityNotification",
-                                           titleMessage: "Hey Stranger... 🫂",
-                                           bodyMessage: "We can help you with your oral hygiene. Let's floss those teeth!",
-                                           timerInSeconds: 1209600,
-                                           shouldRepeat: true
-    )
-
+    static func getDailyStreakReminderId() -> String {
+        return DailyStreakReminder.notificationId
+    }
     
 }
 
+extension FlossReminder {
+    
+    struct DailyStreakReminder {
+        
+        static let notificationId: String = "dailyStreakNotification"
+        
+        static func createDailyStreakReminderModel(daysOnStreak days: Int) -> NotificationModel {
+            return NotificationModel(id: notificationId,
+                                     titleMessage: "You are amazing! Keep going",
+                                     bodyMessage: "You are \(days) on streak. Don't forget to floss today",
+                                     trigger: UNNotificationTrigger.tomorrowAtNight())
+        }
+        
+    }
+}
+
+extension FlossReminder {
+    
+    struct InactivityReminder {
+        enum Period: String, Identifiable, CaseIterable {
+            case threeDays
+            case oneWeek
+            case twoWeek
+            
+            var id: String { self.rawValue }
+        }
+        
+        
+        static func createInactivityNotification(period: Period) -> NotificationModel {
+            switch period {
+            case .threeDays:
+                return NotificationModel(
+                    id: period.id,
+                    titleMessage: "Don't lose track! 🦷",
+                    bodyMessage:  "You are doing great! Don't forget to floss today and register it",
+                    trigger: UNNotificationTrigger.afterDays(days: 3)
+                )
+            case .oneWeek:
+                return NotificationModel(
+                    id: period.id,
+                    titleMessage: "Don't lose track! 🦷",
+                    bodyMessage:  "You are doing great! Don't forget to floss today and register it",
+                    trigger: UNNotificationTrigger.afterDays(days: 3)
+                )
+            case .twoWeek:
+                return NotificationModel(
+                    id: period.id,
+                    titleMessage: "Hey Stranger... 🫂",
+                    bodyMessage: "We can help you with your oral hygiene. Let's floss those teeth!",
+                    trigger: UNNotificationTrigger.afterDays(days: 14, repeats: true)
+                )
+            }
+        }
+    }
+}
 

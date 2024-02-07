@@ -59,7 +59,7 @@ final class NotificationTests: XCTestCase {
     }
     
     func testScheduleFlossRemindersAppendsToScheduleCenter() {
-        let notificationsIds = FlossReminder.getAllNotifications().map { $0.id }
+        let notificationsIds = FlossReminder.getAllInactivityReminderModels().map { $0.id }
         
         notificationService.scheduleFlossRemindersNotifications()
         
@@ -67,7 +67,7 @@ final class NotificationTests: XCTestCase {
     }
     
     func testRemoveAllPendingFlossRemindersScheduled() {
-        let notificationsIds = FlossReminder.getAllNotifications().map { $0.id }
+        let notificationsIds = FlossReminder.getAllInactivityReminderModels().map { $0.id }
         notificationService.scheduleFlossRemindersNotifications()
         
         notificationService.clearAllPendingFlossRemindersNotifications()
