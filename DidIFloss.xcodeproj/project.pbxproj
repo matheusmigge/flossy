@@ -55,6 +55,7 @@
 		0CEB25CE2B56FF5300B14298 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB25CD2B56FF5300B14298 /* Date.swift */; };
 		0CEB25D02B56FF5A00B14298 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB25CF2B56FF5A00B14298 /* Calendar.swift */; };
 		0CEB25D32B5EE37200B14298 /* CalendarViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB25D22B5EE37200B14298 /* CalendarViewDelegate.swift */; };
+		0CFF66442B73D68B00E80202 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFF66432B73D68B00E80202 /* Color.swift */; };
 		561DBA7C2B45DCF10052EE78 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBA7B2B45DCF10052EE78 /* BackgroundView.swift */; };
 		5625BFD52B439A5C006F88BD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5625BFD42B439A5C006F88BD /* README.md */; };
 		562749CC2B43A5C2004F37A0 /* Borel-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 562749CB2B43A5C1004F37A0 /* Borel-Regular.ttf */; };
@@ -177,6 +178,7 @@
 		0CEB25CD2B56FF5300B14298 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		0CEB25CF2B56FF5A00B14298 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		0CEB25D22B5EE37200B14298 /* CalendarViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewDelegate.swift; sourceTree = "<group>"; };
+		0CFF66432B73D68B00E80202 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		561DBA7B2B45DCF10052EE78 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		5625BFD42B439A5C006F88BD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		562749CB2B43A5C1004F37A0 /* Borel-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Borel-Regular.ttf"; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 			children = (
 				0CEB25CD2B56FF5300B14298 /* Date.swift */,
 				0CEB25CF2B56FF5A00B14298 /* Calendar.swift */,
+				0CFF66432B73D68B00E80202 /* Color.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -835,6 +838,7 @@
 				561DBA7C2B45DCF10052EE78 /* BackgroundView.swift in Sources */,
 				0C2FE4522B635C4600BAC3E8 /* LogRecordsView.swift in Sources */,
 				56FB7AFC2B699BE8009082EE /* WarningBannerModel.swift in Sources */,
+				0CFF66442B73D68B00E80202 /* Color.swift in Sources */,
 				0CB342372B6C0AF600B68277 /* OnboardingRowInfoModel.swift in Sources */,
 				0C79CE892B710276001EFC7C /* CalendarView+MonthView.swift in Sources */,
 				0C79CE8E2B710821001EFC7C /* FlossRecord+Sample.swift in Sources */,
