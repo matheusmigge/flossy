@@ -20,7 +20,7 @@ extension FlossReminder {
             if days < 2 {
                 content = MessageContent.getSmallStreakMessageContent()
             } else {
-                content = MessageContent.getStandartMessageContent()
+                content = MessageContent.getStandardMessageContent(daysOnStreak: days)
             }
             
             return NotificationModel(id: notificationId,
@@ -73,16 +73,36 @@ extension FlossReminder.DailyStreakReminder {
             ]
         }
         
+        private static func standardExplicitStreakCatalog(daysOnStreak days: Int) -> MessageContent {
+            
+            let explicitContentOnTitle: Bool = Bool.random()
+            
+            if explicitContentOnTitle {
+                return MessageContent(title: "Wow! \(days) days in a streak! 🔥",
+                                      body: "Keep up the excellent work!")
+            } else {
+                return MessageContent(title: "Don't stop now! ⏳",
+                                      body: "You are \(days) days on streak. Floss today to keep your streak growing")
+            }
+            
+        }
+        
         public static func getSmallStreakMessageContent() -> MessageContent {
             return smallStreaksCatalog.randomElement() ?? MessageContent(title: "Let's start the streak! 💪",
                                                                          body: "Start your flossing streak today. Remember, consistency is key!")
         }
         
-        public static func getStandartMessageContent() -> MessageContent {
-            return standardStreakCatalog.randomElement() ?? MessageContent(title: "Keep up the good work! 🌟",
-                                                                           body: "You've flossed days in a row. Keep the streak alive!")
+        public static func getStandardMessageContent(daysOnStreak days: Int) -> MessageContent {
+            
+            let hasNotificationExplicitStreak: Bool = Bool.random()
+            
+            if hasNotificationExplicitStreak {
+                return standardExplicitStreakCatalog(daysOnStreak: days)
+            } else {
+                return standardStreakCatalog.randomElement() ?? MessageContent(title: "Keep up the good work! 🌟",
+                                                                               body: "You've flossed days in a row. Keep the streak alive!")
+            }
         }
-        
     }
     
 }

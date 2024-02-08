@@ -17,7 +17,7 @@ extension FlossReminder {
             case oneWeek
             case twoWeek
             
-            var id: String { self.rawValue }
+            var id: String { self.rawValue + "InactivityNotification" }
         }
         
         
