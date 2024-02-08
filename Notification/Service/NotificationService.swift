@@ -13,7 +13,7 @@ import UserNotifications
 ///
 /// Use the `NotificationService` struct to request notification authorization, schedule notifications,
 /// and manage floss reminders.
-public struct NotificationService {
+public struct NotificationService: FlossRemindersService {
     
     // MARK: init
     
@@ -56,7 +56,6 @@ public struct NotificationService {
     
     // MARK: Generic functions
     
-    
     /// Schedules a notification based on the provided `NotificationModel` type.
     ///
     /// - Parameter notification: The `NotificationModel` type to schedule.
@@ -80,14 +79,38 @@ public struct NotificationService {
         }
     }
     
-    // MARK: FlossReminders
+    /// Clears all pending notifications scheduled
+    ///
+    /// Removes all pending notification requests. Please use with caution
+    public func clearAllPendingNotifications() {
+        center.removeAllPendingNotificationRequests()
+    }
+    
+    
+    // MARK: Floss Reminder
+    
+    public func scheduleFlossReminders(streakCount: Int) {
+        self.clearAllPendingFlossReminderNotification()
+        
+        self.scheduleDailyStreakReminder(streakCount: streakCount)
+        self.scheduleFlossRemindersNotifications()
+    }
+    
+    public func clearAllPendingFlossReminderNotification() {
+        var ids: [String] = FlossReminder.getAllInactivityReminderIds()
+        
+        ids.append(FlossReminder.getDailyStreakReminderId())
+        
+        center.removePendingNotificationRequests(withIdentifiers: ids)
+       
+    }
+    
+    // MARK: FlossReminders - Inactivity
     
     /// Schedules floss reminders notifications based on the defined notifications.
     ///
     /// Clears existing floss reminders notifications and schedules new ones if the app has notification authorization.
     public func scheduleFlossRemindersNotifications() {
-        self.clearAllPendingFlossRemindersNotifications()
-        
         let notifications = FlossReminder.getAllInactivityReminderModels()
         
         notifications.forEach { notification in
@@ -95,20 +118,12 @@ public struct NotificationService {
         }
     }
     
-    /// Clears all pending floss reminders notifications.
-    ///
-    /// Removes all pending notification requests associated with floss reminders.
-    public func clearAllPendingFlossRemindersNotifications() {
-        let notificationsIds = FlossReminder.getAllInactivityReminderModels().map { $0.id }
-        center.removePendingNotificationRequests(withIdentifiers: notificationsIds)
-    }
+    // MARK: FlossReminders - Streak
     
-    
-    /// Clears all pending notifications scheduled
-    ///
-    /// Removes all pending notification requests. Please use with caution
-    public func clearAllPendingNotifications() {
-        center.removeAllPendingNotificationRequests()
+    public func scheduleDailyStreakReminder(streakCount: Int) {
+        let notificationModel = FlossReminder.getADailyStreakReminderModel(daysOnStreak: streakCount)
+        
+        self.scheduleNotification(type: notificationModel)
     }
     
 }
