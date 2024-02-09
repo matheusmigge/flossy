@@ -19,10 +19,13 @@ class HomeViewModel: ObservableObject {
     @Published var flossRecords: [FlossRecord] = []
     
     weak var persistence: PersistenceManagerProtocol?
+    var notificationService: FlossRemindersService?
     
-    init(persistence: PersistenceManagerProtocol = PersistenceManager.shared) {
+    init(persistence: PersistenceManagerProtocol = PersistenceManager.shared, notificationService: FlossRemindersService = NotificationService.current()) {
         self.persistence = persistence
         self.persistence?.observer = self
+        
+        self.notificationService = notificationService
         
     }
 
@@ -202,7 +205,8 @@ class HomeViewModel: ObservableObject {
     }
     
     func onboardingOver() {
-        NotificationService.current().requestAuthorizationToNotificate(provisional: false)
+        notificationService?.requestAuthorizationToNotificate(provisional: false)
+        
     }
     
     func plusButtonPressed() {

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Notification
 import SwiftUI
 
 class LogRecordsViewModel: ObservableObject {
@@ -13,11 +14,13 @@ class LogRecordsViewModel: ObservableObject {
     @Published var selectedDate: Date?
     
     weak var persistence: PersistenceManagerProtocol?
+    var notificationService: FlossRemindersService?
     
     @Published var records: [FlossRecord] = []
     
-    init(persistenceService: PersistenceManagerProtocol = PersistenceManager.shared) {
+    init(persistenceService: PersistenceManagerProtocol = PersistenceManager.shared, notificationService: FlossRemindersService = NotificationService.current()) {
         self.persistence = persistenceService
+        self.notificationService = notificationService
         
     }
     
@@ -34,19 +37,46 @@ class LogRecordsViewModel: ObservableObject {
     }
     
     func removeRecordAt(indexSet: IndexSet) {
-        guard let safePersistence = persistence else { return }
-        
         guard let index = indexSet.first else { return }
-        safePersistence.deleteFlossRecord(sectionRecords[index])
-        loadRecords()
+        
+        removeRecord(sectionRecords[index])
     }
     
     func removeRecord(_ record: FlossRecord) {
         guard let safePersistence = persistence else { return }
         
-        records.removeAll { $0 == record }
         safePersistence.deleteFlossRecord(record)
+        
+        // has any other record for today?
+        if shouldRemovePendingDailyStreakNotification(ifRemove: record) {
+            notificationService?.clearPendingDailyStreakFlossReminderNotification()
+        }
+        
         loadRecords()
+    }
+    
+    
+    func shouldRemovePendingDailyStreakNotification(ifRemove record: FlossRecord) -> Bool {
+        
+        if !Calendar.current.isDateInToday(record.date) {
+            return false
+        }
+        
+        let remainingRecords: [FlossRecord] = self.records.filter({$0 != record })
+        let recordDaySignature = record.date.dayAndMonthAndYearFormatted
+        var uniqueLogDays: Set<String> = Set()
+        
+        remainingRecords.forEach { log in
+            let logDaySignature = log.date.dayAndMonthAndYearFormatted
+            
+            uniqueLogDays.insert(logDaySignature)
+        }
+        
+        if uniqueLogDays.contains(recordDaySignature) {
+            return false
+        } else {
+            return true
+        }
     }
     
     var sectionRecords: [FlossRecord] {

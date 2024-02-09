@@ -8,13 +8,17 @@
 import Foundation
 
 
-protocol FlossRemindersService {
+public protocol FlossRemindersService {
     static func current() -> NotificationService
     
     func requestAuthorizationToNotificate(provisional: Bool)
     
-    func scheduleFlossReminders(streakCount: Int)
+    func scheduleAllFlossReminders(streakCount: Int)
     
-    func clearAllPendingFlossReminderNotification() 
+    func scheduleInactivityFlossReminderNotifications()
+    
+    func clearPendingDailyStreakFlossReminderNotification()
+    
+    func clearAllPendingFlossReminderNotification()
     
 }

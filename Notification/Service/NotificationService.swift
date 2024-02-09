@@ -89,11 +89,11 @@ public struct NotificationService: FlossRemindersService {
     
     // MARK: Floss Reminder
     
-    public func scheduleFlossReminders(streakCount: Int) {
+    public func scheduleAllFlossReminders(streakCount: Int) {
         self.clearAllPendingFlossReminderNotification()
         
         self.scheduleDailyStreakReminder(streakCount: streakCount)
-        self.scheduleFlossRemindersNotifications()
+        self.scheduleInactivityFlossReminderNotifications()
     }
     
     public func clearAllPendingFlossReminderNotification() {
@@ -110,7 +110,7 @@ public struct NotificationService: FlossRemindersService {
     /// Schedules floss reminders notifications based on the defined notifications.
     ///
     /// Clears existing floss reminders notifications and schedules new ones if the app has notification authorization.
-    public func scheduleFlossRemindersNotifications() {
+    public func scheduleInactivityFlossReminderNotifications() {
         let notifications = FlossReminder.getAllInactivityReminderModels()
         
         notifications.forEach { notification in
@@ -124,6 +124,12 @@ public struct NotificationService: FlossRemindersService {
         let notificationModel = FlossReminder.getADailyStreakReminderModel(daysOnStreak: streakCount)
         
         self.scheduleNotification(type: notificationModel)
+    }
+    
+    public func clearPendingDailyStreakFlossReminderNotification() {
+        let id = FlossReminder.DailyStreakReminder.notificationId
+        
+        center.removePendingNotificationRequests(withIdentifiers: [id])
     }
     
 }
