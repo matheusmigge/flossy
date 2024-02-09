@@ -32,7 +32,6 @@ class PersistenceManager: PersistenceManagerProtocol {
     
     private func updateLastFlossDate(_ date: Date?) {
         self.userDefaults.set(date, forKey: UserDefaultsKeys.date)
-        NotificationService.current().scheduleFlossRemindersNotifications()
         
     }
     

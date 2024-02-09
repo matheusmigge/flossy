@@ -56,6 +56,10 @@
 		0CEB25D02B56FF5A00B14298 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB25CF2B56FF5A00B14298 /* Calendar.swift */; };
 		0CEB25D32B5EE37200B14298 /* CalendarViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB25D22B5EE37200B14298 /* CalendarViewDelegate.swift */; };
 		0CFF66442B73D68B00E80202 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFF66432B73D68B00E80202 /* Color.swift */; };
+		0CFF66462B7404D800E80202 /* UNUserNotificationTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFF66452B7404D800E80202 /* UNUserNotificationTrigger.swift */; };
+		0CFF66492B740C9D00E80202 /* FlossReminder+Inactivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFF66482B740C9D00E80202 /* FlossReminder+Inactivity.swift */; };
+		0CFF664B2B740CE700E80202 /* FlossReminder+DailyStreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFF664A2B740CE700E80202 /* FlossReminder+DailyStreak.swift */; };
+		0CFF664D2B750E5E00E80202 /* FlossRemindersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFF664C2B750E5E00E80202 /* FlossRemindersService.swift */; };
 		561DBA7C2B45DCF10052EE78 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DBA7B2B45DCF10052EE78 /* BackgroundView.swift */; };
 		5625BFD52B439A5C006F88BD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5625BFD42B439A5C006F88BD /* README.md */; };
 		562749CC2B43A5C2004F37A0 /* Borel-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 562749CB2B43A5C1004F37A0 /* Borel-Regular.ttf */; };
@@ -179,6 +183,10 @@
 		0CEB25CF2B56FF5A00B14298 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		0CEB25D22B5EE37200B14298 /* CalendarViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewDelegate.swift; sourceTree = "<group>"; };
 		0CFF66432B73D68B00E80202 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		0CFF66452B7404D800E80202 /* UNUserNotificationTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNUserNotificationTrigger.swift; sourceTree = "<group>"; };
+		0CFF66482B740C9D00E80202 /* FlossReminder+Inactivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FlossReminder+Inactivity.swift"; sourceTree = "<group>"; };
+		0CFF664A2B740CE700E80202 /* FlossReminder+DailyStreak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FlossReminder+DailyStreak.swift"; sourceTree = "<group>"; };
+		0CFF664C2B750E5E00E80202 /* FlossRemindersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRemindersService.swift; sourceTree = "<group>"; };
 		561DBA7B2B45DCF10052EE78 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		5625BFD42B439A5C006F88BD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		562749CB2B43A5C1004F37A0 /* Borel-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Borel-Regular.ttf"; sourceTree = "<group>"; };
@@ -437,7 +445,7 @@
 		0CB950962B67EE140085E3D6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0CCEE1CA2B67EBAD0084C9DC /* FlossReminder.swift */,
+				0CFF66472B740C4300E80202 /* FlossReminders */,
 				0CCEE1CB2B67EBAD0084C9DC /* NotificationModel.swift */,
 			);
 			path = Model;
@@ -447,6 +455,7 @@
 			isa = PBXGroup;
 			children = (
 				0CCEE1C92B67EBAD0084C9DC /* NotificationService.swift */,
+				0CFF664E2B750E7A00E80202 /* Protocol */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -455,6 +464,7 @@
 			isa = PBXGroup;
 			children = (
 				0CB950992B681D5E0085E3D6 /* UNUserNotificationCenter.swift */,
+				0CFF66452B7404D800E80202 /* UNUserNotificationTrigger.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -512,6 +522,24 @@
 				0CB342432B6C450C00B68277 /* View */,
 			);
 			path = Calendar;
+			sourceTree = "<group>";
+		};
+		0CFF66472B740C4300E80202 /* FlossReminders */ = {
+			isa = PBXGroup;
+			children = (
+				0CCEE1CA2B67EBAD0084C9DC /* FlossReminder.swift */,
+				0CFF664A2B740CE700E80202 /* FlossReminder+DailyStreak.swift */,
+				0CFF66482B740C9D00E80202 /* FlossReminder+Inactivity.swift */,
+			);
+			path = FlossReminders;
+			sourceTree = "<group>";
+		};
+		0CFF664E2B750E7A00E80202 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				0CFF664C2B750E5E00E80202 /* FlossRemindersService.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		562749CD2B43A603004F37A0 /* Fonts */ = {
@@ -811,8 +839,12 @@
 			files = (
 				0CCEE1F82B67EC500084C9DC /* NotificationModel.swift in Sources */,
 				0CCEE1F92B67EC510084C9DC /* NotificationService.swift in Sources */,
+				0CFF66462B7404D800E80202 /* UNUserNotificationTrigger.swift in Sources */,
+				0CFF664B2B740CE700E80202 /* FlossReminder+DailyStreak.swift in Sources */,
+				0CFF66492B740C9D00E80202 /* FlossReminder+Inactivity.swift in Sources */,
 				0CCEE1FA2B67EC510084C9DC /* FlossReminder.swift in Sources */,
 				0CB9509A2B681D5E0085E3D6 /* UNUserNotificationCenter.swift in Sources */,
+				0CFF664D2B750E5E00E80202 /* FlossRemindersService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

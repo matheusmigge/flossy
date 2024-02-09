@@ -58,22 +58,14 @@ final class NotificationTests: XCTestCase {
         XCTAssertTrue(center.didAskToRemoveRequestOfIdentifiers.contains(notificationIdentifier))
     }
     
-    func testScheduleFlossRemindersAppendsToScheduleCenter() {
-        let notificationsIds = FlossReminder.getAllNotifications().map { $0.id }
+    func testScheduleInactivityFlossRemindersAppendsToScheduleCenter() {
+        let notificationsIds = FlossReminder.getAllInactivityReminderModels().map { $0.id }
         
-        notificationService.scheduleFlossRemindersNotifications()
+        notificationService.scheduleInactivityFlossReminderNotifications()
         
         XCTAssertEqual(notificationsIds, center.scheduledNotificationIds)
     }
     
-    func testRemoveAllPendingFlossRemindersScheduled() {
-        let notificationsIds = FlossReminder.getAllNotifications().map { $0.id }
-        notificationService.scheduleFlossRemindersNotifications()
-        
-        notificationService.clearAllPendingFlossRemindersNotifications()
-        
-        XCTAssertEqual(notificationsIds, center.didAskToRemoveRequestOfIdentifiers)
-    }
     
     func testRemoveAllPendingNotificationsSchedules() {
         let notificationIds = ["test1", "test2", "test3"]
