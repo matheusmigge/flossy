@@ -9,19 +9,45 @@ import Foundation
 
 struct StreakManager {
     
-    static func calculateCurrentStreak(logsDates: [Date]) -> StreakInfo {
+    public static func createStreakBoardViewModel(info: StreakInfo) -> StreakBoardViewModel {
+        switch info.streak {
+        case .positive:
+            return StreakBoardViewModel(streakBoardContent: .positiveStreak(count: info.days),
+                                        warmingBoardContent: .userHadLoggedToday)
+        case .positiveMissingToday:
+            return StreakBoardViewModel(streakBoardContent: .positiveStreak(count: info.days),
+                                        warmingBoardContent: .userHasPositiveStreak)
+        case .negative:
+            if info.days < 3 {
+                return StreakBoardViewModel(streakBoardContent: .shortNegativeStreak,
+                                            warmingBoardContent: .userHasNegativeStreak)
+            } else {
+                return StreakBoardViewModel(streakBoardContent: .longNegativeStreak(count: info.days),
+                                            warmingBoardContent: .userHasNegativeStreak)
+            }
+        case .empty:
+            return StreakBoardViewModel(streakBoardContent: .noLogsRecorded,
+                                        warmingBoardContent: .noLogsRecorded)
+        }
+    }
+    
+    
+    public static func calculateCurrentStreak(logsDates: [Date]) -> StreakInfo {
         let logDaysSet = getLogDaysSet(from: logsDates)
         
-        guard let firstLogDate = logsDates.first else {
-            return StreakInfo(state: .empty, days: 0)
+        guard let lastLogDate = logsDates.first else {
+            return StreakInfo(streak: .empty, days: 0)
         }
+    
         
         if let (didFlossToday, streakCount) = calculateStreak(logDaysSet: logDaysSet) {
-            return StreakInfo(state: didFlossToday ? .streak : .missingToday, days: streakCount)
+            // is positive
+            return StreakInfo(streak: didFlossToday ? .positive : .positiveMissingToday, days: streakCount)
             
         } else {
-            let daysCount = calculateDaysSinceLastLog(from: firstLogDate)
-            return StreakInfo(state: .missing, days: daysCount)
+            // is negative
+            let daysCount = calculateDaysSinceLastLog(from: lastLogDate)
+            return StreakInfo(streak: .negative, days: daysCount)
             
         }
     }
@@ -59,7 +85,6 @@ struct StreakManager {
         } else {
             return nil
         }
-
     }
     
     private static func calculateDaysSinceLastLog(from date: Date) -> Int {
@@ -68,11 +93,5 @@ struct StreakManager {
     }
 }
 
-struct StreakInfo {
-    enum State {
-        case streak, missingToday, missing, empty
-    }
-    
-    let state: State
-    let days: Int
-}
+
+

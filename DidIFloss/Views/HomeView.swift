@@ -12,22 +12,15 @@ struct HomeView: View {
     
     @StateObject var viewModel: HomeViewModel = HomeViewModel()
     
-    var currentStreakState: HomeViewModel.State {
-        viewModel.streakStatus
-    }
-    
-    var dayStreak: Int {
-        viewModel.streakCount
-    }
     
     var body: some View {
         NavigationStack {
             List {
                 BannerSectionView()
                 
-                WarningBannerView(model: viewModel.warningBannerContent)
+                WarningBannerView(model: viewModel.streakBoardViewModel.warmingBoardContent)
                 
-                StreakBoardView(model: viewModel.streakBoardContent)
+                StreakBoardView(model: viewModel.streakBoardViewModel.streakBoardContent)
                     .padding(.vertical)
                     .listRowSeparator(.hidden)
                 
