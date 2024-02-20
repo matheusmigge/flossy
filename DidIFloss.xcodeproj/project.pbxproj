@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		0C196DFF2B614E7600EDD0B3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C196DFE2B614E7600EDD0B3 /* Launch Screen.storyboard */; };
 		0C196E012B61555D00EDD0B3 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C196E002B61555C00EDD0B3 /* RootView.swift */; };
+		0C2CCA8B2B84E6DD0024B376 /* StreakManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2CCA8A2B84E6DD0024B376 /* StreakManager.swift */; };
+		0C2CCA8D2B84EEA10024B376 /* StreakManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2CCA8C2B84EEA10024B376 /* StreakManagerTests.swift */; };
+		0C2CCA922B852EB60024B376 /* StreakBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2CCA912B852EB60024B376 /* StreakBoardViewModel.swift */; };
+		0C2CCA942B852EDD0024B376 /* StreakInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2CCA932B852EDD0024B376 /* StreakInfo.swift */; };
 		0C2EF6652B710E4400AFF9D4 /* UserDefaultsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2EF6642B710E4400AFF9D4 /* UserDefaultsMock.swift */; };
 		0C2EF6672B710EA100AFF9D4 /* FlossRecordDataProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2EF6662B710EA100AFF9D4 /* FlossRecordDataProviderMock.swift */; };
 		0C2EF66B2B710FE500AFF9D4 /* PersistenceManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2EF66A2B710FE500AFF9D4 /* PersistenceManagerTests.swift */; };
@@ -136,6 +140,10 @@
 /* Begin PBXFileReference section */
 		0C196DFE2B614E7600EDD0B3 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		0C196E002B61555C00EDD0B3 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		0C2CCA8A2B84E6DD0024B376 /* StreakManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakManager.swift; sourceTree = "<group>"; };
+		0C2CCA8C2B84EEA10024B376 /* StreakManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakManagerTests.swift; sourceTree = "<group>"; };
+		0C2CCA912B852EB60024B376 /* StreakBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakBoardViewModel.swift; sourceTree = "<group>"; };
+		0C2CCA932B852EDD0024B376 /* StreakInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakInfo.swift; sourceTree = "<group>"; };
 		0C2EF6592B710E0300AFF9D4 /* DidIFlossTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DidIFlossTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C2EF6642B710E4400AFF9D4 /* UserDefaultsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsMock.swift; sourceTree = "<group>"; };
 		0C2EF6662B710EA100AFF9D4 /* FlossRecordDataProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecordDataProviderMock.swift; sourceTree = "<group>"; };
@@ -241,6 +249,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C2CCA8E2B852E6E0024B376 /* Streak */ = {
+			isa = PBXGroup;
+			children = (
+				56FB7AFB2B699BE8009082EE /* WarningBannerModel.swift */,
+				564891A82B6C4E050008F323 /* StreakBoardModel.swift */,
+				0C2CCA932B852EDD0024B376 /* StreakInfo.swift */,
+			);
+			path = Streak;
+			sourceTree = "<group>";
+		};
+		0C2CCA8F2B852E970024B376 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5669DCE52B654A64005A0E22 /* WarningBannerView.swift */,
+				564891A62B6C35F10008F323 /* StreakBoardView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0C2CCA902B852E9B0024B376 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0C2CCA912B852EB60024B376 /* StreakBoardViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0C2CCA952B8530160024B376 /* StreakManager */ = {
+			isa = PBXGroup;
+			children = (
+				0C2CCA8A2B84E6DD0024B376 /* StreakManager.swift */,
+			);
+			path = StreakManager;
+			sourceTree = "<group>";
+		};
 		0C2EF65A2B710E0300AFF9D4 /* DidIFlossTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -264,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				0C2EF66A2B710FE500AFF9D4 /* PersistenceManagerTests.swift */,
+				0C2CCA8C2B84EEA10024B376 /* StreakManagerTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -312,9 +356,8 @@
 			isa = PBXGroup;
 			children = (
 				562749CF2B43AD61004F37A0 /* Constants.swift */,
+				0C2CCA8E2B852E6E0024B376 /* Streak */,
 				0C79CE8C2B710806001EFC7C /* FlossRecord */,
-				56FB7AFB2B699BE8009082EE /* WarningBannerModel.swift */,
-				564891A82B6C4E050008F323 /* StreakBoardModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -322,6 +365,7 @@
 		0C8981F22B466306008CFD5D /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				0C2CCA952B8530160024B376 /* StreakManager */,
 				0C7E92362B46FDD30079525D /* Persistence */,
 			);
 			path = Service;
@@ -550,13 +594,13 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		5669DCE42B654A1C005A0E22 /* HomeView */ = {
+		5669DCE42B654A1C005A0E22 /* SteakBanner */ = {
 			isa = PBXGroup;
 			children = (
-				5669DCE52B654A64005A0E22 /* WarningBannerView.swift */,
-				564891A62B6C35F10008F323 /* StreakBoardView.swift */,
+				0C2CCA902B852E9B0024B376 /* ViewModel */,
+				0C2CCA8F2B852E970024B376 /* View */,
 			);
-			path = HomeView;
+			path = SteakBanner;
 			sourceTree = "<group>";
 		};
 		567999192B4480A500941D75 /* Views */ = {
@@ -576,7 +620,7 @@
 		5679991A2B4480C200941D75 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				5669DCE42B654A1C005A0E22 /* HomeView */,
+				5669DCE42B654A1C005A0E22 /* SteakBanner */,
 				0CB3423C2B6C439400B68277 /* Celebration */,
 				0CEB25D12B5EE36100B14298 /* Calendar */,
 				0C2FE44E2B619C3600BAC3E8 /* LogoView.swift */,
@@ -830,6 +874,7 @@
 				0C2EF66B2B710FE500AFF9D4 /* PersistenceManagerTests.swift in Sources */,
 				0C2EF6652B710E4400AFF9D4 /* UserDefaultsMock.swift in Sources */,
 				0C2EF6672B710EA100AFF9D4 /* FlossRecordDataProviderMock.swift in Sources */,
+				0C2CCA8D2B84EEA10024B376 /* StreakManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -863,6 +908,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				567999182B447E7A00941D75 /* ToothView.swift in Sources */,
+				0C2CCA942B852EDD0024B376 /* StreakInfo.swift in Sources */,
 				0C79CE8B2B710289001EFC7C /* CalendarView+WeekView.swift in Sources */,
 				0CEB25D02B56FF5A00B14298 /* Calendar.swift in Sources */,
 				0C88C7772B5322540040494D /* CalendarView.swift in Sources */,
@@ -877,10 +923,12 @@
 				0C2FE4502B619C3600BAC3E8 /* LogoView.swift in Sources */,
 				56C33DF72B3CAA1000D8DEB7 /* DidIFlossApp.swift in Sources */,
 				0C90A2F92B6D81BE00015298 /* LogRecordsViewModel+CalendarDelegate.swift in Sources */,
+				0C2CCA8B2B84E6DD0024B376 /* StreakManager.swift in Sources */,
 				0C8981F02B466223008CFD5D /* FlossRecord.swift in Sources */,
 				0C2FE44F2B619C3600BAC3E8 /* BannerSectionView.swift in Sources */,
 				0C90A2FF2B6D82A300015298 /* HomeViewModel+CelebrationDelegate.swift in Sources */,
 				0CEB25CE2B56FF5300B14298 /* Date.swift in Sources */,
+				0C2CCA922B852EB60024B376 /* StreakBoardViewModel.swift in Sources */,
 				566FF8CB2B439FB70056644A /* LaunchScreenView.swift in Sources */,
 				564891A92B6C4E050008F323 /* StreakBoardModel.swift in Sources */,
 				0C7E923B2B470DB00079525D /* UserDefaultable.swift in Sources */,

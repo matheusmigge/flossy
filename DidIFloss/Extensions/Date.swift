@@ -57,4 +57,11 @@ extension Date {
         
         return formatter.string(from: self)
     }
+    
+    var calendarSignature: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMMM yyyy"
+        
+        return formatter.string(from: self)
+    }
 }
