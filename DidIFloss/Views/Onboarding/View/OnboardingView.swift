@@ -14,19 +14,29 @@ struct OnboardingView: View {
     var body: some View {
         VStack(spacing: 50){
             
-            Text("Wellcome to Did I Floss")
-                .font(.largeTitle)
-                .monospaced()
-                .padding()
+            HStack(spacing: -22) {
+                Text("Wellcome to")
+                    .bold()
+                    .font(.system(size: 30))
+                    .padding(.horizontal)
+                
+                Text("Flossy")
+                    .font(.custom(Constants.FontNames.borel, size: 30))
+                    .padding(.horizontal)
+                    .padding(.bottom, -24)
+            }
+            .padding(.vertical, 20)
             
-            VStack(spacing: 30) {
+            VStack(alignment: .leading, spacing: 30) {
+                
                 createRowView(feature: OnboardingRowInfoModel.WellcomeFeatures.calendar)
                 
                 createRowView(feature: OnboardingRowInfoModel.WellcomeFeatures.streak)
                 
                 createRowView(feature: OnboardingRowInfoModel.WellcomeFeatures.notifications)
-                
             }
+            
+            Spacer()
             
             Button {
                 dismiss()
@@ -34,12 +44,14 @@ struct OnboardingView: View {
                 Text("Continue")
                     .bold()
                     .padding()
-                    .frame(maxWidth: .infinity, maxHeight: 30)
-                
+                    .frame(maxWidth: .infinity, maxHeight: 40)
             }
             .buttonStyle(.borderedProminent)
+            .padding(.bottom, 70)
+            
+            
         }
-        .padding()
+        .padding(25)
         .presentationBackgroundInteraction(.enabled)
         .presentationCornerRadius(25)
         .presentationBackground(Material.regular)
@@ -51,8 +63,9 @@ struct OnboardingView: View {
             HStack {
                 Image(systemName: feature.iconString)
                     .resizable()
-                    .frame(width: 35, height: 35)
-                    .padding(.horizontal)
+                    .scaledToFit()
+                    .frame(width: 35)
+                    .foregroundStyle(Color.accentColor)
                 
                 VStack(alignment: .leading, spacing: 5) {
                     Text(feature.title)
@@ -60,13 +73,14 @@ struct OnboardingView: View {
                     
                     Text(feature.message)
                         .font(.callout)
-                        .fontWeight(.light)
-                        .foregroundStyle(.primary)
+                        .foregroundStyle(.secondary)
                     
                 }
                 .multilineTextAlignment(.leading)
+                .padding(.leading)
             }
         }
+        .padding(.horizontal)
     }
 }
 
