@@ -11,14 +11,14 @@ import Notification
 extension HomeViewModel: AddLogDelegate {
     func addLogRecord(date: Date) {
         
-        scheduleNotifications(date: date)
+        scheduleNotifications(flossDate: date)
         persistence?.saveFlossDate(date: date)
         self.loadData()
         sheetView = nil
         showingCelebration = true
     }
     
-    private func scheduleNotifications(date: Date) {
+    private func scheduleNotifications(flossDate date: Date) {
         if Calendar.current.isDateInToday(date) {
             #warning("streak count must be created")
             notificationService?.scheduleAllFlossReminders(streakCount: 3)       // streak count placeholder
