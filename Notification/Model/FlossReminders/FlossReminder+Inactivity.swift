@@ -14,8 +14,7 @@ extension FlossReminder {
     struct Inactivity {
         enum Period: String, Identifiable, CaseIterable {
             case threeDays
-            case oneWeek
-            case twoWeek
+            case fiveDays
             
             var id: String { self.rawValue + "InactivityNotification" }
         }
@@ -26,23 +25,16 @@ extension FlossReminder {
             case .threeDays:
                 return NotificationModel(
                     id: period.id,
-                    titleMessage: "Don't lose track! 🦷",
-                    bodyMessage:  "You are doing great! Don't forget to floss today and register it",
+                    titleMessage: "We miss you! 🦷",
+                    bodyMessage:  "When was the last day you floss? What about we make it today?",
                     trigger: UNNotificationTrigger.afterDays(days: 3)
                 )
-            case .oneWeek:
-                return NotificationModel(
-                    id: period.id,
-                    titleMessage: "Don't lose track! 🦷",
-                    bodyMessage:  "You are doing great! Don't forget to floss today and register it",
-                    trigger: UNNotificationTrigger.afterDays(days: 3)
-                )
-            case .twoWeek:
+            case .fiveDays:
                 return NotificationModel(
                     id: period.id,
                     titleMessage: "Hey Stranger... 🫂",
                     bodyMessage: "We can help you with your oral hygiene. Let's floss those teeth!",
-                    trigger: UNNotificationTrigger.afterDays(days: 14, repeats: true)
+                    trigger: UNNotificationTrigger.afterDays(days: 5, repeats: true)
                 )
             }
         }
