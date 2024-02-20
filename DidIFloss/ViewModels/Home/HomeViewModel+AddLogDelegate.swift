@@ -20,8 +20,10 @@ extension HomeViewModel: AddLogDelegate {
     
     private func scheduleNotifications(flossDate date: Date) {
         if Calendar.current.isDateInToday(date) {
-            #warning("streak count must be created")
-            notificationService?.scheduleAllFlossReminders(streakCount: 3)       // streak count placeholder
+            DispatchQueue.main.async {
+                let streakInfo = StreakManager.calculateCurrentStreak(logsDates: self.flossRecords.map({$0.date}))
+                self.notificationService?.scheduleAllFlossReminders(streakCount: streakInfo.days)
+            }
         } else {
             notificationService?.scheduleInactivityFlossReminderNotifications()
         }
