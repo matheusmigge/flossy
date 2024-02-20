@@ -29,11 +29,12 @@ class HomeViewModel: ObservableObject {
         
     }
     
-    var streakBoardViewModel: StreakBoardViewModel {
+    var streakBoardViewModel: StreakBoardViewModel = StreakBoardViewModel(streakBoardContent: .noLogsRecorded,
+                                                                          warmingBoardContent: .noLogsRecorded)
+    func updateStreakBoardViewModel(){
         let streakInfo =  StreakManager.calculateCurrentStreak(logsDates: flossRecords.map({$0.date}))
-        return StreakManager.createStreakBoardViewModel(info: streakInfo)
+        self.streakBoardViewModel = StreakManager.createStreakBoardViewModel(info: streakInfo)
     }
-    
     
     // MARK: Did Apper
 
@@ -46,6 +47,7 @@ class HomeViewModel: ObservableObject {
     func loadData() {
         persistence?.getFlossRecords { [weak self] records in
             self?.flossRecords = records
+            self?.updateStreakBoardViewModel()
         }
     }
     
