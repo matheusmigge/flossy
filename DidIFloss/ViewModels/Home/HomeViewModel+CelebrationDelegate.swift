@@ -11,8 +11,6 @@ import SwiftUI
 
 extension HomeViewModel: CelebrationDelegate {
     func didCompleteAnimation() {
-        withAnimation(.easeOut(duration: 2)) {
-            showingCelebration = false
-        }
+        showingCelebration = false
     }
 }
