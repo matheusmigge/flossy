@@ -14,18 +14,18 @@ struct WarningBannerModel {
     var textColor: Color
     
     static var noLogsRecorded: WarningBannerModel {
-        WarningBannerModel(backgroundColor: .greenyBlue, text: "Seja bem vindo(a) ao Did I Floss! ☀️", textColor: .white)
+        WarningBannerModel(backgroundColor: .greenyBlue, text: "Welcome to Flossy! ☀️", textColor: .white)
     }
     
     static var userHadLoggedToday: WarningBannerModel {
-        WarningBannerModel(backgroundColor: .greenyBlue, text: "O de hoje tá pago! 🫡", textColor: .white)
+        WarningBannerModel(backgroundColor: .greenyBlue, text: "Done for the day! 🫡", textColor: .white)
     }
     
     static var userHasPositiveStreak: WarningBannerModel {
-        WarningBannerModel(backgroundColor: .lightYellow, text: "Você ainda não usou o fio dental hoje. Cuidado para não perder o seu combo! ⚠️", textColor: .black)
+        WarningBannerModel(backgroundColor: .lightYellow, text: "You didn't floss today yet. Don't lose your streak! ⚠️", textColor: .black)
     }
     
     static var userHasNegativeStreak: WarningBannerModel {
-        WarningBannerModel(backgroundColor: .flamingoPink, text: "Estamos sentindo sua falta! 🥺", textColor: .black)
+        WarningBannerModel(backgroundColor: .flamingoPink, text: "We miss you! 🥺", textColor: .black)
     }
 }
