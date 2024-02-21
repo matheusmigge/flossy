@@ -46,7 +46,9 @@ struct HomeView: View {
                     } label: {
                         Image(systemName: "plus")
                     }
+                    .disabled(viewModel.showingCelebration)
                 }
+                
                 
                 ToolbarItem(placement: .topBarLeading) {
                     NavigationLink {

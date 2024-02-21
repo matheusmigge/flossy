@@ -12,6 +12,7 @@ struct CelebrationView: View {
     
     private let confettiCount: Int
     @State var isAnimating: Bool = false
+    @State var shouldFadeOut: Bool = false
     
     weak var delegate: CelebrationDelegate?
     
@@ -30,6 +31,7 @@ struct CelebrationView: View {
                         .rotationEffect(isAnimating ? .degrees(Double.random(in: -15...15)) : .degrees(0))
                 }
             }
+            .opacity(isAnimating ? 0 : 80)
         }
         .ignoresSafeArea()
         .onAppear {
@@ -37,7 +39,7 @@ struct CelebrationView: View {
                 isAnimating = true
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                 delegate?.didCompleteAnimation()
             }
         }
