@@ -14,22 +14,22 @@ struct StreakBoardModel {
     var captionText: String
     
     static var noLogsRecorded: StreakBoardModel {
-        StreakBoardModel(titleColor: .greenyBlue, titleText: "Comece seu combo hoje!", captionText: "Até quantos dias seguidos você consegue se manter passando o fio dental? 👀")
+        StreakBoardModel(titleColor: .greenyBlue, titleText: "Start your streak today!", captionText: "For how long can you keep flossing every day? 👀")
     }
     
     static var firstDayOfPositiveStreak: StreakBoardModel {
-        StreakBoardModel(titleColor: .greenyBlue, titleText: "Combo iniciado!", captionText: "Continue passando o fio dental todos os dias para manter o seu combo.")
+        StreakBoardModel(titleColor: .greenyBlue, titleText: "Streak started!", captionText: "Keep flossing everyday to increase your record!")
     }
     
     static func positiveStreak(count: Int) -> StreakBoardModel {
-        StreakBoardModel(titleColor: .greenyBlue, titleText: "\(count) dias seguidos!", captionText: "É isso aí! Até quantos dias você consegue manter o combo? 👀")
+        StreakBoardModel(titleColor: .greenyBlue, titleText: "\(count) day streak!", captionText: "Good work! For how long can you keep it going? 🤩")
     }
     
     static var shortNegativeStreak: StreakBoardModel {
-        StreakBoardModel(titleColor: .flamingoPink, titleText: "Combo perdido!", captionText: "Oh não! Você estava indo tão bem... Tem 5 minutinhos para passar o fio dental e recomeçar o seu combo? 👀")
+        StreakBoardModel(titleColor: .flamingoPink, titleText: "Streak lost!", captionText: "Oh no! You were doing so well... Have you got 5 minutes to floss and restart your streak? 👀")
     }
     
     static func longNegativeStreak(count: Int) -> StreakBoardModel {
-        StreakBoardModel(titleColor: .flamingoPink, titleText: "\(count) dias seguidos!", captionText: "Parece que você está acumulando um combo de dias seguidos sem passar o fio dental! 😭 ")
+        StreakBoardModel(titleColor: .flamingoPink, titleText: "\(count) day streak!", captionText: "Looks like you're keeping a streak of not flossing your teeth! 😭")
     }
 }
