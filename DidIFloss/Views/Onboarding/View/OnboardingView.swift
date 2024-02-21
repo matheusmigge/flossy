@@ -25,18 +25,17 @@ struct OnboardingView: View {
                     .padding(.horizontal)
                     .padding(.bottom, -24)
             }
-            .padding(.vertical, 20)
             
-            VStack(alignment: .leading, spacing: 30) {
+            VStack(alignment: .leading, spacing: 20) {
                 
                 createRowView(feature: OnboardingRowInfoModel.WellcomeFeatures.calendar)
                 
                 createRowView(feature: OnboardingRowInfoModel.WellcomeFeatures.streak)
-                
+
                 createRowView(feature: OnboardingRowInfoModel.WellcomeFeatures.notifications)
             }
             
-            Spacer()
+//            Spacer()
             
             Button {
                 dismiss()
@@ -47,7 +46,7 @@ struct OnboardingView: View {
                     .frame(maxWidth: .infinity, maxHeight: 40)
             }
             .buttonStyle(.borderedProminent)
-            .padding(.bottom, 70)
+            .padding(.bottom)
             
             
         }
@@ -63,8 +62,8 @@ struct OnboardingView: View {
             HStack {
                 Image(systemName: feature.iconString)
                     .resizable()
-                    .scaledToFit()
-                    .frame(width: 35)
+                    .scaledToFill()
+                    .frame(width: 35, height: 35)
                     .foregroundStyle(Color.accentColor)
                 
                 VStack(alignment: .leading, spacing: 5) {
@@ -77,6 +76,7 @@ struct OnboardingView: View {
                     
                 }
                 .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
                 .padding(.leading)
             }
         }
