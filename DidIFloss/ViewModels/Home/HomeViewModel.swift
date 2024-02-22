@@ -37,7 +37,7 @@ class HomeViewModel: ObservableObject {
     }
     
     // MARK: Did Apper
-
+    
     func viewDidApper() {
         self.loadData()
         self.checkForOnboarding()
@@ -74,8 +74,11 @@ class HomeViewModel: ObservableObject {
     }
     
     func goToDeveloperView() {
+        #if DEBUG
         sheetView = .developerSheet
+        #endif
+        
     }
-
+    
 }
 

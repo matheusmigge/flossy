@@ -12,7 +12,7 @@ struct HomeView: View {
     
     @StateObject var viewModel: HomeViewModel = HomeViewModel()
     
-    
+
     var body: some View {
         NavigationStack {
             List {
