@@ -16,6 +16,7 @@ extension HomeViewModel: AddLogDelegate {
         self.loadData()
         sheetView = nil
         showingCelebration = true
+//        UserFeedbackManager().vibrateDevice()
     }
     
     private func scheduleNotifications(flossDate date: Date) {

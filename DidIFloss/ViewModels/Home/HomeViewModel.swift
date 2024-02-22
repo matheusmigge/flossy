@@ -72,6 +72,10 @@ class HomeViewModel: ObservableObject {
             sheetView = .addLogSheet
         }
     }
+    
+    func goToDeveloperView() {
+        sheetView = .developerSheet
+    }
 
 }
 

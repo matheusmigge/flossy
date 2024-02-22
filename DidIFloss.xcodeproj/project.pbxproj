@@ -21,6 +21,8 @@
 		0C2FE4502B619C3600BAC3E8 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2FE44E2B619C3600BAC3E8 /* LogoView.swift */; };
 		0C2FE4522B635C4600BAC3E8 /* LogRecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2FE4512B635C4600BAC3E8 /* LogRecordsView.swift */; };
 		0C4177AA2B4CF9CB00E8976B /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4177A92B4CF9CB00E8976B /* UserDefaults.swift */; };
+		0C5555582B87D53A00CADA1B /* UserFeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5555572B87D53A00CADA1B /* UserFeedbackManager.swift */; };
+		0C55555B2B87DA3500CADA1B /* DeveloperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C55555A2B87DA3500CADA1B /* DeveloperView.swift */; };
 		0C79CE892B710276001EFC7C /* CalendarView+MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C79CE882B710276001EFC7C /* CalendarView+MonthView.swift */; };
 		0C79CE8B2B710289001EFC7C /* CalendarView+WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C79CE8A2B710289001EFC7C /* CalendarView+WeekView.swift */; };
 		0C79CE8E2B710821001EFC7C /* FlossRecord+Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C79CE8D2B710821001EFC7C /* FlossRecord+Sample.swift */; };
@@ -154,6 +156,8 @@
 		0C2FE4512B635C4600BAC3E8 /* LogRecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogRecordsView.swift; sourceTree = "<group>"; };
 		0C3FCF3B2B712134001BAC12 /* DidIFloss.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = DidIFloss.xctestplan; sourceTree = "<group>"; };
 		0C4177A92B4CF9CB00E8976B /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		0C5555572B87D53A00CADA1B /* UserFeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedbackManager.swift; sourceTree = "<group>"; };
+		0C55555A2B87DA3500CADA1B /* DeveloperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperView.swift; sourceTree = "<group>"; };
 		0C79CE882B710276001EFC7C /* CalendarView+MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarView+MonthView.swift"; sourceTree = "<group>"; };
 		0C79CE8A2B710289001EFC7C /* CalendarView+WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarView+WeekView.swift"; sourceTree = "<group>"; };
 		0C79CE8D2B710821001EFC7C /* FlossRecord+Sample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FlossRecord+Sample.swift"; sourceTree = "<group>"; };
@@ -321,6 +325,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		0C5555592B87D54600CADA1B /* UserFeedback */ = {
+			isa = PBXGroup;
+			children = (
+				0C5555572B87D53A00CADA1B /* UserFeedbackManager.swift */,
+			);
+			path = UserFeedback;
+			sourceTree = "<group>";
+		};
 		0C79CE8C2B710806001EFC7C /* FlossRecord */ = {
 			isa = PBXGroup;
 			children = (
@@ -365,6 +377,7 @@
 		0C8981F22B466306008CFD5D /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				0C5555592B87D54600CADA1B /* UserFeedback */,
 				0C2CCA952B8530160024B376 /* StreakManager */,
 				0C7E92362B46FDD30079525D /* Persistence */,
 			);
@@ -613,6 +626,7 @@
 				0CB342482B6C4E3600B68277 /* AddFlossRecord */,
 				0CB342452B6C4D8C00B68277 /* Onboarding */,
 				5679991A2B4480C200941D75 /* Components */,
+				0C55555A2B87DA3500CADA1B /* DeveloperView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -914,6 +928,7 @@
 				0C88C7772B5322540040494D /* CalendarView.swift in Sources */,
 				0C196E012B61555D00EDD0B3 /* RootView.swift in Sources */,
 				561DBA7C2B45DCF10052EE78 /* BackgroundView.swift in Sources */,
+				0C55555B2B87DA3500CADA1B /* DeveloperView.swift in Sources */,
 				0C2FE4522B635C4600BAC3E8 /* LogRecordsView.swift in Sources */,
 				56FB7AFC2B699BE8009082EE /* WarningBannerModel.swift in Sources */,
 				0CFF66442B73D68B00E80202 /* Color.swift in Sources */,
@@ -941,6 +956,7 @@
 				0C90A2F52B6D796800015298 /* PersistenceObserver.swift in Sources */,
 				0C2FE44C2B619C0B00BAC3E8 /* HomeView.swift in Sources */,
 				0C90A2FD2B6D823C00015298 /* HomeViewModel+AddLogDelegate.swift in Sources */,
+				0C5555582B87D53A00CADA1B /* UserFeedbackManager.swift in Sources */,
 				0CB3424C2B6C4E5C00B68277 /* AddLogDelegate.swift in Sources */,
 				563008442B61A7EE00290875 /* HomeViewModel.swift in Sources */,
 				5669DCE62B654A64005A0E22 /* WarningBannerView.swift in Sources */,
@@ -1266,7 +1282,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"DidIFloss/Preview Content\"";
-				DEVELOPMENT_TEAM = P9D4UX94KC;
+				DEVELOPMENT_TEAM = 749Q737TF5;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1309,7 +1325,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"DidIFloss/Preview Content\"";
-				DEVELOPMENT_TEAM = P9D4UX94KC;
+				DEVELOPMENT_TEAM = 749Q737TF5;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

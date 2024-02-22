@@ -23,6 +23,9 @@ struct HomeView: View {
                 StreakBoardView(model: viewModel.streakBoardViewModel.streakBoardContent)
                     .padding(.vertical)
                     .listRowSeparator(.hidden)
+                    .onLongPressGesture(minimumDuration: 4) {
+                        viewModel.goToDeveloperView()
+                    }
                 
                 Section {
                     CalendarView(records: $viewModel.flossRecords, style: .week)
@@ -69,6 +72,9 @@ struct HomeView: View {
                     }
             case .addLogSheet:
                 AddLogView(delegate: self.viewModel)
+                
+            case .developerSheet:
+                DeveloperView()
             }
         })
         .onAppear {
