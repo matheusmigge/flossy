@@ -53,6 +53,7 @@ class LogRecordsViewModel: ObservableObject {
         }
         
         loadRecords()
+        UserFeedbackManager.shared.vibrateDeletion()
     }
     
     

@@ -23,9 +23,10 @@ struct HomeView: View {
                 StreakBoardView(model: viewModel.streakBoardViewModel.streakBoardContent)
                     .padding(.vertical)
                     .listRowSeparator(.hidden)
-                    .onLongPressGesture(minimumDuration: 4) {
+                    .onTapGesture(count: 3, perform: {
                         viewModel.goToDeveloperView()
-                    }
+                    })
+              
                 
                 Section {
                     CalendarView(records: $viewModel.flossRecords, style: .week)

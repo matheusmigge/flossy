@@ -6,33 +6,48 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct DeveloperView: View {
     
-    var feedbackGenerator = UserFeedbackManager()
+    @ObservedObject var feedbackGenerator = UserFeedbackManager.shared
     
     var body: some View {
         List {
-            Section("Vibrations") {
-                Button {
-                    feedbackGenerator.vibrateDevice(type: .success)
-                } label: {
-                    Text("Success")
+            Section {
+                Picker("Celebration", selection: $feedbackGenerator.preferredCelebrationFeedbackType) {
+                    Text("Tuc")
+                        .tag(FeedbackOption.success)
+    
+                    Text("Tuc Tuc")
+                        .tag(FeedbackOption.warning)
+                    
+                    Text("Tuc Tuc Tuc")
+                        .tag(FeedbackOption.error)
+                    Text("None")
+                            .tag(FeedbackOption.none)
                 }
                 
-                Button {
-                    feedbackGenerator.vibrateDevice(type: .error)
-                } label: {
-                    Text("Error")
+                Picker("Deletion", selection: $feedbackGenerator.preferredDeletionFeedbackType) {
+                    Text("Tuc")
+                        .tag(FeedbackOption.success)
+    
+                    Text("Tuc Tuc")
+                        .tag(FeedbackOption.warning)
+                    
+                    Text("Tuc Tuc Tuc")
+                        .tag(FeedbackOption.error)
+                    Text("None")
+                            .tag(FeedbackOption.none)
+
                 }
                 
-                Button {
-                    feedbackGenerator.vibrateDevice(type: .warning)
-                } label: {
-                    Text("Warming")
-                }
+            } header: {
+                Text("Vibrations")
+            } footer: {
+                Text("Chose a vibration style to be triggered for each case")
             }
-  
+            
         }
     }
 }
