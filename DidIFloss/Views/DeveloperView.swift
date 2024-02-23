@@ -17,28 +17,30 @@ struct DeveloperView: View {
             Section {
                 Picker("Celebration", selection: $feedbackGenerator.preferredCelebrationFeedbackType) {
                     Text("Tuc")
-                        .tag(FeedbackOption.success)
+                        .tag(HapticFeedbackOption.success)
     
                     Text("Tuc Tuc")
-                        .tag(FeedbackOption.warning)
+                        .tag(HapticFeedbackOption.warning)
                     
                     Text("Tuc Tuc Tuc")
-                        .tag(FeedbackOption.error)
+                        .tag(HapticFeedbackOption.error)
+                    
                     Text("None")
-                            .tag(FeedbackOption.none)
+                            .tag(HapticFeedbackOption.none)
                 }
                 
                 Picker("Deletion", selection: $feedbackGenerator.preferredDeletionFeedbackType) {
                     Text("Tuc")
-                        .tag(FeedbackOption.success)
+                        .tag(HapticFeedbackOption.success)
     
                     Text("Tuc Tuc")
-                        .tag(FeedbackOption.warning)
+                        .tag(HapticFeedbackOption.warning)
                     
                     Text("Tuc Tuc Tuc")
-                        .tag(FeedbackOption.error)
+                        .tag(HapticFeedbackOption.error)
+                    
                     Text("None")
-                            .tag(FeedbackOption.none)
+                            .tag(HapticFeedbackOption.none)
 
                 }
                 

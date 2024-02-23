@@ -8,32 +8,15 @@
 import Foundation
 import UIKit
 
-protocol UserFeedbackManagerProtocol {
-    func vibrateCelebration()
-    func vibrateDeletion()
-    
-}
-
-enum FeedbackOption: Hashable {
-    case success
-    case warning
-    case error
-    case none
-}
-
 
 class UserFeedbackManager: ObservableObject, UserFeedbackManagerProtocol {
     
-    enum VibrationStyle {
-        case celebration, deletion
-    }
-    
-    var generator = UINotificationFeedbackGenerator()
+    let generator = UINotificationFeedbackGenerator()
     
     static var shared: UserFeedbackManager = UserFeedbackManager()
     
-    @Published var preferredCelebrationFeedbackType: FeedbackOption = .none
-    @Published var preferredDeletionFeedbackType: FeedbackOption = .none
+    @Published var preferredCelebrationFeedbackType: HapticFeedbackOption = .none
+    @Published var preferredDeletionFeedbackType: HapticFeedbackOption = .none
     
     func vibrateDevice(for type: UINotificationFeedbackGenerator.FeedbackType) {
         generator.notificationOccurred(type)
@@ -41,30 +24,14 @@ class UserFeedbackManager: ObservableObject, UserFeedbackManagerProtocol {
     }
 
     func vibrateCelebration() {
-    
-        switch self.preferredCelebrationFeedbackType {
-        case .success:
-            vibrateDevice(for: .success)
-        case .warning:
-            vibrateDevice(for: .warning)
-        case .error:
-            vibrateDevice(for: .error)
-        case .none:
-            return
-        }
+        guard let feedbackType = preferredCelebrationFeedbackType.feedBackStyle else { return }
+        vibrateDevice(for: feedbackType)
+
     }
     
     func vibrateDeletion() {
-        switch self.preferredDeletionFeedbackType {
-        case .success:
-            vibrateDevice(for: .success)
-        case .warning:
-            vibrateDevice(for: .warning)
-        case .error:
-            vibrateDevice(for: .error)
-        case .none:
-            return
-        }
+        guard let feedbackType = preferredDeletionFeedbackType.feedBackStyle else { return }
+        vibrateDevice(for: feedbackType)
     }
     
 }

@@ -23,6 +23,8 @@
 		0C4177AA2B4CF9CB00E8976B /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4177A92B4CF9CB00E8976B /* UserDefaults.swift */; };
 		0C5555582B87D53A00CADA1B /* UserFeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5555572B87D53A00CADA1B /* UserFeedbackManager.swift */; };
 		0C55555B2B87DA3500CADA1B /* DeveloperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C55555A2B87DA3500CADA1B /* DeveloperView.swift */; };
+		0C55555D2B881B9E00CADA1B /* UserFeedbackManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C55555C2B881B9E00CADA1B /* UserFeedbackManagerProtocol.swift */; };
+		0C55555F2B881BC000CADA1B /* HapticFeedbackOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C55555E2B881BC000CADA1B /* HapticFeedbackOption.swift */; };
 		0C79CE892B710276001EFC7C /* CalendarView+MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C79CE882B710276001EFC7C /* CalendarView+MonthView.swift */; };
 		0C79CE8B2B710289001EFC7C /* CalendarView+WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C79CE8A2B710289001EFC7C /* CalendarView+WeekView.swift */; };
 		0C79CE8E2B710821001EFC7C /* FlossRecord+Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C79CE8D2B710821001EFC7C /* FlossRecord+Sample.swift */; };
@@ -158,6 +160,8 @@
 		0C4177A92B4CF9CB00E8976B /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		0C5555572B87D53A00CADA1B /* UserFeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedbackManager.swift; sourceTree = "<group>"; };
 		0C55555A2B87DA3500CADA1B /* DeveloperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperView.swift; sourceTree = "<group>"; };
+		0C55555C2B881B9E00CADA1B /* UserFeedbackManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedbackManagerProtocol.swift; sourceTree = "<group>"; };
+		0C55555E2B881BC000CADA1B /* HapticFeedbackOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedbackOption.swift; sourceTree = "<group>"; };
 		0C79CE882B710276001EFC7C /* CalendarView+MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarView+MonthView.swift"; sourceTree = "<group>"; };
 		0C79CE8A2B710289001EFC7C /* CalendarView+WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarView+WeekView.swift"; sourceTree = "<group>"; };
 		0C79CE8D2B710821001EFC7C /* FlossRecord+Sample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FlossRecord+Sample.swift"; sourceTree = "<group>"; };
@@ -329,6 +333,8 @@
 			isa = PBXGroup;
 			children = (
 				0C5555572B87D53A00CADA1B /* UserFeedbackManager.swift */,
+				0C55555C2B881B9E00CADA1B /* UserFeedbackManagerProtocol.swift */,
+				0C55555E2B881BC000CADA1B /* HapticFeedbackOption.swift */,
 			);
 			path = UserFeedback;
 			sourceTree = "<group>";
@@ -956,9 +962,11 @@
 				0C90A2F52B6D796800015298 /* PersistenceObserver.swift in Sources */,
 				0C2FE44C2B619C0B00BAC3E8 /* HomeView.swift in Sources */,
 				0C90A2FD2B6D823C00015298 /* HomeViewModel+AddLogDelegate.swift in Sources */,
+				0C55555F2B881BC000CADA1B /* HapticFeedbackOption.swift in Sources */,
 				0C5555582B87D53A00CADA1B /* UserFeedbackManager.swift in Sources */,
 				0CB3424C2B6C4E5C00B68277 /* AddLogDelegate.swift in Sources */,
 				563008442B61A7EE00290875 /* HomeViewModel.swift in Sources */,
+				0C55555D2B881B9E00CADA1B /* UserFeedbackManagerProtocol.swift in Sources */,
 				5669DCE62B654A64005A0E22 /* WarningBannerView.swift in Sources */,
 				56C33E0A2B3CCA9E00D8DEB7 /* PersistenceManager.swift in Sources */,
 				0C90A3012B6D82DB00015298 /* HomeViewModel+PersistenceObserver.swift in Sources */,
