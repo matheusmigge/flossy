@@ -339,6 +339,14 @@
 			path = UserFeedback;
 			sourceTree = "<group>";
 		};
+		0C5555602B881F0400CADA1B /* Developer */ = {
+			isa = PBXGroup;
+			children = (
+				0C55555A2B87DA3500CADA1B /* DeveloperView.swift */,
+			);
+			path = Developer;
+			sourceTree = "<group>";
+		};
 		0C79CE8C2B710806001EFC7C /* FlossRecord */ = {
 			isa = PBXGroup;
 			children = (
@@ -632,7 +640,7 @@
 				0CB342482B6C4E3600B68277 /* AddFlossRecord */,
 				0CB342452B6C4D8C00B68277 /* Onboarding */,
 				5679991A2B4480C200941D75 /* Components */,
-				0C55555A2B87DA3500CADA1B /* DeveloperView.swift */,
+				0C5555602B881F0400CADA1B /* Developer */,
 			);
 			path = Views;
 			sourceTree = "<group>";
