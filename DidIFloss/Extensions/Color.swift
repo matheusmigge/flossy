@@ -14,4 +14,5 @@ extension Color {
     static let flossLightYellow = Color(Constants.ColorNames.lightYellow)
     static let flossFlamingoPink = Color(Constants.ColorNames.flamingoPink)
     static let flossGreenyBlue = Color(Constants.ColorNames.greenyBlue)
+    static let flossLogoBackground = Color(Constants.ColorNames.logoBackground)
 }

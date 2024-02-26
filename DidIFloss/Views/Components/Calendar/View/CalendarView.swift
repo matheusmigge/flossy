@@ -18,6 +18,8 @@ struct CalendarView: View {
     
     @Binding var records: [FlossRecord]
     
+    @Environment(\.colorScheme) var colorScheme
+    
     var style: Style
     
     weak var delegate: CalendarViewDelegate?

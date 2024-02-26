@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
-                        <color key="backgroundColor" name="sky-blue"/>
+                        <color key="backgroundColor" name="AccentColorInverse"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -25,7 +25,7 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="sky-blue">
+        <namedColor name="AccentColorInverse">
             <color red="0.54000002145767212" green="0.74699997901916504" blue="0.88200002908706665" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>

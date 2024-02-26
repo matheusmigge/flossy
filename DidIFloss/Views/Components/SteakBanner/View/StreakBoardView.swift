@@ -19,12 +19,12 @@ struct StreakBoardView: View {
                     Text(model.titleText)
                         .font(.system(size: 35))
                         .fontWeight(.black)
-                        .foregroundStyle(.lightYellow)
+                        .offset(x: -1, y: 1)
+                        .foregroundStyle(Color.primary)
                     
                     Text(model.titleText)
                         .font(.system(size: 35))
                         .fontWeight(.black)
-                        .offset(x: 3, y: -3)
                         .foregroundStyle(model.titleColor)
                 }
                 Spacer()

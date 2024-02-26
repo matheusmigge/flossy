@@ -35,7 +35,7 @@ extension CalendarView {
                 .background {
                     if self.isSelectedDate(date) {
                         Circle()
-                            .fill(Color.skyBlue)
+                            .fill(Color.accentColorAlternative)
                             .frame(width: 30, height: 30)
                             .matchedGeometryEffect(id: "selectedDateNameSpace", in: selectedDateNameSpace)
                     }
