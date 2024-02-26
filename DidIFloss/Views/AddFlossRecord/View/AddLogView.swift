@@ -10,6 +10,7 @@ import SwiftUI
 
 struct AddLogView: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.colorScheme) var colorScheme
     
     @State var selectedDate: Date = .now
     
@@ -36,12 +37,12 @@ struct AddLogView: View {
                     } label: {
                         Text("Add")
                             .bold()
-                            .foregroundStyle(.white)
+                            .foregroundStyle(colorScheme == .light ? Color.white : Color.black)
                             .padding()
                             .frame(maxWidth: .infinity, maxHeight: 200)
                             .background {
                                 RoundedRectangle(cornerRadius: 10)
-                                    .fill(Color.greenyBlue)
+                                    .fill(Color.accentColor)
                             }
                             
                     }
@@ -59,13 +60,6 @@ struct AddLogView: View {
                 }
                 .padding(.horizontal)
                 .toolbar {
-//                    ToolbarItem(placement: .topBarLeading) {
-//                        Button {
-//                            dismiss()
-//                        } label: {
-//                            Text("Dismiss")
-//                        }
-//                    }
                     
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {

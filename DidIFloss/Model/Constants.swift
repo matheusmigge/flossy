@@ -24,6 +24,8 @@ struct Constants {
         static let lightYellow = "light-yellow"
         static let flamingoPink = "flamingo-pink"
         static let greenyBlue = "greeny-blue"
+        static let accentColorInverse = "AccentColorInverse"
+        static let logoBackground = "logo-background"
     }
 }
 

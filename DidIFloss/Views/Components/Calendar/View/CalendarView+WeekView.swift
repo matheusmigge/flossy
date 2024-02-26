@@ -22,7 +22,7 @@ extension CalendarView {
                         if self.hasDayFlossRecords(for: day) {
                             Image(systemName: "checkmark.circle.fill")
                                 .resizable()
-                                .foregroundStyle(.greenyBlue)
+                                .foregroundStyle(Color.accentColor)
                                 .frame(width: 30, height: 30)
                         } else {
                             Circle()
@@ -38,7 +38,7 @@ extension CalendarView {
                 .background {
                     if shouldDayOfTheWeekBePink(day) {
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.flossFlamingoPink)
+                            .fill(Color.flossAccentColorInverse)
                     }
                 }
             }
