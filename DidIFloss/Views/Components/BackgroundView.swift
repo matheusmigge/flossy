@@ -27,7 +27,7 @@ struct BackgroundView: View {
         
         ZStack {
             
-            Color.flossAccentColorInverse
+            Color.accentColorAlternative
             
             LazyVGrid(
                 columns: gridItems,

@@ -38,7 +38,7 @@ extension CalendarView {
                 .background {
                     if shouldDayOfTheWeekBePink(day) {
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.flossAccentColorInverse)
+                            .fill(Color.accentColorAlternative)
                     }
                 }
             }

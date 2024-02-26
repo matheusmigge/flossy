@@ -29,7 +29,7 @@ struct BannerSectionView: View {
                     Spacer()
                 }
             }
-            .background(Color.flossAccentColorInverse)
+            .background(Color.accentColorAlternative)
         }.listRowInsets(.init(top: -20, leading: -20, bottom: -20, trailing: -20))
     }
 }

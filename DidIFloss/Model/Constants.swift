@@ -20,11 +20,11 @@ struct Constants {
     }
     
     struct ColorNames {
+        static let accentColorAlternative = "AccentColorAlternative"
         static let skyBlue = "sky-blue"
         static let lightYellow = "light-yellow"
         static let flamingoPink = "flamingo-pink"
         static let greenyBlue = "greeny-blue"
-        static let accentColorInverse = "AccentColorInverse"
         static let logoBackground = "logo-background"
     }
 }

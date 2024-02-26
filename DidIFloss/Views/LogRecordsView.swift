@@ -98,7 +98,7 @@ struct LogRecordsView: View {
         HStack(alignment: .center) {
             HStack {
                 Image(systemName: "calendar")
-                    .foregroundColor(.flossAccentColorInverse)
+                    .foregroundColor(.accentColorAlternative)
                 
                 Text(date.dayAndMonthAndYearFormatted)
             }
@@ -107,7 +107,7 @@ struct LogRecordsView: View {
             
             HStack {
                 Image(systemName: "clock")
-                    .foregroundColor(.flossAccentColorInverse)
+                    .foregroundColor(.accentColorAlternative)
                 
                 Text(date.minuteAndHourFormatted)
             }
