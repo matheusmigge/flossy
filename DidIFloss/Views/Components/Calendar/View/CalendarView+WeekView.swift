@@ -20,10 +20,17 @@ extension CalendarView {
                     
                     Group {
                         if self.hasDayFlossRecords(for: day) {
-                            Image(systemName: "checkmark.circle.fill")
-                                .resizable()
-                                .foregroundStyle(Color.accentColor)
-                                .frame(width: 30, height: 30)
+                            ZStack {
+                                Image(systemName: "circle.fill")
+                                    .resizable()
+                                    .foregroundStyle(colorScheme == .light ? Color.white : Color.black)
+                                    .frame(width: 30, height: 30)
+                                
+                                Image(systemName: "checkmark.circle.fill")
+                                    .resizable()
+                                    .foregroundStyle(Color.accentColor)
+                                    .frame(width: 30, height: 30)
+                            }
                         } else {
                             Circle()
                                 .stroke(lineWidth: 2)
