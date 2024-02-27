@@ -25,7 +25,7 @@ struct OnboardingRowInfoModel {
             
             iconString: "checkmark.seal.fill",
             title: "Challenge yourself",
-            message: "For how long can you keep your floss streak? Start today you record!")
+            message: "For how long can you keep your floss streak? Start today your record!")
         
         static let notifications = OnboardingRowInfoModel(
             
