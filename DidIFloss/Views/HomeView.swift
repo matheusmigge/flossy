@@ -19,6 +19,7 @@ struct HomeView: View {
                 BannerSectionView()
                 
                 WarningBannerView(model: viewModel.streakBoardViewModel.warmingBoardContent)
+                    .listRowSeparator(.hidden)
                 
                 HStack {
                     Spacer()
@@ -27,6 +28,9 @@ struct HomeView: View {
                         .padding(.top, 5)
                         .padding(.bottom, 20)
                         .listRowSeparator(.hidden)
+                        .onTapGesture(count: 3, perform: {
+                            viewModel.goToDeveloperView()
+                        })
                     
                     Spacer()
                 }
