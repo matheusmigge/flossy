@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OnboardingView: View {
-    
+    @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -35,14 +35,13 @@ struct OnboardingView: View {
                 createRowView(feature: OnboardingRowInfoModel.WellcomeFeatures.notifications)
             }
             
-//            Spacer()
-            
             Button {
                 dismiss()
             } label: {
                 Text("Continue")
                     .bold()
                     .padding()
+                    .foregroundStyle(colorScheme == .light ? .white : .black)
                     .frame(maxWidth: .infinity, maxHeight: 40)
             }
             .buttonStyle(.borderedProminent)
