@@ -14,7 +14,7 @@ extension HomeViewModel {
     }
     
     enum Sheet: String, Identifiable {
-        case welcomeSheet, addLogSheet
+        case welcomeSheet, addLogSheet, developerSheet
         
         var id: String {
             self.rawValue

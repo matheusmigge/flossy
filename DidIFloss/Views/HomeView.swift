@@ -12,7 +12,7 @@ struct HomeView: View {
     
     @StateObject var viewModel: HomeViewModel = HomeViewModel()
     
-    
+
     var body: some View {
         NavigationStack {
             List {
@@ -76,6 +76,9 @@ struct HomeView: View {
                     }
             case .addLogSheet:
                 AddLogView(delegate: self.viewModel)
+                
+            case .developerSheet:
+                DeveloperView()
             }
         })
         .onAppear {
