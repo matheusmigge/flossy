@@ -10,7 +10,6 @@ import SwiftUI
 
 struct LogRecordsView: View {
     
-    @Environment(\.colorScheme) var colorScheme
     @StateObject var viewModel: LogRecordsViewModel = LogRecordsViewModel()
     
     var body: some View {
@@ -99,7 +98,7 @@ struct LogRecordsView: View {
         HStack(alignment: .center) {
             HStack {
                 Image(systemName: "calendar")
-                    .foregroundColor(colorScheme == .light ? .flossGreenyBlue : .flossFlamingoPink)
+                    .foregroundColor(.accentColor)
                 
                 Text(date.dayAndMonthAndYearFormatted)
             }
@@ -108,7 +107,7 @@ struct LogRecordsView: View {
             
             HStack {
                 Image(systemName: "clock")
-                    .foregroundColor(colorScheme == .light ? .flossGreenyBlue : .flossFlamingoPink)
+                    .foregroundColor(.accentColor)
                 
                 Text(date.minuteAndHourFormatted)
             }

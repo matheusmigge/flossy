@@ -20,13 +20,16 @@ struct HomeView: View {
                 
                 WarningBannerView(model: viewModel.streakBoardViewModel.warmingBoardContent)
                 
-                StreakBoardView(model: viewModel.streakBoardViewModel.streakBoardContent)
-                    .padding(.vertical)
-                    .listRowSeparator(.hidden)
-                    .onTapGesture(count: 3, perform: {
-                        viewModel.goToDeveloperView()
-                    })
-              
+                HStack {
+                    Spacer()
+                    
+                    StreakBoardView(model: viewModel.streakBoardViewModel.streakBoardContent)
+                        .padding(.top, 5)
+                        .padding(.bottom, 20)
+                        .listRowSeparator(.hidden)
+                    
+                    Spacer()
+                }
                 
                 Section {
                     CalendarView(records: $viewModel.flossRecords, style: .week)

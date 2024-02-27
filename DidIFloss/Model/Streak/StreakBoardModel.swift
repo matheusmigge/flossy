@@ -14,7 +14,7 @@ struct StreakBoardModel {
     var captionText: String
     
     static var noLogsRecorded: StreakBoardModel {
-        StreakBoardModel(titleColor: .greenyBlue, titleText: "Start your streak today!", captionText: "For how long can you keep flossing every day? 👀")
+        StreakBoardModel(titleColor: .flamingoPink, titleText: "Start your streak today!", captionText: "For how long can you keep flossing every day? 👀")
     }
     
     static var firstDayOfPositiveStreak: StreakBoardModel {

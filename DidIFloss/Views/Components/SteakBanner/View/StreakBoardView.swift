@@ -12,24 +12,22 @@ struct StreakBoardView: View {
     let model: StreakBoardModel
     
     var body: some View {
-        VStack {
+        VStack(spacing: 15) {
             HStack {
-                Spacer()
                 ZStack {
                     Text(model.titleText)
                         .font(.system(size: 35))
                         .fontWeight(.black)
-                        .foregroundStyle(.lightYellow)
+                        .offset(x: -1, y: 1)
+                        .foregroundStyle(Color.primary)
                     
                     Text(model.titleText)
                         .font(.system(size: 35))
                         .fontWeight(.black)
-                        .offset(x: 3, y: -3)
                         .foregroundStyle(model.titleColor)
                 }
-                Spacer()
+                .multilineTextAlignment(.center)
             }
-            .foregroundStyle(Color("sky-blue"))
             
             Text(model.captionText)
                 .font(.caption)
