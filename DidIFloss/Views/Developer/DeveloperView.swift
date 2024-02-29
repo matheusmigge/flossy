@@ -10,7 +10,7 @@ import UIKit
 
 struct DeveloperView: View {
     
-    @ObservedObject var feedbackGenerator = UserFeedbackManager.shared
+    @ObservedObject var feedbackGenerator = HapticsManager.shared
     
     var body: some View {
         List {

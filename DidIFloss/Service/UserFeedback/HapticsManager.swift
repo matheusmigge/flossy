@@ -1,5 +1,5 @@
 //
-//  UserFeedbackManager.swift
+//  HapticsManager.swift
 //  DidIFloss
 //
 //  Created by Lucas Migge on 22/02/24.
@@ -9,11 +9,11 @@ import Foundation
 import UIKit
 
 
-class UserFeedbackManager: ObservableObject, UserFeedbackManagerProtocol {
+class HapticsManager: ObservableObject, HapticsManagerProtocol {
     
     let generator = UINotificationFeedbackGenerator()
     
-    static var shared: UserFeedbackManager = UserFeedbackManager()
+    static var shared: HapticsManager = HapticsManager()
     
     @Published var preferredCelebrationFeedbackType: HapticFeedbackOption = .long
     @Published var preferredDeletionFeedbackType: HapticFeedbackOption = .short

@@ -20,11 +20,11 @@ class HomeViewModel: ObservableObject {
     
     weak var persistence: PersistenceManagerProtocol?
     var notificationService: FlossRemindersService?
-    weak var userFeedbackService: UserFeedbackManagerProtocol?
+    weak var userFeedbackService: HapticsManagerProtocol?
     
     init(persistence: PersistenceManagerProtocol = PersistenceManager.shared,
          notificationService: FlossRemindersService = NotificationService.current(),
-         userFeedbackService: UserFeedbackManagerProtocol = UserFeedbackManager.shared
+         userFeedbackService: HapticsManagerProtocol = HapticsManager.shared
     ) {
         self.persistence = persistence
         self.persistence?.observer = self
