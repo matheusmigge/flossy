@@ -15,21 +15,21 @@ class UserFeedbackManager: ObservableObject, UserFeedbackManagerProtocol {
     
     static var shared: UserFeedbackManager = UserFeedbackManager()
     
-    @Published var preferredCelebrationFeedbackType: HapticFeedbackOption = .none
-    @Published var preferredDeletionFeedbackType: HapticFeedbackOption = .none
+    @Published var preferredCelebrationFeedbackType: HapticFeedbackOption = .long
+    @Published var preferredDeletionFeedbackType: HapticFeedbackOption = .short
     
     func vibrateDevice(for type: UINotificationFeedbackGenerator.FeedbackType) {
         generator.notificationOccurred(type)
         
     }
 
-    func vibrateCelebration() {
+    func vibrateAddLogCelebration() {
         guard let feedbackType = preferredCelebrationFeedbackType.feedBackStyle else { return }
         vibrateDevice(for: feedbackType)
 
     }
     
-    func vibrateDeletion() {
+    func vibrateLogRemoval() {
         guard let feedbackType = preferredDeletionFeedbackType.feedBackStyle else { return }
         vibrateDevice(for: feedbackType)
     }

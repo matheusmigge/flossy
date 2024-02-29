@@ -7,8 +7,8 @@
 
 import Foundation
 
-protocol UserFeedbackManagerProtocol {
-    func vibrateCelebration()
-    func vibrateDeletion()
+protocol UserFeedbackManagerProtocol: AnyObject {
+    func vibrateAddLogCelebration()
+    func vibrateLogRemoval()
     
 }
