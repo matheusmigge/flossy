@@ -45,7 +45,6 @@ final class HapticsManagerTests: XCTestCase {
         
         XCTAssertNil(feedbackGenerator.lastVibrationStyleTriggered)
         XCTAssertFalse(feedbackGenerator.didVibrate)
-        
     }
     
     
@@ -61,7 +60,6 @@ final class HapticsManagerTests: XCTestCase {
         
         XCTAssertEqual(feedbackOption.feedBackStyle, feedbackGenerator.lastVibrationStyleTriggered)
         XCTAssertTrue(feedbackGenerator.didVibrate)
-        
     }
   
     
@@ -76,9 +74,6 @@ final class HapticsManagerTests: XCTestCase {
         
         XCTAssertNil(feedbackGenerator.lastVibrationStyleTriggered)
         XCTAssertFalse(feedbackGenerator.didVibrate)
-        
     }
-    
-    
 
 }
