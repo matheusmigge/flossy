@@ -20,7 +20,7 @@ class PersistenceManager: PersistenceManagerProtocol {
     
     // beware! Should only be one FlossRecordDataSource to maintain persistence container single instance
     // prefer use of shared instante to use a persistenceManager
-    public init(userDefaults: UserDefaultable, flossRecordService: FlossRecordDataProvider) {
+    init(userDefaults: UserDefaultable, flossRecordService: FlossRecordDataProvider) {
         self.userDefaults = userDefaults
         self.flossRecordService = flossRecordService
     }

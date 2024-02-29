@@ -11,9 +11,13 @@ import UIKit
 
 class HapticsManager: ObservableObject, HapticsManagerProtocol {
     
-    let generator = UINotificationFeedbackGenerator()
+    let generator: UINotificationFeedbackGeneratable
     
     static var shared: HapticsManager = HapticsManager()
+    
+    init(feedbackGenerator: UINotificationFeedbackGeneratable = UINotificationFeedbackGenerator()) {
+        self.generator = feedbackGenerator
+    }
     
     @Published var preferredCelebrationFeedbackType: HapticFeedbackOption = .long
     @Published var preferredDeletionFeedbackType: HapticFeedbackOption = .short
@@ -35,3 +39,4 @@ class HapticsManager: ObservableObject, HapticsManagerProtocol {
     }
     
 }
+
