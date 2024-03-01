@@ -10,22 +10,27 @@ import UserNotifications
 
 extension UNNotificationTrigger {
     static func tomorrowAtNight() -> UNCalendarNotificationTrigger {
-        let triggerDay = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
-        var triggerDate = Calendar.current.dateComponents([.day, .minute], from: triggerDay)
+        
+        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+        var triggerComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: tomorrow)
         
         // trigger any hour at night
-        triggerDate.hour = Int.random(in: 18...22)
+        triggerComponents.hour = Int.random(in: 18...20)
         
-        return UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerComponents, repeats: false)
+        
+        return trigger
     }
       
       static func afterDays(days: Int, repeats: Bool = false) -> UNCalendarNotificationTrigger {
           let triggerDay = Calendar.current.date(byAdding: .day, value: days, to: Date())!
-          var triggerDate = Calendar.current.dateComponents([.day, .minute], from: triggerDay)
+          var triggerComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: triggerDay)
           
-          // trigger any hour at night
-          triggerDate.hour = Int.random(in: 10...20)
+          // trigger any hour of the day
+          triggerComponents.hour = Int.random(in: 10...20)
           
-          return UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: repeats)
+          let trigger = UNCalendarNotificationTrigger(dateMatching: triggerComponents, repeats: false)
+          
+          return trigger
       }
 }
