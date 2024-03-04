@@ -39,4 +39,20 @@ extension FlossReminder {
             }
         }
     }
+    
+    private static var smallStreaksCatalog: [MessageContent] {
+        [
+            MessageContent(title: "Let's start the streak! 💪",
+                           body: "Start your flossing streak today. Remember, consistency is key!"),
+            MessageContent(title: "Begin your flossing journey today! 🚀",
+                           body: "A journey of a thousand miles begins with a single step. Start flossing today!"),
+            MessageContent(title: "Time to make a change! ⏰",
+                           body: "Commit to better oral hygiene today. Start your flossing streak now!")
+        ]
+    }
+    
+    public static func getSmallStreakMessageContent() -> MessageContent {
+        return smallStreaksCatalog.randomElement() ?? MessageContent(title: "Let's start the streak! 💪",
+                                                                     body: "Start your flossing streak today. Remember, consistency is key!")
+    }
 }
