@@ -14,6 +14,9 @@ class HomeViewModel: ObservableObject {
     @Published var sheetView: Sheet?
     @Published var showingCelebration: Bool = false
     
+    @Published var showingAlert: Bool = false
+    var focusedDate: Date?
+    
     // MARK: Floss records
     
     @Published var flossRecords: [FlossRecord] = []
@@ -74,11 +77,45 @@ class HomeViewModel: ObservableObject {
     }
     
     func goToDeveloperView() {
-        #if DEBUG
+#if DEBUG
         sheetView = .developerSheet
-        #endif
+#endif
         
+    }
+    
+    private func flossRecordsContains(date: Date) -> Bool {
+        return flossRecords.map({$0.date}).contains(date)
     }
     
 }
 
+extension HomeViewModel: CalendarViewDelegate {
+    func didSelectDate(_ date: Date) {
+        if flossRecordsContains(date: date) {
+            self.focusedDate = date
+            self.showingAlert = true
+            
+            return
+        }
+        
+        if !Calendar.isDateInTheFuture(date) {
+            let calendarComponents = Calendar.current.dateComponents([.year, .month, .day], from: date)
+            let timeComponents = Calendar.current.dateComponents([.hour, .minute], from: .now)
+            
+            let logDate = Calendar.createDate(year: calendarComponents.year, month: calendarComponents.month, day: calendarComponents.day, hour: timeComponents.hour, minute: timeComponents.minute)
+            
+            addLogRecord(date: logDate ?? date)
+            
+        }
+    }
+    
+    func alertDismiss() {
+        showingAlert = false
+        self.focusedDate = nil
+    }
+    
+    func removeRecordsForFocusedDate() {
+        
+        
+    }
+}
