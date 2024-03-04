@@ -621,13 +621,13 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		5669DCE42B654A1C005A0E22 /* SteakBanner */ = {
+		5669DCE42B654A1C005A0E22 /* StreakBanner */ = {
 			isa = PBXGroup;
 			children = (
 				0C2CCA902B852E9B0024B376 /* ViewModel */,
 				0C2CCA8F2B852E970024B376 /* View */,
 			);
-			path = SteakBanner;
+			path = StreakBanner;
 			sourceTree = "<group>";
 		};
 		567999192B4480A500941D75 /* Views */ = {
@@ -648,7 +648,7 @@
 		5679991A2B4480C200941D75 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				5669DCE42B654A1C005A0E22 /* SteakBanner */,
+				5669DCE42B654A1C005A0E22 /* StreakBanner */,
 				0CB3423C2B6C439400B68277 /* Celebration */,
 				0CEB25D12B5EE36100B14298 /* Calendar */,
 				0C2FE44E2B619C3600BAC3E8 /* LogoView.swift */,
