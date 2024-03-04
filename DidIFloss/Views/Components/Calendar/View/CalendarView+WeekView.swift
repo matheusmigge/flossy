@@ -35,6 +35,8 @@ extension CalendarView {
                             Circle()
                                 .stroke(lineWidth: 2)
                                 .frame(width: 30, height: 30)
+                                .foregroundStyle(Calendar.isDateInTheFuture(day) ? Color.gray : Color.primary)
+
                         }
                     }
                     .onTapGesture {
