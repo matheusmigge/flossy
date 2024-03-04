@@ -46,6 +46,11 @@ protocol PersistenceManagerProtocol: AnyObject {
     /// - Parameter record: The FlossRecord to be deleted.
     func deleteFlossRecord(_ record: FlossRecord)
     
+    /// Deletes a collection of floss records.
+    ///
+    /// - Parameter records: The FlossRecords array to be deleted.
+    func deleteFlossRecords(_ records: [FlossRecord])
+    
     /// Erases all stored floss-related data.
     ///
     /// Use this method to clear all persisted floss-related information.
