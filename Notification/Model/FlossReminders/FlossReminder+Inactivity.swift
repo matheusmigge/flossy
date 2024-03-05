@@ -48,13 +48,13 @@ extension FlossReminder {
         
         private static var inactivityMessageContent: [MessageContent] {
             [
-                MessageContent(title: "We miss you! 🦷", body: "When was the last day you floss? What about we make it today?"),
-                MessageContent(title: "Hey Stranger... 🫂", body: "We can help you with your oral hygiene. Let's floss those teeth!")
+                MessageContent(title: "We miss you! 🦷", body: "When was the last day you flossed? What about we make it today?"),
+                MessageContent(title: "Hey Stranger... 🤠", body: "We can help you with your flossing routine. Let's floss those teeth!")
             ]
         }
         
         private static func getInactivityMessageContent() -> MessageContent {
-            inactivityMessageContent.randomElement() ??  MessageContent(title: "We miss you! 🦷", body: "When was the last day you floss? What about we make it today?")
+            inactivityMessageContent.randomElement() ??  MessageContent(title: "We miss you! 🦷", body: "When was the last day you flossed? What about we make it today?")
         }
         
         private static var invitationToStartMessageContent: [MessageContent] {

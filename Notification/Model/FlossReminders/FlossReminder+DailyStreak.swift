@@ -27,18 +27,6 @@ extension FlossReminder {
 
 extension FlossReminder.DailyStreakReminder {
     
-    
-    private static var smallStreaksCatalog: [MessageContent] {
-        [
-            MessageContent(title: "Let's start the streak! 💪",
-                           body: "Start your flossing streak today. Remember, consistency is key!"),
-            MessageContent(title: "Begin your flossing journey today! 🚀",
-                           body: "A journey of a thousand miles begins with a single step. Start flossing today!"),
-            MessageContent(title: "Time to make a change! ⏰",
-                           body: "Commit to better oral hygiene today. Start your flossing streak now!")
-        ]
-    }
-    
     private static var standardStreakCatalog: [MessageContent] {
         [
             MessageContent(title: "Keep up the good work! 🌟",
@@ -69,11 +57,11 @@ extension FlossReminder.DailyStreakReminder {
         let explicitContentOnTitle: Bool = Bool.random()
         
         if explicitContentOnTitle {
-            return MessageContent(title: "Wow! \(days) days in a streak! 🔥",
+            return MessageContent(title: "Wow! \(days) day streak! 🔥",
                                   body: "Keep up the excellent work!")
         } else {
             return MessageContent(title: "Don't stop now! ⏳",
-                                  body: "You are \(days) days on streak. Floss today to keep your streak growing")
+                                  body: "You are \(days) day streak. Floss today to keep your streak growing")
         }
         
     }
