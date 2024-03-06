@@ -15,7 +15,7 @@ extension FlossReminder {
         
         static func createDailyStreakReminderModel(daysOnStreak days: Int) -> NotificationModel {
             
-            let  content = DailyStreakReminder.getStandardMessageContent(daysOnStreak: days)
+            let content = DailyStreakReminder.getStandardMessageContent(daysOnStreak: days)
             
             return NotificationModel(id: notificationId,
                                      titleMessage: content.title,
@@ -70,7 +70,7 @@ extension FlossReminder.DailyStreakReminder {
     
     public static func getStandardMessageContent(daysOnStreak days: Int) -> MessageContent {
         
-        let hasNotificationExplicitStreak: Bool = Bool.random()
+        let hasNotificationExplicitStreak: Bool = true
         
         if hasNotificationExplicitStreak {
             return standardExplicitStreakCatalog(daysOnStreak: days)
