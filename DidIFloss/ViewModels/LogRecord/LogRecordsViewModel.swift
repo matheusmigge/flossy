@@ -15,12 +15,17 @@ class LogRecordsViewModel: ObservableObject {
     
     weak var persistence: PersistenceManagerProtocol?
     var notificationService: FlossRemindersService?
+    weak var userFeedbackService: HapticsManagerProtocol?
     
     @Published var records: [FlossRecord] = []
     
-    init(persistenceService: PersistenceManagerProtocol = PersistenceManager.shared, notificationService: FlossRemindersService = NotificationService.current()) {
+    init(persistenceService: PersistenceManagerProtocol = PersistenceManager.shared, 
+         notificationService: FlossRemindersService = NotificationService.current(),
+         userFeedbackService: HapticsManagerProtocol = HapticsManager.shared
+    ) {
         self.persistence = persistenceService
         self.notificationService = notificationService
+        self.userFeedbackService = userFeedbackService
         
     }
     
@@ -53,7 +58,7 @@ class LogRecordsViewModel: ObservableObject {
         }
         
         loadRecords()
-        UserFeedbackManager.shared.vibrateDeletion()
+        userFeedbackService?.vibrateLogRemoval()
     }
     
     
