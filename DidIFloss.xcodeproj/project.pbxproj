@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C02028E2B97EF9F00FA65F0 /* HomeViewModel+CalendarViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C02028D2B97EF9F00FA65F0 /* HomeViewModel+CalendarViewDelegate.swift */; };
 		0C196DFF2B614E7600EDD0B3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C196DFE2B614E7600EDD0B3 /* Launch Screen.storyboard */; };
 		0C196E012B61555D00EDD0B3 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C196E002B61555C00EDD0B3 /* RootView.swift */; };
 		0C2CCA8B2B84E6DD0024B376 /* StreakManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2CCA8A2B84E6DD0024B376 /* StreakManager.swift */; };
@@ -146,6 +147,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0C02028D2B97EF9F00FA65F0 /* HomeViewModel+CalendarViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewModel+CalendarViewDelegate.swift"; sourceTree = "<group>"; };
 		0C196DFE2B614E7600EDD0B3 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		0C196E002B61555C00EDD0B3 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		0C2CCA8A2B84E6DD0024B376 /* StreakManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakManager.swift; sourceTree = "<group>"; };
@@ -459,6 +461,7 @@
 				0C90A2FC2B6D823C00015298 /* HomeViewModel+AddLogDelegate.swift */,
 				0C90A2FA2B6D81ED00015298 /* HomeViewModel+Enums.swift */,
 				0C90A3002B6D82DB00015298 /* HomeViewModel+PersistenceObserver.swift */,
+				0C02028D2B97EF9F00FA65F0 /* HomeViewModel+CalendarViewDelegate.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -665,13 +668,13 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		5669DCE42B654A1C005A0E22 /* SteakBanner */ = {
+		5669DCE42B654A1C005A0E22 /* StreakBanner */ = {
 			isa = PBXGroup;
 			children = (
 				0C2CCA902B852E9B0024B376 /* ViewModel */,
 				0C2CCA8F2B852E970024B376 /* View */,
 			);
-			path = SteakBanner;
+			path = StreakBanner;
 			sourceTree = "<group>";
 		};
 		567999192B4480A500941D75 /* Views */ = {
@@ -692,7 +695,7 @@
 		5679991A2B4480C200941D75 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				5669DCE42B654A1C005A0E22 /* SteakBanner */,
+				5669DCE42B654A1C005A0E22 /* StreakBanner */,
 				0CB3423C2B6C439400B68277 /* Celebration */,
 				0CEB25D12B5EE36100B14298 /* Calendar */,
 				0C2FE44E2B619C3600BAC3E8 /* LogoView.swift */,
@@ -984,6 +987,7 @@
 				567999182B447E7A00941D75 /* ToothView.swift in Sources */,
 				0C2CCA942B852EDD0024B376 /* StreakInfo.swift in Sources */,
 				0C79CE8B2B710289001EFC7C /* CalendarView+WeekView.swift in Sources */,
+				0C02028E2B97EF9F00FA65F0 /* HomeViewModel+CalendarViewDelegate.swift in Sources */,
 				0CEB25D02B56FF5A00B14298 /* Calendar.swift in Sources */,
 				0C88C7772B5322540040494D /* CalendarView.swift in Sources */,
 				0C196E012B61555D00EDD0B3 /* RootView.swift in Sources */,

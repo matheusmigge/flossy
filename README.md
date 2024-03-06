@@ -1,5 +1,5 @@
-# Did I Floss
-Did I Floss is a lightweight iOS app designed to help users keep track of their daily flossing routine.
+# Flossy
+Flossy is a lightweight iOS app designed to help users keep track of their daily flossing routine.
 
 Features
 - Track Flossing: Log each time you floss your teeth.
@@ -7,7 +7,7 @@ Features
 - Reminders: Set reminders to ensure you never miss a flossing session.
 
 Getting Started
-- Clone the repository: git clone https://github.com/matheusmigge/did-i-floss/
+- Clone the repository: git clone https://github.com/matheusmigge/flossy/
 - Open the project in Xcode.
 - Build and run the app on your iOS device or simulator.
 

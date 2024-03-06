@@ -36,7 +36,7 @@ struct HomeView: View {
                 }
                 
                 Section {
-                    CalendarView(records: $viewModel.flossRecords, style: .week)
+                    CalendarView(records: $viewModel.flossRecords, style: .week, delegate: viewModel)
                         .padding(.vertical, 7.5)
                 }
                 
@@ -71,6 +71,16 @@ struct HomeView: View {
                 }
             }
         }
+        .alert("Would you like to remove all records this day?", isPresented: $viewModel.showingAlert, actions: {
+            Button("Remove Records", role: .destructive) {
+                viewModel.removeRecordsForFocusedDate()
+            }
+            
+            Button("Cancel", role: .cancel) {
+                viewModel.alertDismiss()
+            }
+      
+        })
         .sheet(item: $viewModel.sheetView, content: { sheet in
             switch sheet {
             case .welcomeSheet:
