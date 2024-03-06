@@ -29,6 +29,7 @@
 		0C79CE892B710276001EFC7C /* CalendarView+MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C79CE882B710276001EFC7C /* CalendarView+MonthView.swift */; };
 		0C79CE8B2B710289001EFC7C /* CalendarView+WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C79CE8A2B710289001EFC7C /* CalendarView+WeekView.swift */; };
 		0C79CE8E2B710821001EFC7C /* FlossRecord+Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C79CE8D2B710821001EFC7C /* FlossRecord+Sample.swift */; };
+		0C7BE5252B95FD7300F7C8B8 /* MessageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7BE5242B95FD7300F7C8B8 /* MessageContent.swift */; };
 		0C7BE5192B912E2A00F7C8B8 /* HapticsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7BE5182B912E2A00F7C8B8 /* HapticsManagerTests.swift */; };
 		0C7BE51C2B91306400F7C8B8 /* UINotificationFeedbackGeneratable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7BE51B2B91306400F7C8B8 /* UINotificationFeedbackGeneratable.swift */; };
 		0C7BE51E2B91309000F7C8B8 /* UINotificationFeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7BE51D2B91309000F7C8B8 /* UINotificationFeedbackGenerator.swift */; };
@@ -171,6 +172,7 @@
 		0C79CE882B710276001EFC7C /* CalendarView+MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarView+MonthView.swift"; sourceTree = "<group>"; };
 		0C79CE8A2B710289001EFC7C /* CalendarView+WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarView+WeekView.swift"; sourceTree = "<group>"; };
 		0C79CE8D2B710821001EFC7C /* FlossRecord+Sample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FlossRecord+Sample.swift"; sourceTree = "<group>"; };
+		0C7BE5242B95FD7300F7C8B8 /* MessageContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContent.swift; sourceTree = "<group>"; };
 		0C7BE5182B912E2A00F7C8B8 /* HapticsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManagerTests.swift; sourceTree = "<group>"; };
 		0C7BE51B2B91306400F7C8B8 /* UINotificationFeedbackGeneratable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINotificationFeedbackGeneratable.swift; sourceTree = "<group>"; };
 		0C7BE51D2B91309000F7C8B8 /* UINotificationFeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINotificationFeedbackGenerator.swift; sourceTree = "<group>"; };
@@ -646,6 +648,7 @@
 			isa = PBXGroup;
 			children = (
 				0CCEE1CA2B67EBAD0084C9DC /* FlossReminder.swift */,
+				0C7BE5242B95FD7300F7C8B8 /* MessageContent.swift */,
 				0CFF664A2B740CE700E80202 /* FlossReminder+DailyStreak.swift */,
 				0CFF66482B740C9D00E80202 /* FlossReminder+Inactivity.swift */,
 			);
@@ -961,6 +964,7 @@
 			files = (
 				0CCEE1F82B67EC500084C9DC /* NotificationModel.swift in Sources */,
 				0CCEE1F92B67EC510084C9DC /* NotificationService.swift in Sources */,
+				0C7BE5252B95FD7300F7C8B8 /* MessageContent.swift in Sources */,
 				0CFF66462B7404D800E80202 /* UNUserNotificationTrigger.swift in Sources */,
 				0CFF664B2B740CE700E80202 /* FlossReminder+DailyStreak.swift in Sources */,
 				0CFF66492B740C9D00E80202 /* FlossReminder+Inactivity.swift in Sources */,
