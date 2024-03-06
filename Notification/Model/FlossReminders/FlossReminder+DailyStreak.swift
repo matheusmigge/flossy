@@ -70,7 +70,7 @@ extension FlossReminder.DailyStreakReminder {
     
     public static func getStandardMessageContent(daysOnStreak days: Int) -> MessageContent {
         
-        let hasNotificationExplicitStreak: Bool = true
+        let hasNotificationExplicitStreak: Bool = Bool.random()
         
         if hasNotificationExplicitStreak {
             return standardExplicitStreakCatalog(daysOnStreak: days)
