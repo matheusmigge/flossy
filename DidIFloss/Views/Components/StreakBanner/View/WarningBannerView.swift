@@ -20,7 +20,7 @@ struct WarningBannerView: View {
             Text(model.text)
                 .padding(20)
                 .foregroundStyle(model.textColor)
-                .font(.caption2)
+                .font(.caption)
                 .bold()
 
         }

@@ -14,6 +14,9 @@ class HomeViewModel: ObservableObject {
     @Published var sheetView: Sheet?
     @Published var showingCelebration: Bool = false
     
+    @Published var showingAlert: Bool = false
+    var focusedDate: Date?
+    
     // MARK: Floss records
     
     @Published var flossRecords: [FlossRecord] = []
@@ -79,10 +82,18 @@ class HomeViewModel: ObservableObject {
     }
     
     func goToDeveloperView() {
-        #if DEBUG
+#if DEBUG
         sheetView = .developerSheet
-        #endif
+#endif
         
+    }
+    
+    func flossRecordsContains(date: Date) -> Bool {
+        var recordsDateSignatures: Set<String> = Set()
+        
+        flossRecords.forEach { recordsDateSignatures.insert($0.date.calendarSignature) }
+        
+        return recordsDateSignatures.contains(date.calendarSignature)
     }
     
 }
