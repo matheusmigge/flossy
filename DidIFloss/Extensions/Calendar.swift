@@ -68,7 +68,7 @@ extension Calendar {
         return days
     }
     
-    static func createDate(year: Int, month: Int, day: Int, hour: Int, minute: Int) -> Date {
+    static func createDate(year: Int?, month: Int?, day: Int?, hour: Int?, minute: Int?) -> Date? {
         var components = DateComponents()
         components.year = year
         components.month = month
@@ -77,7 +77,7 @@ extension Calendar {
         components.minute = minute
         
         let calendar = Calendar.current
-        return calendar.date(from: components) ?? Date()
+        return calendar.date(from: components)
     }
     
     static var today: Date {
@@ -86,5 +86,13 @@ extension Calendar {
     
     static var yesterday: Date {
         Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+    }
+    
+    static var tomorrow: Date {
+        Calendar.current.date(byAdding: .day, value: +1, to: Date())!
+    }
+    
+    static func isDateInTheFuture(_ date: Date) -> Bool {
+        return date >= today
     }
 }

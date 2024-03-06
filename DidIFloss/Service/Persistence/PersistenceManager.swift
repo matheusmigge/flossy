@@ -9,6 +9,8 @@ import Foundation
 import Notification
 
 class PersistenceManager: PersistenceManagerProtocol {
+
+    
     
     let userDefaults: UserDefaultable
     let flossRecordService: FlossRecordDataProvider
@@ -20,7 +22,7 @@ class PersistenceManager: PersistenceManagerProtocol {
     
     // beware! Should only be one FlossRecordDataSource to maintain persistence container single instance
     // prefer use of shared instante to use a persistenceManager
-    public init(userDefaults: UserDefaultable, flossRecordService: FlossRecordDataProvider) {
+    init(userDefaults: UserDefaultable, flossRecordService: FlossRecordDataProvider) {
         self.userDefaults = userDefaults
         self.flossRecordService = flossRecordService
     }
@@ -68,6 +70,12 @@ class PersistenceManager: PersistenceManagerProtocol {
         observer?.hadChangesInFlossRecordDataBase()
     }
     
+    func deleteFlossRecords(_ records: [FlossRecord]) {
+        records.forEach { record in
+            self.deleteFlossRecord(record)
+        }
+    }
+    
     func saveFlossDate(date: Date) {
         if let lastFlossDate = getLastFlossDate() {
             if date > lastFlossDate {
@@ -98,5 +106,6 @@ class PersistenceManager: PersistenceManagerProtocol {
             return false
         }
     }
+    
 }
 

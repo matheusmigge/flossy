@@ -10,20 +10,20 @@ import UIKit
 
 struct DeveloperView: View {
     
-    @ObservedObject var feedbackGenerator = UserFeedbackManager.shared
+    @ObservedObject var feedbackGenerator = HapticsManager.shared
     
     var body: some View {
         List {
             Section {
                 Picker("Celebration", selection: $feedbackGenerator.preferredCelebrationFeedbackType) {
                     Text("Success - Tuc")
-                        .tag(HapticFeedbackOption.success)
+                        .tag(HapticFeedbackOption.short)
     
                     Text("Warming - Tuc Tuc")
-                        .tag(HapticFeedbackOption.warning)
+                        .tag(HapticFeedbackOption.medium)
                     
                     Text("Error - Tuc Tuc Tuc")
-                        .tag(HapticFeedbackOption.error)
+                        .tag(HapticFeedbackOption.long)
                     
                     Text("None")
                             .tag(HapticFeedbackOption.none)
@@ -31,13 +31,13 @@ struct DeveloperView: View {
                 
                 Picker("Deletion", selection: $feedbackGenerator.preferredDeletionFeedbackType) {
                     Text("Success - Tuc")
-                        .tag(HapticFeedbackOption.success)
+                        .tag(HapticFeedbackOption.short)
     
                     Text("Warming - Tuc Tuc")
-                        .tag(HapticFeedbackOption.warning)
+                        .tag(HapticFeedbackOption.medium)
                     
                     Text("Error - Tuc Tuc Tuc")
-                        .tag(HapticFeedbackOption.error)
+                        .tag(HapticFeedbackOption.long)
                     
                     Text("None")
                             .tag(HapticFeedbackOption.none)

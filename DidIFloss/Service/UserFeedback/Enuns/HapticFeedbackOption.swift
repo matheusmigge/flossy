@@ -9,15 +9,15 @@ import Foundation
 import UIKit
 
 enum HapticFeedbackOption: Hashable {
-    case success, warning, error, none
+    case short, medium, long, none
     
     var feedBackStyle: UINotificationFeedbackGenerator.FeedbackType? {
         switch self {
-        case .success:
+        case .short:
             return .success
-        case .warning:
+        case .medium:
             return .warning
-        case .error:
+        case .long:
             return .error
         case .none:
             return nil

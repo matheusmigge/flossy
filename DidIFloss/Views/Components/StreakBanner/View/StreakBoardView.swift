@@ -30,7 +30,7 @@ struct StreakBoardView: View {
             }
             
             Text(model.captionText)
-                .font(.caption)
+                .font(.body)
                 .multilineTextAlignment(.center)
         }
     }

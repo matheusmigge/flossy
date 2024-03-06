@@ -14,18 +14,26 @@ class HomeViewModel: ObservableObject {
     @Published var sheetView: Sheet?
     @Published var showingCelebration: Bool = false
     
+    @Published var showingAlert: Bool = false
+    var focusedDate: Date?
+    
     // MARK: Floss records
     
     @Published var flossRecords: [FlossRecord] = []
     
     weak var persistence: PersistenceManagerProtocol?
     var notificationService: FlossRemindersService?
+    weak var userFeedbackService: HapticsManagerProtocol?
     
-    init(persistence: PersistenceManagerProtocol = PersistenceManager.shared, notificationService: FlossRemindersService = NotificationService.current()) {
+    init(persistence: PersistenceManagerProtocol = PersistenceManager.shared,
+         notificationService: FlossRemindersService = NotificationService.current(),
+         userFeedbackService: HapticsManagerProtocol = HapticsManager.shared
+    ) {
         self.persistence = persistence
         self.persistence?.observer = self
         
         self.notificationService = notificationService
+        self.userFeedbackService = userFeedbackService
         
     }
     
@@ -74,10 +82,18 @@ class HomeViewModel: ObservableObject {
     }
     
     func goToDeveloperView() {
-        #if DEBUG
+#if DEBUG
         sheetView = .developerSheet
-        #endif
+#endif
         
+    }
+    
+    func flossRecordsContains(date: Date) -> Bool {
+        var recordsDateSignatures: Set<String> = Set()
+        
+        flossRecords.forEach { recordsDateSignatures.insert($0.date.calendarSignature) }
+        
+        return recordsDateSignatures.contains(date.calendarSignature)
     }
     
 }
