@@ -83,7 +83,7 @@ class HomeViewModel: ObservableObject {
         
     }
     
-    private func flossRecordsContains(date: Date) -> Bool {
+    func flossRecordsContains(date: Date) -> Bool {
         var recordsDateSignatures: Set<String> = Set()
         
         flossRecords.forEach { recordsDateSignatures.insert($0.date.calendarSignature) }
@@ -93,44 +93,3 @@ class HomeViewModel: ObservableObject {
     
 }
 
-extension HomeViewModel: CalendarViewDelegate {
-    func didSelectDate(_ date: Date) {
-        if flossRecordsContains(date: date) {
-            self.focusedDate = date
-            self.showingAlert = true
-            
-            return
-        }
-        
-        
-        if !Calendar.isDateInTheFuture(date) && !showingCelebration {
-            let calendarComponents = Calendar.current.dateComponents([.year, .month, .day], from: date)
-            let timeComponents = Calendar.current.dateComponents([.hour, .minute], from: .now)
-            
-            let logDate = Calendar.createDate(year: calendarComponents.year, month: calendarComponents.month, day: calendarComponents.day, hour: timeComponents.hour, minute: timeComponents.minute)
-            
-            addLogRecord(date: logDate ?? date)
-            
-        }
-        
-    }
-    
-    func alertDismiss() {
-        showingAlert = false
-        self.focusedDate = nil
-    }
-    
-    func removeRecordsForFocusedDate() {
-        guard let date = focusedDate else { return }
-        
-        var selectedRecords: [FlossRecord] {
-            self.flossRecords.filter { Calendar.current.isDate($0.date, inSameDayAs: date)}
-        }
-        
-        persistence?.deleteFlossRecords(selectedRecords)
-        
-        alertDismiss()
-        self.loadData()
-        
-    }
-}
