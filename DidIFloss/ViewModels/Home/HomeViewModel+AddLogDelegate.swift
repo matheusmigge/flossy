@@ -11,12 +11,14 @@ import Notification
 extension HomeViewModel: AddLogDelegate {
     func addLogRecord(date: Date) {
         
-        scheduleNotifications(flossDate: date)
         persistence?.saveFlossDate(date: date)
         self.loadData()
+        
         sheetView = nil
         showingCelebration = true
+        
         userFeedbackService?.vibrateAddLogCelebration()
+        scheduleNotifications(flossDate: date)
     }
     
     private func scheduleNotifications(flossDate date: Date) {
