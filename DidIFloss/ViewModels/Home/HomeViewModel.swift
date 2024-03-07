@@ -22,7 +22,7 @@ class HomeViewModel: ObservableObject {
     @Published var flossRecords: [FlossRecord] = []
     
     weak var persistence: PersistenceManagerProtocol?
-    var notificationService: FlossRemindersService?
+    weak var notificationService: FlossRemindersService?
     weak var userFeedbackService: HapticsManagerProtocol?
     
     init(persistence: PersistenceManagerProtocol = PersistenceManager.shared,

@@ -13,7 +13,7 @@ import UserNotifications
 ///
 /// Use the `NotificationService` struct to request notification authorization, schedule notifications,
 /// and manage floss reminders.
-public struct NotificationService: FlossRemindersService {
+public class NotificationService: FlossRemindersService {
     
     // MARK: init
     
