@@ -76,4 +76,66 @@ final class StreakManagerTests: XCTestCase {
         XCTAssertEqual(result.days, 3)
         
     }
+    
+    
+    func testCalculateCurrentStreakReturnsEmptyStateWhenNoRecords() {
+        var dates: [Date] = []
+        
+        let result = StreakManager.calculateCurrentStreak(logsDates: dates)
+        
+        XCTAssertEqual(result.streak, StreakInfo.Streak.empty)
+    }
+    
+    func testCalculateCurrentStreakReturnsCorrespondingPositiveStreak() {
+        
+        var dates: [Date] { [
+            Calendar.current.date(byAdding: .day, value: -3, to: .now)!,
+            Calendar.current.date(byAdding: .day, value: -3, to: .now)!,
+            Calendar.current.date(byAdding: .day, value: -2, to: .now)!,
+            Calendar.current.date(byAdding: .day, value: -1, to: .now)!,
+            Date()
+        ]
+        }
+        
+        let result = StreakManager.calculateCurrentStreak(logsDates: dates)
+        
+        XCTAssertEqual(result.streak, StreakInfo.Streak.positive)
+        XCTAssertEqual(result.days, 4)
+        
+    }
+    
+    func testCalculateCurrentStreakReturnsPositiveMissingToday() {
+        var dates: [Date] { [
+            Calendar.current.date(byAdding: .day, value: -3, to: .now)!,
+            Calendar.current.date(byAdding: .day, value: -3, to: .now)!,
+            Calendar.current.date(byAdding: .day, value: -2, to: .now)!,
+            Calendar.current.date(byAdding: .day, value: -1, to: .now)!,
+    
+        ]
+        }
+        
+        let result = StreakManager.calculateCurrentStreak(logsDates: dates)
+        
+        XCTAssertEqual(result.streak, StreakInfo.Streak.positiveMissingToday)
+        XCTAssertEqual(result.days, 3)
+    }
+    
+    func testCalculateCurrentStreakReturnsNegativeStreak() {
+        var dates: [Date] { [
+            Calendar.current.date(byAdding: .day, value: -7, to: .now)!,
+            Calendar.current.date(byAdding: .day, value: -8, to: .now)!,
+            Calendar.current.date(byAdding: .day, value: -9, to: .now)!,
+            Calendar.current.date(byAdding: .day, value: -10, to: .now)!
+        ]
+        }
+        
+        let result = StreakManager.calculateCurrentStreak(logsDates: dates)
+        
+        XCTAssertEqual(result.streak, StreakInfo.Streak.negative)
+        XCTAssertEqual(result.days, 7)
+    }
+    
+
+    
 }
+
