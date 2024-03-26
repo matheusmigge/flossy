@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Notification
 import SwiftUI
 
 class LogRecordsViewModel: ObservableObject {
@@ -14,18 +13,18 @@ class LogRecordsViewModel: ObservableObject {
     @Published var selectedDate: Date?
     
     weak var persistence: PersistenceManagerProtocol?
-    var notificationService: FlossRemindersService?
     weak var userFeedbackService: HapticsManagerProtocol?
+    var logRecordsHandler: HandleLogInteractionUseCaseProtocol
     
     @Published var records: [FlossRecord] = []
     
     init(persistenceService: PersistenceManagerProtocol = PersistenceManager.shared, 
-         notificationService: FlossRemindersService = NotificationService.current(),
-         userFeedbackService: HapticsManagerProtocol = HapticsManager.shared
+         userFeedbackService: HapticsManagerProtocol = HapticsManager.shared,
+         logRecordsHandler: HandleLogInteractionUseCaseProtocol = HandleLogInteractionUseCase()
     ) {
         self.persistence = persistenceService
-        self.notificationService = notificationService
         self.userFeedbackService = userFeedbackService
+        self.logRecordsHandler = logRecordsHandler
         
     }
     
@@ -48,42 +47,13 @@ class LogRecordsViewModel: ObservableObject {
     }
     
     func removeRecord(_ record: FlossRecord) {
-        guard let safePersistence = persistence else { return }
         
-        safePersistence.deleteFlossRecord(record)
-        
-        // has any other record for today?
-        if shouldRemovePendingDailyStreakNotification(ifRemove: record) {
-            notificationService?.clearPendingDailyStreakFlossReminderNotification()
-        }
+        logRecordsHandler.removeLogRecord(for: record)
         
         loadRecords()
         userFeedbackService?.vibrateLogRemoval()
     }
     
-    
-    private func shouldRemovePendingDailyStreakNotification(ifRemove record: FlossRecord) -> Bool {
-        
-        if !Calendar.current.isDateInToday(record.date) {
-            return false
-        }
-        
-        let remainingRecords: [FlossRecord] = self.records.filter({$0 != record })
-        let recordDaySignature = record.date.dayAndMonthAndYearFormatted
-        var uniqueLogDays: Set<String> = Set()
-        
-        remainingRecords.forEach { log in
-            let logDaySignature = log.date.dayAndMonthAndYearFormatted
-            
-            uniqueLogDays.insert(logDaySignature)
-        }
-        
-        if uniqueLogDays.contains(recordDaySignature) {
-            return false
-        } else {
-            return true
-        }
-    }
     
     var sectionRecords: [FlossRecord] {
         let descendingSortedRecords = records.sorted(by: {$0.date > $1.date})

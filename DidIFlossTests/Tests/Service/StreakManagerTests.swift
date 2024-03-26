@@ -79,7 +79,7 @@ final class StreakManagerTests: XCTestCase {
     
     
     func testCalculateCurrentStreakReturnsEmptyStateWhenNoRecords() {
-        var dates: [Date] = []
+        let dates: [Date] = []
         
         let result = StreakManager.calculateCurrentStreak(logsDates: dates)
         

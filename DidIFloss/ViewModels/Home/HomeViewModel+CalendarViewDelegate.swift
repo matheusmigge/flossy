@@ -16,7 +16,6 @@ extension HomeViewModel: CalendarViewDelegate {
             return
         }
         
-        
         if isLogDateValid(for: date) {
             addLogRecord(date: date)
         }
@@ -26,8 +25,8 @@ extension HomeViewModel: CalendarViewDelegate {
         guard let date = focusedDate else { return }
         
         logInteractionHandler.removeAllLogRecords(for: date)
-      
         userFeedbackService?.vibrateLogRemoval()
+        
         alertDismiss()
         self.loadData()
     }

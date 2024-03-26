@@ -46,6 +46,10 @@ struct HandleLogInteractionUseCase: HandleLogInteractionUseCaseProtocol {
     
     func removeLogRecord(for record: FlossRecord) {
         
+        recordsRepository.deleteFlossRecord(record)
+        
+        // has any other record for today?
+        shouldRemovePendingDailyStreakNotification(ifRemove: record)
     }
     
     func removeAllLogRecords(for date: Date) {
@@ -72,6 +76,29 @@ struct HandleLogInteractionUseCase: HandleLogInteractionUseCaseProtocol {
             
         } else {
             notificationService.scheduleInactivityFlossReminderNotifications()
+        }
+    }
+    
+    private func shouldRemovePendingDailyStreakNotification(ifRemove record: FlossRecord) {
+        
+        if !Calendar.current.isDateInToday(record.date) {
+            return
+        }
+        
+        recordsRepository.getFlossRecords { records in
+            let remainingRecords: [FlossRecord] = records.filter({$0 != record })
+            let recordDaySignature = record.date.dayAndMonthAndYearFormatted
+            var uniqueLogDays: Set<String> = Set()
+            
+            remainingRecords.forEach { log in
+                let logDaySignature = log.date.dayAndMonthAndYearFormatted
+                
+                uniqueLogDays.insert(logDaySignature)
+            }
+            
+            if uniqueLogDays.contains(recordDaySignature) {
+                notificationService.clearPendingDailyStreakFlossReminderNotification()
+            }
         }
     }
 }
