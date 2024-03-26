@@ -71,7 +71,7 @@ struct HomeView: View {
                 }
             }
         }
-        .alert("Would you like to remove all records this day?", isPresented: $viewModel.showingAlert, actions: {
+        .alert("Would you like to remove all records for this day?", isPresented: $viewModel.showingAlert, actions: {
             Button("Remove Records", role: .destructive) {
                 viewModel.removeRecordsForFocusedDate()
             }

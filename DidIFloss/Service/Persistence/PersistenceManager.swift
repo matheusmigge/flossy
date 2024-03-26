@@ -9,8 +9,6 @@ import Foundation
 import Notification
 
 class PersistenceManager: PersistenceManagerProtocol {
-
-    
     
     let userDefaults: UserDefaultable
     let flossRecordService: FlossRecordDataProvider

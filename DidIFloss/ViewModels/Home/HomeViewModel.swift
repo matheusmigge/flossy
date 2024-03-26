@@ -24,24 +24,25 @@ class HomeViewModel: ObservableObject {
     weak var persistence: PersistenceManagerProtocol?
     weak var notificationService: FlossRemindersService?
     weak var userFeedbackService: HapticsManagerProtocol?
+    weak var logInteractionHandler: HandleLogInteractionUseCaseProtocol?
+    
+    var streakBoardViewModel: StreakBoardViewModel {
+        let streakInfo = StreakManager.calculateCurrentStreak(logsDates: flossRecords.map({$0.date}))
+        return StreakManager.createStreakBoardViewModel(info: streakInfo)
+    }
     
     init(persistence: PersistenceManagerProtocol = PersistenceManager.shared,
          notificationService: FlossRemindersService = NotificationService.current(),
-         userFeedbackService: HapticsManagerProtocol = HapticsManager.shared
+         userFeedbackService: HapticsManagerProtocol = HapticsManager.shared,
+         logInteractionHandler: HandleLogInteractionUseCaseProtocol = HandleLogInteractionUseCase()
     ) {
         self.persistence = persistence
         self.persistence?.observer = self
         
         self.notificationService = notificationService
         self.userFeedbackService = userFeedbackService
+        self.logInteractionHandler = logInteractionHandler
         
-    }
-    
-    var streakBoardViewModel: StreakBoardViewModel = StreakBoardViewModel(streakBoardContent: .noLogsRecorded,
-                                                                          warmingBoardContent: .noLogsRecorded)
-    func updateStreakBoardViewModel(){
-        let streakInfo =  StreakManager.calculateCurrentStreak(logsDates: flossRecords.map({$0.date}))
-        self.streakBoardViewModel = StreakManager.createStreakBoardViewModel(info: streakInfo)
     }
     
     // MARK: Did Apper
@@ -55,7 +56,6 @@ class HomeViewModel: ObservableObject {
     func loadData() {
         persistence?.getFlossRecords { [weak self] records in
             self?.flossRecords = records
-            self?.updateStreakBoardViewModel()
         }
     }
     
@@ -86,14 +86,6 @@ class HomeViewModel: ObservableObject {
         sheetView = .developerSheet
 #endif
         
-    }
-    
-    func flossRecordsContains(date: Date) -> Bool {
-        var recordsDateSignatures: Set<String> = Set()
-        
-        flossRecords.forEach { recordsDateSignatures.insert($0.date.calendarSignature) }
-        
-        return recordsDateSignatures.contains(date.calendarSignature)
     }
     
 }

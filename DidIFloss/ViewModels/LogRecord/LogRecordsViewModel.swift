@@ -62,7 +62,7 @@ class LogRecordsViewModel: ObservableObject {
     }
     
     
-    func shouldRemovePendingDailyStreakNotification(ifRemove record: FlossRecord) -> Bool {
+    private func shouldRemovePendingDailyStreakNotification(ifRemove record: FlossRecord) -> Bool {
         
         if !Calendar.current.isDateInToday(record.date) {
             return false

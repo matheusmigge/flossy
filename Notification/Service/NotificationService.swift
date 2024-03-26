@@ -24,7 +24,7 @@ public class NotificationService: FlossRemindersService {
     let center: UNUserNotificationCenterable
     
     /// The standard method for utilizing NotificationService
-    static public func current() -> NotificationService {
+    static public func current() -> FlossRemindersService {
         NotificationService()
     }
     

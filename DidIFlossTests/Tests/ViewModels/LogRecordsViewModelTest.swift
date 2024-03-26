@@ -6,8 +6,16 @@
 //
 
 import XCTest
+@testable import DidIFloss
 
 final class LogRecordsViewModelTest: XCTestCase {
+    
+    var viewModel: LogRecordsViewModel!
+    
+    var hapticsManager: HapticsManagerMock!
+    var persistanceManager: PersistenceManagerMock!
+    var notificationManager: Notification!
+    
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
