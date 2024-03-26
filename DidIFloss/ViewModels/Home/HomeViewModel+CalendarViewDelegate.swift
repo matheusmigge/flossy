@@ -25,7 +25,7 @@ extension HomeViewModel: CalendarViewDelegate {
     func removeRecordsForFocusedDate() {
         guard let date = focusedDate else { return }
         
-        logInteractionHandler?.handleLogRecord(for: date)
+        logInteractionHandler.removeAllLogRecords(for: date)
       
         userFeedbackService?.vibrateLogRemoval()
         alertDismiss()

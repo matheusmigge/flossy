@@ -24,7 +24,7 @@ class HomeViewModel: ObservableObject {
     weak var persistence: PersistenceManagerProtocol?
     weak var notificationService: FlossRemindersService?
     weak var userFeedbackService: HapticsManagerProtocol?
-    weak var logInteractionHandler: HandleLogInteractionUseCaseProtocol?
+    var logInteractionHandler: HandleLogInteractionUseCaseProtocol
     
     var streakBoardViewModel: StreakBoardViewModel {
         let streakInfo = StreakManager.calculateCurrentStreak(logsDates: flossRecords.map({$0.date}))
@@ -37,17 +37,16 @@ class HomeViewModel: ObservableObject {
          logInteractionHandler: HandleLogInteractionUseCaseProtocol = HandleLogInteractionUseCase()
     ) {
         self.persistence = persistence
-        self.persistence?.observer = self
-        
         self.notificationService = notificationService
         self.userFeedbackService = userFeedbackService
         self.logInteractionHandler = logInteractionHandler
-        
     }
     
     // MARK: Did Apper
     
     func viewDidApper() {
+        self.persistence?.observer = self
+        
         self.loadData()
         self.checkForOnboarding()
         

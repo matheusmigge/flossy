@@ -8,7 +8,7 @@
 import Foundation
 import Notification
 
-protocol HandleLogInteractionUseCaseProtocol: AnyObject {
+protocol HandleLogInteractionUseCaseProtocol {
     func handleLogRecord(for date: Date)
     
     func removeLogRecord(for record: FlossRecord)
@@ -16,7 +16,7 @@ protocol HandleLogInteractionUseCaseProtocol: AnyObject {
     func removeAllLogRecords(for date: Date)
 }
 
-class HandleLogInteractionUseCase: HandleLogInteractionUseCaseProtocol {
+struct HandleLogInteractionUseCase: HandleLogInteractionUseCaseProtocol {
     
     let recordsRepository: PersistenceManagerProtocol
     let notificationService: FlossRemindersService
@@ -49,15 +49,15 @@ class HandleLogInteractionUseCase: HandleLogInteractionUseCaseProtocol {
     }
     
     func removeAllLogRecords(for date: Date) {
-        recordsRepository.getFlossRecords { [weak self] records in
+        recordsRepository.getFlossRecords {  records in
             var selectedRecords: [FlossRecord] {
                 records.filter { Calendar.current.isDate($0.date, inSameDayAs: date)}
             }
             
-            self?.recordsRepository.deleteFlossRecords(selectedRecords)
+            self.recordsRepository.deleteFlossRecords(selectedRecords)
             
             if Calendar.current.isDateInToday(date) {
-                self?.notificationService.clearPendingDailyStreakFlossReminderNotification()
+                self.notificationService.clearPendingDailyStreakFlossReminderNotification()
                 
             }
         }
@@ -65,9 +65,9 @@ class HandleLogInteractionUseCase: HandleLogInteractionUseCaseProtocol {
     
     private func scheduleNotifications(flossDate date: Date) {
         if Calendar.current.isDateInToday(date) {
-            self.recordsRepository.getFlossRecords { [weak self] records in
+            self.recordsRepository.getFlossRecords { records in
                 let streakInfo = StreakManager.calculateCurrentStreak(logsDates: records.map({$0.date}))
-                self?.notificationService.scheduleAllFlossReminders(streakCount: streakInfo.days)
+                self.notificationService.scheduleAllFlossReminders(streakCount: streakInfo.days)
             }
             
         } else {

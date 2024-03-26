@@ -11,7 +11,7 @@ import Notification
 extension HomeViewModel: AddLogDelegate {
     func addLogRecord(date: Date) {
         
-        logInteractionHandler?.handleLogRecord(for: date)
+        logInteractionHandler.handleLogRecord(for: date)
         userFeedbackService?.vibrateAddLogCelebration()
         
         sheetView = nil
