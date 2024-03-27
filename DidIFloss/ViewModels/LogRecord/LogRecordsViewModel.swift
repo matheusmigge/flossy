@@ -12,24 +12,24 @@ class LogRecordsViewModel: ObservableObject {
     
     @Published var selectedDate: Date?
     
-    weak var persistence: PersistenceManagerProtocol?
+    weak var recordsRepository: FlossRecordsRepositoryProtocol?
     weak var userFeedbackService: HapticsManagerProtocol?
     var logRecordsHandler: HandleLogInteractionUseCaseProtocol
     
     @Published var records: [FlossRecord] = []
     
-    init(persistenceService: PersistenceManagerProtocol = PersistenceManager.shared, 
+    init(persistenceService: FlossRecordsRepositoryProtocol = PersistenceManager.shared,
          userFeedbackService: HapticsManagerProtocol = HapticsManager.shared,
          logRecordsHandler: HandleLogInteractionUseCaseProtocol = HandleLogInteractionUseCase()
     ) {
-        self.persistence = persistenceService
+        self.recordsRepository = persistenceService
         self.userFeedbackService = userFeedbackService
         self.logRecordsHandler = logRecordsHandler
         
     }
     
     private func loadRecords() {
-        guard let safePersistence = persistence else { return }
+        guard let safePersistence = recordsRepository else { return }
         
         safePersistence.getFlossRecords { [weak self] result in
             self?.records = result

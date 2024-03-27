@@ -25,7 +25,7 @@ import Foundation
 /// }
 /// ```
 
-protocol PersistenceManagerProtocol: AnyObject {
+protocol PersistenceManagerProtocol: AnyObject, FlossRecordsRepositoryProtocol {
     /// Saves the provided date as the last floss date.
     ///
     /// - Parameter date: The date to be saved as the last floss date.
@@ -35,11 +35,6 @@ protocol PersistenceManagerProtocol: AnyObject {
     ///
     /// - Returns: The last saved floss date, or `nil` if no date has been saved.
     func getLastFlossDate() -> Date?
-    
-    /// Fetches the floss records and provides them to the specified handler.
-    ///
-    /// - Parameter handler: A closure that receives an array of FlossRecord.
-    func getFlossRecords(handler: @escaping ([FlossRecord]) -> Void)
     
     /// Deletes the specified floss record.
     ///

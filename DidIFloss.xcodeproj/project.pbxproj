@@ -10,8 +10,8 @@
 		0C02028E2B97EF9F00FA65F0 /* HomeViewModel+CalendarViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C02028D2B97EF9F00FA65F0 /* HomeViewModel+CalendarViewDelegate.swift */; };
 		0C196DFF2B614E7600EDD0B3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C196DFE2B614E7600EDD0B3 /* Launch Screen.storyboard */; };
 		0C196E012B61555D00EDD0B3 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C196E002B61555C00EDD0B3 /* RootView.swift */; };
-		0C2CCA8B2B84E6DD0024B376 /* StreakManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2CCA8A2B84E6DD0024B376 /* StreakManager.swift */; };
-		0C2CCA8D2B84EEA10024B376 /* StreakManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2CCA8C2B84EEA10024B376 /* StreakManagerTests.swift */; };
+		0C2CCA8B2B84E6DD0024B376 /* StreakCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2CCA8A2B84E6DD0024B376 /* StreakCalculator.swift */; };
+		0C2CCA8D2B84EEA10024B376 /* StreakCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2CCA8C2B84EEA10024B376 /* StreakCalculatorTests.swift */; };
 		0C2CCA922B852EB60024B376 /* StreakBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2CCA912B852EB60024B376 /* StreakBoardViewModel.swift */; };
 		0C2CCA942B852EDD0024B376 /* StreakInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2CCA932B852EDD0024B376 /* StreakInfo.swift */; };
 		0C2EF6652B710E4400AFF9D4 /* UserDefaultsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2EF6642B710E4400AFF9D4 /* UserDefaultsMock.swift */; };
@@ -43,7 +43,7 @@
 		0C7E923B2B470DB00079525D /* UserDefaultable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923A2B470DB00079525D /* UserDefaultable.swift */; };
 		0C7E923D2B470DDB0079525D /* PersistenceManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */; };
 		0C7E923F2B470FD30079525D /* PersistenceManager+KEYS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923E2B470FD30079525D /* PersistenceManager+KEYS.swift */; };
-		0C7E92462B479E170079525D /* FlossRecordDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E92452B479E170079525D /* FlossRecordDataProvider.swift */; };
+		0C7E92462B479E170079525D /* FlossRecordDataProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E92452B479E170079525D /* FlossRecordDataProviderProtocol.swift */; };
 		0C88C7772B5322540040494D /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C88C7762B5322540040494D /* CalendarView.swift */; };
 		0C8981F02B466223008CFD5D /* FlossRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8981EF2B466223008CFD5D /* FlossRecord.swift */; };
 		0C8981F42B4667AC008CFD5D /* FlossRecordDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8981F32B4667AC008CFD5D /* FlossRecordDataSource.swift */; };
@@ -56,6 +56,7 @@
 		0C916C4B2B6C70570041FE3B /* LogRecordsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C916C4A2B6C70570041FE3B /* LogRecordsViewModel.swift */; };
 		0C916C4C2B6C75600041FE3B /* Notification.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCEE1D42B67EBDB0084C9DC /* Notification.framework */; };
 		0C916C4D2B6C75600041FE3B /* Notification.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCEE1D42B67EBDB0084C9DC /* Notification.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0CB26C632BB398A600CB1A43 /* FlossRecordsRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB26C622BB398A600CB1A43 /* FlossRecordsRepositoryProtocol.swift */; };
 		0CB342332B6B0C0400B68277 /* AddLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB342322B6B0C0400B68277 /* AddLogView.swift */; };
 		0CB342352B6BD43900B68277 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB342342B6BD43900B68277 /* OnboardingView.swift */; };
 		0CB342372B6C0AF600B68277 /* OnboardingRowInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB342362B6C0AF600B68277 /* OnboardingRowInfoModel.swift */; };
@@ -157,8 +158,8 @@
 		0C02028D2B97EF9F00FA65F0 /* HomeViewModel+CalendarViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewModel+CalendarViewDelegate.swift"; sourceTree = "<group>"; };
 		0C196DFE2B614E7600EDD0B3 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		0C196E002B61555C00EDD0B3 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		0C2CCA8A2B84E6DD0024B376 /* StreakManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakManager.swift; sourceTree = "<group>"; };
-		0C2CCA8C2B84EEA10024B376 /* StreakManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakManagerTests.swift; sourceTree = "<group>"; };
+		0C2CCA8A2B84E6DD0024B376 /* StreakCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakCalculator.swift; sourceTree = "<group>"; };
+		0C2CCA8C2B84EEA10024B376 /* StreakCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakCalculatorTests.swift; sourceTree = "<group>"; };
 		0C2CCA912B852EB60024B376 /* StreakBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakBoardViewModel.swift; sourceTree = "<group>"; };
 		0C2CCA932B852EDD0024B376 /* StreakInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakInfo.swift; sourceTree = "<group>"; };
 		0C2EF6592B710E0300AFF9D4 /* DidIFlossTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DidIFlossTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,7 +193,7 @@
 		0C7E923A2B470DB00079525D /* UserDefaultable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultable.swift; sourceTree = "<group>"; };
 		0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManagerProtocol.swift; sourceTree = "<group>"; };
 		0C7E923E2B470FD30079525D /* PersistenceManager+KEYS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistenceManager+KEYS.swift"; sourceTree = "<group>"; };
-		0C7E92452B479E170079525D /* FlossRecordDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecordDataProvider.swift; sourceTree = "<group>"; };
+		0C7E92452B479E170079525D /* FlossRecordDataProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecordDataProviderProtocol.swift; sourceTree = "<group>"; };
 		0C88C7762B5322540040494D /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		0C8981EF2B466223008CFD5D /* FlossRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecord.swift; sourceTree = "<group>"; };
 		0C8981F32B4667AC008CFD5D /* FlossRecordDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecordDataSource.swift; sourceTree = "<group>"; };
@@ -203,6 +204,7 @@
 		0C90A2FE2B6D82A300015298 /* HomeViewModel+CelebrationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewModel+CelebrationDelegate.swift"; sourceTree = "<group>"; };
 		0C90A3002B6D82DB00015298 /* HomeViewModel+PersistenceObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewModel+PersistenceObserver.swift"; sourceTree = "<group>"; };
 		0C916C4A2B6C70570041FE3B /* LogRecordsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogRecordsViewModel.swift; sourceTree = "<group>"; };
+		0CB26C622BB398A600CB1A43 /* FlossRecordsRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecordsRepositoryProtocol.swift; sourceTree = "<group>"; };
 		0CB342322B6B0C0400B68277 /* AddLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLogView.swift; sourceTree = "<group>"; };
 		0CB342342B6BD43900B68277 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		0CB342362B6C0AF600B68277 /* OnboardingRowInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingRowInfoModel.swift; sourceTree = "<group>"; };
@@ -311,7 +313,7 @@
 		0C2CCA952B8530160024B376 /* StreakManager */ = {
 			isa = PBXGroup;
 			children = (
-				0C2CCA8A2B84E6DD0024B376 /* StreakManager.swift */,
+				0C2CCA8A2B84E6DD0024B376 /* StreakCalculator.swift */,
 			);
 			path = StreakManager;
 			sourceTree = "<group>";
@@ -361,7 +363,7 @@
 			isa = PBXGroup;
 			children = (
 				0C2EF66A2B710FE500AFF9D4 /* PersistenceManagerTests.swift */,
-				0C2CCA8C2B84EEA10024B376 /* StreakManagerTests.swift */,
+				0C2CCA8C2B84EEA10024B376 /* StreakCalculatorTests.swift */,
 				0C7BE5182B912E2A00F7C8B8 /* HapticsManagerTests.swift */,
 			);
 			path = Service;
@@ -485,8 +487,9 @@
 			isa = PBXGroup;
 			children = (
 				0C7E923A2B470DB00079525D /* UserDefaultable.swift */,
-				0C7E92452B479E170079525D /* FlossRecordDataProvider.swift */,
+				0C7E92452B479E170079525D /* FlossRecordDataProviderProtocol.swift */,
 				0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */,
+				0CB26C622BB398A600CB1A43 /* FlossRecordsRepositoryProtocol.swift */,
 				0C90A2F42B6D796800015298 /* PersistenceObserver.swift */,
 			);
 			path = Protocols;
@@ -1023,7 +1026,7 @@
 				0C3CBCD92B9A006900708BD1 /* HapticsManagerMock.swift in Sources */,
 				0C7BE5232B91313A00F7C8B8 /* UINotificationFeedbackGeneratorMock.swift in Sources */,
 				0C2EF6672B710EA100AFF9D4 /* FlossRecordDataProviderMock.swift in Sources */,
-				0C2CCA8D2B84EEA10024B376 /* StreakManagerTests.swift in Sources */,
+				0C2CCA8D2B84EEA10024B376 /* StreakCalculatorTests.swift in Sources */,
 				0C3CBCD12B99FEC600708BD1 /* HomeViewModelTest.swift in Sources */,
 				0C3DB6BC2BB318DC00CADE57 /* PersistenceManagerMock.swift in Sources */,
 			);
@@ -1077,7 +1080,7 @@
 				0C2FE4502B619C3600BAC3E8 /* LogoView.swift in Sources */,
 				56C33DF72B3CAA1000D8DEB7 /* DidIFlossApp.swift in Sources */,
 				0C90A2F92B6D81BE00015298 /* LogRecordsViewModel+CalendarDelegate.swift in Sources */,
-				0C2CCA8B2B84E6DD0024B376 /* StreakManager.swift in Sources */,
+				0C2CCA8B2B84E6DD0024B376 /* StreakCalculator.swift in Sources */,
 				0C8981F02B466223008CFD5D /* FlossRecord.swift in Sources */,
 				0C2FE44F2B619C3600BAC3E8 /* BannerSectionView.swift in Sources */,
 				0C3DB6C12BB3593400CADE57 /* HandleLogInteractionUseCase.swift in Sources */,
@@ -1087,7 +1090,7 @@
 				566FF8CB2B439FB70056644A /* LaunchScreenView.swift in Sources */,
 				564891A92B6C4E050008F323 /* StreakBoardModel.swift in Sources */,
 				0C7E923B2B470DB00079525D /* UserDefaultable.swift in Sources */,
-				0C7E92462B479E170079525D /* FlossRecordDataProvider.swift in Sources */,
+				0C7E92462B479E170079525D /* FlossRecordDataProviderProtocol.swift in Sources */,
 				0C8981F42B4667AC008CFD5D /* FlossRecordDataSource.swift in Sources */,
 				564891A72B6C35F10008F323 /* StreakBoardView.swift in Sources */,
 				0C7E923F2B470FD30079525D /* PersistenceManager+KEYS.swift in Sources */,
@@ -1095,6 +1098,7 @@
 				0CEB25D32B5EE37200B14298 /* CalendarViewDelegate.swift in Sources */,
 				0C90A2F52B6D796800015298 /* PersistenceObserver.swift in Sources */,
 				0C7BE51E2B91309000F7C8B8 /* UINotificationFeedbackGenerator.swift in Sources */,
+				0CB26C632BB398A600CB1A43 /* FlossRecordsRepositoryProtocol.swift in Sources */,
 				0C2FE44C2B619C0B00BAC3E8 /* HomeView.swift in Sources */,
 				0C90A2FD2B6D823C00015298 /* HomeViewModel+AddLogDelegate.swift in Sources */,
 				0C55555F2B881BC000CADA1B /* HapticFeedbackOption.swift in Sources */,

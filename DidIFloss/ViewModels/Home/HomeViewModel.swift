@@ -27,8 +27,8 @@ class HomeViewModel: ObservableObject {
     var logInteractionHandler: HandleLogInteractionUseCaseProtocol
     
     var streakBoardViewModel: StreakBoardViewModel {
-        let streakInfo = StreakManager.calculateCurrentStreak(logsDates: flossRecords.map({$0.date}))
-        return StreakManager.createStreakBoardViewModel(info: streakInfo)
+        let streakInfo = StreakCalculator.calculateCurrentStreak(logsDates: flossRecords.map({$0.date}))
+        return StreakCalculator.createStreakBoardViewModel(info: streakInfo)
     }
     
     init(persistence: PersistenceManagerProtocol = PersistenceManager.shared,

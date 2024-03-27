@@ -11,7 +11,7 @@ import Notification
 class PersistenceManager: PersistenceManagerProtocol {
     
     let userDefaults: UserDefaultable
-    let flossRecordService: FlossRecordDataProvider
+    let flossRecordService: FlossRecordDataProviderProtocol
     
     weak var observer: PersistenceObserver?
     
@@ -20,7 +20,7 @@ class PersistenceManager: PersistenceManagerProtocol {
     
     // beware! Should only be one FlossRecordDataSource to maintain persistence container single instance
     // prefer use of shared instante to use a persistenceManager
-    init(userDefaults: UserDefaultable, flossRecordService: FlossRecordDataProvider) {
+    init(userDefaults: UserDefaultable, flossRecordService: FlossRecordDataProviderProtocol) {
         self.userDefaults = userDefaults
         self.flossRecordService = flossRecordService
     }

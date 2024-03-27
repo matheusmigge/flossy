@@ -70,7 +70,7 @@ struct HandleLogInteractionUseCase: HandleLogInteractionUseCaseProtocol {
     private func scheduleNotifications(flossDate date: Date) {
         if Calendar.current.isDateInToday(date) {
             self.recordsRepository.getFlossRecords { records in
-                let streakInfo = StreakManager.calculateCurrentStreak(logsDates: records.map({$0.date}))
+                let streakInfo = StreakCalculator.calculateCurrentStreak(logsDates: records.map({$0.date}))
                 self.notificationService.scheduleAllFlossReminders(streakCount: streakInfo.days)
             }
             
