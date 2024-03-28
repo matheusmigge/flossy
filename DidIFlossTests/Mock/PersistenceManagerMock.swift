@@ -9,8 +9,13 @@ import Foundation
 @testable import DidIFloss
 
 class PersistenceManagerMock: PersistenceManagerProtocol {
+    
+    var didCallGetFlossRecord: Bool = false
+    var didCallSaveFlossRecord: Bool = false
+    var isNewUser: Bool = false
+    
     func saveFlossDate(date: Date) {
-        
+        didCallSaveFlossRecord = true
     }
     
     func getLastFlossDate() -> Date? {
@@ -18,6 +23,7 @@ class PersistenceManagerMock: PersistenceManagerProtocol {
     }
     
     func getFlossRecords(handler: @escaping ([FlossRecord]) -> Void) {
+        didCallGetFlossRecord = true
         
     }
     
@@ -34,10 +40,10 @@ class PersistenceManagerMock: PersistenceManagerProtocol {
     }
     
     func checkIfIsNewUser() -> Bool {
-       return false
+       return isNewUser
     }
     
-    var observer: (any PersistenceObserver)?
+    var delegate: (any DidIFloss.PersistenceDelegate)?
     
     
 }

@@ -14,4 +14,6 @@ protocol FlossRecordsRepositoryProtocol: AnyObject {
     /// - Parameter handler: A closure that receives an array of FlossRecord.
     func getFlossRecords(handler: @escaping ([FlossRecord]) -> Void)
     
+    var delegate: PersistenceDelegate? { get set }
+    
 }

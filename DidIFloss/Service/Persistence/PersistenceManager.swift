@@ -13,7 +13,7 @@ class PersistenceManager: PersistenceManagerProtocol {
     let userDefaults: UserDefaultable
     let flossRecordService: FlossRecordDataProviderProtocol
     
-    weak var observer: PersistenceObserver?
+    weak var delegate: PersistenceDelegate?
     
     public static let shared: PersistenceManager = PersistenceManager(userDefaults: UserDefaults.standard,
                                                                       flossRecordService: FlossRecordDataSource())
@@ -65,7 +65,7 @@ class PersistenceManager: PersistenceManagerProtocol {
             }
         }
         
-        observer?.hadChangesInFlossRecordDataBase()
+        delegate?.hadChangesInFlossRecordDataBase()
     }
     
     func deleteFlossRecords(_ records: [FlossRecord]) {

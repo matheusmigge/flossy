@@ -65,7 +65,7 @@ final class FlossRecordDataProviderMock: FlossRecordDataProviderProtocol {
     
 }
 
-extension FlossRecordDataProviderMock: PersistenceObserver {
+extension FlossRecordDataProviderMock: PersistenceDelegate {
     func hadChangesInFlossRecordDataBase() {
         hasBeenNotifiedOfChangesByDelegate = true
     }

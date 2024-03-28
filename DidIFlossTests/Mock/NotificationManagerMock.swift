@@ -10,12 +10,14 @@ import Foundation
 
 class NotificationManagerMock: FlossRemindersService {
     
+    var didCallRequestAuth: Bool = false
+    
     static func current() -> FlossRemindersService {
         return NotificationManagerMock()
     }
     
     func requestAuthorizationToNotificate(provisional: Bool) {
-        
+        didCallRequestAuth = true
     }
     
     func scheduleAllFlossReminders(streakCount: Int) {

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Notification
 
 extension HomeViewModel: AddLogDelegate {
     func addLogRecord(date: Date) {

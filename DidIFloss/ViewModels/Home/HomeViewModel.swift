@@ -45,7 +45,7 @@ class HomeViewModel: ObservableObject {
     // MARK: Did Apper
     
     func viewDidApper() {
-        self.persistence?.observer = self
+        self.persistence?.delegate = self
         
         self.loadData()
         self.checkForOnboarding()

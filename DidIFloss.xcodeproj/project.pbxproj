@@ -47,12 +47,12 @@
 		0C88C7772B5322540040494D /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C88C7762B5322540040494D /* CalendarView.swift */; };
 		0C8981F02B466223008CFD5D /* FlossRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8981EF2B466223008CFD5D /* FlossRecord.swift */; };
 		0C8981F42B4667AC008CFD5D /* FlossRecordDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8981F32B4667AC008CFD5D /* FlossRecordDataSource.swift */; };
-		0C90A2F52B6D796800015298 /* PersistenceObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C90A2F42B6D796800015298 /* PersistenceObserver.swift */; };
+		0C90A2F52B6D796800015298 /* PersistenceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C90A2F42B6D796800015298 /* PersistenceDelegate.swift */; };
 		0C90A2F92B6D81BE00015298 /* LogRecordsViewModel+CalendarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C90A2F82B6D81BE00015298 /* LogRecordsViewModel+CalendarDelegate.swift */; };
 		0C90A2FB2B6D81ED00015298 /* HomeViewModel+Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C90A2FA2B6D81ED00015298 /* HomeViewModel+Enums.swift */; };
 		0C90A2FD2B6D823C00015298 /* HomeViewModel+AddLogDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C90A2FC2B6D823C00015298 /* HomeViewModel+AddLogDelegate.swift */; };
 		0C90A2FF2B6D82A300015298 /* HomeViewModel+CelebrationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C90A2FE2B6D82A300015298 /* HomeViewModel+CelebrationDelegate.swift */; };
-		0C90A3012B6D82DB00015298 /* HomeViewModel+PersistenceObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C90A3002B6D82DB00015298 /* HomeViewModel+PersistenceObserver.swift */; };
+		0C90A3012B6D82DB00015298 /* HomeViewModel+PersistenceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C90A3002B6D82DB00015298 /* HomeViewModel+PersistenceDelegate.swift */; };
 		0C916C4B2B6C70570041FE3B /* LogRecordsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C916C4A2B6C70570041FE3B /* LogRecordsViewModel.swift */; };
 		0C916C4C2B6C75600041FE3B /* Notification.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCEE1D42B67EBDB0084C9DC /* Notification.framework */; };
 		0C916C4D2B6C75600041FE3B /* Notification.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCEE1D42B67EBDB0084C9DC /* Notification.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -64,6 +64,7 @@
 		0CB3423E2B6C43DC00B68277 /* ConfettiPieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB3423D2B6C43DC00B68277 /* ConfettiPieceView.swift */; };
 		0CB342402B6C43F300B68277 /* CelebrationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB3423F2B6C43F300B68277 /* CelebrationDelegate.swift */; };
 		0CB3424C2B6C4E5C00B68277 /* AddLogDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB3424B2B6C4E5C00B68277 /* AddLogDelegate.swift */; };
+		0CB6491A2BB3A272002E18B4 /* HandleLogInteractionUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB649192BB3A272002E18B4 /* HandleLogInteractionUseCaseMock.swift */; };
 		0CB9509A2B681D5E0085E3D6 /* UNUserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB950992B681D5E0085E3D6 /* UNUserNotificationCenter.swift */; };
 		0CB9509E2B6821B60085E3D6 /* UNUserNotificationMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB9509D2B6821B60085E3D6 /* UNUserNotificationMock.swift */; };
 		0CB950A02B682C1A0085E3D6 /* NotificantionModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB9509F2B682C1A0085E3D6 /* NotificantionModelMock.swift */; };
@@ -197,12 +198,12 @@
 		0C88C7762B5322540040494D /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		0C8981EF2B466223008CFD5D /* FlossRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecord.swift; sourceTree = "<group>"; };
 		0C8981F32B4667AC008CFD5D /* FlossRecordDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecordDataSource.swift; sourceTree = "<group>"; };
-		0C90A2F42B6D796800015298 /* PersistenceObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceObserver.swift; sourceTree = "<group>"; };
+		0C90A2F42B6D796800015298 /* PersistenceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceDelegate.swift; sourceTree = "<group>"; };
 		0C90A2F82B6D81BE00015298 /* LogRecordsViewModel+CalendarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LogRecordsViewModel+CalendarDelegate.swift"; sourceTree = "<group>"; };
 		0C90A2FA2B6D81ED00015298 /* HomeViewModel+Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewModel+Enums.swift"; sourceTree = "<group>"; };
 		0C90A2FC2B6D823C00015298 /* HomeViewModel+AddLogDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewModel+AddLogDelegate.swift"; sourceTree = "<group>"; };
 		0C90A2FE2B6D82A300015298 /* HomeViewModel+CelebrationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewModel+CelebrationDelegate.swift"; sourceTree = "<group>"; };
-		0C90A3002B6D82DB00015298 /* HomeViewModel+PersistenceObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewModel+PersistenceObserver.swift"; sourceTree = "<group>"; };
+		0C90A3002B6D82DB00015298 /* HomeViewModel+PersistenceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewModel+PersistenceDelegate.swift"; sourceTree = "<group>"; };
 		0C916C4A2B6C70570041FE3B /* LogRecordsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogRecordsViewModel.swift; sourceTree = "<group>"; };
 		0CB26C622BB398A600CB1A43 /* FlossRecordsRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecordsRepositoryProtocol.swift; sourceTree = "<group>"; };
 		0CB342322B6B0C0400B68277 /* AddLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLogView.swift; sourceTree = "<group>"; };
@@ -212,6 +213,7 @@
 		0CB3423D2B6C43DC00B68277 /* ConfettiPieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiPieceView.swift; sourceTree = "<group>"; };
 		0CB3423F2B6C43F300B68277 /* CelebrationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrationDelegate.swift; sourceTree = "<group>"; };
 		0CB3424B2B6C4E5C00B68277 /* AddLogDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLogDelegate.swift; sourceTree = "<group>"; };
+		0CB649192BB3A272002E18B4 /* HandleLogInteractionUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleLogInteractionUseCaseMock.swift; sourceTree = "<group>"; };
 		0CB950992B681D5E0085E3D6 /* UNUserNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNUserNotificationCenter.swift; sourceTree = "<group>"; };
 		0CB9509D2B6821B60085E3D6 /* UNUserNotificationMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNUserNotificationMock.swift; sourceTree = "<group>"; };
 		0CB9509F2B682C1A0085E3D6 /* NotificantionModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificantionModelMock.swift; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				0C2EF6642B710E4400AFF9D4 /* UserDefaultsMock.swift */,
+				0CB649192BB3A272002E18B4 /* HandleLogInteractionUseCaseMock.swift */,
 				0C2EF6662B710EA100AFF9D4 /* FlossRecordDataProviderMock.swift */,
 				0C7BE5222B91313A00F7C8B8 /* UINotificationFeedbackGeneratorMock.swift */,
 				0C3CBCD82B9A006900708BD1 /* HapticsManagerMock.swift */,
@@ -490,7 +493,7 @@
 				0C7E92452B479E170079525D /* FlossRecordDataProviderProtocol.swift */,
 				0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */,
 				0CB26C622BB398A600CB1A43 /* FlossRecordsRepositoryProtocol.swift */,
-				0C90A2F42B6D796800015298 /* PersistenceObserver.swift */,
+				0C90A2F42B6D796800015298 /* PersistenceDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -531,7 +534,7 @@
 				0C90A2FE2B6D82A300015298 /* HomeViewModel+CelebrationDelegate.swift */,
 				0C90A2FC2B6D823C00015298 /* HomeViewModel+AddLogDelegate.swift */,
 				0C90A2FA2B6D81ED00015298 /* HomeViewModel+Enums.swift */,
-				0C90A3002B6D82DB00015298 /* HomeViewModel+PersistenceObserver.swift */,
+				0C90A3002B6D82DB00015298 /* HomeViewModel+PersistenceDelegate.swift */,
 				0C02028D2B97EF9F00FA65F0 /* HomeViewModel+CalendarViewDelegate.swift */,
 			);
 			path = Home;
@@ -1019,6 +1022,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C3CBCD32B99FEDE00708BD1 /* LogRecordsViewModelTest.swift in Sources */,
+				0CB6491A2BB3A272002E18B4 /* HandleLogInteractionUseCaseMock.swift in Sources */,
 				0C2EF66B2B710FE500AFF9D4 /* PersistenceManagerTests.swift in Sources */,
 				0C3DB6BE2BB31B9400CADE57 /* NotificationManagerMock.swift in Sources */,
 				0C7BE5192B912E2A00F7C8B8 /* HapticsManagerTests.swift in Sources */,
@@ -1096,7 +1100,7 @@
 				0C7E923F2B470FD30079525D /* PersistenceManager+KEYS.swift in Sources */,
 				0C916C4B2B6C70570041FE3B /* LogRecordsViewModel.swift in Sources */,
 				0CEB25D32B5EE37200B14298 /* CalendarViewDelegate.swift in Sources */,
-				0C90A2F52B6D796800015298 /* PersistenceObserver.swift in Sources */,
+				0C90A2F52B6D796800015298 /* PersistenceDelegate.swift in Sources */,
 				0C7BE51E2B91309000F7C8B8 /* UINotificationFeedbackGenerator.swift in Sources */,
 				0CB26C632BB398A600CB1A43 /* FlossRecordsRepositoryProtocol.swift in Sources */,
 				0C2FE44C2B619C0B00BAC3E8 /* HomeView.swift in Sources */,
@@ -1108,7 +1112,7 @@
 				0C55555D2B881B9E00CADA1B /* HapticsManagerProtocol.swift in Sources */,
 				5669DCE62B654A64005A0E22 /* WarningBannerView.swift in Sources */,
 				56C33E0A2B3CCA9E00D8DEB7 /* PersistenceManager.swift in Sources */,
-				0C90A3012B6D82DB00015298 /* HomeViewModel+PersistenceObserver.swift in Sources */,
+				0C90A3012B6D82DB00015298 /* HomeViewModel+PersistenceDelegate.swift in Sources */,
 				0C90A2FB2B6D81ED00015298 /* HomeViewModel+Enums.swift in Sources */,
 				0CB3423E2B6C43DC00B68277 /* ConfettiPieceView.swift in Sources */,
 				0C7BE51C2B91306400F7C8B8 /* UINotificationFeedbackGeneratable.swift in Sources */,

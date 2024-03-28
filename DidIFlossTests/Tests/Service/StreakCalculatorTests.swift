@@ -9,12 +9,6 @@ import XCTest
 @testable import DidIFloss
 
 final class StreakCalculatorTests: XCTestCase {
-    
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    
     func testCalculateStreakReturnsExpectedResultWhenUserHasNoLogs() {
         
         let logs: [Date] = []

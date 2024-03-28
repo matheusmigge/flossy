@@ -12,32 +12,112 @@ final class LogRecordsViewModelTest: XCTestCase {
     
     var viewModel: LogRecordsViewModel!
     
-    var hapticsManager: HapticsManagerMock!
-    var persistanceManager: PersistenceManagerMock!
-    var notificationManager: Notification!
+    var persistenceMock: PersistenceManagerMock!
+    var notificationMock: NotificationManagerMock!
+    var hapticsMock: HapticsManagerMock!
+    var logHandler: HandleLogInteractionUseCaseMock!
+    var flossDataProvider: FlossRecordDataProviderMock!
     
-
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        flossDataProvider = FlossRecordDataProviderMock()
+        
+        persistenceMock = PersistenceManagerMock()
+        hapticsMock = HapticsManagerMock()
+        logHandler = HandleLogInteractionUseCaseMock()
+        
+        
+        viewModel = LogRecordsViewModel(
+            persistenceService: persistenceMock,
+            userFeedbackService: hapticsMock,
+            logRecordsHandler: logHandler)
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func testViewDidAppearsCallsDataFromRepository() {
+        
+        persistenceMock.didCallGetFlossRecord = false
+        
+        viewModel.viewDidApper()
+        
+        XCTAssertTrue(persistenceMock.didCallGetFlossRecord)
+        
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func testRemoveRecordAtCallsCorrespondingMethodFromUserCase() {
+        
+        let log1 = FlossRecord(date: .distantPast)
+        let log2 = FlossRecord(date: .now)
+        viewModel.records = [log1, log2]
+        logHandler.didCallRemoveLogRecord = false
+        hapticsMock.didCallVibrateRemoval = false
+        
+        viewModel.removeRecordAt(indexSet: IndexSet(integer: 1))
+        
+        XCTAssertTrue(logHandler.didCallRemoveLogRecord)
+        XCTAssertTrue(hapticsMock.didCallVibrateRemoval)
+        
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testRemoveRecordCallsCorrespondingMethodFromUseCase() {
+        
+        let log1 = FlossRecord(date: .distantPast)
+        let log2 = FlossRecord(date: .now)
+        viewModel.records = [log1, log2]
+        logHandler.didCallRemoveLogRecord = false
+        hapticsMock.didCallVibrateRemoval = false
+        
+        viewModel.removeRecord(log2)
+        
+        XCTAssertTrue(logHandler.didCallRemoveLogRecord)
+        XCTAssertTrue(hapticsMock.didCallVibrateRemoval)
+        
     }
-
+    
+    func testDidSelectDateAddsValueToViewModelVariableIfEmpty() {
+        
+        viewModel.selectedDate = nil
+        
+        viewModel.didSelectDate(.now)
+        
+        XCTAssertNotNil(viewModel.selectedDate)
+        
+    }
+    
+    func testDidSelectDateRemoveValuesIfNotNil() {
+        
+        viewModel.selectedDate = .distantFuture
+        
+        viewModel.didSelectDate(.now)
+        
+        XCTAssertNotNil(viewModel.selectedDate)
+        
+    }
+    
+    func testSectionRecordsShouldNotChangeIfSelectedDateIsNil() {
+        
+        let log1 = FlossRecord(date: .distantPast)
+        let log2 = FlossRecord(date: .now)
+        let log3 = FlossRecord(date: .now)
+        viewModel.records = [log1, log2, log3]
+        
+        viewModel.selectedDate = .now
+        
+        XCTAssertFalse(viewModel.sectionRecords.contains(log1))
+        XCTAssertTrue(viewModel.sectionRecords.contains([log3, log2]))
+        
+    }
+    
+    func testSectionRecordsShouldBeFilteredBasedBySelectedDateIfHasOne() {
+        
+        let log1 = FlossRecord(date: .distantPast)
+        let log2 = FlossRecord(date: .now)
+        let log3 = FlossRecord(date: .now)
+        viewModel.records = [log1, log2, log3]
+        
+        viewModel.selectedDate = nil
+        
+        XCTAssertTrue(viewModel.sectionRecords.contains([log3, log2, log1]))
+        
+    }
+    
 }
