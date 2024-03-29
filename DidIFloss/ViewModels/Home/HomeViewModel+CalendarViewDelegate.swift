@@ -16,17 +16,19 @@ extension HomeViewModel: CalendarViewDelegate {
             return
         }
         
-        
-        if !Calendar.isDateInTheFuture(date) && !showingCelebration {
-            let calendarComponents = Calendar.current.dateComponents([.year, .month, .day], from: date)
-            let timeComponents = Calendar.current.dateComponents([.hour, .minute], from: .now)
-            
-            let logDate = Calendar.createDate(year: calendarComponents.year, month: calendarComponents.month, day: calendarComponents.day, hour: timeComponents.hour, minute: timeComponents.minute)
-            
-            addLogRecord(date: logDate ?? date)
-            
+        if isLogDateValid(for: date) {
+            addLogRecord(date: date)
         }
+    }
+
+    func removeRecordsForFocusedDate() {
+        guard let date = focusedDate else { return }
         
+        logInteractionHandler.removeAllLogRecords(for: date)
+        userFeedbackService?.vibrateLogRemoval()
+        
+        alertDismiss()
+        self.loadData()
     }
     
     func alertDismiss() {
@@ -34,21 +36,15 @@ extension HomeViewModel: CalendarViewDelegate {
         self.focusedDate = nil
     }
     
-    func removeRecordsForFocusedDate() {
-        guard let date = focusedDate else { return }
+    private func flossRecordsContains(date: Date) -> Bool {
+        var recordsDateSignatures: Set<String> = Set()
         
-        var selectedRecords: [FlossRecord] {
-            self.flossRecords.filter { Calendar.current.isDate($0.date, inSameDayAs: date)}
-        }
+        flossRecords.forEach { recordsDateSignatures.insert($0.date.calendarSignature) }
         
-        persistence?.deleteFlossRecords(selectedRecords)
-        
-        if Calendar.current.isDateInToday(date) {
-            notificationService?.clearPendingDailyStreakFlossReminderNotification()
-            
-        }
-      
-        alertDismiss()
-        self.loadData()
+        return recordsDateSignatures.contains(date.calendarSignature)
+    }
+    
+    private func isLogDateValid(for date: Date) -> Bool {
+        return !Calendar.isDateInTheFuture(date) && !showingCelebration
     }
 }

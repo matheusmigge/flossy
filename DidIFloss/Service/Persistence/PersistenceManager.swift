@@ -9,20 +9,18 @@ import Foundation
 import Notification
 
 class PersistenceManager: PersistenceManagerProtocol {
-
-    
     
     let userDefaults: UserDefaultable
-    let flossRecordService: FlossRecordDataProvider
+    let flossRecordService: FlossRecordDataProviderProtocol
     
-    weak var observer: PersistenceObserver?
+    weak var delegate: PersistenceDelegate?
     
     public static let shared: PersistenceManager = PersistenceManager(userDefaults: UserDefaults.standard,
                                                                       flossRecordService: FlossRecordDataSource())
     
     // beware! Should only be one FlossRecordDataSource to maintain persistence container single instance
     // prefer use of shared instante to use a persistenceManager
-    init(userDefaults: UserDefaultable, flossRecordService: FlossRecordDataProvider) {
+    init(userDefaults: UserDefaultable, flossRecordService: FlossRecordDataProviderProtocol) {
         self.userDefaults = userDefaults
         self.flossRecordService = flossRecordService
     }
@@ -67,7 +65,7 @@ class PersistenceManager: PersistenceManagerProtocol {
             }
         }
         
-        observer?.hadChangesInFlossRecordDataBase()
+        delegate?.hadChangesInFlossRecordDataBase()
     }
     
     func deleteFlossRecords(_ records: [FlossRecord]) {

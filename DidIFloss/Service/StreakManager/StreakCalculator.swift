@@ -1,5 +1,5 @@
 //
-//  StreakManager.swift
+//  StreakCalculator.swift
 //  DidIFloss
 //
 //  Created by Lucas Migge on 20/02/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct StreakManager {
+struct StreakCalculator {
     
     public static func createStreakBoardViewModel(info: StreakInfo) -> StreakBoardViewModel {
         switch info.streak {

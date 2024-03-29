@@ -19,8 +19,7 @@ final class PersistenceManagerTests: XCTestCase {
         userDefaults = UserDefaultsMock()
         flossDataProvider = FlossRecordDataProviderMock()
         
-        persistenceManager = PersistenceManager(userDefaults: userDefaults,
-                                                  flossRecordService: flossDataProvider)
+        persistenceManager = PersistenceManager(userDefaults: userDefaults,             flossRecordService: flossDataProvider)
     }
 
     func testGetLastFlossDateReturnLastFlossPersisted() {
@@ -62,7 +61,7 @@ final class PersistenceManagerTests: XCTestCase {
     }
     
     func testRemoveFlossRecordCallsObserver() {
-        persistenceManager.observer = flossDataProvider
+        persistenceManager.delegate = flossDataProvider
         let log = FlossRecord()
         
         persistenceManager.deleteFlossRecord(log)

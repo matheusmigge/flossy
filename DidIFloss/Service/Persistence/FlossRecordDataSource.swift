@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 
-final class FlossRecordDataSource: FlossRecordDataProvider {
+final class FlossRecordDataSource: FlossRecordDataProviderProtocol {
     
     private let modelContainer: ModelContainer
     

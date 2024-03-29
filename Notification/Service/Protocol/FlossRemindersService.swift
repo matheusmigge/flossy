@@ -8,8 +8,8 @@
 import Foundation
 
 
-public protocol FlossRemindersService {
-    static func current() -> NotificationService
+public protocol FlossRemindersService: AnyObject {
+    static func current() -> FlossRemindersService
     
     func requestAuthorizationToNotificate(provisional: Bool)
     
