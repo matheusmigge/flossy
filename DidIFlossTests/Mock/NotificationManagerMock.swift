@@ -11,6 +11,13 @@ import Foundation
 class NotificationManagerMock: FlossRemindersService {
     
     var didCallRequestAuth: Bool = false
+    var didScheduleDailyNotification: Bool = false
+    var didScheduleInactivityNotification: Bool = false
+    var didScheduleAllNotifications: Bool = false
+
+    var didRemoveAllPendingNotifications: Bool = false
+    var didRemovePendingDailyNotification: Bool = false
+
     
     static func current() -> FlossRemindersService {
         return NotificationManagerMock()
@@ -21,19 +28,22 @@ class NotificationManagerMock: FlossRemindersService {
     }
     
     func scheduleAllFlossReminders(streakCount: Int) {
-        
+        didScheduleDailyNotification = true
+        didScheduleInactivityNotification = true
+        didScheduleAllNotifications = true
     }
     
     func scheduleInactivityFlossReminderNotifications() {
-        
+        didScheduleInactivityNotification = true
     }
     
     func clearPendingDailyStreakFlossReminderNotification() {
-        
+        didRemovePendingDailyNotification = true
     }
     
     func clearAllPendingFlossReminderNotification() {
-        
+        didRemoveAllPendingNotifications = true
+        didRemovePendingDailyNotification = true
     }
     
     

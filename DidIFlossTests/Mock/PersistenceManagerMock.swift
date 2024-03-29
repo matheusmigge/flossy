@@ -10,12 +10,15 @@ import Foundation
 
 class PersistenceManagerMock: PersistenceManagerProtocol {
     
+    var logs: [FlossRecord] = []
     var didCallGetFlossRecord: Bool = false
-    var didCallSaveFlossRecord: Bool = false
+    var didCallSaveFlossRecordForDate: Date? = nil
+    var didCallRemoveFlossRecordOn: FlossRecord? = nil
+    var didCallRemoveAllFlossRecordsOn: [FlossRecord] = []
     var isNewUser: Bool = false
     
     func saveFlossDate(date: Date) {
-        didCallSaveFlossRecord = true
+        didCallSaveFlossRecordForDate = date
     }
     
     func getLastFlossDate() -> Date? {
@@ -24,14 +27,17 @@ class PersistenceManagerMock: PersistenceManagerProtocol {
     
     func getFlossRecords(handler: @escaping ([FlossRecord]) -> Void) {
         didCallGetFlossRecord = true
+        handler(logs)
         
     }
     
     func deleteFlossRecord(_ record: FlossRecord) {
-        
+        didCallRemoveFlossRecordOn = record
+        logs = logs.filter({$0.id != record.id})
     }
     
     func deleteFlossRecords(_ records: [FlossRecord]) {
+        didCallRemoveAllFlossRecordsOn = records
         
     }
     

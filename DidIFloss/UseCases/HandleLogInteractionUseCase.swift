@@ -59,11 +59,11 @@ struct HandleLogInteractionUseCase: HandleLogInteractionUseCaseProtocol {
             }
             
             self.recordsRepository.deleteFlossRecords(selectedRecords)
+        }
+        
+        if Calendar.current.isDateInToday(date) {
+            self.notificationService.clearPendingDailyStreakFlossReminderNotification()
             
-            if Calendar.current.isDateInToday(date) {
-                self.notificationService.clearPendingDailyStreakFlossReminderNotification()
-                
-            }
         }
     }
     
@@ -85,18 +85,19 @@ struct HandleLogInteractionUseCase: HandleLogInteractionUseCaseProtocol {
             return
         }
         
+        let recordDaySignature = record.date.calendarSignature
+        var uniqueLogDays: Set<String> = Set()
+        
         recordsRepository.getFlossRecords { records in
-            let remainingRecords: [FlossRecord] = records.filter({$0 != record })
-            let recordDaySignature = record.date.dayAndMonthAndYearFormatted
-            var uniqueLogDays: Set<String> = Set()
+            let remainingRecords: [FlossRecord] = records.filter({$0.id != record.id})
             
             remainingRecords.forEach { log in
-                let logDaySignature = log.date.dayAndMonthAndYearFormatted
+                let logDaySignature = log.date.calendarSignature
                 
                 uniqueLogDays.insert(logDaySignature)
             }
             
-            if uniqueLogDays.contains(recordDaySignature) {
+            if !uniqueLogDays.contains(recordDaySignature) {
                 notificationService.clearPendingDailyStreakFlossReminderNotification()
             }
         }

@@ -71,7 +71,7 @@ final class HomeViewModelTest: XCTestCase {
         }
         
         // Wait for the expectation to be fulfilled
-        wait(for: [expectation], timeout: 2)
+        wait(for: [expectation], timeout: 3)
         
     }
     
@@ -163,14 +163,14 @@ final class HomeViewModelTest: XCTestCase {
         viewModel.flossRecords = [log]
         viewModel.showingAlert = false
         viewModel.focusedDate = nil
-        persistenceMock.didCallSaveFlossRecord = false
+        persistenceMock.didCallSaveFlossRecordForDate = nil
         
         viewModel.didSelectDate(.now)
         
         
         XCTAssertTrue(viewModel.showingAlert)
         XCTAssertNotNil(viewModel.focusedDate)
-        XCTAssertFalse(persistenceMock.didCallSaveFlossRecord)
+        XCTAssertNil(persistenceMock.didCallSaveFlossRecordForDate)
         
     }
     

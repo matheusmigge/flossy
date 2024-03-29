@@ -10,6 +10,7 @@
 		0C02028E2B97EF9F00FA65F0 /* HomeViewModel+CalendarViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C02028D2B97EF9F00FA65F0 /* HomeViewModel+CalendarViewDelegate.swift */; };
 		0C196DFF2B614E7600EDD0B3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C196DFE2B614E7600EDD0B3 /* Launch Screen.storyboard */; };
 		0C196E012B61555D00EDD0B3 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C196E002B61555C00EDD0B3 /* RootView.swift */; };
+		0C1D0F0C2BB7315C00DAF82B /* HandleLogInteractionUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1D0F0B2BB7315C00DAF82B /* HandleLogInteractionUseCaseTest.swift */; };
 		0C2CCA8B2B84E6DD0024B376 /* StreakCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2CCA8A2B84E6DD0024B376 /* StreakCalculator.swift */; };
 		0C2CCA8D2B84EEA10024B376 /* StreakCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2CCA8C2B84EEA10024B376 /* StreakCalculatorTests.swift */; };
 		0C2CCA922B852EB60024B376 /* StreakBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2CCA912B852EB60024B376 /* StreakBoardViewModel.swift */; };
@@ -159,6 +160,7 @@
 		0C02028D2B97EF9F00FA65F0 /* HomeViewModel+CalendarViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewModel+CalendarViewDelegate.swift"; sourceTree = "<group>"; };
 		0C196DFE2B614E7600EDD0B3 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		0C196E002B61555C00EDD0B3 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		0C1D0F0B2BB7315C00DAF82B /* HandleLogInteractionUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleLogInteractionUseCaseTest.swift; sourceTree = "<group>"; };
 		0C2CCA8A2B84E6DD0024B376 /* StreakCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakCalculator.swift; sourceTree = "<group>"; };
 		0C2CCA8C2B84EEA10024B376 /* StreakCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakCalculatorTests.swift; sourceTree = "<group>"; };
 		0C2CCA912B852EB60024B376 /* StreakBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakBoardViewModel.swift; sourceTree = "<group>"; };
@@ -285,6 +287,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C1D0F0A2BB7314200DAF82B /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				0C1D0F0B2BB7315C00DAF82B /* HandleLogInteractionUseCaseTest.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
 		0C2CCA8E2B852E6E0024B376 /* Streak */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,6 +357,7 @@
 		0C2EF6632B710E1800AFF9D4 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				0C1D0F0A2BB7314200DAF82B /* UseCases */,
 				0C3CBCD52B99FEE900708BD1 /* Service */,
 				0C3CBCD42B99FEE200708BD1 /* ViewModels */,
 			);
@@ -1032,6 +1043,7 @@
 				0C2EF6672B710EA100AFF9D4 /* FlossRecordDataProviderMock.swift in Sources */,
 				0C2CCA8D2B84EEA10024B376 /* StreakCalculatorTests.swift in Sources */,
 				0C3CBCD12B99FEC600708BD1 /* HomeViewModelTest.swift in Sources */,
+				0C1D0F0C2BB7315C00DAF82B /* HandleLogInteractionUseCaseTest.swift in Sources */,
 				0C3DB6BC2BB318DC00CADE57 /* PersistenceManagerMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
