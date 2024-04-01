@@ -92,8 +92,8 @@ struct HomeView: View {
             case .addLogSheet:
                 AddLogView(delegate: self.viewModel)
                 
-            case .shareStreak:
-                ShareStreakView(streakDescription: "2")
+            case .shareStreak(let message):
+                ShareStreakView(streakDescription: message)
                     .presentationDetents([.medium])
                 
             case .developerSheet:
