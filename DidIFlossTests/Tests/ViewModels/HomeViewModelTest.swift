@@ -66,7 +66,7 @@ final class HomeViewModelTest: XCTestCase {
         let expectation = XCTestExpectation(description: "sheetView set to welcomeSheet")
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.1) {
-            XCTAssertEqual(self.viewModel.sheetView, .welcomeSheet)
+            XCTAssertEqual(self.viewModel.sheetView?.id, HomeViewModel.Sheet.welcomeSheet.id)
             expectation.fulfill()
         }
         
@@ -104,7 +104,7 @@ final class HomeViewModelTest: XCTestCase {
         
         viewModel.plusButtonPressed()
         
-        XCTAssertEqual(viewModel.sheetView, .addLogSheet)
+        XCTAssertEqual(viewModel.sheetView?.id, HomeViewModel.Sheet.addLogSheet.id)
         
     }
     

@@ -52,7 +52,8 @@ struct HomeView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        viewModel.plusButtonPressed()
+//                        viewModel.plusButtonPressed()
+                        viewModel.presentShareSheet()
 
                     } label: {
                         Image(systemName: "plus")
@@ -90,6 +91,10 @@ struct HomeView: View {
                     }
             case .addLogSheet:
                 AddLogView(delegate: self.viewModel)
+                
+            case .shareStreak:
+                ShareStreakView(streakDescription: "2")
+                    .presentationDetents([.medium])
                 
             case .developerSheet:
                 DeveloperView()

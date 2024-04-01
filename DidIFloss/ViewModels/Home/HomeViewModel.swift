@@ -87,5 +87,9 @@ class HomeViewModel: ObservableObject {
         
     }
     
+    func presentShareSheet() {
+        sheetView = .shareStreak(streakInfo: "2")
+    }
+    
 }
 
