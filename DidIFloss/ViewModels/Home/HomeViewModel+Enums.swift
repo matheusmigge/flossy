@@ -13,11 +13,24 @@ extension HomeViewModel {
         case noLogsRecorded, positiveStreak, negativeStreak
     }
     
-    enum Sheet: String, Identifiable {
-        case welcomeSheet, addLogSheet, developerSheet
+    enum Sheet: Identifiable {
+        
+        case welcomeSheet
+        case addLogSheet
+        case shareStreak(streakInfo: String)
+        case developerSheet
         
         var id: String {
-            self.rawValue
+            switch self {
+            case .welcomeSheet:
+                return "welcome"
+            case .addLogSheet:
+                return "addLog"
+            case .shareStreak:
+                return "shareStreak"
+            case .developerSheet:
+                return "developer"
+            }
         }
     }
     

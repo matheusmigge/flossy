@@ -87,5 +87,19 @@ class HomeViewModel: ObservableObject {
         
     }
     
+    func presentShareSheet() {
+        let streak = StreakCalculator.calculateCurrentStreak(logsDates: self.flossRecords.map({ $0.date }))
+        
+        if streak.streak == .negative || streak.streak == .empty {
+            let message = "Oh no! I need to start flossing again! It's been \(streak.days) days since the last time I've flossed"
+            sheetView = .shareStreak(streakInfo: message)
+        }
+        
+        if streak.streak == .positive || streak.streak == .positiveMissingToday {
+            let message = "Look at me go!! I have been flossing for \(streak.days) days straight!"
+            sheetView = .shareStreak(streakInfo: message)
+        }
+    }
+    
 }
 

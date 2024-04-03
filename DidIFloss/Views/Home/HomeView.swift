@@ -34,6 +34,9 @@ struct HomeView: View {
                     
                     Spacer()
                 }
+                .onTapGesture {
+                    viewModel.presentShareSheet()
+                }
                 
                 Section {
                     CalendarView(records: $viewModel.flossRecords, style: .week, delegate: viewModel)
@@ -50,6 +53,16 @@ struct HomeView: View {
                 }
             }
             .toolbar {
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        viewModel.presentShareSheet()
+
+                    } label: {
+                        Image(systemName: "square.and.arrow.up")
+                    }
+                }
+                
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         viewModel.plusButtonPressed()
@@ -59,7 +72,6 @@ struct HomeView: View {
                     }
                     .disabled(viewModel.showingCelebration)
                 }
-                
                 
                 ToolbarItem(placement: .topBarLeading) {
                     NavigationLink {
@@ -90,6 +102,10 @@ struct HomeView: View {
                     }
             case .addLogSheet:
                 AddLogView(delegate: self.viewModel)
+                
+            case .shareStreak(let message):
+                ShareStreakView(streakDescription: message)
+                    .presentationDetents([.medium])
                 
             case .developerSheet:
                 DeveloperView()

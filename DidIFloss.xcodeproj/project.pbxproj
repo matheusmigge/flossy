@@ -11,6 +11,7 @@
 		0C196DFF2B614E7600EDD0B3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C196DFE2B614E7600EDD0B3 /* Launch Screen.storyboard */; };
 		0C196E012B61555D00EDD0B3 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C196E002B61555C00EDD0B3 /* RootView.swift */; };
 		0C1D0F0C2BB7315C00DAF82B /* HandleLogInteractionUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1D0F0B2BB7315C00DAF82B /* HandleLogInteractionUseCaseTest.swift */; };
+		0C1D0F0F2BBA399200DAF82B /* ShareStreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1D0F0E2BBA399200DAF82B /* ShareStreakView.swift */; };
 		0C2CCA8B2B84E6DD0024B376 /* StreakCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2CCA8A2B84E6DD0024B376 /* StreakCalculator.swift */; };
 		0C2CCA8D2B84EEA10024B376 /* StreakCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2CCA8C2B84EEA10024B376 /* StreakCalculatorTests.swift */; };
 		0C2CCA922B852EB60024B376 /* StreakBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2CCA912B852EB60024B376 /* StreakBoardViewModel.swift */; };
@@ -161,6 +162,7 @@
 		0C196DFE2B614E7600EDD0B3 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		0C196E002B61555C00EDD0B3 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		0C1D0F0B2BB7315C00DAF82B /* HandleLogInteractionUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleLogInteractionUseCaseTest.swift; sourceTree = "<group>"; };
+		0C1D0F0E2BBA399200DAF82B /* ShareStreakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareStreakView.swift; sourceTree = "<group>"; };
 		0C2CCA8A2B84E6DD0024B376 /* StreakCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakCalculator.swift; sourceTree = "<group>"; };
 		0C2CCA8C2B84EEA10024B376 /* StreakCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakCalculatorTests.swift; sourceTree = "<group>"; };
 		0C2CCA912B852EB60024B376 /* StreakBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakBoardViewModel.swift; sourceTree = "<group>"; };
@@ -293,6 +295,14 @@
 				0C1D0F0B2BB7315C00DAF82B /* HandleLogInteractionUseCaseTest.swift */,
 			);
 			path = UseCases;
+			sourceTree = "<group>";
+		};
+		0C1D0F0D2BBA397400DAF82B /* ShareSheet */ = {
+			isa = PBXGroup;
+			children = (
+				0C1D0F0E2BBA399200DAF82B /* ShareStreakView.swift */,
+			);
+			path = ShareSheet;
 			sourceTree = "<group>";
 		};
 		0C2CCA8E2B852E6E0024B376 /* Streak */ = {
@@ -780,6 +790,7 @@
 		5679991A2B4480C200941D75 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				0C1D0F0D2BBA397400DAF82B /* ShareSheet */,
 				5669DCE42B654A1C005A0E22 /* StreakBanner */,
 				0CB3423C2B6C439400B68277 /* Celebration */,
 				0CEB25D12B5EE36100B14298 /* Calendar */,
@@ -1100,6 +1111,7 @@
 				0C8981F02B466223008CFD5D /* FlossRecord.swift in Sources */,
 				0C2FE44F2B619C3600BAC3E8 /* BannerSectionView.swift in Sources */,
 				0C3DB6C12BB3593400CADE57 /* HandleLogInteractionUseCase.swift in Sources */,
+				0C1D0F0F2BBA399200DAF82B /* ShareStreakView.swift in Sources */,
 				0C90A2FF2B6D82A300015298 /* HomeViewModel+CelebrationDelegate.swift in Sources */,
 				0CEB25CE2B56FF5300B14298 /* Date.swift in Sources */,
 				0C2CCA922B852EB60024B376 /* StreakBoardViewModel.swift in Sources */,
