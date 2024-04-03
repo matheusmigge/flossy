@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 @testable import DidIFloss
 
-final class FlossRecordDataProviderMock: FlossRecordDataProvider {
+final class FlossRecordDataProviderMock: FlossRecordDataProviderProtocol {
     
     
     var shouldFetchRecordsBeSuccessful: Bool = true
@@ -65,7 +65,7 @@ final class FlossRecordDataProviderMock: FlossRecordDataProvider {
     
 }
 
-extension FlossRecordDataProviderMock: PersistenceObserver {
+extension FlossRecordDataProviderMock: PersistenceDelegate {
     func hadChangesInFlossRecordDataBase() {
         hasBeenNotifiedOfChangesByDelegate = true
     }

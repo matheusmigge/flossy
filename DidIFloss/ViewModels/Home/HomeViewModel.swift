@@ -22,31 +22,31 @@ class HomeViewModel: ObservableObject {
     @Published var flossRecords: [FlossRecord] = []
     
     weak var persistence: PersistenceManagerProtocol?
-    var notificationService: FlossRemindersService?
+    weak var notificationService: FlossRemindersService?
     weak var userFeedbackService: HapticsManagerProtocol?
+    var logInteractionHandler: HandleLogInteractionUseCaseProtocol
+    
+    var streakBoardViewModel: StreakBoardViewModel {
+        let streakInfo = StreakCalculator.calculateCurrentStreak(logsDates: flossRecords.map({$0.date}))
+        return StreakCalculator.createStreakBoardViewModel(info: streakInfo)
+    }
     
     init(persistence: PersistenceManagerProtocol = PersistenceManager.shared,
          notificationService: FlossRemindersService = NotificationService.current(),
-         userFeedbackService: HapticsManagerProtocol = HapticsManager.shared
+         userFeedbackService: HapticsManagerProtocol = HapticsManager.shared,
+         logInteractionHandler: HandleLogInteractionUseCaseProtocol = HandleLogInteractionUseCase()
     ) {
         self.persistence = persistence
-        self.persistence?.observer = self
-        
         self.notificationService = notificationService
         self.userFeedbackService = userFeedbackService
-        
-    }
-    
-    var streakBoardViewModel: StreakBoardViewModel = StreakBoardViewModel(streakBoardContent: .noLogsRecorded,
-                                                                          warmingBoardContent: .noLogsRecorded)
-    func updateStreakBoardViewModel(){
-        let streakInfo =  StreakManager.calculateCurrentStreak(logsDates: flossRecords.map({$0.date}))
-        self.streakBoardViewModel = StreakManager.createStreakBoardViewModel(info: streakInfo)
+        self.logInteractionHandler = logInteractionHandler
     }
     
     // MARK: Did Apper
     
     func viewDidApper() {
+        self.persistence?.delegate = self
+        
         self.loadData()
         self.checkForOnboarding()
         
@@ -55,7 +55,6 @@ class HomeViewModel: ObservableObject {
     func loadData() {
         persistence?.getFlossRecords { [weak self] records in
             self?.flossRecords = records
-            self?.updateStreakBoardViewModel()
         }
     }
     
@@ -88,12 +87,18 @@ class HomeViewModel: ObservableObject {
         
     }
     
-    func flossRecordsContains(date: Date) -> Bool {
-        var recordsDateSignatures: Set<String> = Set()
+    func presentShareSheet() {
+        let streak = StreakCalculator.calculateCurrentStreak(logsDates: self.flossRecords.map({ $0.date }))
         
-        flossRecords.forEach { recordsDateSignatures.insert($0.date.calendarSignature) }
+        if streak.streak == .negative || streak.streak == .empty {
+            let message = "Oh no! I need to start flossing again! It's been \(streak.days) days since the last time I've flossed"
+            sheetView = .shareStreak(streakInfo: message)
+        }
         
-        return recordsDateSignatures.contains(date.calendarSignature)
+        if streak.streak == .positive || streak.streak == .positiveMissingToday {
+            let message = "Look at me go!! I have been flossing for \(streak.days) days straight!"
+            sheetView = .shareStreak(streakInfo: message)
+        }
     }
     
 }
