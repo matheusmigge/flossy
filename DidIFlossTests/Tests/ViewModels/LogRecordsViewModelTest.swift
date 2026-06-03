@@ -14,7 +14,6 @@ final class LogRecordsViewModelTest: XCTestCase {
     
     var persistenceMock: PersistenceManagerMock!
     var notificationMock: NotificationManagerMock!
-    var hapticsMock: HapticsManagerMock!
     var logHandler: HandleLogInteractionUseCaseMock!
     var flossDataProvider: FlossRecordDataProviderMock!
     
@@ -23,13 +22,11 @@ final class LogRecordsViewModelTest: XCTestCase {
         flossDataProvider = FlossRecordDataProviderMock()
         
         persistenceMock = PersistenceManagerMock()
-        hapticsMock = HapticsManagerMock()
         logHandler = HandleLogInteractionUseCaseMock()
         
         
         viewModel = LogRecordsViewModel(
             persistenceService: persistenceMock,
-            userFeedbackService: hapticsMock,
             logRecordsHandler: logHandler)
     }
     
@@ -49,13 +46,10 @@ final class LogRecordsViewModelTest: XCTestCase {
         let log2 = FlossRecord(date: .now)
         viewModel.records = [log1, log2]
         logHandler.didCallRemoveLogRecord = false
-        hapticsMock.didCallVibrateRemoval = false
         
         viewModel.removeRecordAt(indexSet: IndexSet(integer: 1))
         
         XCTAssertTrue(logHandler.didCallRemoveLogRecord)
-        XCTAssertTrue(hapticsMock.didCallVibrateRemoval)
-        
     }
     
     func testRemoveRecordCallsCorrespondingMethodFromUseCase() {
@@ -64,13 +58,10 @@ final class LogRecordsViewModelTest: XCTestCase {
         let log2 = FlossRecord(date: .now)
         viewModel.records = [log1, log2]
         logHandler.didCallRemoveLogRecord = false
-        hapticsMock.didCallVibrateRemoval = false
         
         viewModel.removeRecord(log2)
         
         XCTAssertTrue(logHandler.didCallRemoveLogRecord)
-        XCTAssertTrue(hapticsMock.didCallVibrateRemoval)
-        
     }
     
     func testDidSelectDateAddsValueToViewModelVariableIfEmpty() {
@@ -80,7 +71,6 @@ final class LogRecordsViewModelTest: XCTestCase {
         viewModel.didSelectDate(.now)
         
         XCTAssertNotNil(viewModel.selectedDate)
-        
     }
     
     func testDidSelectDateRemoveValuesIfNotNil() {
@@ -90,7 +80,6 @@ final class LogRecordsViewModelTest: XCTestCase {
         viewModel.didSelectDate(.now)
         
         XCTAssertNotNil(viewModel.selectedDate)
-        
     }
     
     func testSectionRecordsShouldNotChangeIfSelectedDateIsNil() {
@@ -104,7 +93,6 @@ final class LogRecordsViewModelTest: XCTestCase {
         
         XCTAssertFalse(viewModel.sectionRecords.contains(log1))
         XCTAssertTrue(viewModel.sectionRecords.contains([log3, log2]))
-        
     }
     
     func testSectionRecordsShouldBeFilteredBasedBySelectedDateIfHasOne() {
@@ -117,7 +105,6 @@ final class LogRecordsViewModelTest: XCTestCase {
         viewModel.selectedDate = nil
         
         XCTAssertTrue(viewModel.sectionRecords.contains([log3, log2, log1]))
-        
     }
     
 }

@@ -20,16 +20,15 @@
       "parallelizable" : true,
       "target" : {
         "containerPath" : "container:DidIFloss.xcodeproj",
-        "identifier" : "0CCEE1DC2B67EBDC0084C9DC",
-        "name" : "NotificationTests"
+        "identifier" : "0C2EF6582B710E0300AFF9D4",
+        "name" : "DidIFlossTests"
       }
     },
     {
-      "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:DidIFloss.xcodeproj",
-        "identifier" : "0C2EF6582B710E0300AFF9D4",
-        "name" : "DidIFlossTests"
+        "containerPath" : "container:FlossyReminders",
+        "identifier" : "FlossyRemindersTests",
+        "name" : "FlossyRemindersTests"
       }
     }
   ],

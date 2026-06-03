@@ -6,7 +6,7 @@
 //
 
 import Foundation
-@testable import Notification
+@testable import FlossyRemindersCore
 
 class NotificationManagerMock: FlossRemindersService {
     
