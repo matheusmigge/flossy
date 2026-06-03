@@ -26,8 +26,8 @@ jobs:
       - name: Rodar Testes Unitários
         run: |
           xcodebuild test \
-            -project didIFloss.xcodeproj \
-            -scheme "didIFloss" \
+            -project DidIFloss.xcodeproj \
+            -scheme "DidIFloss" \
             -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO
