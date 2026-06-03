@@ -9,11 +9,16 @@ on:
 jobs:
   test:
     name: Build and Test
-    runs-on: macos-14
+    runs-on: macos-latest
 
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
+
+      - name: Forçar versão mais recente do Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: "latest"
 
       - name: Listar simuladores disponíveis
         run: xcrun simctl list devices available
