@@ -7,7 +7,7 @@
 
 import Foundation
 import UserNotifications
-@testable import Notification
+@testable import FlossyNotification
 
 
 extension NotificationModel {

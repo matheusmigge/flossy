@@ -6,7 +6,7 @@
 //
 
 import UserNotifications
-@testable import Notification
+@testable import FlossyNotification
 
 class UNUserNotificationCenterMock: UNUserNotificationCenterable {
     

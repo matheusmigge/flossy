@@ -8,6 +8,7 @@
 import Foundation
 import UserNotifications
 
+@preconcurrency
 protocol UNUserNotificationCenterable {
     func requestAuthorization(options: UNAuthorizationOptions, completionHandler: @escaping (Bool, Error?) -> Void)
     

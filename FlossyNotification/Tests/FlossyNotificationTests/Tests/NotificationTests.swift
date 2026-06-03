@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import Notification
+@testable import FlossyNotification
 
 final class NotificationTests: XCTestCase {
     
