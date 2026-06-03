@@ -8,9 +8,7 @@
 import Foundation
 
 
-public protocol FlossRemindersService: AnyObject {
-    static func current() -> FlossRemindersService
-    
+public protocol FlossRemindersServicing {
     func requestAuthorizationToNotificate(provisional: Bool)
     
     func scheduleAllFlossReminders(streakCount: Int)

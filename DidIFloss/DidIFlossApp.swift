@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import FlossyRemindersCore
+import FlossyReminders
 
 @main
 struct DidIFlossApp: App {
@@ -22,7 +22,9 @@ struct DidIFlossApp: App {
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        NotificationService.current().requestAuthorizationToNotificate(provisional: true)
+        let notificationService = FlossyRemindersServiceFactory.make()
+        notificationService.requestAuthorizationToNotificate(provisional: true)
+        
         return true
     }
 }

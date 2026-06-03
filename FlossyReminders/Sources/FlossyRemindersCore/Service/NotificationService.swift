@@ -13,7 +13,7 @@ import UserNotifications
 ///
 /// Use the `NotificationService` struct to request notification authorization, schedule notifications,
 /// and manage floss reminders.
-public class NotificationService: FlossRemindersService {
+public struct NotificationService: FlossRemindersServicing {
     
     // MARK: init
     
@@ -21,12 +21,11 @@ public class NotificationService: FlossRemindersService {
         self.center = center
     }
     
-    let center: UNUserNotificationCenterable
-    
-    /// The standard method for utilizing NotificationService
-    static public func current() -> FlossRemindersService {
-        NotificationService()
+    public init() {
+        self.center = UNUserNotificationCenter.current()
     }
+    
+    let center: UNUserNotificationCenterable
     
     
     // MARK: Auth
