@@ -4,24 +4,27 @@
 import PackageDescription
 
 let package = Package(
-    name: "FlossyNotification",
+    name: "FlossyReminders",
     platforms: [.iOS(.v17)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "FlossyNotification",
-            targets: ["FlossyNotification"]
+            name: "FlossyReminders",
+            targets: ["FlossyReminders", "FlossyRemindersCore"]
         ),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "FlossyNotification"
+            name: "FlossyReminders"
+        ),
+        .target(
+            name: "FlossyRemindersCore"
         ),
         .testTarget(
-            name: "FlossyNotificationTests",
-            dependencies: ["FlossyNotification"]
+            name: "FlossyRemindersTests",
+            dependencies: ["FlossyReminders", "FlossyRemindersCore"]
         ),
     ],
     swiftLanguageModes: [.v6]

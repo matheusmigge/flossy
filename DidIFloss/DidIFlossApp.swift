@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import FlossyNotification
+import FlossyRemindersCore
 
 @main
 struct DidIFlossApp: App {

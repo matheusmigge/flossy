@@ -26,9 +26,9 @@
     },
     {
       "target" : {
-        "containerPath" : "container:FlossyNotification",
-        "identifier" : "FlossyNotificationTests",
-        "name" : "FlossyNotificationTests"
+        "containerPath" : "container:FlossyReminders",
+        "identifier" : "FlossyRemindersTests",
+        "name" : "FlossyRemindersTests"
       }
     }
   ],

@@ -5,7 +5,7 @@
 //  Created by Matheus Migge on 24/01/24.
 //
 
-import FlossyNotification
+import FlossyRemindersCore
 import SwiftUI
 
 class HomeViewModel: ObservableObject {

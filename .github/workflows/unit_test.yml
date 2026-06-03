@@ -1,0 +1,28 @@
+name: Flawless Floss
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  test:
+    name: Build and Test
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Listar simuladores disponíveis
+        run: xcrun simctl list devices available
+
+      - name: Rodar Testes Unitários
+        run: |
+          xcodebuild test \
+            -project didIFloss.xcodeproj \
+            -scheme "didIFloss" \
+            -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO

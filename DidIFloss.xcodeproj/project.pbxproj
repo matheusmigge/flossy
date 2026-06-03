@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0C196DFF2B614E7600EDD0B3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C196DFE2B614E7600EDD0B3 /* Launch Screen.storyboard */; };
 		0C4177AA2B4CF9CB00E8976B /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4177A92B4CF9CB00E8976B /* UserDefaults.swift */; };
-		0C64B4C22FCFC53E007DAD94 /* FlossyNotification in Frameworks */ = {isa = PBXBuildFile; productRef = 0C64B4C12FCFC53E007DAD94 /* FlossyNotification */; };
+		0C64B4C72FD06046007DAD94 /* FlossyReminders in Frameworks */ = {isa = PBXBuildFile; productRef = 0C64B4C62FD06046007DAD94 /* FlossyReminders */; };
 		0C7E923B2B470DB00079525D /* UserDefaultable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923A2B470DB00079525D /* UserDefaultable.swift */; };
 		0C7E923D2B470DDB0079525D /* PersistenceManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */; };
 		0C7E923F2B470FD30079525D /* PersistenceManager+KEYS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923E2B470FD30079525D /* PersistenceManager+KEYS.swift */; };
@@ -50,7 +50,7 @@
 		0C196DFE2B614E7600EDD0B3 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		0C2EF6592B710E0300AFF9D4 /* DidIFlossTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DidIFlossTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C4177A92B4CF9CB00E8976B /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
-		0C64B4BF2FCFC39B007DAD94 /* FlossyNotification */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FlossyNotification; sourceTree = "<group>"; };
+		0C64B4C82FD06DF6007DAD94 /* FlossyReminders */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FlossyReminders; sourceTree = "<group>"; };
 		0C7E923A2B470DB00079525D /* UserDefaultable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultable.swift; sourceTree = "<group>"; };
 		0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManagerProtocol.swift; sourceTree = "<group>"; };
 		0C7E923E2B470FD30079525D /* PersistenceManager+KEYS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistenceManager+KEYS.swift"; sourceTree = "<group>"; };
@@ -104,7 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C64B4C22FCFC53E007DAD94 /* FlossyNotification in Frameworks */,
+				0C64B4C72FD06046007DAD94 /* FlossyReminders in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,7 +160,7 @@
 		56C33DEA2B3CAA1000D8DEB7 = {
 			isa = PBXGroup;
 			children = (
-				0C64B4BF2FCFC39B007DAD94 /* FlossyNotification */,
+				0C64B4C82FD06DF6007DAD94 /* FlossyReminders */,
 				5625BFD42B439A5C006F88BD /* README.md */,
 				56C33DF52B3CAA1000D8DEB7 /* DidIFloss */,
 				0C6CCCAD2FCFBCD2000E0DEE /* DidIFlossTests */,
@@ -247,7 +247,7 @@
 			);
 			name = DidIFloss;
 			packageProductDependencies = (
-				0C64B4C12FCFC53E007DAD94 /* FlossyNotification */,
+				0C64B4C62FD06046007DAD94 /* FlossyReminders */,
 			);
 			productName = DidIFloss;
 			productReference = 56C33DF32B3CAA1000D8DEB7 /* DidIFloss.app */;
@@ -631,9 +631,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0C64B4C12FCFC53E007DAD94 /* FlossyNotification */ = {
+		0C64B4C62FD06046007DAD94 /* FlossyReminders */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = FlossyNotification;
+			productName = FlossyReminders;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

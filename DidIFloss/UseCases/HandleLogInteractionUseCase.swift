@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import FlossyNotification
+import FlossyRemindersCore
 
 /// A protocol that defines the use case for handling interactions with flossing log records.
 protocol HandleLogInteractionUseCaseProtocol {
