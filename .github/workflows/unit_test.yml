@@ -55,7 +55,7 @@ jobs:
             -destination "$DESTINATION" \
             -configuration Debug \
             CODE_SIGNING_ALLOWED=NO \
-            | xcbeautify --rederer github-actions
+            | xcbeautify --renderer github-actions
 
       - name: Run unit tests
         run: |
@@ -67,7 +67,7 @@ jobs:
             -configuration Debug \
             -resultBundlePath TestResults.xcresult \
             CODE_SIGNING_ALLOWED=NO \
-            | xcbeautify --rederer github-actions
+            | xcbeautify --renderer github-actions
 
       - name: Upload test results
         if: ${{ !cancelled() }}
