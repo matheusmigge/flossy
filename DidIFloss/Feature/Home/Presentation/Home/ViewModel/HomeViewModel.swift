@@ -58,9 +58,7 @@ class HomeViewModel: ObservableObject {
         guard let safePersistence = persistence else { return }
         
         if safePersistence.checkIfIsNewUser() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.sheetView = .welcomeSheet
-            }
+            self.sheetView = .welcomeSheet
         }
     }
     
