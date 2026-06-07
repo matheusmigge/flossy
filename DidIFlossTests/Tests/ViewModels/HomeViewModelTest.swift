@@ -59,17 +59,7 @@ final class HomeViewModelTest: XCTestCase {
         
         viewModel.viewDidAppear()
         
-        // Expectation to fulfill after delay
-        let expectation = XCTestExpectation(description: "sheetView set to welcomeSheet")
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.1) {
-            XCTAssertEqual(self.viewModel.sheetView?.id, HomeViewModel.Sheet.welcomeSheet.id)
-            expectation.fulfill()
-        }
-        
-        // Wait for the expectation to be fulfilled
-        wait(for: [expectation], timeout: 3)
-        
+        XCTAssertEqual(self.viewModel.sheetView?.id, HomeViewModel.Sheet.welcomeSheet.id)
     }
     
     func testShouldNotPresentOnboardingIfNotNewUser() {
@@ -77,16 +67,7 @@ final class HomeViewModelTest: XCTestCase {
         
         viewModel.viewDidAppear()
         
-        // Expectation to fulfill after delay
-        let expectation = XCTestExpectation(description: "sheetView set to welcomeSheet")
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.1) {
-            XCTAssertNil(self.viewModel.sheetView, "ViewModel should not have any active sheet")
-            expectation.fulfill()
-        }
-        
-        // Wait for the expectation to be fulfilled
-        wait(for: [expectation], timeout: 2)
+        XCTAssertNil(self.viewModel.sheetView, "ViewModel should not have any active sheet")
     }
     
     func testShouldRequestNotificationAuthAfterOnboarding() {

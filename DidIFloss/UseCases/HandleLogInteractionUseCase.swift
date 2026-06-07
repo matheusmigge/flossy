@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import FlossyRemindersCore
+import FlossyReminders
 
 /// A protocol that defines the use case for handling interactions with flossing log records.
 protocol HandleLogInteractionUseCaseProtocol {
@@ -37,11 +37,11 @@ protocol HandleLogInteractionUseCaseProtocol {
 struct HandleLogInteractionUseCase: HandleLogInteractionUseCaseProtocol {
     
     let recordsRepository: PersistenceManagerProtocol
-    let notificationService: FlossRemindersService
+    let notificationService: FlossyRemindersService
     let hapticsManager: HapticsManagerProtocol
     
     init(recordsRepository: PersistenceManagerProtocol = PersistenceManager.shared,
-         notificationService: FlossRemindersService = NotificationService.current(),
+         notificationService: FlossyRemindersService = FlossyRemindersServiceFactory.make(),
          hapticsManager: HapticsManagerProtocol = HapticsManager()
     ) {
         self.recordsRepository = recordsRepository

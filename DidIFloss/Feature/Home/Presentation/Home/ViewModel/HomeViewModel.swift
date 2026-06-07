@@ -5,7 +5,7 @@
 //  Created by Matheus Migge on 24/01/24.
 //
 
-import FlossyRemindersCore
+import FlossyReminders
 import SwiftUI
 
 class HomeViewModel: ObservableObject {
@@ -21,7 +21,7 @@ class HomeViewModel: ObservableObject {
     @Published var flossRecords: [FlossRecord] = []
     
     weak var persistence: PersistenceManagerProtocol?
-    weak var notificationService: FlossRemindersService?
+    var notificationService: FlossyRemindersService?
     var logInteractionHandler: HandleLogInteractionUseCaseProtocol
     
     var streakBoardViewModel: StreakBoardViewModel {
@@ -30,7 +30,7 @@ class HomeViewModel: ObservableObject {
     }
     
     init(persistence: PersistenceManagerProtocol = PersistenceManager.shared,
-         notificationService: FlossRemindersService = NotificationService.current(),
+         notificationService: FlossyRemindersService = FlossyRemindersServiceFactory.make(),
          logInteractionHandler: HandleLogInteractionUseCaseProtocol = HandleLogInteractionUseCase()
     ) {
         self.persistence = persistence
@@ -58,9 +58,7 @@ class HomeViewModel: ObservableObject {
         guard let safePersistence = persistence else { return }
         
         if safePersistence.checkIfIsNewUser() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.sheetView = .welcomeSheet
-            }
+            self.sheetView = .welcomeSheet
         }
     }
     
