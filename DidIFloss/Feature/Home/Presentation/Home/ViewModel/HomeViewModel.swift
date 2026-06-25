@@ -6,6 +6,7 @@
 //
 
 import FlossyReminders
+import FlossyRecords
 import SwiftUI
 
 class HomeViewModel: ObservableObject {
@@ -18,11 +19,12 @@ class HomeViewModel: ObservableObject {
     
     // MARK: Floss records
     
-    @Published var flossRecords: [FlossRecord] = []
+    @Published var flossRecords: [FlossLog] = []
     
     weak var persistence: PersistenceManagerProtocol?
-    var notificationService: FlossyRemindersService?
-    var logInteractionHandler: HandleLogInteractionUseCaseProtocol
+    var recordsRepository: any FlossLogRepository
+    let notificationService: FlossyRemindersService?
+    let logInteractionHandler: HandleLogInteractionUseCaseProtocol
     
     var streakBoardViewModel: StreakBoardViewModel {
         let streakInfo = StreakCalculator.calculateCurrentStreak(logsDates: flossRecords.map({$0.date}))
@@ -30,26 +32,35 @@ class HomeViewModel: ObservableObject {
     }
     
     init(persistence: PersistenceManagerProtocol = PersistenceManager.shared,
+         recordsRepository: any FlossLogRepository = FlossLogRepositoryFactory.make(),
          notificationService: FlossyRemindersService = FlossyRemindersServiceFactory.make(),
          logInteractionHandler: HandleLogInteractionUseCaseProtocol = HandleLogInteractionUseCase()
     ) {
         self.persistence = persistence
+        self.recordsRepository = recordsRepository
         self.notificationService = notificationService
         self.logInteractionHandler = logInteractionHandler
+        
+       setup()
+    }
+    
+    private func setup() {
+        self.recordsRepository.delegate = self
     }
     
     // MARK: Did Appear
     
     func viewDidAppear() {
         self.checkForOnboarding()
-        self.persistence?.delegate = self
-        
         self.loadData()
     }
     
     func loadData() {
-        persistence?.getFlossRecords { [weak self] records in
-            self?.flossRecords = records
+        Task {
+            guard let records = try? await recordsRepository.fetchLogs() else { return }
+            await MainActor.run {
+                self.flossRecords = records
+            }
         }
     }
     
@@ -96,3 +107,8 @@ class HomeViewModel: ObservableObject {
     
 }
 
+extension HomeViewModel: FlossRecordsRepositoryDelegate {
+    func didUpdateLogs() {
+        loadData()
+    }
+}

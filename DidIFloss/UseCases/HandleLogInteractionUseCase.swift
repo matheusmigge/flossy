@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FlossyRecords
 import FlossyReminders
 
 /// A protocol that defines the use case for handling interactions with flossing log records.
@@ -19,7 +20,7 @@ protocol HandleLogInteractionUseCaseProtocol {
     /// Removes a specific floss record.
     ///
     /// - Parameter record: The `FlossRecord` to be removed.
-    func removeLogRecord(for record: FlossRecord)
+    func removeLogRecord(for record: FlossLog)
     
     /// Removes all floss records associated with a specific date.
     ///
@@ -36,11 +37,11 @@ protocol HandleLogInteractionUseCaseProtocol {
 /// a `FlossRemindersService` to handle scheduling and clearing reminders.
 struct HandleLogInteractionUseCase: HandleLogInteractionUseCaseProtocol {
     
-    let recordsRepository: PersistenceManagerProtocol
+    let recordsRepository: any FlossLogRepository
     let notificationService: FlossyRemindersService
     let hapticsManager: HapticsManagerProtocol
     
-    init(recordsRepository: PersistenceManagerProtocol = PersistenceManager.shared,
+    init(recordsRepository: any FlossLogRepository = FlossLogRepositoryFactory.make(),
          notificationService: FlossyRemindersService = FlossyRemindersServiceFactory.make(),
          hapticsManager: HapticsManagerProtocol = HapticsManager()
     ) {
@@ -50,51 +51,52 @@ struct HandleLogInteractionUseCase: HandleLogInteractionUseCaseProtocol {
     }
     
     func handleLogRecord(for log: Date) {
-        
-        var date: Date = log
-        
-        // formats date if needed
-        if !Calendar.current.isDateInToday(date) {
-            let calendarComponents = Calendar.current.dateComponents([.year, .month, .day], from: date)
-            let timeComponents = Calendar.current.dateComponents([.hour, .minute], from: .now)
+        Task {
+            var date: Date = log
             
-            date = Calendar.createDate(year: calendarComponents.year, month: calendarComponents.month, day: calendarComponents.day, hour: timeComponents.hour, minute: timeComponents.minute) ?? log
+            // formats date if needed
+            if !Calendar.current.isDateInToday(date) {
+                let calendarComponents = Calendar.current.dateComponents([.year, .month, .day], from: date)
+                let timeComponents = Calendar.current.dateComponents([.hour, .minute], from: .now)
+                
+                date = Calendar.createDate(year: calendarComponents.year, month: calendarComponents.month, day: calendarComponents.day, hour: timeComponents.hour, minute: timeComponents.minute) ?? log
+            }
+            
+            hapticsManager.vibrateAddLogCelebration()
+            try? await recordsRepository.addLog(FlossLog(flossDate: log))
+            scheduleNotifications(flossDate: date)
         }
-        
-        hapticsManager.vibrateAddLogCelebration()
-        recordsRepository.saveFlossDate(date: date)
-        scheduleNotifications(flossDate: date)
     }
     
-    func removeLogRecord(for record: FlossRecord) {
-        
-        recordsRepository.deleteFlossRecord(record)
-        
-        // has any other record for today?
-        shouldRemovePendingDailyStreakNotification(ifRemove: record)
+    func removeLogRecord(for record: FlossLog) {
+        Task {
+            try? await recordsRepository.deleteLog(id: record.id)
+            
+            // has any other record for today?
+            shouldRemovePendingDailyStreakNotification(ifRemove: record)
+        }
     }
     
     func removeAllLogRecords(for date: Date) {
-        recordsRepository.getFlossRecords {  records in
-            var selectedRecords: [FlossRecord] {
-                records.filter { Calendar.current.isDate($0.date, inSameDayAs: date)}
-            }
-            
-            self.recordsRepository.deleteFlossRecords(selectedRecords)
+        Task {
+            try? await recordsRepository.deleteAllLogs()
             hapticsManager.vibrateLogRemoval()
+            
+            if Calendar.current.isDateInToday(date) {
+                self.notificationService.clearPendingDailyStreakFlossReminderNotification()
+            }
         }
         
-        if Calendar.current.isDateInToday(date) {
-            self.notificationService.clearPendingDailyStreakFlossReminderNotification()
-            
-        }
     }
     
     private func scheduleNotifications(flossDate date: Date) {
         if Calendar.current.isDateInToday(date) {
-            self.recordsRepository.getFlossRecords { records in
-                let streakInfo = StreakCalculator.calculateCurrentStreak(logsDates: records.map({$0.date}))
-                self.notificationService.scheduleAllFlossReminders(streakCount: streakInfo.days)
+            Task {
+                guard let records = try? await recordsRepository.fetchLogs() else { return }
+                records.forEach { _ in
+                    let streakInfo = StreakCalculator.calculateCurrentStreak(logsDates: records.map({$0.date}))
+                    self.notificationService.scheduleAllFlossReminders(streakCount: streakInfo.days)
+                }
             }
             
         } else {
@@ -102,7 +104,7 @@ struct HandleLogInteractionUseCase: HandleLogInteractionUseCaseProtocol {
         }
     }
     
-    private func shouldRemovePendingDailyStreakNotification(ifRemove record: FlossRecord) {
+    private func shouldRemovePendingDailyStreakNotification(ifRemove record: FlossLog) {
         
         if !Calendar.current.isDateInToday(record.date) {
             return
@@ -111,8 +113,9 @@ struct HandleLogInteractionUseCase: HandleLogInteractionUseCaseProtocol {
         let recordDaySignature = record.date.calendarSignature
         var uniqueLogDays: Set<String> = Set()
         
-        recordsRepository.getFlossRecords { records in
-            let remainingRecords: [FlossRecord] = records.filter({$0.id != record.id})
+        Task {
+            guard let records = try? await recordsRepository.fetchLogs() else { return }
+            let remainingRecords: [FlossLog] = records.filter({$0.id != record.id})
             
             remainingRecords.forEach { log in
                 let logDaySignature = log.date.calendarSignature
@@ -124,5 +127,6 @@ struct HandleLogInteractionUseCase: HandleLogInteractionUseCaseProtocol {
                 notificationService.clearPendingDailyStreakFlossReminderNotification()
             }
         }
+        
     }
 }

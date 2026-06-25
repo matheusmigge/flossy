@@ -6,29 +6,31 @@
 //
 
 import Foundation
+import FlossyRecords
 import SwiftUI
 
 class LogRecordsViewModel: ObservableObject {
     
     @Published var selectedDate: Date?
     
-    weak var recordsRepository: FlossRecordsRepositoryProtocol?
+    var recordsRepository: any FlossLogRepository
     var logRecordsHandler: HandleLogInteractionUseCaseProtocol
     
-    @Published var records: [FlossRecord] = []
+    @Published var records: [FlossLog] = []
     
-    init(persistenceService: FlossRecordsRepositoryProtocol = PersistenceManager.shared,
+    init(recordsRepository: any FlossLogRepository = FlossLogRepositoryFactory.make(),
          logRecordsHandler: HandleLogInteractionUseCaseProtocol = HandleLogInteractionUseCase()
     ) {
-        self.recordsRepository = persistenceService
+        self.recordsRepository = recordsRepository
         self.logRecordsHandler = logRecordsHandler
     }
     
     private func loadRecords() {
-        guard let safePersistence = recordsRepository else { return }
-        
-        safePersistence.getFlossRecords { [weak self] result in
-            self?.records = result
+        Task {
+            guard let records = try? await recordsRepository.fetchLogs() else { return }
+            await MainActor.run {
+                self.records = records
+            }
         }
     }
     
@@ -42,14 +44,14 @@ class LogRecordsViewModel: ObservableObject {
         removeRecord(sectionRecords[index])
     }
     
-    func removeRecord(_ record: FlossRecord) {
+    func removeRecord(_ record: FlossLog) {
         
         logRecordsHandler.removeLogRecord(for: record)
         loadRecords()
     }
     
     
-    var sectionRecords: [FlossRecord] {
+    var sectionRecords: [FlossLog] {
         let descendingSortedRecords = records.sorted(by: {$0.date > $1.date})
         
         if let date = selectedDate {

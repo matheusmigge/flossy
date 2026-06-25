@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FlossyRecords
 
 
 struct CalendarView: View {
@@ -16,7 +17,7 @@ struct CalendarView: View {
     
     @State var dateFocused: Date?
     
-    @Binding var records: [FlossRecord]
+    @Binding var records: [FlossLog]
     
     @Environment(\.colorScheme) var colorScheme
     
@@ -27,7 +28,7 @@ struct CalendarView: View {
     let gridColumns: [GridItem] = Array(repeating:
                                             GridItem(.flexible(minimum: 15, maximum: 50)), count: 7)
     
-    init(records: Binding<[FlossRecord]>, style: Style, delegate: CalendarViewDelegate? = nil) {
+    init(records: Binding<[FlossLog]>, style: Style, delegate: CalendarViewDelegate? = nil) {
         self._records = records
         self.style = style
         self.delegate = delegate

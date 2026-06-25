@@ -25,33 +25,7 @@ import Foundation
 /// }
 /// ```
 
-protocol PersistenceManagerProtocol: AnyObject, FlossRecordsRepositoryProtocol {
-    /// Saves the provided date as the last floss date.
-    ///
-    /// - Parameter date: The date to be saved as the last floss date.
-    func saveFlossDate(date: Date)
-    
-    /// Retrieves the last saved floss date.
-    ///
-    /// - Returns: The last saved floss date, or `nil` if no date has been saved.
-    func getLastFlossDate() -> Date?
-    
-    /// Deletes the specified floss record.
-    ///
-    /// - Parameter record: The FlossRecord to be deleted.
-    func deleteFlossRecord(_ record: FlossRecord)
-    
-    /// Deletes a collection of floss records.
-    ///
-    /// - Parameter records: The FlossRecords array to be deleted.
-    func deleteFlossRecords(_ records: [FlossRecord])
-    
-    /// Erases all stored floss-related data.
-    ///
-    /// Use this method to clear all persisted floss-related information.
-    func eraseData()
-    
-    
+protocol PersistenceManagerProtocol: AnyObject {
     func checkIfIsNewUser() -> Bool
-    
+
 }
