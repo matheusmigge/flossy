@@ -12,7 +12,6 @@ struct HomeView: View {
     
     @StateObject var viewModel: HomeViewModel = HomeViewModel()
     
-
     var body: some View {
         NavigationStack {
             List {
@@ -112,12 +111,13 @@ struct HomeView: View {
             }
         })
         .onAppear {
-            viewModel.viewDidAppear()
+            Task {
+                await viewModel.viewDidAppear()
+            }
         }
     }
 }
 
 #Preview {
     HomeView()
-    
 }

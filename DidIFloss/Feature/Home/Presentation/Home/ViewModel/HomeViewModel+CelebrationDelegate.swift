@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 
-extension HomeViewModel: CelebrationDelegate {
+extension HomeViewModel: @MainActor CelebrationDelegate {
     func didCompleteAnimation() {
         showingCelebration = false
     }

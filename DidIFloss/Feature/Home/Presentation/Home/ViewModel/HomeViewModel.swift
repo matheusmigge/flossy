@@ -9,6 +9,7 @@ import FlossyReminders
 import FlossyRecords
 import SwiftUI
 
+@MainActor
 class HomeViewModel: ObservableObject {
     
     @Published var sheetView: Sheet?
@@ -41,7 +42,7 @@ class HomeViewModel: ObservableObject {
         self.notificationService = notificationService
         self.logInteractionHandler = logInteractionHandler
         
-       setup()
+        setup()
     }
     
     private func setup() {
@@ -50,21 +51,23 @@ class HomeViewModel: ObservableObject {
     
     // MARK: Did Appear
     
-    func viewDidAppear() {
-        self.checkForOnboarding()
-        self.loadData()
+    func viewDidAppear() async {
+        await withDiscardingTaskGroup { [weak self] group in
+            group.addTask { await self?.checkForOnboarding() }
+            group.addTask { await self?.loadData() }
+        }
+        
     }
     
-    func loadData() {
-        Task {
-            guard let records = try? await recordsRepository.fetchLogs() else { return }
-            await MainActor.run {
-                self.flossRecords = records
-            }
+    func loadData() async {
+        guard let records = try? await recordsRepository.fetchLogs() else { return }
+        await MainActor.run {
+            self.flossRecords = records
+            
         }
     }
     
-    private func checkForOnboarding() {
+    private func checkForOnboarding() async {
         // should show onboard?
         guard let safePersistence = persistence else { return }
         
@@ -108,7 +111,9 @@ class HomeViewModel: ObservableObject {
 }
 
 extension HomeViewModel: FlossRecordsRepositoryDelegate {
-    func didUpdateLogs() {
-        loadData()
+    nonisolated func didUpdateLogs() {
+        Task {
+            await loadData()
+        }
     }
 }
