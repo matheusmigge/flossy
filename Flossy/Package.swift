@@ -26,6 +26,10 @@ let package = Package(
             name: "FlossyTests",
             dependencies: ["Flossy"]
         ),
+        .testTarget(
+            name: "FlossyRecordsTests",
+            dependencies: ["FlossyRecords"]
+        )
     ],
     swiftLanguageModes: [.v6]
 )

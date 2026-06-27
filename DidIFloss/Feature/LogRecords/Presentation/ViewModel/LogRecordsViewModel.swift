@@ -18,7 +18,7 @@ class LogRecordsViewModel: ObservableObject {
     
     @Published var records: [FlossLog] = []
     
-    init(recordsRepository: any FlossLogRepository = FlossLogRepositoryFactory.make(),
+    init(recordsRepository: any FlossLogRepository = DefaultFlossLogRepositoryFactory.make(),
          logRecordsHandler: HandleLogInteractionUseCaseProtocol = HandleLogInteractionUseCase()
     ) {
         self.recordsRepository = recordsRepository

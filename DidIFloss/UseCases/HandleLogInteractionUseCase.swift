@@ -41,7 +41,7 @@ struct HandleLogInteractionUseCase: HandleLogInteractionUseCaseProtocol {
     let notificationService: FlossyRemindersService
     let hapticsManager: HapticsManagerProtocol
     
-    init(recordsRepository: any FlossLogRepository = FlossLogRepositoryFactory.make(),
+    init(recordsRepository: any FlossLogRepository = DefaultFlossLogRepositoryFactory.make(),
          notificationService: FlossyRemindersService = FlossyRemindersServiceFactory.make(),
          hapticsManager: HapticsManagerProtocol = HapticsManager()
     ) {

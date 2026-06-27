@@ -33,7 +33,7 @@ class HomeViewModel: ObservableObject {
     }
     
     init(persistence: PersistenceManagerProtocol = PersistenceManager.shared,
-         recordsRepository: any FlossLogRepository = FlossLogRepositoryFactory.make(),
+         recordsRepository: any FlossLogRepository = DefaultFlossLogRepositoryFactory.make(),
          notificationService: FlossyRemindersService = FlossyRemindersServiceFactory.make(),
          logInteractionHandler: HandleLogInteractionUseCaseProtocol = HandleLogInteractionUseCase()
     ) {
@@ -41,17 +41,14 @@ class HomeViewModel: ObservableObject {
         self.recordsRepository = recordsRepository
         self.notificationService = notificationService
         self.logInteractionHandler = logInteractionHandler
-        
-        setup()
     }
     
-    private func setup() {
-        self.recordsRepository.delegate = self
-    }
     
     // MARK: Did Appear
     
     func viewDidAppear() async {
+        await recordsRepository.setDelegate(self)
+        
         await withDiscardingTaskGroup { [weak self] group in
             group.addTask { await self?.checkForOnboarding() }
             group.addTask { await self?.loadData() }

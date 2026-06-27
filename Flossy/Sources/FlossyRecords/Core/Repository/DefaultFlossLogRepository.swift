@@ -7,24 +7,44 @@
 
 import Foundation
 
-struct DefaultFlossLogRepository {
+
+actor DefaultFlossLogRepository {
+    
     private let dataSource: any FlossLogDataSource
     
-    var delegate: (any FlossRecordsRepositoryDelegate)?
+    var cachedLogs: [FlossLog]?
     
-    init(dataSource: any FlossLogDataSource) {
+    weak var delegate: (any FlossRecordsRepositoryDelegate)?
+    
+    init(
+        dataSource: any FlossLogDataSource,
+         delegate: (any FlossRecordsRepositoryDelegate)? = nil
+    ) {
         self.dataSource = dataSource
+        self.delegate = delegate
     }
+    
 }
 
 extension DefaultFlossLogRepository: FlossLogRepository {
+    
+    func setDelegate(_ delegate: (any FlossRecordsRepositoryDelegate)) async {
+        self.delegate = delegate
+    }
+    
     func fetchLogs() async throws -> [FlossLog] {
+        if let cachedLogs {
+            return cachedLogs
+        }
+        
         let logs = try await dataSource.fetchLogs()
-        return logs.sorted { $0.date > $1.date }
+        let sortedLogs = logs.sorted { $0.date > $1.date }
+        cachedLogs = sortedLogs
+        return sortedLogs
     }
     
     func fetchLogs(on date: Date) async throws -> [FlossLog] {
-        let logs = try await dataSource.fetchLogs()
+        let logs = try await fetchLogs()
         let logsFromDate = logs.filter {
             Calendar.current.isDate($0.date, inSameDayAs: date)
         }
@@ -33,11 +53,14 @@ extension DefaultFlossLogRepository: FlossLogRepository {
     
     func addLog(_ flossLog: FlossLog) async throws {
         try await dataSource.insertLog(flossLog)
+        cachedLogs?.append(flossLog)
+        cachedLogs = cachedLogs?.sorted{ $0.date > $1.date }
         delegate?.didUpdateLogs()
     }
     
     func deleteLog(id: String) async throws {
         try await dataSource.deleteLog(id: id)
+        cachedLogs?.removeAll { $0.id == id }
         delegate?.didUpdateLogs()
     }
     

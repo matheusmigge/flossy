@@ -6,7 +6,11 @@
 //
 
 
-public enum FlossLogRepositoryFactory {
+public protocol FlossRecordRepositoryFactory {
+    static func make() -> any FlossLogRepository
+}
+
+public enum DefaultFlossLogRepositoryFactory: FlossRecordRepositoryFactory {
     public static func make() -> any FlossLogRepository {
         let dataSource = SwiftDataFlossRecordDataSource.shared
         return DefaultFlossLogRepository(dataSource: dataSource)

@@ -6,7 +6,7 @@
 //
 
 
-protocol FlossLogDataSource {
+protocol FlossLogDataSource: Sendable {
     func fetchLogs() async throws -> [FlossLog]
     func insertLog(_ flossLog: FlossLog) async throws
     func deleteLog(id: String) async throws

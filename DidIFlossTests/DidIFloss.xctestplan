@@ -30,6 +30,20 @@
         "identifier" : "FlossyRemindersTests",
         "name" : "FlossyRemindersTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Flossy",
+        "identifier" : "FlossyRecordsTests",
+        "name" : "FlossyRecordsTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Flossy",
+        "identifier" : "FlossyTests",
+        "name" : "FlossyTests"
+      }
     }
   ],
   "version" : 1

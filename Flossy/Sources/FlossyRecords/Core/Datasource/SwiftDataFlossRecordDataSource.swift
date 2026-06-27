@@ -8,18 +8,18 @@
 import SwiftData
 
 actor SwiftDataFlossRecordDataSource {
-    
-    static let shared: SwiftDataFlossRecordDataSource = .init()
-    
-    private let modelContainer: ModelContainer
-    
-    init() {
-        do {
-            self.modelContainer = try ModelContainer(for: FlossRecordEntity.self)
-        } catch {
-            fatalError("Failed to initialize ModelContainer: \(error.localizedDescription)")
+        static let shared: SwiftDataFlossRecordDataSource = .init()
+        
+        private let modelContainer: ModelContainer
+        
+        init(inMemory: Bool = false) {
+            do {
+                let configuration = ModelConfiguration(isStoredInMemoryOnly: inMemory)
+                self.modelContainer = try ModelContainer(for: FlossRecordEntity.self, configurations: configuration)
+            } catch {
+                fatalError("Failed to initialize ModelContainer: \(error.localizedDescription)")
+            }
         }
-    }
 }
 
 extension SwiftDataFlossRecordDataSource: FlossLogDataSource {

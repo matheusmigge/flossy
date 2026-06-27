@@ -34,6 +34,3 @@ public struct FlossLog: Identifiable, Equatable, Sendable {
         self.activity = flossActivity
     }
 }
-
-
-

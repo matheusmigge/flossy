@@ -7,9 +7,9 @@
 
 import Foundation
 
-public protocol FlossLogRepository {
+public protocol FlossLogRepository: Sendable {
     
-    var delegate: FlossRecordsRepositoryDelegate? { get set }
+    func setDelegate(_ delegate: (any FlossRecordsRepositoryDelegate)) async
     
     func fetchLogs() async throws -> [FlossLog]
     func fetchLogs(on date: Date) async throws -> [FlossLog]
@@ -19,6 +19,6 @@ public protocol FlossLogRepository {
     func deleteAllLogs() async throws
 }
 
-public protocol FlossRecordsRepositoryDelegate: AnyObject {
+public protocol FlossRecordsRepositoryDelegate: AnyObject, Sendable {
     func didUpdateLogs()
 }
