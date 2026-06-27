@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C0FDC462FF08D520094E9BF /* Flossy in Frameworks */ = {isa = PBXBuildFile; productRef = 0C0FDC452FF08D520094E9BF /* Flossy */; };
+		0C0FDC492FF08D5E0094E9BF /* FlossyReminders in Frameworks */ = {isa = PBXBuildFile; productRef = 0C0FDC482FF08D5E0094E9BF /* FlossyReminders */; };
 		0C196DFF2B614E7600EDD0B3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C196DFE2B614E7600EDD0B3 /* Launch Screen.storyboard */; };
 		0C4177AA2B4CF9CB00E8976B /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4177A92B4CF9CB00E8976B /* UserDefaults.swift */; };
 		0C64B4C72FD06046007DAD94 /* FlossyReminders in Frameworks */ = {isa = PBXBuildFile; productRef = 0C64B4C62FD06046007DAD94 /* FlossyReminders */; };
@@ -98,6 +100,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C0FDC492FF08D5E0094E9BF /* FlossyReminders in Frameworks */,
+				0C0FDC462FF08D520094E9BF /* Flossy in Frameworks */,
 				0C6B98CE2FEDBC730081CF20 /* Flossy in Frameworks */,
 				0C64B4C72FD06046007DAD94 /* FlossyReminders in Frameworks */,
 			);
@@ -249,6 +253,8 @@
 			packageProductDependencies = (
 				0C64B4C62FD06046007DAD94 /* FlossyReminders */,
 				0C6B98CD2FEDBC730081CF20 /* Flossy */,
+				0C0FDC452FF08D520094E9BF /* Flossy */,
+				0C0FDC482FF08D5E0094E9BF /* FlossyReminders */,
 			);
 			productName = DidIFloss;
 			productReference = 56C33DF32B3CAA1000D8DEB7 /* DidIFloss.app */;
@@ -284,6 +290,8 @@
 			);
 			mainGroup = 56C33DEA2B3CAA1000D8DEB7;
 			packageReferences = (
+				0C0FDC442FF08D520094E9BF /* XCLocalSwiftPackageReference "Flossy" */,
+				0C0FDC472FF08D5E0094E9BF /* XCLocalSwiftPackageReference "FlossyReminders" */,
 			);
 			productRefGroup = 56C33DF42B3CAA1000D8DEB7 /* Products */;
 			projectDirPath = "";
@@ -627,7 +635,26 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		0C0FDC442FF08D520094E9BF /* XCLocalSwiftPackageReference "Flossy" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Flossy;
+		};
+		0C0FDC472FF08D5E0094E9BF /* XCLocalSwiftPackageReference "FlossyReminders" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = FlossyReminders;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		0C0FDC452FF08D520094E9BF /* Flossy */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Flossy;
+		};
+		0C0FDC482FF08D5E0094E9BF /* FlossyReminders */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FlossyReminders;
+		};
 		0C64B4C62FD06046007DAD94 /* FlossyReminders */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FlossyReminders;

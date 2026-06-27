@@ -63,7 +63,7 @@ struct HandleLogInteractionUseCase: HandleLogInteractionUseCaseProtocol {
             }
             
             hapticsManager.vibrateAddLogCelebration()
-            try? await recordsRepository.addLog(FlossLog(flossDate: log))
+            try? await recordsRepository.addLog(FlossLog(flossDate: date))
             scheduleNotifications(flossDate: date)
         }
     }
@@ -79,7 +79,7 @@ struct HandleLogInteractionUseCase: HandleLogInteractionUseCaseProtocol {
     
     func removeAllLogRecords(for date: Date) {
         Task {
-            try? await recordsRepository.deleteAllLogs()
+            try? await recordsRepository.deleteLogs(on: date)
             hapticsManager.vibrateLogRemoval()
             
             if Calendar.current.isDateInToday(date) {
@@ -93,10 +93,8 @@ struct HandleLogInteractionUseCase: HandleLogInteractionUseCaseProtocol {
         if Calendar.current.isDateInToday(date) {
             Task {
                 guard let records = try? await recordsRepository.fetchLogs() else { return }
-                records.forEach { _ in
-                    let streakInfo = StreakCalculator.calculateCurrentStreak(logsDates: records.map({$0.date}))
-                    self.notificationService.scheduleAllFlossReminders(streakCount: streakInfo.days)
-                }
+                let streakInfo = StreakCalculator.calculateCurrentStreak(logsDates: records.map({ $0.date }))
+                notificationService.scheduleAllFlossReminders(streakCount: streakInfo.days)
             }
             
         } else {
@@ -127,6 +125,5 @@ struct HandleLogInteractionUseCase: HandleLogInteractionUseCaseProtocol {
                 notificationService.clearPendingDailyStreakFlossReminderNotification()
             }
         }
-        
     }
 }
