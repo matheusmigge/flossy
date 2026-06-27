@@ -128,6 +128,26 @@ struct DefaultFlossLogRepositoryTests {
         #expect(mockDataSource.fetchLogsCallCount == 1, "It should remove the item from cache without hitting the DB")
     }
     
+    @Test("Should clear cache when Delete All Logs has no erros")
+    func deleteAllLogsClearsCache() async throws {
+        let mockDataSource = sut.dataSourceMock
+        let repository = sut.repository
+        
+        // Given
+        mockDataSource.mockedLogsToReturn = [
+            FlossLog(id: "1", date: Date(), activity: .floss),
+            FlossLog(id: "2", date: Date(), activity: .mouthwash)
+            ]
+        let _ = try await repository.fetchLogs()
+        
+        // When
+        try await repository.deleteAllLogs()
+        
+        // Then
+        #expect(await repository.cachedLogs == nil)
+    }
+    
+    
     // MARK: - Standard Operation Tests
     
     @Test("Should fetch logs and sort them in descending order (newest first)")

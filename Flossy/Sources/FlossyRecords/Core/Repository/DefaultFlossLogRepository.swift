@@ -77,6 +77,7 @@ extension DefaultFlossLogRepository: FlossLogRepository {
     
     func deleteAllLogs() async throws {
         try await dataSource.deleteAllLogs()
+        cachedLogs = nil
         delegate?.didUpdateLogs()
     }
 }

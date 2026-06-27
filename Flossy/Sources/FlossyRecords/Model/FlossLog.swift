@@ -24,13 +24,9 @@ public struct FlossLog: Identifiable, Equatable, Sendable {
         self.activity = activity
     }
     
-    init?(from model: FlossRecordEntity) {
-        guard let flossActivity = FlossActivity(rawValue: model.activity) else {
-            return nil
-        }
-        
+    init?(from model: FlossRecord) {
         self.id = model.id
         self.date = model.date
-        self.activity = flossActivity
+        self.activity = FlossActivity(from: model.detail)
     }
 }

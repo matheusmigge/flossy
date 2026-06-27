@@ -15,7 +15,7 @@ actor SwiftDataFlossRecordDataSource {
         init(inMemory: Bool = false) {
             do {
                 let configuration = ModelConfiguration(isStoredInMemoryOnly: inMemory)
-                self.modelContainer = try ModelContainer(for: FlossRecordEntity.self, configurations: configuration)
+                self.modelContainer = try ModelContainer(for: FlossRecord.self, configurations: configuration)
             } catch {
                 fatalError("Failed to initialize ModelContainer: \(error.localizedDescription)")
             }
@@ -25,13 +25,13 @@ actor SwiftDataFlossRecordDataSource {
 extension SwiftDataFlossRecordDataSource: FlossLogDataSource {
     func fetchLogs() async throws -> [FlossLog] {
         let localContext = ModelContext(modelContainer)
-        let records = try localContext.fetch(FetchDescriptor<FlossRecordEntity>())
+        let records = try localContext.fetch(FetchDescriptor<FlossRecord>())
         return records.compactMap { FlossLog(from: $0) }
     }
     
     func insertLog(_ flossLog: FlossLog) async throws {
         let localContext = ModelContext(modelContainer)
-        let entity = FlossRecordEntity(from: flossLog)
+        let entity = FlossRecord(from: flossLog)
         localContext.insert(entity)
         try localContext.save()
     }
@@ -39,7 +39,7 @@ extension SwiftDataFlossRecordDataSource: FlossLogDataSource {
     
     func deleteLog(id: String) async throws {
         let localContext = ModelContext(modelContainer)
-        let records = try localContext.fetch(FetchDescriptor<FlossRecordEntity>())
+        let records = try localContext.fetch(FetchDescriptor<FlossRecord>())
         if  let flossLog = records.first(where: { $0.id == id }) {
             localContext.delete(flossLog)
             try localContext.save()
@@ -48,7 +48,7 @@ extension SwiftDataFlossRecordDataSource: FlossLogDataSource {
     
     func deleteAllLogs() async throws {
         let localContext = ModelContext(modelContainer)
-        let records = try localContext.fetch(FetchDescriptor<FlossRecordEntity>())
+        let records = try localContext.fetch(FetchDescriptor<FlossRecord>())
         for record in records {
             localContext.delete(record)
         }
