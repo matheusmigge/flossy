@@ -290,8 +290,6 @@
 			);
 			mainGroup = 56C33DEA2B3CAA1000D8DEB7;
 			packageReferences = (
-				0C0FDC442FF08D520094E9BF /* XCLocalSwiftPackageReference "Flossy" */,
-				0C0FDC472FF08D5E0094E9BF /* XCLocalSwiftPackageReference "FlossyReminders" */,
 			);
 			productRefGroup = 56C33DF42B3CAA1000D8DEB7 /* Products */;
 			projectDirPath = "";
@@ -634,17 +632,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCLocalSwiftPackageReference section */
-		0C0FDC442FF08D520094E9BF /* XCLocalSwiftPackageReference "Flossy" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = Flossy;
-		};
-		0C0FDC472FF08D5E0094E9BF /* XCLocalSwiftPackageReference "FlossyReminders" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = FlossyReminders;
-		};
-/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		0C0FDC452FF08D520094E9BF /* Flossy */ = {
