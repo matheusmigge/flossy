@@ -11,6 +11,6 @@ public enum StreakState: Equatable, Sendable {
     case startedToday
     case activeCompletedToday(days: Int)
     case activePendingToday(days: Int)
-    case inactived(daysSinceLastLog: Int)
+    case inactive(daysSinceLastLog: Int)
 }
 

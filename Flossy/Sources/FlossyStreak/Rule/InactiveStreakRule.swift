@@ -16,6 +16,6 @@ struct InactiveStreakRule: StreakRule {
         }
         
         let daysSinceLastLog = context.countDaysSince(lastLoggedDay)
-        return .inactived(daysSinceLastLog: daysSinceLastLog)
+        return .inactive(daysSinceLastLog: daysSinceLastLog)
     }
 }

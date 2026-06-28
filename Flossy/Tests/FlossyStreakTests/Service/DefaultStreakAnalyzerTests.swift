@@ -36,7 +36,7 @@ struct DefaultStreakAnalyzerTests {
         let sut = DefaultStreakAnalyzer(rules: [
             MockStreakRule(result: .activePendingToday(days: 5)),
             MockStreakRule(result: nil),
-            MockStreakRule(result: .inactived(daysSinceLastLog: 5))
+            MockStreakRule(result: .inactive(daysSinceLastLog: 5))
         ])
         
         // When
@@ -54,13 +54,13 @@ struct DefaultStreakAnalyzerTests {
             MockStreakRule(result: nil),
             MockStreakRule(result: nil),
             MockStreakRule(result: nil),
-            MockStreakRule(result: .inactived(daysSinceLastLog: 5))
+            MockStreakRule(result: .inactive(daysSinceLastLog: 5))
         ])
         
         // When
         let result = sut.analyze(anyContext)
         
-        #expect(result == .inactived(daysSinceLastLog: 5))
+        #expect(result == .inactive(daysSinceLastLog: 5))
     }
     
     @Test("Analyze should return noHistory as fallback when no rule resolves")
@@ -84,7 +84,7 @@ struct DefaultStreakAnalyzerTests {
         // Given
         let unresolvedRule = MockStreakRule(result: nil)
         let resolvedRule = MockStreakRule(result: .activePendingToday(days: 5))
-        let ruleResolvedAfter = MockStreakRule(result: .inactived(daysSinceLastLog: 5))
+        let ruleResolvedAfter = MockStreakRule(result: .inactive(daysSinceLastLog: 5))
         
         let sut = DefaultStreakAnalyzer(rules: [
             unresolvedRule,
