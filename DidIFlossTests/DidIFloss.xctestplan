@@ -44,6 +44,13 @@
         "identifier" : "FlossyTests",
         "name" : "FlossyTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Flossy",
+        "identifier" : "FlossyStreakTests",
+        "name" : "FlossyStreakTests"
+      }
     }
   ],
   "version" : 1

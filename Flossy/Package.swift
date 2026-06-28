@@ -10,7 +10,11 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "Flossy",
-            targets: ["Flossy", "FlossyRecords"]
+            targets: [
+                "Flossy",
+                "FlossyRecords",
+                "FlossyStreak"
+            ]
         ),
     ],
     targets: [
@@ -22,6 +26,9 @@ let package = Package(
         .target(
             name: "FlossyRecords"
         ),
+        .target(
+            name: "FlossyStreak"
+        ),
         .testTarget(
             name: "FlossyTests",
             dependencies: ["Flossy"]
@@ -29,6 +36,10 @@ let package = Package(
         .testTarget(
             name: "FlossyRecordsTests",
             dependencies: ["FlossyRecords"]
+        ),
+        .testTarget(
+            name: "FlossyStreakTests",
+            dependencies: ["FlossyStreak"]
         )
     ],
     swiftLanguageModes: [.v6]
