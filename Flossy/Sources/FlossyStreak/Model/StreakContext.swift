@@ -17,11 +17,14 @@ struct StreakContext {
         today: Date,
         calendar: Calendar = Calendar.current
     ) {
+        let todayDate = calendar.startOfDay(for: today)
         self.calendar = calendar
+        self.today = todayDate
         self.loggedDays = Set(
-            loggedDates.map{ calendar.startOfDay(for: $0)}
+            loggedDates
+                .map{ calendar.startOfDay(for: $0)}
+                .filter{ $0 <= todayDate }
         )
-        self.today = calendar.startOfDay(for: today)
     }
     
     var yesterday: Date {

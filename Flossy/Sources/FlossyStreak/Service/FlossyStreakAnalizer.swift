@@ -8,7 +8,11 @@
 import Foundation
 
 public protocol StreakAnalyzer {
-    func analyze(logDates: [Date]) -> StreakState
+    func analyze(
+        logDates: [Date],
+        referenceDate: Date,
+        calendar: Calendar
+    ) -> StreakState
 }
 
 public struct DefaultStreakAnalyzer {
@@ -25,9 +29,17 @@ public struct DefaultStreakAnalyzer {
 }
 
 extension DefaultStreakAnalyzer: StreakAnalyzer {
-    public func analyze(logDates: [Date]) -> StreakState {
-        let context = StreakContext(loggedDates: logDates, today: .now)
-        return self.analyze(context)
+    public func analyze(
+        logDates: [Date],
+        referenceDate: Date = .now,
+        calendar: Calendar = .current
+    ) -> StreakState {
+        let context = StreakContext(
+                    loggedDates: logDates,
+                    today: referenceDate,
+                    calendar: calendar
+                )
+                return self.analyze(context)
     }
     
     func analyze(_ context: StreakContext) -> StreakState {

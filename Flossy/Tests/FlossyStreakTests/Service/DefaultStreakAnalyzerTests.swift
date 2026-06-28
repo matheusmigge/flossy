@@ -5,15 +5,17 @@
 //  Created by Lucas Migge de Barros on 28/06/26.
 //
 
+import Foundation
 import Testing
 @testable import FlossyStreak
 
 @Suite("DefaultStreakAnalyzer Testing")
 struct DefaultStreakAnalyzerTests {
-
+    
     final class MockStreakRule: StreakRule {
         let result: StreakState?
         var resolveCallCount: Int
+        var capturedContext: StreakContext?
         
         init(result: StreakState?) {
             self.result = result
@@ -22,6 +24,7 @@ struct DefaultStreakAnalyzerTests {
         
         func resolve(context: StreakContext) -> StreakState? {
             resolveCallCount += 1
+            capturedContext = context
             return result
         }
     }
@@ -29,7 +32,7 @@ struct DefaultStreakAnalyzerTests {
     var anyContext: StreakContext {
         .init(loggedDates: [], today: .now)
     }
-
+    
     @Test("Analyze should return first resolved rule")
     func testAnalyzeShouldReturnFirstResolvedRule() {
         // given
@@ -43,7 +46,7 @@ struct DefaultStreakAnalyzerTests {
         let result = sut.analyze(anyContext)
         
         
-        // Then 
+        // Then
         #expect(result == .activePendingToday(days: 5))
     }
     
@@ -70,7 +73,7 @@ struct DefaultStreakAnalyzerTests {
             MockStreakRule(result: nil),
             MockStreakRule(result: nil),
             MockStreakRule(result: nil)
-            ])
+        ])
         
         // When
         let result = sut.analyze(anyContext)
@@ -102,5 +105,41 @@ struct DefaultStreakAnalyzerTests {
         #expect(ruleResolvedAfter.resolveCallCount == 0)
     }
     
+    @Test("Should pass injected dependencies to StreakContext correctly")
+    func shouldPassInjectedDependencies_toContext() {
+        // Given
+        let spyRule = MockStreakRule(result: .noHistory, )
+        let sut = DefaultStreakAnalyzer(rules: [spyRule])
+        
+        var customCalendar = Calendar(identifier: .gregorian)
+        customCalendar.timeZone = TimeZone(secondsFromGMT: 0)!
+        
+        let customReferenceDate = Date(timeIntervalSince1970: 1000000)
+        let logDate1 = Date(timeIntervalSince1970: 900000)
+        let logDate2 = Date(timeIntervalSince1970: 800000)
+        let customLogDates = [logDate1, logDate2]
+        
+        // When
+        _ = sut.analyze(
+            logDates: customLogDates,
+            referenceDate: customReferenceDate,
+            calendar: customCalendar
+        )
+        
+        // Then
+        guard let capturedContext = spyRule.capturedContext else {
+            Issue.record("Context should not be nil")
+            return
+        }
+        
+        #expect(capturedContext.calendar == customCalendar)
+        let expectedToday = customCalendar.startOfDay(for: customReferenceDate)
+        #expect(capturedContext.today == expectedToday)
+        
+        let expectedLog1 = customCalendar.startOfDay(for: logDate1)
+        let expectedLog2 = customCalendar.startOfDay(for: logDate2)
+        #expect(capturedContext.loggedDays.contains(expectedLog1))
+        #expect(capturedContext.loggedDays.contains(expectedLog2))
+    }
     
 }
