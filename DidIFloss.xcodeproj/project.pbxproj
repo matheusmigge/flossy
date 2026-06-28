@@ -81,7 +81,6 @@
 		0C6CCD1C2FCFBCF9000E0DEE /* Fonts */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Fonts; sourceTree = "<group>"; };
 		0C6CCD1F2FCFBCFC000E0DEE /* Preview Content */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Preview Content"; sourceTree = "<group>"; };
 		0C6CCD2A2FCFBD02000E0DEE /* UserFeedback */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = UserFeedback; sourceTree = "<group>"; };
-		0C6CCD312FCFBD09000E0DEE /* StreakManager */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = StreakManager; sourceTree = "<group>"; };
 		0C6CCD372FCFBD12000E0DEE /* AddFloss */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = AddFloss; sourceTree = "<group>"; };
 		0C6CCD402FCFBD16000E0DEE /* LogRecords */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = LogRecords; sourceTree = "<group>"; };
 		0C6CCD582FCFBD18000E0DEE /* Home */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Home; sourceTree = "<group>"; };
@@ -149,7 +148,6 @@
 			isa = PBXGroup;
 			children = (
 				0C6CCD2A2FCFBD02000E0DEE /* UserFeedback */,
-				0C6CCD312FCFBD09000E0DEE /* StreakManager */,
 				0C7E92362B46FDD30079525D /* Persistence */,
 				0C6CCD372FCFBD12000E0DEE /* AddFloss */,
 				0C6CCD402FCFBD16000E0DEE /* LogRecords */,
@@ -243,7 +241,6 @@
 				0C6CCD1C2FCFBCF9000E0DEE /* Fonts */,
 				0C6CCD1F2FCFBCFC000E0DEE /* Preview Content */,
 				0C6CCD2A2FCFBD02000E0DEE /* UserFeedback */,
-				0C6CCD312FCFBD09000E0DEE /* StreakManager */,
 				0C6CCD372FCFBD12000E0DEE /* AddFloss */,
 				0C6CCD402FCFBD16000E0DEE /* LogRecords */,
 				0C6CCD582FCFBD18000E0DEE /* Home */,

@@ -15,6 +15,12 @@ public protocol StreakAnalyzer {
     ) -> StreakState
 }
 
+public extension StreakAnalyzer {
+    func analyze(logDates: [Date]) -> StreakState {
+        analyze(logDates: logDates, referenceDate: .now, calendar: .current)
+    }
+}
+
 public struct DefaultStreakAnalyzer {
     
     let rules: [any StreakRule]

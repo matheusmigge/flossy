@@ -8,6 +8,7 @@
 import Foundation
 import FlossyRecords
 import FlossyReminders
+import FlossyStreak
 
 /// A protocol that defines the use case for handling interactions with flossing log records.
 protocol HandleLogInteractionUseCaseProtocol {
@@ -39,14 +40,17 @@ struct HandleLogInteractionUseCase: HandleLogInteractionUseCaseProtocol {
     
     let recordsRepository: any FlossLogRepository
     let notificationService: FlossyRemindersService
+    let streakAnalyzer: any StreakAnalyzer
     let hapticsManager: HapticsManagerProtocol
     
     init(recordsRepository: any FlossLogRepository = DefaultFlossLogRepositoryFactory.make(),
          notificationService: FlossyRemindersService = FlossyRemindersServiceFactory.make(),
+         streakAnalyzer: any StreakAnalyzer = DefaultStreakAnalyzer(),
          hapticsManager: HapticsManagerProtocol = HapticsManager()
     ) {
         self.recordsRepository = recordsRepository
         self.notificationService = notificationService
+        self.streakAnalyzer = streakAnalyzer
         self.hapticsManager = hapticsManager
     }
     
@@ -93,8 +97,9 @@ struct HandleLogInteractionUseCase: HandleLogInteractionUseCaseProtocol {
         if Calendar.current.isDateInToday(date) {
             Task {
                 guard let records = try? await recordsRepository.fetchLogs() else { return }
-                let streakInfo = StreakCalculator.calculateCurrentStreak(logsDates: records.map({ $0.date }))
-                notificationService.scheduleAllFlossReminders(streakCount: streakInfo.days)
+                let state = streakAnalyzer.analyze(logDates: records.map { $0.date })
+                let streakCount = StreakReminderPolicy.completedStreakCount(from: state)
+                notificationService.scheduleAllFlossReminders(streakCount: streakCount)
             }
             
         } else {
@@ -123,6 +128,18 @@ struct HandleLogInteractionUseCase: HandleLogInteractionUseCaseProtocol {
             
             if !uniqueLogDays.contains(recordDaySignature) {
                 notificationService.clearPendingDailyStreakFlossReminderNotification()
+            }
+        }
+    }
+}
+
+extension HandleLogInteractionUseCase {
+    struct StreakReminderPolicy {
+        static func completedStreakCount(from state: StreakState) -> Int {
+            switch state {
+            case .startedToday: return 1
+            case .activeCompletedToday(days: let days): return days
+            default: return 0
             }
         }
     }

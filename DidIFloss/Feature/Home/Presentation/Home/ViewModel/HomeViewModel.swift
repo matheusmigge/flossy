@@ -7,7 +7,8 @@
 
 import FlossyReminders
 import FlossyRecords
-import SwiftUI
+import FlossyStreak
+import Foundation
 
 @MainActor
 class HomeViewModel: ObservableObject {
@@ -26,21 +27,24 @@ class HomeViewModel: ObservableObject {
     var recordsRepository: any FlossLogRepository
     let notificationService: FlossyRemindersService?
     let logInteractionHandler: HandleLogInteractionUseCaseProtocol
+    let streakAnalyzer: any StreakAnalyzer
     
     var streakBoardViewModel: StreakBoardViewModel {
-        let streakInfo = StreakCalculator.calculateCurrentStreak(logsDates: flossRecords.map({$0.date}))
-        return StreakCalculator.createStreakBoardViewModel(info: streakInfo)
+        let state = streakAnalyzer.analyze(logDates: flossRecords.map({ $0.date }))
+        return StreakBoardPresenter.makeViewModel(from: state)
     }
     
     init(persistence: PersistenceManagerProtocol = PersistenceManager.shared,
          recordsRepository: any FlossLogRepository = DefaultFlossLogRepositoryFactory.make(),
          notificationService: FlossyRemindersService = FlossyRemindersServiceFactory.make(),
-         logInteractionHandler: HandleLogInteractionUseCaseProtocol = HandleLogInteractionUseCase()
+         logInteractionHandler: HandleLogInteractionUseCaseProtocol = HandleLogInteractionUseCase(),
+         streakAnalyzer: any StreakAnalyzer = DefaultStreakAnalyzer()
     ) {
         self.persistence = persistence
         self.recordsRepository = recordsRepository
         self.notificationService = notificationService
         self.logInteractionHandler = logInteractionHandler
+        self.streakAnalyzer = streakAnalyzer
     }
     
     
@@ -92,17 +96,9 @@ class HomeViewModel: ObservableObject {
     }
     
     func presentShareSheet() {
-        let streak = StreakCalculator.calculateCurrentStreak(logsDates: self.flossRecords.map({ $0.date }))
-        
-        if streak.streak == .negative || streak.streak == .empty {
-            let message = "Oh no! I need to start flossing again! It's been \(streak.days) days since the last time I've flossed"
-            sheetView = .shareStreak(streakInfo: message)
-        }
-        
-        if streak.streak == .positive || streak.streak == .positiveMissingToday {
-            let message = "Look at me go!! I have been flossing for \(streak.days) days straight!"
-            sheetView = .shareStreak(streakInfo: message)
-        }
+        let state = streakAnalyzer.analyze(logDates: flossRecords.map{ $0.date })
+        let message = ShareStreakMessageFactory.makeMessage(from: state)
+        sheetView = .shareStreak(streakInfo: message)
     }
     
 }
@@ -111,6 +107,46 @@ extension HomeViewModel: FlossRecordsRepositoryDelegate {
     nonisolated func didUpdateLogs() {
         Task {
             await loadData()
+        }
+    }
+}
+
+
+extension HomeViewModel {
+    struct StreakBoardPresenter {
+        static func makeViewModel(from state: StreakState) -> StreakBoardViewModel {
+            switch state {
+            case .noHistory:
+                return .init(streakBoardContent: .noLogsRecorded, warmingBoardContent: .noLogsRecorded)
+            case .startedToday:
+                return .init(streakBoardContent: .firstDayOfPositiveStreak, warmingBoardContent: .userHadLoggedToday)
+            case .activePendingToday(let days):
+                return .init(streakBoardContent: .positiveStreak(count: days), warmingBoardContent: .userHasPositiveStreak)
+            case .activeCompletedToday(let days):
+                return .init(streakBoardContent: .positiveStreak(count: days), warmingBoardContent: .userHadLoggedToday)
+            case .inactive(let days):
+                let content: StreakBoardModel = days < 3
+                ? .shortNegativeStreak
+                : .longNegativeStreak(count: days)
+                
+                return .init(streakBoardContent: content, warmingBoardContent: .userHasNegativeStreak)
+            }
+        }
+    }
+    
+    struct ShareStreakMessageFactory {
+        static func makeMessage(from state: StreakState) -> String {
+            switch state {
+            case .noHistory:
+                return "I'm starting my flossing streak today!"
+            case .startedToday:
+                return "Look at me go! I started flossing today!"
+            case .activePendingToday(days: let days), .activeCompletedToday(days: let days):
+                return "Look at me go! I have been flossing for \(days) days straight!"
+            case .inactive(daysSinceLastLog: let days):
+                return "Oh no! I need to start flossing again! It's been \(days) days since the last time I've flossed"
+
+            }
         }
     }
 }
