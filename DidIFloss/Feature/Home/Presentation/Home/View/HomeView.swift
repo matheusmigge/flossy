@@ -12,6 +12,10 @@ struct HomeView: View {
     
     @StateObject var viewModel: HomeViewModel = HomeViewModel()
     
+    var recordsDates: [Date] {
+        viewModel.flossRecords.map { $0.date }
+    }
+    
     var body: some View {
         NavigationStack {
             List {
@@ -38,7 +42,7 @@ struct HomeView: View {
                 }
                 
                 Section {
-                    CalendarView(records: $viewModel.flossRecords, style: .week, delegate: viewModel)
+                    CalendarView(records: recordsDates, style: .week, delegate: viewModel)
                         .padding(.vertical, 7.5)
                 }
                 

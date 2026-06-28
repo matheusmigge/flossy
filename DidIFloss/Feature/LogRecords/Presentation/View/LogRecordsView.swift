@@ -12,10 +12,14 @@ struct LogRecordsView: View {
     
     @StateObject var viewModel: LogRecordsViewModel = LogRecordsViewModel()
     
+    var recordsDates: [Date] {
+        viewModel.records.map { $0.date }
+    }
+    
     var body: some View {
         List {
             Section("Calendar") {
-                CalendarView(records: $viewModel.records,
+                CalendarView(records: recordsDates,
                              style: .month,
                              delegate: viewModel)
                 .padding(.vertical, 7)

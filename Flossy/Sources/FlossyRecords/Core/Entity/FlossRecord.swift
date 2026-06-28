@@ -22,7 +22,7 @@ class FlossRecord: Identifiable {
         self.detail = detail
     }
     
-    public enum Detail: Codable, CaseIterable {
+    enum Detail: Codable, CaseIterable {
         case floss, brush, mouthwash
         
         init(activity: FlossActivity) {
