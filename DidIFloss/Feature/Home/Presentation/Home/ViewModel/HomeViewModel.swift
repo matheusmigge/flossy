@@ -23,7 +23,7 @@ class HomeViewModel: ObservableObject {
     
     @Published var flossRecords: [FlossLog] = []
     
-    weak var persistence: PersistenceManagerProtocol?
+    weak var persistence: AppPreferencesProtocol?
     var recordsRepository: any FlossLogRepository
     let notificationService: FlossyRemindersService?
     let logInteractionHandler: HandleLogInteractionUseCaseProtocol
@@ -34,7 +34,7 @@ class HomeViewModel: ObservableObject {
         return StreakBoardPresenter.makeViewModel(from: state)
     }
     
-    init(persistence: PersistenceManagerProtocol = PersistenceManager.shared,
+    init(persistence: AppPreferencesProtocol = AppPreferences.shared,
          recordsRepository: any FlossLogRepository = DefaultFlossLogRepositoryFactory.make(),
          notificationService: FlossyRemindersService = FlossyRemindersServiceFactory.make(),
          logInteractionHandler: HandleLogInteractionUseCaseProtocol = HandleLogInteractionUseCase(),

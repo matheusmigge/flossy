@@ -8,22 +8,22 @@
 import XCTest
 @testable import DidIFloss
 
-final class PersistenceManagerTests: XCTestCase {
+final class AppPreferencesTests: XCTestCase {
 
     var userDefaults: UserDefaultsMock!
     
-    var persistenceManager: PersistenceManager!
+    var sut: AppPreferences!
     
     override func setUpWithError() throws {
         userDefaults = UserDefaultsMock()
         
-        persistenceManager = PersistenceManager(userDefaults: userDefaults)
+        sut = AppPreferences(userDefaults: userDefaults)
     }
     
     func testCheckIfNewUserReturnsTrueIfFirstTimeInApp() {
         userDefaults.didUserAlreadyUseApp = false
         
-        XCTAssertTrue(persistenceManager.checkIfIsNewUser())
+        XCTAssertTrue(sut.checkIfIsNewUser())
     }
         
     func testCheckIfNewUserReturnFalseIfUserAlreadyUseApp() {
@@ -31,9 +31,9 @@ final class PersistenceManagerTests: XCTestCase {
         userDefaults.didUserAlreadyUseApp = false
         
         // first use
-        _ = persistenceManager.checkIfIsNewUser()
+        _ = sut.checkIfIsNewUser()
         // second use
-        let isNewUser = persistenceManager.checkIfIsNewUser()
+        let isNewUser = sut.checkIfIsNewUser()
         
         XCTAssertFalse(isNewUser)
         

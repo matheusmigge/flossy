@@ -9,9 +9,9 @@
 struct InactiveStreakRule: StreakRule {
     func resolve(context: StreakContext) -> StreakState? {
         let hasLogToday = context.hasLog(on: context.today)
-        let hasLogYesteday = context.hasLog(on: context.yesterday)
+        let hasLogYesterday = context.hasLog(on: context.yesterday)
         
-        guard let lastLoggedDay = context.lastLoggedDay, !hasLogToday, !hasLogYesteday else {
+        guard let lastLoggedDay = context.lastLoggedDay, !hasLogToday, !hasLogYesterday else {
             return nil
         }
         

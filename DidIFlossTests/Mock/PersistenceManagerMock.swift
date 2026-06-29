@@ -8,7 +8,7 @@
 import Foundation
 @testable import DidIFloss
 
-class PersistenceManagerMock: PersistenceManagerProtocol {
+class PersistenceManagerMock: AppPreferencesProtocol {
     
     var didCallGetFlossRecord: Bool = false
     var didCallSaveFlossRecordForDate: Date? = nil

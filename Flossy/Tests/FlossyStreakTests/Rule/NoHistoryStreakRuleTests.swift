@@ -12,7 +12,7 @@ import Foundation
 @Suite("NoHistoryStreakRule Testing")
 struct NoHistoryStreakRuleTests {
     
-    @Test("Resolve should return no historiy if logged days is empty")
+    @Test("Resolve should return no history if logged days is empty")
     func resolve_emptyLoggedDays_returnNoHistory() {
         // Given
         let noLoggedDaysContext = StreakContext(loggedDates: [], today: .now)
