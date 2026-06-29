@@ -13,12 +13,17 @@ import Foundation
 struct StreakContextTests {
     
     let calendar = Calendar.current
-    let referenceToday = Date()
+    let referenceToday: Date = {
+        var components = DateComponents()
+        components.year = 2026
+        components.month = 6
+        components.day = 28
+        components.hour = 12
+        components.minute = 0
+        return Calendar.current.date(from: components)!
+    }()
     
     // MARK: - Helpers
-    
-    /// Creates a date by offsetting days and hours from the reference `today`.
-    /// Useful to test if time-of-day variations are correctly normalized.
     private func makeDate(daysAgo: Int, hourOffset: Int = 0) -> Date {
         let dayDate = calendar.date(byAdding: .day, value: -daysAgo, to: referenceToday)!
         return calendar.date(byAdding: .hour, value: hourOffset, to: dayDate)!
@@ -85,6 +90,7 @@ struct StreakContextTests {
         // When
         let queryDateAtNight = makeDate(daysAgo: 2, hourOffset: 8)
         let queryMissingDate = makeDate(daysAgo: 3)
+        
         
         // Then
         #expect(sut.hasLog(on: queryDateAtNight))
