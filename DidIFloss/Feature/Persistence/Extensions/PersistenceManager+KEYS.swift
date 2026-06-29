@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension PersistenceManager {
+extension AppPreferences {
     
     /// A struct that holds the keys used for accessing persisted data in `UserDefaults`.
     ///

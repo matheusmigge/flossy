@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension HomeViewModel: CalendarViewDelegate {
+extension HomeViewModel: @MainActor CalendarViewDelegate {
     func didSelectDate(_ date: Date) {
         if flossRecordsContains(date: date) {
             self.focusedDate = date
@@ -28,7 +28,9 @@ extension HomeViewModel: CalendarViewDelegate {
      
         
         alertDismiss()
-        self.loadData()
+        Task {
+            await self.loadData()
+        }
     }
     
     func alertDismiss() {

@@ -7,13 +7,15 @@
 
 import Foundation
 
-extension HomeViewModel: AddFlossDelegate {
+extension HomeViewModel: @MainActor AddFlossDelegate {
     func addLogRecord(date: Date) {
         logInteractionHandler.handleLogRecord(for: date)
         
         sheetView = nil
         showingCelebration = true
         
-        self.loadData()
+        Task {
+            await self.loadData()
+        }
     }
 }

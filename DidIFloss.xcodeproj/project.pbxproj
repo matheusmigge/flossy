@@ -7,20 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C0FDC462FF08D520094E9BF /* Flossy in Frameworks */ = {isa = PBXBuildFile; productRef = 0C0FDC452FF08D520094E9BF /* Flossy */; };
+		0C0FDC492FF08D5E0094E9BF /* FlossyReminders in Frameworks */ = {isa = PBXBuildFile; productRef = 0C0FDC482FF08D5E0094E9BF /* FlossyReminders */; };
 		0C196DFF2B614E7600EDD0B3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C196DFE2B614E7600EDD0B3 /* Launch Screen.storyboard */; };
 		0C4177AA2B4CF9CB00E8976B /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4177A92B4CF9CB00E8976B /* UserDefaults.swift */; };
 		0C64B4C72FD06046007DAD94 /* FlossyReminders in Frameworks */ = {isa = PBXBuildFile; productRef = 0C64B4C62FD06046007DAD94 /* FlossyReminders */; };
+		0C6B98CE2FEDBC730081CF20 /* Flossy in Frameworks */ = {isa = PBXBuildFile; productRef = 0C6B98CD2FEDBC730081CF20 /* Flossy */; };
 		0C7E923B2B470DB00079525D /* UserDefaultable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923A2B470DB00079525D /* UserDefaultable.swift */; };
-		0C7E923D2B470DDB0079525D /* PersistenceManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */; };
+		0C7E923D2B470DDB0079525D /* AppPreferencesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923C2B470DDB0079525D /* AppPreferencesProtocol.swift */; };
 		0C7E923F2B470FD30079525D /* PersistenceManager+KEYS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E923E2B470FD30079525D /* PersistenceManager+KEYS.swift */; };
-		0C7E92462B479E170079525D /* FlossRecordDataProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7E92452B479E170079525D /* FlossRecordDataProviderProtocol.swift */; };
-		0C8981F42B4667AC008CFD5D /* FlossRecordDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8981F32B4667AC008CFD5D /* FlossRecordDataSource.swift */; };
-		0C90A2F52B6D796800015298 /* PersistenceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C90A2F42B6D796800015298 /* PersistenceDelegate.swift */; };
-		0CB26C632BB398A600CB1A43 /* FlossRecordsRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB26C622BB398A600CB1A43 /* FlossRecordsRepositoryProtocol.swift */; };
 		5625BFD52B439A5C006F88BD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5625BFD42B439A5C006F88BD /* README.md */; };
 		56C33DF72B3CAA1000D8DEB7 /* DidIFlossApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C33DF62B3CAA1000D8DEB7 /* DidIFlossApp.swift */; };
 		56C33DFB2B3CAA1500D8DEB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56C33DFA2B3CAA1500D8DEB7 /* Assets.xcassets */; };
-		56C33E0A2B3CCA9E00D8DEB7 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C33E092B3CCA9E00D8DEB7 /* PersistenceManager.swift */; };
+		56C33E0A2B3CCA9E00D8DEB7 /* AppPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C33E092B3CCA9E00D8DEB7 /* AppPreferences.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,20 +50,17 @@
 		0C2EF6592B710E0300AFF9D4 /* DidIFlossTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DidIFlossTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C4177A92B4CF9CB00E8976B /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		0C64B4C82FD06DF6007DAD94 /* FlossyReminders */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FlossyReminders; sourceTree = "<group>"; };
+		0C6B98CB2FEDB4BF0081CF20 /* Flossy */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Flossy; sourceTree = "<group>"; };
 		0C7E923A2B470DB00079525D /* UserDefaultable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultable.swift; sourceTree = "<group>"; };
-		0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManagerProtocol.swift; sourceTree = "<group>"; };
+		0C7E923C2B470DDB0079525D /* AppPreferencesProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferencesProtocol.swift; sourceTree = "<group>"; };
 		0C7E923E2B470FD30079525D /* PersistenceManager+KEYS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistenceManager+KEYS.swift"; sourceTree = "<group>"; };
-		0C7E92452B479E170079525D /* FlossRecordDataProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecordDataProviderProtocol.swift; sourceTree = "<group>"; };
-		0C8981F32B4667AC008CFD5D /* FlossRecordDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecordDataSource.swift; sourceTree = "<group>"; };
-		0C90A2F42B6D796800015298 /* PersistenceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceDelegate.swift; sourceTree = "<group>"; };
-		0CB26C622BB398A600CB1A43 /* FlossRecordsRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlossRecordsRepositoryProtocol.swift; sourceTree = "<group>"; };
 		5625BFD42B439A5C006F88BD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		562749CE2B43A64C004F37A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		56C33DF32B3CAA1000D8DEB7 /* DidIFloss.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DidIFloss.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56C33DF62B3CAA1000D8DEB7 /* DidIFlossApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidIFlossApp.swift; sourceTree = "<group>"; };
 		56C33DFA2B3CAA1500D8DEB7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		56C33DFC2B3CAA1500D8DEB7 /* DidIFloss.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DidIFloss.entitlements; sourceTree = "<group>"; };
-		56C33E092B3CCA9E00D8DEB7 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		56C33E092B3CCA9E00D8DEB7 /* AppPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferences.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -85,7 +81,6 @@
 		0C6CCD1C2FCFBCF9000E0DEE /* Fonts */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Fonts; sourceTree = "<group>"; };
 		0C6CCD1F2FCFBCFC000E0DEE /* Preview Content */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Preview Content"; sourceTree = "<group>"; };
 		0C6CCD2A2FCFBD02000E0DEE /* UserFeedback */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = UserFeedback; sourceTree = "<group>"; };
-		0C6CCD312FCFBD09000E0DEE /* StreakManager */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = StreakManager; sourceTree = "<group>"; };
 		0C6CCD372FCFBD12000E0DEE /* AddFloss */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = AddFloss; sourceTree = "<group>"; };
 		0C6CCD402FCFBD16000E0DEE /* LogRecords */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = LogRecords; sourceTree = "<group>"; };
 		0C6CCD582FCFBD18000E0DEE /* Home */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Home; sourceTree = "<group>"; };
@@ -104,6 +99,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C0FDC492FF08D5E0094E9BF /* FlossyReminders in Frameworks */,
+				0C0FDC462FF08D520094E9BF /* Flossy in Frameworks */,
+				0C6B98CE2FEDBC730081CF20 /* Flossy in Frameworks */,
 				0C64B4C72FD06046007DAD94 /* FlossyReminders in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -120,11 +118,17 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		0C6B98CC2FEDBC730081CF20 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		0C7E92362B46FDD30079525D /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				56C33E092B3CCA9E00D8DEB7 /* PersistenceManager.swift */,
-				0C8981F32B4667AC008CFD5D /* FlossRecordDataSource.swift */,
+				56C33E092B3CCA9E00D8DEB7 /* AppPreferences.swift */,
 				0C4177A82B4CF9B000E8976B /* Extensions */,
 				0C7E92472B479E3A0079525D /* Protocols */,
 			);
@@ -135,10 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				0C7E923A2B470DB00079525D /* UserDefaultable.swift */,
-				0C7E92452B479E170079525D /* FlossRecordDataProviderProtocol.swift */,
-				0C7E923C2B470DDB0079525D /* PersistenceManagerProtocol.swift */,
-				0CB26C622BB398A600CB1A43 /* FlossRecordsRepositoryProtocol.swift */,
-				0C90A2F42B6D796800015298 /* PersistenceDelegate.swift */,
+				0C7E923C2B470DDB0079525D /* AppPreferencesProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -147,7 +148,6 @@
 			isa = PBXGroup;
 			children = (
 				0C6CCD2A2FCFBD02000E0DEE /* UserFeedback */,
-				0C6CCD312FCFBD09000E0DEE /* StreakManager */,
 				0C7E92362B46FDD30079525D /* Persistence */,
 				0C6CCD372FCFBD12000E0DEE /* AddFloss */,
 				0C6CCD402FCFBD16000E0DEE /* LogRecords */,
@@ -160,10 +160,12 @@
 		56C33DEA2B3CAA1000D8DEB7 = {
 			isa = PBXGroup;
 			children = (
+				0C6B98CB2FEDB4BF0081CF20 /* Flossy */,
 				0C64B4C82FD06DF6007DAD94 /* FlossyReminders */,
 				5625BFD42B439A5C006F88BD /* README.md */,
 				56C33DF52B3CAA1000D8DEB7 /* DidIFloss */,
 				0C6CCCAD2FCFBCD2000E0DEE /* DidIFlossTests */,
+				0C6B98CC2FEDBC730081CF20 /* Frameworks */,
 				56C33DF42B3CAA1000D8DEB7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -239,7 +241,6 @@
 				0C6CCD1C2FCFBCF9000E0DEE /* Fonts */,
 				0C6CCD1F2FCFBCFC000E0DEE /* Preview Content */,
 				0C6CCD2A2FCFBD02000E0DEE /* UserFeedback */,
-				0C6CCD312FCFBD09000E0DEE /* StreakManager */,
 				0C6CCD372FCFBD12000E0DEE /* AddFloss */,
 				0C6CCD402FCFBD16000E0DEE /* LogRecords */,
 				0C6CCD582FCFBD18000E0DEE /* Home */,
@@ -248,6 +249,9 @@
 			name = DidIFloss;
 			packageProductDependencies = (
 				0C64B4C62FD06046007DAD94 /* FlossyReminders */,
+				0C6B98CD2FEDBC730081CF20 /* Flossy */,
+				0C0FDC452FF08D520094E9BF /* Flossy */,
+				0C0FDC482FF08D5E0094E9BF /* FlossyReminders */,
 			);
 			productName = DidIFloss;
 			productReference = 56C33DF32B3CAA1000D8DEB7 /* DidIFloss.app */;
@@ -328,14 +332,10 @@
 			files = (
 				56C33DF72B3CAA1000D8DEB7 /* DidIFlossApp.swift in Sources */,
 				0C7E923B2B470DB00079525D /* UserDefaultable.swift in Sources */,
-				0C7E92462B479E170079525D /* FlossRecordDataProviderProtocol.swift in Sources */,
-				0C8981F42B4667AC008CFD5D /* FlossRecordDataSource.swift in Sources */,
 				0C7E923F2B470FD30079525D /* PersistenceManager+KEYS.swift in Sources */,
-				0C90A2F52B6D796800015298 /* PersistenceDelegate.swift in Sources */,
-				0CB26C632BB398A600CB1A43 /* FlossRecordsRepositoryProtocol.swift in Sources */,
-				56C33E0A2B3CCA9E00D8DEB7 /* PersistenceManager.swift in Sources */,
+				56C33E0A2B3CCA9E00D8DEB7 /* AppPreferences.swift in Sources */,
 				0C4177AA2B4CF9CB00E8976B /* UserDefaults.swift in Sources */,
-				0C7E923D2B470DDB0079525D /* PersistenceManagerProtocol.swift in Sources */,
+				0C7E923D2B470DDB0079525D /* AppPreferencesProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,7 +358,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pb.PedalBoard.DidIFlossTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -379,7 +379,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pb.PedalBoard.DidIFlossTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -539,7 +539,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.6;
@@ -582,7 +582,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.6;
@@ -631,9 +631,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0C0FDC452FF08D520094E9BF /* Flossy */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Flossy;
+		};
+		0C0FDC482FF08D5E0094E9BF /* FlossyReminders */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FlossyReminders;
+		};
 		0C64B4C62FD06046007DAD94 /* FlossyReminders */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FlossyReminders;
+		};
+		0C6B98CD2FEDBC730081CF20 /* Flossy */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Flossy;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

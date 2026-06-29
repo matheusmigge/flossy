@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FlossyRecords
 @testable import DidIFloss
 
 class HandleLogInteractionUseCaseMock: HandleLogInteractionUseCaseProtocol {
@@ -18,7 +19,7 @@ class HandleLogInteractionUseCaseMock: HandleLogInteractionUseCaseProtocol {
         didCallHandleLogRecord = true
     }
     
-    func removeLogRecord(for record: FlossRecord) {
+    func removeLogRecord(for record: FlossLog) {
         didCallRemoveLogRecord = true
     }
     

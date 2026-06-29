@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct CalendarView: View {
     
     @Namespace internal var selectedDateNameSpace
@@ -16,7 +15,7 @@ struct CalendarView: View {
     
     @State var dateFocused: Date?
     
-    @Binding var records: [FlossRecord]
+    var recordsDates: [Date]
     
     @Environment(\.colorScheme) var colorScheme
     
@@ -27,8 +26,8 @@ struct CalendarView: View {
     let gridColumns: [GridItem] = Array(repeating:
                                             GridItem(.flexible(minimum: 15, maximum: 50)), count: 7)
     
-    init(records: Binding<[FlossRecord]>, style: Style, delegate: CalendarViewDelegate? = nil) {
-        self._records = records
+    init(records: [Date], style: Style, delegate: CalendarViewDelegate? = nil) {
+        self.recordsDates = records
         self.style = style
         self.delegate = delegate
     }
@@ -115,10 +114,8 @@ extension CalendarView {
 extension CalendarView {
     
     var filteredRecords: [Date] {
-        records.filter { record in
-            self.isSelectedDate(record.date)
-        }.map { record in
-            record.date
+        recordsDates.filter { record in
+            self.isSelectedDate(record)
         }
     }
     
@@ -186,14 +183,14 @@ extension CalendarView {
     }
     
     func numberOfFlossRecords(for date: Date) -> Int {
-        return records
-            .filter({calendar.isDate($0.date, equalTo: date, toGranularity: .day)})
+        return recordsDates
+            .filter({calendar.isDate($0, equalTo: date, toGranularity: .day)})
             .count
     }
     
     func hasDayFlossRecords(for date: Date) -> Bool {
-        let recordsCount = records
-            .filter({calendar.isDate($0.date, equalTo: date, toGranularity: .day)})
+        let recordsCount = recordsDates
+            .filter({calendar.isDate($0, equalTo: date, toGranularity: .day)})
             .count
         return recordsCount > 0
     }
@@ -226,5 +223,5 @@ extension CalendarView {
 
 
 #Preview {
-    CalendarView(records: .constant([]), style: .month)
+    CalendarView(records: [], style: .month)
 }
