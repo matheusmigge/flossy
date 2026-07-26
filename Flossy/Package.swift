@@ -12,7 +12,7 @@ let package = Package(
             name: "Flossy",
             targets: [
                 "Flossy",
-                "FlossyRecords",
+                "FlossyData",
                 "FlossyStreak"
             ]
         ),
@@ -24,7 +24,7 @@ let package = Package(
             name: "Flossy"
         ),
         .target(
-            name: "FlossyRecords"
+            name: "FlossyData"
         ),
         .target(
             name: "FlossyStreak"
@@ -34,8 +34,8 @@ let package = Package(
             dependencies: ["Flossy"]
         ),
         .testTarget(
-            name: "FlossyRecordsTests",
-            dependencies: ["FlossyRecords"]
+            name: "FlossyDataTests",
+            dependencies: ["FlossyData"]
         ),
         .testTarget(
             name: "FlossyStreakTests",

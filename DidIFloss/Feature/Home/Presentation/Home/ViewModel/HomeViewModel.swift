@@ -6,7 +6,7 @@
 //
 
 import FlossyReminders
-import FlossyRecords
+import FlossyData
 import FlossyStreak
 import Foundation
 

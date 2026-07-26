@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import FlossyRecords
+import FlossyData
 import SwiftUI
 
 class LogRecordsViewModel: ObservableObject {
