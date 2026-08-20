@@ -3,12 +3,14 @@
 //  DidIFlossTests
 //
 
-import XCTest
+import Testing
 @testable import DidIFloss
 
-final class OnboardingViewModelTests: XCTestCase {
+@Suite("OnboardingViewModel Tests")
+struct OnboardingViewModelTests {
 
-    func test_continueButtonTapped_callsClosure() {
+    @Test("continueButtonTapped triggers the onContinueTapped closure")
+    func testContinueButtonTapped() {
         var didCallClosure = false
         
         let sut = OnboardingViewModel {
@@ -17,6 +19,6 @@ final class OnboardingViewModelTests: XCTestCase {
         
         sut.continueButtonTapped()
         
-        XCTAssertTrue(didCallClosure)
+        #expect(didCallClosure == true)
     }
 }

@@ -3,14 +3,16 @@
 //  DidIFlossTests
 //
 
-import XCTest
+import Testing
 @testable import DidIFloss
 
-final class DeveloperViewModelTests: XCTestCase {
+@Suite("DeveloperViewModel Tests")
+struct DeveloperViewModelTests {
 
-    func test_initialization_setsFeedbackGenerator() {
+    @Test("Initialization sets feedbackGenerator correctly")
+    func testInitialization() {
         let sut = DeveloperViewModel()
         
-        XCTAssertNotNil(sut.feedbackGenerator)
+        #expect(sut.feedbackGenerator != nil)
     }
 }

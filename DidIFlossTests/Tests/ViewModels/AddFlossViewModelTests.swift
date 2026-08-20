@@ -3,10 +3,12 @@
 //  DidIFlossTests
 //
 
-import XCTest
+import Testing
+import Foundation
 @testable import DidIFloss
 
-final class AddFlossViewModelTests: XCTestCase {
+@Suite("AddFlossViewModel Tests")
+struct AddFlossViewModelTests {
     
     class MockAddFlossDelegate: AddFlossDelegate {
         var didCallAddLogRecord = false
@@ -18,21 +20,24 @@ final class AddFlossViewModelTests: XCTestCase {
         }
     }
     
-    func test_isSelectedDateValid_whenDateIsInTheFuture_returnsFalse() {
+    @Test("isSelectedDateValid returns false when date is in the future")
+    func testIsSelectedDateValidFuture() {
         let sut = AddFlossViewModel()
         sut.selectedDate = Date().addingTimeInterval(3600) // 1 hour in the future
         
-        XCTAssertFalse(sut.isSelectedDateValid)
+        #expect(sut.isSelectedDateValid == false)
     }
     
-    func test_isSelectedDateValid_whenDateIsInThePast_returnsTrue() {
+    @Test("isSelectedDateValid returns true when date is in the past")
+    func testIsSelectedDateValidPast() {
         let sut = AddFlossViewModel()
         sut.selectedDate = Date().addingTimeInterval(-3600) // 1 hour in the past
         
-        XCTAssertTrue(sut.isSelectedDateValid)
+        #expect(sut.isSelectedDateValid == true)
     }
     
-    func test_addLogRecord_whenDateIsValid_callsDelegate() {
+    @Test("addLogRecord calls delegate when date is valid")
+    func testAddLogRecordValid() {
         let mockDelegate = MockAddFlossDelegate()
         let sut = AddFlossViewModel(delegate: mockDelegate)
         let pastDate = Date().addingTimeInterval(-3600)
@@ -40,11 +45,12 @@ final class AddFlossViewModelTests: XCTestCase {
         sut.selectedDate = pastDate
         sut.addLogRecord()
         
-        XCTAssertTrue(mockDelegate.didCallAddLogRecord)
-        XCTAssertEqual(mockDelegate.passedDate, pastDate)
+        #expect(mockDelegate.didCallAddLogRecord == true)
+        #expect(mockDelegate.passedDate == pastDate)
     }
     
-    func test_addLogRecord_whenDateIsInvalid_doesNotCallDelegate() {
+    @Test("addLogRecord does not call delegate when date is invalid")
+    func testAddLogRecordInvalid() {
         let mockDelegate = MockAddFlossDelegate()
         let sut = AddFlossViewModel(delegate: mockDelegate)
         let futureDate = Date().addingTimeInterval(3600)
@@ -52,7 +58,7 @@ final class AddFlossViewModelTests: XCTestCase {
         sut.selectedDate = futureDate
         sut.addLogRecord()
         
-        XCTAssertFalse(mockDelegate.didCallAddLogRecord)
-        XCTAssertNil(mockDelegate.passedDate)
+        #expect(mockDelegate.didCallAddLogRecord == false)
+        #expect(mockDelegate.passedDate == nil)
     }
 }
