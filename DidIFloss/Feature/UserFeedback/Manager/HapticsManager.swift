@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-
+import Observation
 
 /// A class that manages haptic feedback for user interactions in the app.
 ///
@@ -15,7 +15,8 @@ import UIKit
 /// such as success, warning, or error notifications, using the `UINotificationFeedbackGenerator`.
 /// It supports customization through the `HapticFeedbackOption` enum, allowing
 /// users to set their preferred feedback type for different actions.
-class HapticsManager, HapticsManagerProtocol {
+@Observable
+class HapticsManager: HapticsManagerProtocol {
     
     /// A shared instance of `HapticsManager` to be used as a singleton.
     static var shared: HapticsManager = HapticsManager()
