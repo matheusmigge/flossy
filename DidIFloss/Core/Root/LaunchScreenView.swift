@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FlossyDesignSystem
 
 struct LaunchScreenView: View {
     
@@ -13,7 +14,7 @@ struct LaunchScreenView: View {
     
     var body: some View {
         ZStack {
-            Color.flossLightYellow
+            FlossyColors.lightYellow
             
             BackgroundView()
             

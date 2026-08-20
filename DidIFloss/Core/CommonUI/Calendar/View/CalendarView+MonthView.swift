@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import FlossyDesignSystem
 
 extension CalendarView {
     
@@ -21,7 +22,7 @@ extension CalendarView {
     }
     
     var daysOfTheWeekMonthView: some View {
-        ForEach(self.daysOfTheWeek, id: \.self) { day in
+        ForEach(Calendar.current.shortWeekdaySymbols, id: \.self) { day in
             Text(day)
                 .foregroundStyle(.secondary)
                 .monospaced()
@@ -29,13 +30,13 @@ extension CalendarView {
     }
     
     var dayMonthCalendarGridView: some View {
-        ForEach(self.daysCalendarSet, id: \.self) { date in
+        ForEach(viewModel.daysCalendarSet(style: .month), id: \.self) { date in
             Text(date.dayFormatted)
-                .foregroundStyle(dayColor(date))
+                .foregroundStyle(viewModel.dayColor(date))
                 .background {
-                    if self.isSelectedDate(date) {
+                    if viewModel.isSelectedDate(date) {
                         Circle()
-                            .fill(Color.accentColorAlternative)
+                            .fill(FlossyColors.accentColorAlternative)
                             .frame(width: 30, height: 30)
                             .matchedGeometryEffect(id: "selectedDateNameSpace", in: selectedDateNameSpace)
                     }

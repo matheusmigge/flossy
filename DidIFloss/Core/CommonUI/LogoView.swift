@@ -6,16 +6,17 @@
 //
 
 import SwiftUI
+import FlossyDesignSystem
 
 struct LogoView: View {
     var body: some View {
         VStack(spacing: 220) {
             
             Text("flossy")
-                .font(.custom(Constants.FontNames.borel, size: 60))
+                .font(FlossyFonts.borel(size: 60))
                 .padding(30)
                 .padding(.top, 30)
-                .background(Color.flossLogoBackground)
+                .background(FlossyColors.logoBackground)
                 .foregroundStyle(Color.primary)
                 .multilineTextAlignment(.center)
                 .rotationEffect(.degrees(7))

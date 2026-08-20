@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FlossyDesignSystem
 
 struct StreakBoardView: View {
     
@@ -37,5 +38,5 @@ struct StreakBoardView: View {
 }
 
 #Preview {
-    StreakBoardView(model: StreakBoardModel(titleColor: .greenyBlue, titleText: "Combo iniciado!", captionText: "Continue passando o fio dental todos os dias para manter o seu combo."))
+    StreakBoardView(model: StreakBoardModel(titleColor: FlossyColors.greenyBlue, titleText: "Combo iniciado!", captionText: "Continue passando o fio dental todos os dias para manter o seu combo."))
 }

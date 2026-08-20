@@ -6,21 +6,17 @@
 //
 
 import SwiftUI
+import FlossyDesignSystem
 
 struct CalendarView: View {
     
     @Namespace internal var selectedDateNameSpace
-    
-    @State var currentCalendar: Date = .now
-    
-    @State var dateFocused: Date?
+    @StateObject var viewModel = CalendarViewModel()
     
     var recordsDates: [Date]
-    
     @Environment(\.colorScheme) var colorScheme
     
     var style: Style
-    
     weak var delegate: CalendarViewDelegate?
     
     let gridColumns: [GridItem] = Array(repeating:
@@ -44,63 +40,64 @@ struct CalendarView: View {
                 weekCalendarGrid
             }
         }
-        
     }
-    
     
     var calendarHeader: some View {
         HStack {
             Button {
-                self.previousCalendarSet()
+                viewModel.previousCalendarSet(style: style)
             } label: {
                 Image(systemName: "chevron.backward")
             }
             
             Spacer()
             
-            Text(self.dateLabel)
+            Text(viewModel.dateLabel(style: style, daysCalendarSet: viewModel.daysCalendarSet(style: style)))
                 .font(.headline)
             
             Spacer()
             
             Button {
-                self.nextCalendarSet()
+                viewModel.nextCalendarSet(style: style)
             } label: {
                 Image(systemName: "chevron.forward")
             }
-            .opacity(self.hasNextCalendar ? 1 : 0)
-            
+            .opacity(viewModel.hasNextCalendar(style: style) ? 1 : 0)
         }
         .padding(.horizontal)
     }
     
-    
-    
-    
     @ViewBuilder
     func FlossIndicatorView(for date: Date) -> some View {
-        let flossCount = self.numberOfFlossRecords(for: date)
+        let flossCount = viewModel.numberOfFlossRecords(for: date, recordsDates: recordsDates)
         
         HStack(spacing: 5) {
             if flossCount > 0 {
                 Circle()
-                    .foregroundStyle(Color.flossFlamingoPink)
+                    .foregroundStyle(FlossyColors.flamingoPink)
                     .frame(width: 5)
                     .offset(y: 14)
             }
             if flossCount > 1 {
                 Circle()
-                    .foregroundStyle(Color.flossFlamingoPink)
+                    .foregroundStyle(FlossyColors.flamingoPink)
                     .frame(width: 5)
                     .offset(y: 14)
             }
             
             if flossCount > 2 {
                 Circle()
-                    .foregroundStyle(Color.flossFlamingoPink)
+                    .foregroundStyle(FlossyColors.flamingoPink)
                     .frame(width: 5)
                     .offset(y: 14)
             }
+        }
+    }
+    
+    internal func didTapOnDate(_ date: Date) {
+        delegate?.didSelectDate(date)
+        withAnimation {
+            viewModel.dateFocused = date == viewModel.dateFocused ? nil : date
         }
     }
 }
@@ -108,116 +105,6 @@ struct CalendarView: View {
 extension CalendarView {
     enum Style {
         case month, week
-    }
-}
-
-extension CalendarView {
-    
-    var filteredRecords: [Date] {
-        recordsDates.filter { record in
-            self.isSelectedDate(record)
-        }
-    }
-    
-    var calendar: Calendar {
-        Calendar.current
-    }
-    
-    var daysOfTheWeek: [String] {
-        calendar.shortWeekdaySymbols
-    }
-    
-    var daysCalendarSet: [Date] {
-        switch style {
-        case .month:
-            return Calendar.getDaysOfTheMonth(for: currentCalendar)
-        case .week:
-            return Calendar.getDaysOfTheWeek(for: currentCalendar)
-        }
-    }
-    
-    var dateLabel: String {
-        switch style {
-        case .month:
-            return dateFocused?.monthFormatted ?? currentCalendar.monthFormatted
-        case .week:
-            let firstDayOfWeek = daysCalendarSet.first?.dayFormatted ?? "XX"
-            let lastDayOfWeek = daysCalendarSet.last?.dayFormatted ?? "XX"
-            
-            return "\(firstDayOfWeek) - \(lastDayOfWeek) \(currentCalendar.monthFormatted)"
-        }
-    }
-    
-    var hasNextCalendar: Bool {
-        let dateComponent: Calendar.Component = style == .month ? .month : .weekOfYear
-        
-        let next = calendar.date(byAdding: dateComponent, value: 1, to: currentCalendar) ?? Date()
-        return next <= .now
-    }
-    
-    func nextCalendarSet() {
-        if hasNextCalendar {
-            let calendarComponent: Calendar.Component = style == .week ? .weekOfYear : .month
-            
-            currentCalendar = calendar.date(byAdding: calendarComponent, value: 1, to: currentCalendar) ?? Date()
-        }
-    }
-    
-    func previousCalendarSet() {
-        let calendarComponent: Calendar.Component = style == .week ? .weekOfYear : .month
-        
-        currentCalendar = calendar.date(byAdding: calendarComponent, value: -1, to: currentCalendar) ?? Date()
-    }
-    
-    func isToday(_ date: Date) -> Bool {
-        return calendar.isDateInToday(date)
-    }
-    
-    func isFromCurrentCalendarSet(_ date: Date) -> Bool {
-        return calendar.isDate(date, equalTo: currentCalendar, toGranularity: .month)
-    }
-    
-    func isSelectedDate(_ date: Date) -> Bool {
-        guard let safeDateFocused = dateFocused else { return false}
-        return calendar.isDate(date, equalTo: safeDateFocused, toGranularity: .day)
-    }
-    
-    func numberOfFlossRecords(for date: Date) -> Int {
-        return recordsDates
-            .filter({calendar.isDate($0, equalTo: date, toGranularity: .day)})
-            .count
-    }
-    
-    func hasDayFlossRecords(for date: Date) -> Bool {
-        let recordsCount = recordsDates
-            .filter({calendar.isDate($0, equalTo: date, toGranularity: .day)})
-            .count
-        return recordsCount > 0
-    }
-    
-    func dayColor(_ date: Date) -> Color {
-        if isToday(date) {
-            return .red
-        }
-        
-        if isFromCurrentCalendarSet(date) {
-            return .primary
-        }
-        
-        return .secondary
-    }
-    
-    func shouldDayOfTheWeekBePink(_ date: Date) -> Bool {
-        Calendar.current.isDate(date, inSameDayAs: Date())
-    }
-    
-    internal func didTapOnDate(_ date: Date) {
-        guard let safeDelegate = delegate else { return }
-        
-        safeDelegate.didSelectDate(date)
-        withAnimation {
-            dateFocused = date == dateFocused ? nil : date
-        }
     }
 }
 

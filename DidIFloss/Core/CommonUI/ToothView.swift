@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FlossyDesignSystem
 
 struct ToothView: View {
     
@@ -17,12 +18,12 @@ struct ToothView: View {
     enum Style: String {
         case pink
         case yellow
-        var imageName: String {
+        var image: Image {
             switch self {
             case .pink:
-                Constants.ImageNames.toothPink
+                return FlossyImages.toothPink
             case .yellow:
-                Constants.ImageNames.toothYellow
+                return FlossyImages.toothYellow
             }
         }
     }
@@ -30,7 +31,7 @@ struct ToothView: View {
     var body: some View {
         ZStack {
             
-            Image(style.imageName)
+            style.image
                 .resizable()
                 .scaledToFit()
                 .frame(height: size)

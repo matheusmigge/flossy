@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FlossyDesignSystem
 
 struct OnboardingView: View {
     @Environment(\.colorScheme) var colorScheme
@@ -21,7 +22,7 @@ struct OnboardingView: View {
                     .padding(.horizontal)
                 
                 Text("Flossy")
-                    .font(.custom(Constants.FontNames.borel, size: 30))
+                    .font(FlossyFonts.borel(size: 30))
                     .padding(.horizontal)
                     .padding(.bottom, -24)
             }

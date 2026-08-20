@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import FlossyDesignSystem
 
 struct AddFlossView: View {
     @Environment(\.dismiss) var dismiss
@@ -27,7 +27,7 @@ struct AddFlossView: View {
                     
                     DatePicker("datePicker", selection: $selectedDate)
                         .datePickerStyle(.graphical)
-                        .tint(.greenyBlue)
+                        .tint(FlossyColors.greenyBlue)
                     
                 
                     

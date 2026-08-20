@@ -13,7 +13,8 @@ let package = Package(
             targets: [
                 "Flossy",
                 "FlossyData",
-                "FlossyStreak"
+                "FlossyStreak",
+                "FlossyDesignSystem"
             ]
         ),
     ],
@@ -28,6 +29,12 @@ let package = Package(
         ),
         .target(
             name: "FlossyStreak"
+        ),
+        .target(
+            name: "FlossyDesignSystem",
+            resources: [
+                .process("Resources")
+            ]
         ),
         .testTarget(
             name: "FlossyTests",

@@ -7,19 +7,20 @@
 
 import Foundation
 import SwiftUI
+import FlossyDesignSystem
 
 extension CalendarView {
 
     var weekCalendarGrid: some View {
         HStack(spacing: 5) {
-            ForEach(self.daysCalendarSet, id: \.self) { day in
+            ForEach(viewModel.daysCalendarSet(style: .week), id: \.self) { day in
                 VStack {
                     Text(day.dayOfTheWeek)
                         .monospaced()
                         .font(.callout)
                     
                     Group {
-                        if self.hasDayFlossRecords(for: day) {
+                        if viewModel.hasDayFlossRecords(for: day, recordsDates: recordsDates) {
                             ZStack {
                                 Image(systemName: "circle.fill")
                                     .resizable()
@@ -45,9 +46,9 @@ extension CalendarView {
                 }
                 .padding(5)
                 .background {
-                    if shouldDayOfTheWeekBePink(day) {
+                    if viewModel.shouldDayOfTheWeekBePink(day) {
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.accentColorAlternative)
+                            .fill(FlossyColors.accentColorAlternative)
                     }
                 }
             }

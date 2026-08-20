@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FlossyDesignSystem
 
 struct BackgroundView: View {
     
@@ -27,7 +28,7 @@ struct BackgroundView: View {
         
         ZStack {
             
-            Color.accentColorAlternative
+            FlossyColors.accentColorAlternative
             
             LazyVGrid(
                 columns: gridItems,

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FlossyDesignSystem
 
 struct WarningBannerView: View {
     
@@ -29,5 +30,5 @@ struct WarningBannerView: View {
 }
 
 #Preview {
-    WarningBannerView(model: WarningBannerModel(backgroundColor: .greenyBlue, text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 🙌", textColor: .white))
+    WarningBannerView(model: WarningBannerModel(backgroundColor: FlossyColors.greenyBlue, text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 🙌", textColor: .white))
 }

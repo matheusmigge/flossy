@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import FlossyDesignSystem
 
 struct WarningBannerModel {
     var backgroundColor: Color
@@ -14,18 +15,18 @@ struct WarningBannerModel {
     var textColor: Color
     
     static var noLogsRecorded: WarningBannerModel {
-        WarningBannerModel(backgroundColor: .greenyBlue, text: "Welcome to Flossy! ☀️", textColor: .white)
+        WarningBannerModel(backgroundColor: FlossyColors.greenyBlue, text: "Welcome to Flossy! ☀️", textColor: .white)
     }
     
     static var userHadLoggedToday: WarningBannerModel {
-        WarningBannerModel(backgroundColor: .greenyBlue, text: "Done for the day! 🫡", textColor: .white)
+        WarningBannerModel(backgroundColor: FlossyColors.greenyBlue, text: "Done for the day! 🫡", textColor: .white)
     }
     
     static var userHasPositiveStreak: WarningBannerModel {
-        WarningBannerModel(backgroundColor: .lightYellow, text: "You didn't floss today yet. Don't lose your streak! ⚠️", textColor: .black)
+        WarningBannerModel(backgroundColor: FlossyColors.lightYellow, text: "You didn't floss today yet. Don't lose your streak! ⚠️", textColor: .black)
     }
     
     static var userHasNegativeStreak: WarningBannerModel {
-        WarningBannerModel(backgroundColor: .flamingoPink, text: "We miss you! 🥺", textColor: .black)
+        WarningBannerModel(backgroundColor: FlossyColors.flamingoPink, text: "We miss you! 🥺", textColor: .black)
     }
 }

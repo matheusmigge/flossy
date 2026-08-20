@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FlossyDesignSystem
 
 struct BannerSectionView: View {
     var body: some View {
@@ -29,7 +30,7 @@ struct BannerSectionView: View {
                     Spacer()
                 }
             }
-            .background(Color.accentColorAlternative)
+            .background(FlossyColors.accentColorAlternative)
         }.listRowInsets(.init(top: -20, leading: -20, bottom: -20, trailing: -20))
     }
 }
