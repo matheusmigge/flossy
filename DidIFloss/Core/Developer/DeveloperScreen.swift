@@ -10,12 +10,17 @@ import UIKit
 
 struct DeveloperScreen: View {
     
-    @ObservedObject var feedbackGenerator = HapticsManager.shared
+    @State var viewModel: DeveloperViewModel
+    
+    init() {
+        _viewModel = State(initialValue: DeveloperViewModel())
+    }
     
     var body: some View {
         List {
             Section {
-                Picker("Celebration", selection: $feedbackGenerator.preferredCelebrationFeedbackType) {
+                @Bindable var bindableViewModel = viewModel
+                Picker("Celebration", selection: $bindableViewModel.feedbackGenerator.preferredCelebrationFeedbackType) {
                     Text("Success - Tuc")
                         .tag(HapticFeedbackOption.short)
     
@@ -29,7 +34,7 @@ struct DeveloperScreen: View {
                             .tag(HapticFeedbackOption.none)
                 }
                 
-                Picker("Deletion", selection: $feedbackGenerator.preferredDeletionFeedbackType) {
+                Picker("Deletion", selection: $bindableViewModel.feedbackGenerator.preferredDeletionFeedbackType) {
                     Text("Success - Tuc")
                         .tag(HapticFeedbackOption.short)
     
@@ -51,6 +56,12 @@ struct DeveloperScreen: View {
             
         }
         .pickerStyle(.menu)
+        .onAppear {
+            viewModel.onAppear()
+        }
+        .onDisappear {
+            viewModel.onDisappear()
+        }
     }
 }
 

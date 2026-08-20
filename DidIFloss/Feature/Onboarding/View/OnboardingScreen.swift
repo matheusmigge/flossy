@@ -12,6 +12,12 @@ struct OnboardingScreen: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
     
+    @State var viewModel: OnboardingViewModel
+    
+    init() {
+        _viewModel = State(initialValue: OnboardingViewModel())
+    }
+    
     var body: some View {
         VStack(spacing: 50){
             
@@ -37,6 +43,7 @@ struct OnboardingScreen: View {
             }
             
             Button {
+                viewModel.continueButtonTapped()
                 dismiss()
             } label: {
                 Text("Continue")
@@ -54,6 +61,13 @@ struct OnboardingScreen: View {
         .presentationBackgroundInteraction(.enabled)
         .presentationCornerRadius(25)
         .presentationBackground(Material.regular)
+        .onAppear {
+            viewModel.onAppear()
+            // Se no futuro houver Coordinator, ele injeta o fechamento no ViewModel.
+        }
+        .onDisappear {
+            viewModel.onDisappear()
+        }
     }
     
     

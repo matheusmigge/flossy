@@ -6,7 +6,7 @@
 import Foundation
 
 
-public protocol ScreenViewModel: AnyObject {
+public protocol ScreenViewModel: AnyObject, Observable {
     func onAppear()
     func onDisappear()
 }

@@ -12,12 +12,10 @@ struct AddFlossScreen: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
     
-    @State var selectedDate: Date = .now
+    @State var viewModel: AddFlossViewModel
     
-    weak var delegate: AddFlossDelegate?
-    
-    var isSelectedDateValid: Bool {
-        selectedDate < .now
+    init(delegate: AddFlossDelegate? = nil) {
+        _viewModel = State(initialValue: AddFlossViewModel(delegate: delegate))
     }
     
     var body: some View {
@@ -25,15 +23,13 @@ struct AddFlossScreen: View {
             ScrollView {
                 VStack(spacing: 50) {
                     
-                    DatePicker("datePicker", selection: $selectedDate)
+                    @Bindable var bindableViewModel = viewModel
+                    DatePicker("datePicker", selection: $bindableViewModel.selectedDate)
                         .datePickerStyle(.graphical)
                         .tint(FlossyColors.greenyBlue)
                     
-                
-                    
                     Button {
-                        delegate?.addLogRecord(date: self.selectedDate)
-                        
+                        viewModel.addLogRecord()
                     } label: {
                         Text("Add")
                             .bold()
@@ -46,10 +42,10 @@ struct AddFlossScreen: View {
                             }
                             
                     }
-                    .disabled(!isSelectedDateValid)
-                    .opacity(isSelectedDateValid ? 1 : 0.75)
+                    .disabled(!viewModel.isSelectedDateValid)
+                    .opacity(viewModel.isSelectedDateValid ? 1 : 0.75)
                     .overlay {
-                        if !isSelectedDateValid {
+                        if !viewModel.isSelectedDateValid {
                             Text("You may not add records in the future ")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
@@ -63,12 +59,12 @@ struct AddFlossScreen: View {
                     
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
-                            delegate?.addLogRecord(date: self.selectedDate)
+                            viewModel.addLogRecord()
                         } label: {
                             Text("Add")
                                 .bold()
                         }
-                        .disabled(!isSelectedDateValid)
+                        .disabled(!viewModel.isSelectedDateValid)
                     }
                 }
      
@@ -77,8 +73,13 @@ struct AddFlossScreen: View {
         .presentationDetents([.fraction(0.75), .large])
         .presentationCornerRadius(25)
         .presentationBackground(Material.regular)
+        .onAppear {
+            viewModel.onAppear()
+        }
+        .onDisappear {
+            viewModel.onDisappear()
+        }
     }
-
 }
 
 #Preview {

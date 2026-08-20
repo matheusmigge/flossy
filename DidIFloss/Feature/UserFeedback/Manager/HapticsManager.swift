@@ -15,7 +15,7 @@ import UIKit
 /// such as success, warning, or error notifications, using the `UINotificationFeedbackGenerator`.
 /// It supports customization through the `HapticFeedbackOption` enum, allowing
 /// users to set their preferred feedback type for different actions.
-class HapticsManager: ObservableObject, HapticsManagerProtocol {
+class HapticsManager, HapticsManagerProtocol {
     
     /// A shared instance of `HapticsManager` to be used as a singleton.
     static var shared: HapticsManager = HapticsManager()
@@ -24,10 +24,10 @@ class HapticsManager: ObservableObject, HapticsManagerProtocol {
     let generator: UINotificationFeedbackGeneratable
     
     /// The user's preferred feedback type for celebration actions.
-    @Published var preferredCelebrationFeedbackType: HapticFeedbackOption = .long
+    var preferredCelebrationFeedbackType: HapticFeedbackOption = .long
     
     /// The user's preferred feedback type for deletion actions.
-    @Published var preferredDeletionFeedbackType: HapticFeedbackOption = .short
+    var preferredDeletionFeedbackType: HapticFeedbackOption = .short
     
     /// Initializes a new `HapticsManager` with a customizable feedback generator.
     ///

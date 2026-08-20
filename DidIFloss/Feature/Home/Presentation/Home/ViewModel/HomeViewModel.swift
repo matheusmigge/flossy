@@ -91,7 +91,7 @@ class HomeViewModel: ScreenViewModel {
         }
     }
     
-    func goToDeveloperView() {
+    func goToDeveloperScreen() {
 #if DEBUG
         sheetView = .developerSheet
 #endif
