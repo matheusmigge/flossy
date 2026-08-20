@@ -11,7 +11,7 @@ import FlossyDesignSystem
 struct CalendarView: View {
     
     @Namespace internal var selectedDateNameSpace
-    @StateObject var viewModel = CalendarViewModel()
+    @State var viewModel = CalendarViewModel()
     
     var recordsDates: [Date]
     @Environment(\.colorScheme) var colorScheme

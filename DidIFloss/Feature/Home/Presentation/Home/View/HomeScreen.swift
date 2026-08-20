@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct HomeView: View {
+struct HomeScreen: View {
     @Namespace var animation
     
-    @StateObject var viewModel: HomeViewModel = HomeViewModel()
+    @State var viewModel: HomeViewModel = HomeViewModel()
     
     var recordsDates: [Date] {
         viewModel.flossRecords.map { $0.date }
@@ -32,7 +32,7 @@ struct HomeView: View {
                         .padding(.bottom, 20)
                         .listRowSeparator(.hidden)
                         .onTapGesture(count: 3, perform: {
-                            viewModel.goToDeveloperView()
+                            viewModel.goToDeveloperScreen()
                         })
                     
                     Spacer()
@@ -78,7 +78,7 @@ struct HomeView: View {
                 
                 ToolbarItem(placement: .topBarLeading) {
                     NavigationLink {
-                        LogRecordsView()
+                        LogRecordsScreen()
                         
                     } label: {
                         Image(systemName: "calendar")
@@ -99,29 +99,33 @@ struct HomeView: View {
         .sheet(item: $viewModel.sheetView, content: { sheet in
             switch sheet {
             case .welcomeSheet:
-                OnboardingView()
+                OnboardingScreen()
                     .onDisappear {
                         viewModel.onboardingOver()
                     }
             case .addLogSheet:
-                AddFlossView(delegate: self.viewModel)
+                AddFlossScreen(delegate: self.viewModel)
                 
             case .shareStreak(let message):
                 ShareStreakView(streakDescription: message)
                     .presentationDetents([.medium])
                 
             case .developerSheet:
-                DeveloperView()
+                DeveloperScreen()
             }
         })
         .onAppear {
+            viewModel.onAppear()
             Task {
                 await viewModel.viewDidAppear()
             }
+        }
+        .onDisappear {
+            viewModel.onDisappear()
         }
     }
 }
 
 #Preview {
-    HomeView()
+    HomeScreen()
 }

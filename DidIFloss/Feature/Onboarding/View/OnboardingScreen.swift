@@ -1,5 +1,5 @@
 //
-//  OnboardingView.swift
+//  OnboardingScreen.swift
 //  DidIFloss
 //
 //  Created by Lucas Migge on 01/02/24.
@@ -8,7 +8,7 @@
 import SwiftUI
 import FlossyDesignSystem
 
-struct OnboardingView: View {
+struct OnboardingScreen: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
     
@@ -85,5 +85,5 @@ struct OnboardingView: View {
 }
 
 #Preview {
-    OnboardingView()
+    OnboardingScreen()
 }

@@ -1,9 +1,10 @@
 import Foundation
 import SwiftUI
 
-class CalendarViewModel: ObservableObject {
-    @Published var currentCalendar: Date = .now
-    @Published var dateFocused: Date?
+@Observable
+class CalendarViewModel {
+    var currentCalendar: Date = .now
+    var dateFocused: Date?
     
     func nextCalendarSet(style: CalendarView.Style) {
         if hasNextCalendar(style: style) {

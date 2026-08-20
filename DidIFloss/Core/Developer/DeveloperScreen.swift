@@ -1,5 +1,5 @@
 //
-//  DeveloperView.swift
+//  DeveloperScreen.swift
 //  DidIFloss
 //
 //  Created by Lucas Migge on 22/02/24.
@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 
-struct DeveloperView: View {
+struct DeveloperScreen: View {
     
     @ObservedObject var feedbackGenerator = HapticsManager.shared
     
@@ -55,5 +55,5 @@ struct DeveloperView: View {
 }
 
 #Preview {
-    DeveloperView()
+    DeveloperScreen()
 }

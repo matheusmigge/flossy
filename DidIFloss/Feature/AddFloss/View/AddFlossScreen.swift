@@ -8,7 +8,7 @@
 import SwiftUI
 import FlossyDesignSystem
 
-struct AddFlossView: View {
+struct AddFlossScreen: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
     
@@ -82,5 +82,5 @@ struct AddFlossView: View {
 }
 
 #Preview {
-    AddFlossView()
+    AddFlossScreen()
 }

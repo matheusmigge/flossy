@@ -9,14 +9,16 @@ import Foundation
 import FlossyData
 import SwiftUI
 
-class LogRecordsViewModel: ObservableObject {
+@Observable
+
+class LogRecordsViewModel: ScreenViewModel {
     
-    @Published var selectedDate: Date?
+    var selectedDate: Date?
     
     var recordsRepository: any FlossLogRepository
     var logRecordsHandler: HandleLogInteractionUseCaseProtocol
     
-    @Published var records: [FlossLog] = []
+    var records: [FlossLog] = []
     
     init(recordsRepository: any FlossLogRepository = DefaultFlossLogRepositoryFactory.make(),
          logRecordsHandler: HandleLogInteractionUseCaseProtocol = HandleLogInteractionUseCase()

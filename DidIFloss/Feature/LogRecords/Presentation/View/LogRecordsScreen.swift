@@ -8,9 +8,9 @@
 import SwiftUI
 
 
-struct LogRecordsView: View {
+struct LogRecordsScreen: View {
     
-    @StateObject var viewModel: LogRecordsViewModel = LogRecordsViewModel()
+    @State var viewModel: LogRecordsViewModel = LogRecordsViewModel()
     
     var recordsDates: [Date] {
         viewModel.records.map { $0.date }
@@ -45,7 +45,11 @@ struct LogRecordsView: View {
             .listRowInsets(.init(top: -20, leading: -20, bottom: -20, trailing: -20))
         }
         .onAppear {
+            viewModel.onAppear()
             viewModel.viewDidApper()
+        }
+        .onDisappear {
+            viewModel.onDisappear()
         }
         .buttonStyle(.borderless)
         .navigationTitle("Records")
@@ -121,6 +125,6 @@ struct LogRecordsView: View {
 
 #Preview {
     NavigationStack {
-        LogRecordsView()
+        LogRecordsScreen()
     }
 }

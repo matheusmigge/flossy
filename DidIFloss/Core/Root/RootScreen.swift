@@ -1,5 +1,5 @@
 //
-//  RootView.swift
+//  RootScreen.swift
 //  DidIFloss
 //
 //  Created by Lucas Migge on 24/01/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RootView: View {
+struct RootScreen: View {
     
     @State var state: Content = .launchScreen
     
@@ -25,7 +25,7 @@ struct RootView: View {
         ZStack {
             switch state {
             case .content:
-                HomeView()
+                HomeScreen()
             case .launchScreen:
                 LaunchScreenView {
                     launchScreenAnimationDone()
@@ -36,5 +36,5 @@ struct RootView: View {
 }
 
 #Preview {
-    RootView()
+    RootScreen()
 }

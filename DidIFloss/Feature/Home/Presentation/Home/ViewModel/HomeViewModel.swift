@@ -8,20 +8,23 @@
 import FlossyReminders
 import FlossyData
 import FlossyStreak
+import SwiftUI
+
 import Foundation
 
 @MainActor
-class HomeViewModel: ObservableObject {
+@Observable
+class HomeViewModel: ScreenViewModel {
     
-    @Published var sheetView: Sheet?
-    @Published var showingCelebration: Bool = false
+    var sheetView: Sheet?
+    var showingCelebration: Bool = false
     
-    @Published var showingAlert: Bool = false
+    var showingAlert: Bool = false
     var focusedDate: Date?
     
     // MARK: Floss records
     
-    @Published var flossRecords: [FlossLog] = []
+    var flossRecords: [FlossLog] = []
     
     weak var persistence: AppPreferencesProtocol?
     var recordsRepository: any FlossLogRepository
