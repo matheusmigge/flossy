@@ -25,7 +25,7 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
          notificationService: FlossyRemindersService = FlossyRemindersServiceFactory.make(),
          logInteractionHandler: HandleLogInteractionUseCaseProtocol = HandleLogInteractionUseCase(),
          streakAnalyzer: any StreakAnalyzer = DefaultStreakAnalyzer()) {
-         
+        
         self.persistence = persistence
         self.recordsRepository = recordsRepository
         self.notificationService = notificationService
@@ -42,10 +42,7 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
         )
         self.homeViewModel.coordinatorDelegate = self
         
-        if persistence.checkIfIsNewUser() {
-            let vm = OnboardingViewModel(delegate: self.homeViewModel)
-            self.presentingSheet = .welcomeSheet(vm)
-        }
+        
     }
     
     enum SheetOption: Identifiable {
@@ -82,10 +79,20 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
         }
     }
     
+    func checkForOnboarding() {
+        if persistence.checkIfIsNewUser() {
+            let vm = OnboardingViewModel(delegate: self.homeViewModel)
+            self.presentingSheet = .welcomeSheet(vm)
+        }
+    }
+    
     // MARK: - HomeCoordinatorDelegate
     
     func didTapAddLogButton() {
-        let vm = AddFlossViewModel(delegate: self.homeViewModel)
+        let vm = AddFlossViewModel(
+            logRecordsHandler: self.logInteractionHandler,
+            coordinatorDelegate: self
+        )
         presentingSheet = .addLogSheet(vm)
     }
     
@@ -108,6 +115,7 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
     
     func addLogDidComplete() {
         presentingSheet = nil
+        self.homeViewModel.showingCelebration = true
     }
     
     func onboardingDidComplete() {
