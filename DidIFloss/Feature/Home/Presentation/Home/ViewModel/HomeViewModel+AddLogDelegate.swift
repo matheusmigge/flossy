@@ -11,7 +11,7 @@ extension HomeViewModel: @MainActor AddFlossDelegate {
     func addLogRecord(date: Date) {
         logInteractionHandler.handleLogRecord(for: date)
         
-        sheetView = nil
+        coordinatorDelegate?.addLogDidComplete()
         showingCelebration = true
         
         Task {

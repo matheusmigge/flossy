@@ -4,7 +4,7 @@
 //
 
 import Foundation
-
+import SwiftUI
 
 public protocol ScreenViewModel: AnyObject, Observable {
     func onAppear()
@@ -14,4 +14,9 @@ public protocol ScreenViewModel: AnyObject, Observable {
 public extension ScreenViewModel {
     func onAppear() {}
     func onDisappear() {}
+}
+
+// indicates that the View is a Page Screen
+public protocol Screen: View {
+    
 }

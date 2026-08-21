@@ -16,7 +16,7 @@ import Foundation
 @Observable
 class HomeViewModel: ScreenViewModel {
     
-    var sheetView: Sheet?
+    weak var coordinatorDelegate: HomeCoordinatorDelegate?
     var showingCelebration: Bool = false
     
     var showingAlert: Bool = false
@@ -76,24 +76,24 @@ class HomeViewModel: ScreenViewModel {
         guard let safePersistence = persistence else { return }
         
         if safePersistence.checkIfIsNewUser() {
-            self.sheetView = .welcomeSheet
+            coordinatorDelegate?.needsOnboarding()
         }
     }
     
     func onboardingOver() {
         notificationService?.requestAuthorizationToNotificate(provisional: false)
-        
+        coordinatorDelegate?.onboardingDidComplete()
     }
     
     func plusButtonPressed() {
         if !showingCelebration {
-            sheetView = .addLogSheet
+            coordinatorDelegate?.didTapAddLogButton()
         }
     }
     
     func goToDeveloperScreen() {
 #if DEBUG
-        sheetView = .developerSheet
+        coordinatorDelegate?.didTapDeveloperOptions()
 #endif
         
     }
@@ -101,7 +101,11 @@ class HomeViewModel: ScreenViewModel {
     func presentShareSheet() {
         let state = streakAnalyzer.analyze(logDates: flossRecords.map{ $0.date })
         let message = ShareStreakMessageFactory.makeMessage(from: state)
-        sheetView = .shareStreak(streakInfo: message)
+        coordinatorDelegate?.didTapShareStreak(streakMessage: message)
+    }
+    
+    func goToLogRecords() {
+        coordinatorDelegate?.didTapLogRecords()
     }
     
 }

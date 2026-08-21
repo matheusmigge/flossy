@@ -11,7 +11,7 @@ import FlossyDesignSystem
 struct HomeScreen: View {
     @Namespace var animation
     
-    @State var viewModel: HomeViewModel = HomeViewModel()
+    @Bindable var viewModel: HomeViewModel
     
     var recordsDates: [Date] {
         viewModel.flossRecords.map { $0.date }
@@ -78,9 +78,8 @@ struct HomeScreen: View {
                 }
                 
                 ToolbarItem(placement: .topBarLeading) {
-                    NavigationLink {
-                        LogRecordsScreen()
-                        
+                    Button {
+                        viewModel.goToLogRecords()
                     } label: {
                         Image(systemName: "calendar")
                     }
@@ -97,24 +96,6 @@ struct HomeScreen: View {
             }
       
         })
-        .sheet(item: $viewModel.sheetView, content: { sheet in
-            switch sheet {
-            case .welcomeSheet:
-                OnboardingScreen()
-                    .onDisappear {
-                        viewModel.onboardingOver()
-                    }
-            case .addLogSheet:
-                AddFlossScreen(delegate: self.viewModel)
-                
-            case .shareStreak(let message):
-                ShareStreakView(streakDescription: message)
-                    .presentationDetents([.medium])
-                
-            case .developerSheet:
-                DeveloperScreen()
-            }
-        })
         .onAppear {
             viewModel.onAppear()
             Task {
@@ -128,5 +109,5 @@ struct HomeScreen: View {
 }
 
 #Preview {
-    HomeScreen()
+    HomeScreen(viewModel: HomeViewModel())
 }

@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-struct RootScreen: View {
+
+
+struct RootScreen: Screen {
     
     @State var state: Content = .launchScreen
     
@@ -25,7 +27,7 @@ struct RootScreen: View {
         ZStack {
             switch state {
             case .content:
-                HomeScreen()
+                FlossyHomeCoordinator.makeView()
             case .launchScreen:
                 LaunchScreenView {
                     launchScreenAnimationDone()
