@@ -12,6 +12,8 @@ import SwiftUI
 
 import Foundation
 
+import Combine
+
 @MainActor
 @Observable
 class HomeViewModel: ScreenViewModel {
@@ -32,10 +34,9 @@ class HomeViewModel: ScreenViewModel {
     let logInteractionHandler: HandleLogInteractionUseCaseProtocol
     let streakAnalyzer: any StreakAnalyzer
     
-    var streakBoardViewModel: StreakBoardViewModel {
-        let state = streakAnalyzer.analyze(logDates: flossRecords.map({ $0.date }))
-        return StreakBoardPresenter.makeViewModel(from: state)
-    }
+    private var cancellables = Set<AnyCancellable>()
+    
+    var streakBoardViewModel: StreakBoardViewModel
     
     init(persistence: AppPreferencesProtocol = AppPreferences.shared,
          recordsRepository: any FlossLogRepository = DefaultFlossLogRepositoryFactory.make(),
@@ -48,13 +49,31 @@ class HomeViewModel: ScreenViewModel {
         self.notificationService = notificationService
         self.logInteractionHandler = logInteractionHandler
         self.streakAnalyzer = streakAnalyzer
+        let initialState = streakAnalyzer.analyze(logDates: [])
+        self.streakBoardViewModel = StreakBoardPresenter.makeViewModel(from: initialState)
+        
+        setupBindings()
     }
     
+    private func makeStreakBoardViewModel() -> StreakBoardViewModel {
+        let state = streakAnalyzer.analyze(logDates: flossRecords.map({ $0.date }))
+        return StreakBoardPresenter.makeViewModel(from: state)
+    }
+    
+    private func setupBindings() {
+        recordsRepository.logsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] logs in
+                guard let self else { return }
+                self.flossRecords = logs
+                self.streakBoardViewModel = self.makeStreakBoardViewModel()
+            }
+            .store(in: &cancellables)
+    }
     
     // MARK: Did Appear
     
     func viewDidAppear() async {
-        await recordsRepository.setDelegate(self)
         await self.loadData()
     }
     
@@ -62,7 +81,7 @@ class HomeViewModel: ScreenViewModel {
         guard let records = try? await recordsRepository.fetchLogs() else { return }
         await MainActor.run {
             self.flossRecords = records
-            
+            self.streakBoardViewModel = self.makeStreakBoardViewModel()
         }
     }
     
@@ -90,14 +109,6 @@ class HomeViewModel: ScreenViewModel {
         coordinatorDelegate?.didTapLogRecords()
     }
     
-}
-
-extension HomeViewModel: FlossRecordsRepositoryDelegate {
-    nonisolated func didUpdateLogs() {
-        Task {
-            await loadData()
-        }
-    }
 }
 
 

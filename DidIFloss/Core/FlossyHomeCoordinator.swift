@@ -23,14 +23,18 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
     init(persistence: AppPreferencesProtocol = AppPreferences.shared,
          recordsRepository: any FlossLogRepository = DefaultFlossLogRepositoryFactory.make(),
          notificationService: FlossyRemindersService = FlossyRemindersServiceFactory.make(),
-         logInteractionHandler: HandleLogInteractionUseCaseProtocol = HandleLogInteractionUseCase(),
          streakAnalyzer: any StreakAnalyzer = DefaultStreakAnalyzer()) {
         
         self.persistence = persistence
         self.recordsRepository = recordsRepository
         self.notificationService = notificationService
-        self.logInteractionHandler = logInteractionHandler
         self.streakAnalyzer = streakAnalyzer
+        
+        self.logInteractionHandler = HandleLogInteractionUseCase(
+            recordsRepository: recordsRepository,
+            notificationService: notificationService,
+            streakAnalyzer: streakAnalyzer
+        )
         
         // Inject dependencies into HomeViewModel
         self.homeViewModel = HomeViewModel(

@@ -20,9 +20,6 @@ extension HomeViewModel: @MainActor CalendarViewDelegate {
         if isLogDateValid(for: date) {
             logInteractionHandler.handleLogRecord(for: date)
             showingCelebration = true
-            Task {
-                await self.loadData()
-            }
         }
     }
 
@@ -31,11 +28,7 @@ extension HomeViewModel: @MainActor CalendarViewDelegate {
         
         logInteractionHandler.removeAllLogRecords(for: date)
      
-        
         alertDismiss()
-        Task {
-            await self.loadData()
-        }
     }
     
     func alertDismiss() {

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import Combine
 
 actor DefaultFlossLogRepository {
     
@@ -14,23 +14,29 @@ actor DefaultFlossLogRepository {
     
     var cachedLogs: [FlossLog]?
     
-    weak var delegate: (any FlossRecordsRepositoryDelegate)?
-    
-    init(
-        dataSource: any FlossLogDataSource,
-         delegate: (any FlossRecordsRepositoryDelegate)? = nil
-    ) {
-        self.dataSource = dataSource
-        self.delegate = delegate
+    private final class SubjectWrapper: @unchecked Sendable {
+        let subject = PassthroughSubject<[FlossLog], Never>()
     }
     
+    private let wrapper = SubjectWrapper()
+    
+    nonisolated var logsPublisher: AnyPublisher<[FlossLog], Never> {
+        wrapper.subject.eraseToAnyPublisher()
+    }
+    
+    init(
+        dataSource: any FlossLogDataSource
+    ) {
+        self.dataSource = dataSource
+    }
+    
+    private func notifyObservers() {
+        let currentLogs = cachedLogs ?? []
+        wrapper.subject.send(currentLogs)
+    }
 }
 
 extension DefaultFlossLogRepository: FlossLogRepository {
-    
-    func setDelegate(_ delegate: (any FlossRecordsRepositoryDelegate)) async {
-        self.delegate = delegate
-    }
     
     func fetchLogs() async throws -> [FlossLog] {
         if let cachedLogs {
@@ -55,13 +61,13 @@ extension DefaultFlossLogRepository: FlossLogRepository {
         try await dataSource.insertLog(flossLog)
         cachedLogs?.append(flossLog)
         cachedLogs = cachedLogs?.sorted{ $0.date > $1.date }
-        delegate?.didUpdateLogs()
+        notifyObservers()
     }
     
     func deleteLog(id: String) async throws {
         try await dataSource.deleteLog(id: id)
         cachedLogs?.removeAll { $0.id == id }
-        delegate?.didUpdateLogs()
+        notifyObservers()
     }
     
     func deleteLogs(on date: Date) async throws {
@@ -72,12 +78,12 @@ extension DefaultFlossLogRepository: FlossLogRepository {
         for log in logsFromDate {
             try await deleteLog(id: log.id)
         }
-        delegate?.didUpdateLogs()
+        notifyObservers()
     }
     
     func deleteAllLogs() async throws {
         try await dataSource.deleteAllLogs()
         cachedLogs = nil
-        delegate?.didUpdateLogs()
+        notifyObservers()
     }
 }

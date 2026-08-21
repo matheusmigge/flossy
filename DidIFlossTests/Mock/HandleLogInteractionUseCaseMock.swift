@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import FlossyRecords
+import FlossyData
 @testable import DidIFloss
 
 class HandleLogInteractionUseCaseMock: HandleLogInteractionUseCaseProtocol {

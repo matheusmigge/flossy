@@ -4,21 +4,33 @@
 //
 
 import Testing
+import FlossyReminders
 @testable import DidIFloss
 
+@MainActor
 @Suite("OnboardingViewModel Tests")
 struct OnboardingViewModelTests {
 
-    @Test("continueButtonTapped triggers the onContinueTapped closure")
-    func testContinueButtonTapped() {
-        var didCallClosure = false
+    class MockHomeCoordinatorDelegate: HomeCoordinatorDelegate {
+        var didCallOnboardingComplete = false
         
-        let sut = OnboardingViewModel {
-            didCallClosure = true
+        func didTapAddLogButton() {}
+        func didTapShareStreak(streakMessage: String) {}
+        func didTapLogRecords() {}
+        func didTapDeveloperOptions() {}
+        func onboardingDidComplete() {
+            didCallOnboardingComplete = true
         }
+        func addLogDidComplete() {}
+    }
+
+    @Test("continueButtonTapped triggers coordinatorDelegate")
+    func testContinueButtonTapped() {
+        let mockCoordinator = MockHomeCoordinatorDelegate()
+        let sut = OnboardingViewModel(notificationService: nil, coordinatorDelegate: mockCoordinator)
         
         sut.continueButtonTapped()
         
-        #expect(didCallClosure == true)
+        #expect(mockCoordinator.didCallOnboardingComplete == true)
     }
 }

@@ -9,8 +9,9 @@ import Foundation
 import FlossyData
 import SwiftUI
 
-@Observable
+import Combine
 
+@Observable
 class LogRecordsViewModel: ScreenViewModel {
     
     var selectedDate: Date?
@@ -20,11 +21,24 @@ class LogRecordsViewModel: ScreenViewModel {
     
     var records: [FlossLog] = []
     
+    private var cancellables = Set<AnyCancellable>()
+    
     init(recordsRepository: any FlossLogRepository = DefaultFlossLogRepositoryFactory.make(),
          logRecordsHandler: HandleLogInteractionUseCaseProtocol = HandleLogInteractionUseCase()
     ) {
         self.recordsRepository = recordsRepository
         self.logRecordsHandler = logRecordsHandler
+        
+        setupBindings()
+    }
+    
+    private func setupBindings() {
+        recordsRepository.logsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] logs in
+                self?.records = logs
+            }
+            .store(in: &cancellables)
     }
     
     private func loadRecords() {
@@ -49,6 +63,7 @@ class LogRecordsViewModel: ScreenViewModel {
     func removeRecord(_ record: FlossLog) {
         
         logRecordsHandler.removeLogRecord(for: record)
+        // Combine publisher will update records, no need to call loadRecords() here anymore if we want, but calling it is fine
         loadRecords()
     }
     

@@ -39,17 +39,19 @@ struct DefaultFlossLogRepositoryTests {
         }
     }
     
-    final class SpyFlossRecordsRepositoryDelegate: FlossRecordsRepositoryDelegate, @unchecked Sendable {
+    final class SpyFlossRecordsObserver: FlossRecordsObserver, @unchecked Sendable {
         var didUpdateLogsCallCount = 0
+        var lastReceivedLogs: [FlossLog]?
         
-        func didUpdateLogs() {
+        func didUpdateLogs(_ logs: [FlossLog]) {
             didUpdateLogsCallCount += 1
+            lastReceivedLogs = logs
         }
     }
     
     struct SUT {
         let dataSourceMock: MockFlossLogDataSource
-        let delegateSpy: SpyFlossRecordsRepositoryDelegate
+        let delegateSpy: SpyFlossRecordsObserver
         let repository: DefaultFlossLogRepository
     }
     
@@ -58,7 +60,7 @@ struct DefaultFlossLogRepositoryTests {
     
     init() {
         let dataSourceMock = MockFlossLogDataSource()
-        let delegateSpy = SpyFlossRecordsRepositoryDelegate()
+        let delegateSpy = SpyFlossRecordsObserver()
         let repository = DefaultFlossLogRepository(
             dataSource: dataSourceMock,
             delegate: delegateSpy
@@ -301,9 +303,9 @@ struct DefaultFlossLogRepositoryTests {
     func testSetDelegate() async {
         let repository = sut.repository
         let currentDelegate = await repository.delegate
-        let newDelegate = SpyFlossRecordsRepositoryDelegate()
+        let newDelegate = SpyFlossRecordsObserver()
         
-        await repository.setDelegate(newDelegate)
+        await repository.addObserver(newDelegate)
         
         #expect(currentDelegate !== newDelegate)
         #expect(await repository.delegate === newDelegate)
