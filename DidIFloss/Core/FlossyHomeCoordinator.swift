@@ -41,8 +41,7 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
             streakAnalyzer: streakAnalyzer
         )
         self.homeViewModel.coordinatorDelegate = self
-        
-        
+        checkForOnboarding()
     }
     
     enum SheetOption: Identifiable {
@@ -81,7 +80,10 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
     
     func checkForOnboarding() {
         if persistence.checkIfIsNewUser() {
-            let vm = OnboardingViewModel(delegate: self.homeViewModel)
+            let vm = OnboardingViewModel(
+                notificationService: self.notificationService,
+                coordinatorDelegate: self
+            )
             self.presentingSheet = .welcomeSheet(vm)
         }
     }

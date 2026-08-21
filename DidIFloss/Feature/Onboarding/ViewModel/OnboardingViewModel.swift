@@ -6,17 +6,23 @@
 import Foundation
 import Observation
 
+import FlossyReminders
+
 @MainActor
 @Observable
 class OnboardingViewModel: ScreenViewModel {
     
-    weak var delegate: OnboardingDelegate?
+    private let notificationService: FlossyRemindersService?
+    private weak var coordinatorDelegate: HomeCoordinatorDelegate?
     
-    init(delegate: OnboardingDelegate? = nil) {
-        self.delegate = delegate
+    init(notificationService: FlossyRemindersService? = FlossyRemindersServiceFactory.make(),
+         coordinatorDelegate: HomeCoordinatorDelegate? = nil) {
+        self.notificationService = notificationService
+        self.coordinatorDelegate = coordinatorDelegate
     }
     
     func continueButtonTapped() {
-        delegate?.onboardingDidComplete()
+        notificationService?.requestAuthorizationToNotificate(provisional: false)
+        coordinatorDelegate?.onboardingDidComplete()
     }
 }
