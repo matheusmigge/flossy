@@ -12,11 +12,7 @@ struct OnboardingScreen: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
     
-    @State var viewModel: OnboardingViewModel
-    
-    init() {
-        _viewModel = State(initialValue: OnboardingViewModel())
-    }
+    var viewModel: OnboardingViewModel
     
     var body: some View {
         VStack(spacing: 50){
@@ -99,5 +95,5 @@ struct OnboardingScreen: View {
 }
 
 #Preview {
-    OnboardingScreen()
+    OnboardingScreen(viewModel: OnboardingViewModel())
 }

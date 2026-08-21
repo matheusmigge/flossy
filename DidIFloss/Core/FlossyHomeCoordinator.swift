@@ -44,10 +44,10 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
     }
     
     enum SheetOption: Identifiable {
-        case welcomeSheet
+        case welcomeSheet(OnboardingViewModel)
         case addLogSheet(AddFlossViewModel)
         case shareStreak(streakInfo: String)
-        case developerSheet
+        case developerSheet(DeveloperViewModel)
         
         var id: String {
             switch self {
@@ -97,7 +97,8 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
     }
     
     func didTapDeveloperOptions() {
-        presentingSheet = .developerSheet
+        let vm = DeveloperViewModel()
+        presentingSheet = .developerSheet(vm)
     }
     
     func addLogDidComplete() {
@@ -109,7 +110,10 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
     }
     
     func needsOnboarding() {
-        presentingSheet = .welcomeSheet
+        let vm = OnboardingViewModel(onContinueTapped: {
+            self.onboardingDidComplete()
+        })
+        presentingSheet = .welcomeSheet(vm)
     }
     
     // MARK: - View Factories
@@ -121,18 +125,15 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
     @ViewBuilder
     func makeSheet(for sheetOption: SheetOption) -> some View {
         switch sheetOption {
-        case .welcomeSheet:
-            OnboardingScreen()
-                .onDisappear {
-                    self.onboardingDidComplete()
-                }
+        case .welcomeSheet(let vm):
+            OnboardingScreen(viewModel: vm)
         case .addLogSheet(let vm):
             AddFlossScreen(viewModel: vm)
         case .shareStreak(let message):
             ShareStreakView(streakDescription: message)
                 .presentationDetents([.medium])
-        case .developerSheet:
-            DeveloperScreen()
+        case .developerSheet(let vm):
+            DeveloperScreen(viewModel: vm)
         }
     }
     

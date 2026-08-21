@@ -10,11 +10,7 @@ import UIKit
 
 struct DeveloperScreen: View {
     
-    @State var viewModel: DeveloperViewModel
-    
-    init() {
-        _viewModel = State(initialValue: DeveloperViewModel())
-    }
+    var viewModel: DeveloperViewModel
     
     var body: some View {
         List {
@@ -66,5 +62,5 @@ struct DeveloperScreen: View {
 }
 
 #Preview {
-    DeveloperScreen()
+    DeveloperScreen(viewModel: DeveloperViewModel())
 }
