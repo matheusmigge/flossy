@@ -12,11 +12,7 @@ struct AddFlossScreen: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
     
-    @State var viewModel: AddFlossViewModel
-    
-    init(delegate: AddFlossDelegate? = nil) {
-        _viewModel = State(initialValue: AddFlossViewModel(delegate: delegate))
-    }
+    var viewModel: AddFlossViewModel
     
     var body: some View {
         NavigationView {
@@ -83,5 +79,5 @@ struct AddFlossScreen: View {
 }
 
 #Preview {
-    AddFlossScreen()
+    AddFlossScreen(viewModel: AddFlossViewModel())
 }

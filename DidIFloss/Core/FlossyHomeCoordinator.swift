@@ -1,4 +1,7 @@
 import SwiftUI
+import FlossyReminders
+import FlossyData
+import FlossyStreak
 
 @MainActor
 @Observable
@@ -7,10 +10,36 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
     var path: NavigationPath = .init()
     var presentingSheet: SheetOption?
     
+    // MARK: - Dependencies
+    private let persistence: AppPreferencesProtocol
+    private let recordsRepository: any FlossLogRepository
+    private let notificationService: FlossyRemindersService?
+    private let logInteractionHandler: HandleLogInteractionUseCaseProtocol
+    private let streakAnalyzer: any StreakAnalyzer
+    
     // Retain view models that act as delegates for sheets
     var homeViewModel: HomeViewModel = HomeViewModel()
     
-    init() {
+    init(persistence: AppPreferencesProtocol = AppPreferences.shared,
+         recordsRepository: any FlossLogRepository = DefaultFlossLogRepositoryFactory.make(),
+         notificationService: FlossyRemindersService = FlossyRemindersServiceFactory.make(),
+         logInteractionHandler: HandleLogInteractionUseCaseProtocol = HandleLogInteractionUseCase(),
+         streakAnalyzer: any StreakAnalyzer = DefaultStreakAnalyzer()) {
+         
+        self.persistence = persistence
+        self.recordsRepository = recordsRepository
+        self.notificationService = notificationService
+        self.logInteractionHandler = logInteractionHandler
+        self.streakAnalyzer = streakAnalyzer
+        
+        // Inject dependencies into HomeViewModel
+        self.homeViewModel = HomeViewModel(
+            persistence: persistence,
+            recordsRepository: recordsRepository,
+            notificationService: notificationService ?? FlossyRemindersServiceFactory.make(),
+            logInteractionHandler: logInteractionHandler,
+            streakAnalyzer: streakAnalyzer
+        )
         self.homeViewModel.coordinatorDelegate = self
     }
     
@@ -79,7 +108,8 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
                     self.onboardingDidComplete()
                 }
         case .addLogSheet:
-            AddFlossScreen(delegate: self.homeViewModel)
+            let vm = AddFlossViewModel(delegate: self.homeViewModel)
+            AddFlossScreen(viewModel: vm)
         case .shareStreak(let message):
             ShareStreakView(streakDescription: message)
                 .presentationDetents([.medium])
@@ -92,7 +122,11 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
     func makeView(for navigationOption: NavigationOption) -> some View {
         switch navigationOption {
         case .logRecords:
-            LogRecordsScreen()
+            let vm = LogRecordsViewModel(
+                recordsRepository: self.recordsRepository,
+                logRecordsHandler: self.logInteractionHandler
+            )
+            LogRecordsScreen(viewModel: vm)
         }
     }
 }

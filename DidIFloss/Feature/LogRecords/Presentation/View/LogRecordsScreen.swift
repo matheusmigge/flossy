@@ -9,9 +9,9 @@ import SwiftUI
 import FlossyDesignSystem
 
 
-struct LogRecordsScreen: View {
+struct LogRecordsScreen: Screen {
     
-    @State var viewModel: LogRecordsViewModel = LogRecordsViewModel()
+    var viewModel: LogRecordsViewModel
     
     var recordsDates: [Date] {
         viewModel.records.map { $0.date }
@@ -125,6 +125,6 @@ struct LogRecordsScreen: View {
 
 #Preview {
     NavigationStack {
-        LogRecordsScreen()
+        LogRecordsScreen(viewModel: LogRecordsViewModel())
     }
 }

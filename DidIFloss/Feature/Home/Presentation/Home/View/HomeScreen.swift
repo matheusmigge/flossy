@@ -8,7 +8,7 @@
 import SwiftUI
 import FlossyDesignSystem
 
-struct HomeScreen: View {
+struct HomeScreen: Screen {
     @Namespace var animation
     
     @Bindable var viewModel: HomeViewModel
