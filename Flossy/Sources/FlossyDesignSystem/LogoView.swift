@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
-import FlossyDesignSystem
 
-struct LogoView: View {
-    var body: some View {
+public struct LogoView: View {
+    public init() {}
+    
+    public var body: some View {
         VStack(spacing: 220) {
             
             Text("flossy")

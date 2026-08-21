@@ -6,25 +6,25 @@ class CalendarViewModel {
     var currentCalendar: Date = .now
     var dateFocused: Date?
     
-    func nextCalendarSet(style: CalendarView.Style) {
+    func nextCalendarSet(style: CalendarStyle) {
         if hasNextCalendar(style: style) {
             let calendarComponent: Calendar.Component = style == .week ? .weekOfYear : .month
             currentCalendar = Calendar.current.date(byAdding: calendarComponent, value: 1, to: currentCalendar) ?? Date()
         }
     }
     
-    func previousCalendarSet(style: CalendarView.Style) {
+    func previousCalendarSet(style: CalendarStyle) {
         let calendarComponent: Calendar.Component = style == .week ? .weekOfYear : .month
         currentCalendar = Calendar.current.date(byAdding: calendarComponent, value: -1, to: currentCalendar) ?? Date()
     }
     
-    func hasNextCalendar(style: CalendarView.Style) -> Bool {
+    func hasNextCalendar(style: CalendarStyle) -> Bool {
         let dateComponent: Calendar.Component = style == .month ? .month : .weekOfYear
         let next = Calendar.current.date(byAdding: dateComponent, value: 1, to: currentCalendar) ?? Date()
         return next <= .now
     }
     
-    func dateLabel(style: CalendarView.Style, daysCalendarSet: [Date]) -> String {
+    func dateLabel(style: CalendarStyle, daysCalendarSet: [Date]) -> String {
         switch style {
         case .month:
             return dateFocused?.monthFormatted ?? currentCalendar.monthFormatted
@@ -35,7 +35,7 @@ class CalendarViewModel {
         }
     }
     
-    func daysCalendarSet(style: CalendarView.Style) -> [Date] {
+    func daysCalendarSet(style: CalendarStyle) -> [Date] {
         switch style {
         case .month:
             return Calendar.getDaysOfTheMonth(for: currentCalendar)

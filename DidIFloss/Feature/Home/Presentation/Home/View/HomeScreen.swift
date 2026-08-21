@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FlossyDesignSystem
 
 struct HomeScreen: View {
     @Namespace var animation
@@ -42,7 +43,7 @@ struct HomeScreen: View {
                 }
                 
                 Section {
-                    CalendarView(records: recordsDates, style: .week, delegate: viewModel)
+                    WeekCalendarView(records: recordsDates, delegate: viewModel)
                         .padding(.vertical, 7.5)
                 }
                 

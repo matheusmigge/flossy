@@ -6,16 +6,20 @@
 //
 
 import SwiftUI
-import FlossyDesignSystem
 
-struct ToothView: View {
+public struct ToothView: View {
     
     @State var isRotating: Bool = false
 
-    var style: Style
-    var size: CGFloat
+    public var style: Style
+    public var size: CGFloat
     
-    enum Style: String {
+    public init(style: Style, size: CGFloat) {
+        self.style = style
+        self.size = size
+    }
+    
+    public enum Style: String {
         case pink
         case yellow
         var image: Image {
@@ -28,7 +32,7 @@ struct ToothView: View {
         }
     }
     
-    var body: some View {
+    public var body: some View {
         ZStack {
             
             style.image

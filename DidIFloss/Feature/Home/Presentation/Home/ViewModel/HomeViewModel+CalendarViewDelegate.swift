@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FlossyDesignSystem
 
 extension HomeViewModel: @MainActor CalendarViewDelegate {
     func didSelectDate(_ date: Date) {

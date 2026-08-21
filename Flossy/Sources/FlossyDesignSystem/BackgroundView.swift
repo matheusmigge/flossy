@@ -6,9 +6,9 @@
 //
 
 import SwiftUI
-import FlossyDesignSystem
 
-struct BackgroundView: View {
+public struct BackgroundView: View {
+    public init() {}
     
     private static let size: CGFloat = 140
     private static let spacingBetweenColumns: CGFloat = 50
@@ -24,7 +24,7 @@ struct BackgroundView: View {
         ), count: totalColumns
     )
     
-    var body: some View {
+    public var body: some View {
         
         ZStack {
             

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FlossyDesignSystem
 
 
 struct LogRecordsScreen: View {
@@ -19,8 +20,7 @@ struct LogRecordsScreen: View {
     var body: some View {
         List {
             Section("Calendar") {
-                CalendarView(records: recordsDates,
-                             style: .month,
+                MonthCalendarView(records: recordsDates,
                              delegate: viewModel)
                 .padding(.vertical, 7)
             }

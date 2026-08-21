@@ -1,16 +1,50 @@
-//
-//  CalendarView+WeekView.swift
-//  DidIFloss
-//
-//  Created by Lucas Migge on 05/02/24.
-//
-
-import Foundation
 import SwiftUI
 import FlossyDesignSystem
 
-extension CalendarView {
-
+struct WeekCalendarView: View {
+    @Namespace internal var selectedDateNameSpace
+    @State var viewModel = CalendarViewModel()
+    var recordsDates: [Date]
+    @Environment(\.colorScheme) var colorScheme
+    weak var delegate: CalendarViewDelegate?
+    
+    init(records: [Date], delegate: CalendarViewDelegate? = nil) {
+        self.recordsDates = records
+        self.delegate = delegate
+    }
+    
+    var body: some View {
+        VStack {
+            calendarHeader
+            weekCalendarGrid
+        }
+    }
+    
+    var calendarHeader: some View {
+        HStack {
+            Button {
+                viewModel.previousCalendarSet(style: .week)
+            } label: {
+                Image(systemName: "chevron.backward")
+            }
+            
+            Spacer()
+            
+            Text(viewModel.dateLabel(style: .week, daysCalendarSet: viewModel.daysCalendarSet(style: .week)))
+                .font(.headline)
+            
+            Spacer()
+            
+            Button {
+                viewModel.nextCalendarSet(style: .week)
+            } label: {
+                Image(systemName: "chevron.forward")
+            }
+            .opacity(viewModel.hasNextCalendar(style: .week) ? 1 : 0)
+        }
+        .padding(.horizontal)
+    }
+    
     var weekCalendarGrid: some View {
         HStack(spacing: 5) {
             ForEach(viewModel.daysCalendarSet(style: .week), id: \.self) { day in
@@ -37,7 +71,6 @@ extension CalendarView {
                                 .stroke(lineWidth: 2)
                                 .frame(width: 30, height: 30)
                                 .foregroundStyle(Calendar.isDateInTheFuture(day) ? Color.gray : Color.primary)
-
                         }
                     }
                     .onTapGesture {
@@ -52,6 +85,13 @@ extension CalendarView {
                     }
                 }
             }
+        }
+    }
+    
+    internal func didTapOnDate(_ date: Date) {
+        delegate?.didSelectDate(date)
+        withAnimation {
+            viewModel.dateFocused = date == viewModel.dateFocused ? nil : date
         }
     }
 }

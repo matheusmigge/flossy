@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
-import FlossyDesignSystem
 
-struct BannerSectionView: View {
-    var body: some View {
+public struct BannerSectionView: View {
+    public init() {}
+    
+    public var body: some View {
         
         Section {
             VStack {
