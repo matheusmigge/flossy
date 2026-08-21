@@ -41,6 +41,11 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
             streakAnalyzer: streakAnalyzer
         )
         self.homeViewModel.coordinatorDelegate = self
+        
+        if persistence.checkIfIsNewUser() {
+            let vm = OnboardingViewModel(delegate: self.homeViewModel)
+            self.presentingSheet = .welcomeSheet(vm)
+        }
     }
     
     enum SheetOption: Identifiable {
@@ -107,11 +112,6 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
     
     func onboardingDidComplete() {
         presentingSheet = nil
-    }
-    
-    func needsOnboarding() {
-        let vm = OnboardingViewModel(delegate: self.homeViewModel)
-        presentingSheet = .welcomeSheet(vm)
     }
     
     // MARK: - View Factories

@@ -8,5 +8,4 @@ protocol HomeCoordinatorDelegate: AnyObject {
     func didTapDeveloperOptions()
     func onboardingDidComplete()
     func addLogDidComplete()
-    func needsOnboarding()
 }

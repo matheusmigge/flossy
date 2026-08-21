@@ -11,7 +11,7 @@ import FlossyDesignSystem
 struct HomeScreen: Screen {
     @Namespace var animation
     
-    @Bindable var viewModel: HomeViewModel
+    @State var viewModel: HomeViewModel
     
     var recordsDates: [Date] {
         viewModel.flossRecords.map { $0.date }

@@ -55,12 +55,7 @@ class HomeViewModel: ScreenViewModel {
     
     func viewDidAppear() async {
         await recordsRepository.setDelegate(self)
-        
-        await withDiscardingTaskGroup { [weak self] group in
-            group.addTask { await self?.checkForOnboarding() }
-            group.addTask { await self?.loadData() }
-        }
-        
+        await self.loadData()
     }
     
     func loadData() async {
@@ -68,15 +63,6 @@ class HomeViewModel: ScreenViewModel {
         await MainActor.run {
             self.flossRecords = records
             
-        }
-    }
-    
-    private func checkForOnboarding() async {
-        // should show onboard?
-        guard let safePersistence = persistence else { return }
-        
-        if safePersistence.checkIfIsNewUser() {
-            coordinatorDelegate?.needsOnboarding()
         }
     }
     
