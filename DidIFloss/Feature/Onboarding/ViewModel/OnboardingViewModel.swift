@@ -6,16 +6,17 @@
 import Foundation
 import Observation
 
+@MainActor
 @Observable
 class OnboardingViewModel: ScreenViewModel {
     
-    var onContinueTapped: (() -> Void)?
+    weak var delegate: OnboardingDelegate?
     
-    init(onContinueTapped: (() -> Void)? = nil) {
-        self.onContinueTapped = onContinueTapped
+    init(delegate: OnboardingDelegate? = nil) {
+        self.delegate = delegate
     }
     
     func continueButtonTapped() {
-        onContinueTapped?()
+        delegate?.onboardingDidComplete()
     }
 }

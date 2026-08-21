@@ -80,11 +80,7 @@ class HomeViewModel: ScreenViewModel {
         }
     }
     
-    func onboardingOver() {
-        notificationService?.requestAuthorizationToNotificate(provisional: false)
-        coordinatorDelegate?.onboardingDidComplete()
-    }
-    
+
     func plusButtonPressed() {
         if !showingCelebration {
             coordinatorDelegate?.didTapAddLogButton()

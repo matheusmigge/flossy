@@ -110,9 +110,7 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
     }
     
     func needsOnboarding() {
-        let vm = OnboardingViewModel(onContinueTapped: {
-            self.onboardingDidComplete()
-        })
+        let vm = OnboardingViewModel(delegate: self.homeViewModel)
         presentingSheet = .welcomeSheet(vm)
     }
     
