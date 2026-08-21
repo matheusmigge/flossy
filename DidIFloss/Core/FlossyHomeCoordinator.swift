@@ -36,7 +36,7 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
         self.homeViewModel = HomeViewModel(
             persistence: persistence,
             recordsRepository: recordsRepository,
-            notificationService: notificationService ?? FlossyRemindersServiceFactory.make(),
+            notificationService: notificationService,
             logInteractionHandler: logInteractionHandler,
             streakAnalyzer: streakAnalyzer
         )
@@ -45,7 +45,7 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
     
     enum SheetOption: Identifiable {
         case welcomeSheet
-        case addLogSheet
+        case addLogSheet(AddFlossViewModel)
         case shareStreak(streakInfo: String)
         case developerSheet
         
@@ -60,13 +60,28 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
     }
     
     enum NavigationOption: Hashable {
-        case logRecords
+        case logRecords(LogRecordsViewModel)
+        
+        static func == (lhs: NavigationOption, rhs: NavigationOption) -> Bool {
+            switch (lhs, rhs) {
+            case (.logRecords(let lhsVm), .logRecords(let rhsVm)):
+                return lhsVm === rhsVm
+            }
+        }
+        
+        func hash(into hasher: inout Hasher) {
+            switch self {
+            case .logRecords(let vm):
+                hasher.combine(ObjectIdentifier(vm))
+            }
+        }
     }
     
     // MARK: - HomeCoordinatorDelegate
     
     func didTapAddLogButton() {
-        presentingSheet = .addLogSheet
+        let vm = AddFlossViewModel(delegate: self.homeViewModel)
+        presentingSheet = .addLogSheet(vm)
     }
     
     func didTapShareStreak(streakMessage: String) {
@@ -74,7 +89,11 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
     }
     
     func didTapLogRecords() {
-        path.append(NavigationOption.logRecords)
+        let vm = LogRecordsViewModel(
+            recordsRepository: self.recordsRepository,
+            logRecordsHandler: self.logInteractionHandler
+        )
+        path.append(NavigationOption.logRecords(vm))
     }
     
     func didTapDeveloperOptions() {
@@ -107,8 +126,7 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
                 .onDisappear {
                     self.onboardingDidComplete()
                 }
-        case .addLogSheet:
-            let vm = AddFlossViewModel(delegate: self.homeViewModel)
+        case .addLogSheet(let vm):
             AddFlossScreen(viewModel: vm)
         case .shareStreak(let message):
             ShareStreakView(streakDescription: message)
@@ -121,11 +139,7 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
     @ViewBuilder
     func makeView(for navigationOption: NavigationOption) -> some View {
         switch navigationOption {
-        case .logRecords:
-            let vm = LogRecordsViewModel(
-                recordsRepository: self.recordsRepository,
-                logRecordsHandler: self.logInteractionHandler
-            )
+        case .logRecords(let vm):
             LogRecordsScreen(viewModel: vm)
         }
     }
