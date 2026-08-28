@@ -32,6 +32,7 @@ class HomeViewModel: ScreenViewModel {
     var recordsRepository: any FlossLogRepository
     let notificationService: FlossyRemindersService?
     let addLogRecordUseCase: AddLogRecordUseCaseProtocol
+    let removeLogRecordUseCase: RemoveLogRecordUseCaseProtocol
     let streakAnalyzer: any StreakAnalyzer
     
     private var cancellables = Set<AnyCancellable>()
@@ -42,12 +43,14 @@ class HomeViewModel: ScreenViewModel {
          recordsRepository: any FlossLogRepository = DefaultFlossLogRepositoryFactory.make(),
          notificationService: FlossyRemindersService = FlossyRemindersServiceFactory.make(),
          addLogRecordUseCase: AddLogRecordUseCaseProtocol = AddLogRecordUseCase(),
+         removeLogRecordUseCase: RemoveLogRecordUseCaseProtocol = RemoveLogRecordUseCase(),
          streakAnalyzer: any StreakAnalyzer = DefaultStreakAnalyzer()
     ) {
         self.persistence = persistence
         self.recordsRepository = recordsRepository
         self.notificationService = notificationService
         self.addLogRecordUseCase = addLogRecordUseCase
+        self.removeLogRecordUseCase = removeLogRecordUseCase
         self.streakAnalyzer = streakAnalyzer
         let initialState = streakAnalyzer.analyze(logDates: [])
         self.streakBoardViewModel = StreakBoardViewModel(state: initialState)

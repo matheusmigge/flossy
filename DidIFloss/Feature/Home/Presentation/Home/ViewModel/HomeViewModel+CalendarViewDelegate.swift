@@ -26,7 +26,7 @@ extension HomeViewModel: @MainActor CalendarViewDelegate {
     func removeRecordsForFocusedDate() {
         guard let date = focusedDate else { return }
         
-        logInteractionHandler.removeAllLogRecords(for: date)
+        Task { try? await removeLogRecordUseCase.execute(removeAllFor: date) }
      
         alertDismiss()
     }

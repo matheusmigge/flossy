@@ -64,7 +64,7 @@ struct HomeViewModelTests {
             persistence: AppPreferences(userDefaults: UserDefaults.standard),
             recordsRepository: mockRepo,
             notificationService: FlossyRemindersServiceFactory.make(),
-            addLogRecordUseCase: AddLogRecordUseCaseMock(),
+            addLogRecordUseCase: AddLogRecordUseCaseMock(), removeLogRecordUseCase: RemoveLogRecordUseCaseMock(),
             streakAnalyzer: StreakAnalyzerMock()
         )
         

@@ -47,6 +47,7 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
             recordsRepository: recordsRepository,
             notificationService: notificationService,
             addLogRecordUseCase: self.addLogRecordUseCase,
+            removeLogRecordUseCase: self.removeLogRecordUseCase,
             streakAnalyzer: streakAnalyzer
         )
         self.homeViewModel.coordinatorDelegate = self
