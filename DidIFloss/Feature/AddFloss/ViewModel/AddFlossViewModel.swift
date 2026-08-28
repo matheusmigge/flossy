@@ -26,17 +26,15 @@ class AddFlossViewModel: ScreenViewModel {
         addLogRecordUseCase.isDateValid(selectedDate)
     }
     
-    func addLogRecord() {
+    func addLogRecord() async {
         guard isSelectedDateValid else { return }
         
-        Task {
-            do {
-                try await addLogRecordUseCase.execute(date: selectedDate)
-                coordinatorDelegate?.addLogDidComplete()
-            } catch {
-                // Handle error if needed
-                print("Failed to save log: \(error)")
-            }
+        do {
+            try await addLogRecordUseCase.execute(date: selectedDate)
+            coordinatorDelegate?.addLogDidComplete()
+        } catch {
+            // Handle error if needed
+            print("Failed to save log: \(error)")
         }
     }
 }

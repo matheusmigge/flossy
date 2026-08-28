@@ -26,7 +26,9 @@ final class FlossLogRepositoryMock: FlossLogRepository, @unchecked Sendable {
         didCallAddLog = true
     }
     
-    func deleteLog(id: String) async throws {}
-    func deleteLogs(on date: Date) async throws {}
+    var didCallDeleteLog = false
+    func deleteLog(id: String) async throws { didCallDeleteLog = true }
+    var didCallDeleteLogs = false
+    func deleteLogs(on date: Date) async throws { didCallDeleteLogs = true }
     func deleteAllLogs() async throws {}
 }

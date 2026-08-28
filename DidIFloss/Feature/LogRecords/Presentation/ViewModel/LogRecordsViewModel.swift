@@ -54,15 +54,15 @@ class LogRecordsViewModel: ScreenViewModel {
         self.loadRecords()
     }
     
-    func removeRecordAt(indexSet: IndexSet) {
+    func removeRecordAt(indexSet: IndexSet) async {
         guard let index = indexSet.first else { return }
         
-        removeRecord(sectionRecords[index])
+        await removeRecord(sectionRecords[index])
     }
     
-    func removeRecord(_ record: FlossLog) {
+    func removeRecord(_ record: FlossLog) async {
         
-        Task { try? await removeLogRecordUseCase.execute(record: record) }
+        try? await removeLogRecordUseCase.execute(record: record)
         // Combine publisher will update records, no need to call loadRecords() here anymore if we want, but calling it is fine
         loadRecords()
     }

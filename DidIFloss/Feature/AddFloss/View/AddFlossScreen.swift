@@ -25,7 +25,7 @@ struct AddFlossScreen: View {
                         .tint(FlossyColors.greenyBlue)
                     
                     Button {
-                        viewModel.addLogRecord()
+                        Task { await viewModel.addLogRecord() }
                     } label: {
                         Text("Add")
                             .bold()
@@ -55,7 +55,7 @@ struct AddFlossScreen: View {
                     
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
-                            viewModel.addLogRecord()
+                            Task { await viewModel.addLogRecord() }
                         } label: {
                             Text("Add")
                                 .bold()

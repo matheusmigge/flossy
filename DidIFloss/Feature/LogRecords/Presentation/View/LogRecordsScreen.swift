@@ -90,14 +90,14 @@ struct LogRecordsScreen: Screen {
             contentRow(date: record.date)
                 .contextMenu(menuItems: {
                     Button(role: .destructive) {
-                        viewModel.removeRecord(record)
+                        Task { await viewModel.removeRecord(record) }
                     } label: {
                         Text("Delete")
                     }
                 })
         }
         .onDelete(perform: { indexSet in
-            viewModel.removeRecordAt(indexSet: indexSet)
+            Task { await viewModel.removeRecordAt(indexSet: indexSet) }
         })
     }
     
