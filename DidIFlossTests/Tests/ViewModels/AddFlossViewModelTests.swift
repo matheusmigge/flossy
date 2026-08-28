@@ -10,8 +10,7 @@ struct AddFlossViewModelTests {
         var didTapAddLogButtonCallCount = 0
         func didTapAddLogButton() {}
         func didTapDeveloperOptions() {}
-        func didTapShareStreak(streakMessage: String) {}
-        func didTapLogRecords() {}
+                func didTapLogRecords() {}
         func onboardingDidComplete() {}
         
         var addLogDidCompleteCallCount = 0

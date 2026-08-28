@@ -57,14 +57,11 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
     enum SheetOption: Identifiable {
         case welcomeSheet(OnboardingViewModel)
         case addLogSheet(AddFlossViewModel)
-        case shareStreak(streakInfo: String)
         
         var id: String {
             switch self {
             case .welcomeSheet: return "welcomeSheet"
             case .addLogSheet: return "addLogSheet"
-            case .shareStreak: return "shareStreak"
-    
             }
         }
     }
@@ -107,9 +104,7 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
         presentingSheet = .addLogSheet(vm)
     }
     
-    func didTapShareStreak(streakMessage: String) {
-        presentingSheet = .shareStreak(streakInfo: streakMessage)
-    }
+
     
     func didTapLogRecords() {
         let vm = LogRecordsViewModel(
@@ -141,9 +136,6 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
             OnboardingScreen(viewModel: vm)
         case .addLogSheet(let vm):
             AddFlossScreen(viewModel: vm)
-        case .shareStreak(let message):
-            ShareStreakView(streakDescription: message)
-                .presentationDetents([.medium])
         }
     }
     

@@ -25,19 +25,19 @@ struct HomeScreen: Screen {
                 WarningBannerView(model: viewModel.streakBoardViewModel.warmingBoardContent)
                     .listRowSeparator(.hidden)
                 
-                HStack {
-                    Spacer()
-                    
-                    StreakBoardView(model: viewModel.streakBoardViewModel.streakBoardContent)
-                        .padding(.top, 5)
-                        .padding(.bottom, 20)
-                        .listRowSeparator(.hidden)
-                    
-                    Spacer()
+                ShareLink(item: viewModel.shareStreakMessage) {
+                    HStack {
+                        Spacer()
+                        
+                        StreakBoardView(model: viewModel.streakBoardViewModel.streakBoardContent)
+                            .padding(.top, 5)
+                            .padding(.bottom, 20)
+                            .listRowSeparator(.hidden)
+                        
+                        Spacer()
+                    }
                 }
-                .onTapGesture {
-                    viewModel.presentShareSheet()
-                }
+                .buttonStyle(.plain)
                 
                 Section {
                     WeekCalendarView(records: recordsDates, delegate: viewModel)
@@ -56,10 +56,7 @@ struct HomeScreen: Screen {
             .toolbar {
                 
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        viewModel.presentShareSheet()
-
-                    } label: {
+                    ShareLink(item: viewModel.shareStreakMessage) {
                         Image(systemName: "square.and.arrow.up")
                     }
                 }
