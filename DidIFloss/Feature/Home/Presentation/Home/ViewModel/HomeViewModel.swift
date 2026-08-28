@@ -92,13 +92,6 @@ class HomeViewModel: ScreenViewModel {
         }
     }
     
-    func goToDeveloperScreen() {
-#if DEBUG
-        coordinatorDelegate?.didTapDeveloperOptions()
-#endif
-        
-    }
-    
     func presentShareSheet() {
         let state = streakAnalyzer.analyze(logDates: flossRecords.map{ $0.date })
         let message = ShareStreakMessageFactory.makeMessage(from: state)

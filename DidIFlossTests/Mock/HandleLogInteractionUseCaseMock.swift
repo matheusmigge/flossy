@@ -14,9 +14,11 @@ class HandleLogInteractionUseCaseMock: HandleLogInteractionUseCaseProtocol {
     var didCallHandleLogRecord: Bool = false
     var didCallRemoveLogRecord: Bool = false
     var didCallRemoveAllLogRecords: Bool = false
+    var passedDate: Date?
     
     func handleLogRecord(for date: Date) {
         didCallHandleLogRecord = true
+        passedDate = date
     }
     
     func removeLogRecord(for record: FlossLog) {

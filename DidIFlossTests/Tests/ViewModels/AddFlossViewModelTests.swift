@@ -1,22 +1,22 @@
-//
-//  AddFlossViewModelTests.swift
-//  DidIFlossTests
-//
-
 import Testing
 import Foundation
 @testable import DidIFloss
 
+@MainActor
 @Suite("AddFlossViewModel Tests")
 struct AddFlossViewModelTests {
     
-    class MockAddFlossDelegate: AddFlossDelegate {
-        var didCallAddLogRecord = false
-        var passedDate: Date?
+    class HomeCoordinatorDelegateMock: HomeCoordinatorDelegate {
+        var didTapAddLogButtonCallCount = 0
+        func didTapAddLogButton() {}
+        func didTapDeveloperOptions() {}
+        func didTapShareStreak(streakMessage: String) {}
+        func didTapLogRecords() {}
+        func onboardingDidComplete() {}
         
-        func addLogRecord(date: Date) {
-            didCallAddLogRecord = true
-            passedDate = date
+        var addLogDidCompleteCallCount = 0
+        func addLogDidComplete() {
+            addLogDidCompleteCallCount += 1
         }
     }
     
@@ -36,29 +36,39 @@ struct AddFlossViewModelTests {
         #expect(sut.isSelectedDateValid == true)
     }
     
-    @Test("addLogRecord calls delegate when date is valid")
+    @Test("addLogRecord calls usecase and coordinator when date is valid")
     func testAddLogRecordValid() {
-        let mockDelegate = MockAddFlossDelegate()
-        let sut = AddFlossViewModel(delegate: mockDelegate)
+        let logHandlerMock = HandleLogInteractionUseCaseMock()
+        let coordinatorMock = HomeCoordinatorDelegateMock()
+        let sut = AddFlossViewModel(
+            logRecordsHandler: logHandlerMock,
+            coordinatorDelegate: coordinatorMock
+        )
         let pastDate = Date().addingTimeInterval(-3600)
         
         sut.selectedDate = pastDate
         sut.addLogRecord()
         
-        #expect(mockDelegate.didCallAddLogRecord == true)
-        #expect(mockDelegate.passedDate == pastDate)
+        #expect(logHandlerMock.didCallHandleLogRecord == true)
+        #expect(logHandlerMock.passedDate == pastDate)
+        #expect(coordinatorMock.addLogDidCompleteCallCount == 1)
     }
     
-    @Test("addLogRecord does not call delegate when date is invalid")
+    @Test("addLogRecord does not call usecase when date is invalid")
     func testAddLogRecordInvalid() {
-        let mockDelegate = MockAddFlossDelegate()
-        let sut = AddFlossViewModel(delegate: mockDelegate)
+        let logHandlerMock = HandleLogInteractionUseCaseMock()
+        let coordinatorMock = HomeCoordinatorDelegateMock()
+        let sut = AddFlossViewModel(
+            logRecordsHandler: logHandlerMock,
+            coordinatorDelegate: coordinatorMock
+        )
         let futureDate = Date().addingTimeInterval(3600)
         
         sut.selectedDate = futureDate
         sut.addLogRecord()
         
-        #expect(mockDelegate.didCallAddLogRecord == false)
-        #expect(mockDelegate.passedDate == nil)
+        #expect(logHandlerMock.didCallHandleLogRecord == false)
+        #expect(logHandlerMock.passedDate == nil)
+        #expect(coordinatorMock.addLogDidCompleteCallCount == 0)
     }
 }

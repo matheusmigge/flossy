@@ -15,12 +15,6 @@ extension AppPreferences {
     /// for persisting and retrieving specific pieces of data related to flossing
     /// records and user onboarding.
     public struct UserDefaultsKeys {
-        
-        /// The key for storing the date of the last flossing event.
-        ///
-        /// Use this key to save or fetch the date when the user last logged a flossing session.
-        static let date: String = "LAST_FLOSS_DATE"
-        
         /// The key for checking if the user has already used the app.
         ///
         /// This key is used to determine whether to show the onboarding screen

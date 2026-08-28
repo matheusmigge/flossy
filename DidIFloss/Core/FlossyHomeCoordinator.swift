@@ -52,14 +52,13 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
         case welcomeSheet(OnboardingViewModel)
         case addLogSheet(AddFlossViewModel)
         case shareStreak(streakInfo: String)
-        case developerSheet(DeveloperViewModel)
         
         var id: String {
             switch self {
             case .welcomeSheet: return "welcomeSheet"
             case .addLogSheet: return "addLogSheet"
             case .shareStreak: return "shareStreak"
-            case .developerSheet: return "developerSheet"
+    
             }
         }
     }
@@ -114,11 +113,6 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
         path.append(NavigationOption.logRecords(vm))
     }
     
-    func didTapDeveloperOptions() {
-        let vm = DeveloperViewModel()
-        presentingSheet = .developerSheet(vm)
-    }
-    
     func addLogDidComplete() {
         presentingSheet = nil
         self.homeViewModel.showingCelebration = true
@@ -144,8 +138,6 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
         case .shareStreak(let message):
             ShareStreakView(streakDescription: message)
                 .presentationDetents([.medium])
-        case .developerSheet(let vm):
-            DeveloperScreen(viewModel: vm)
         }
     }
     

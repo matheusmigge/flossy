@@ -32,9 +32,6 @@ struct HomeScreen: Screen {
                         .padding(.top, 5)
                         .padding(.bottom, 20)
                         .listRowSeparator(.hidden)
-                        .onTapGesture(count: 3, perform: {
-                            viewModel.goToDeveloperScreen()
-                        })
                     
                     Spacer()
                 }

@@ -12,16 +12,9 @@ final class UserDefaultsMock: UserDefaultable {
     
     var didCallSet: Bool = false
     var didUserAlreadyUseApp: Bool = false
-    var lastFlossDate: Date? = .distantPast
     
     func set(_ value: Any?, forKey: String) {
         didCallSet = true
-        
-        let dateKey = AppPreferences.UserDefaultsKeys.date
-        if forKey == dateKey {
-            guard let safeDate = value as? Date? else { return }
-            lastFlossDate = safeDate
-        }
         
         let previousUserKey = AppPreferences.UserDefaultsKeys.didUserAlreadyUseApp
         if forKey == previousUserKey {
@@ -35,13 +28,7 @@ final class UserDefaultsMock: UserDefaultable {
     }
     
     func value(forKey: String) -> Any? {
-        let lastFlossDateKey = AppPreferences.UserDefaultsKeys.date
-        
-        if forKey == lastFlossDateKey {
-            return lastFlossDate
-        }
-        
-        return "nil"
+        return nil
     }
     
     func bool(forKey: String) -> Bool {

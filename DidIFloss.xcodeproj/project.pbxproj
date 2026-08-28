@@ -21,11 +21,6 @@
 		0CA1974B3037F9CC0026BD76 /* CalendarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1973F3037F9CC0026BD76 /* CalendarStyle.swift */; };
 		0CA1974C3037F9CC0026BD76 /* MonthCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA197433037F9CC0026BD76 /* MonthCalendarView.swift */; };
 		0CA1974D3037F9CC0026BD76 /* CalendarViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA197413037F9CC0026BD76 /* CalendarViewDelegate.swift */; };
-		0CA1974E3037F9CC0026BD76 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA197463037F9CC0026BD76 /* CalendarViewModel.swift */; };
-		0CA1974F3037F9CC0026BD76 /* WeekCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA197443037F9CC0026BD76 /* WeekCalendarView.swift */; };
-		0CA197503037F9CC0026BD76 /* CalendarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA1973F3037F9CC0026BD76 /* CalendarStyle.swift */; };
-		0CA197513037F9CC0026BD76 /* MonthCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA197433037F9CC0026BD76 /* MonthCalendarView.swift */; };
-		0CA197523037F9CC0026BD76 /* CalendarViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA197413037F9CC0026BD76 /* CalendarViewDelegate.swift */; };
 		5625BFD52B439A5C006F88BD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5625BFD42B439A5C006F88BD /* README.md */; };
 		56C33DF72B3CAA1000D8DEB7 /* DidIFlossApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C33DF62B3CAA1000D8DEB7 /* DidIFlossApp.swift */; };
 		56C33DFB2B3CAA1500D8DEB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56C33DFA2B3CAA1500D8DEB7 /* Assets.xcassets */; };
@@ -383,11 +378,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CA1974E3037F9CC0026BD76 /* CalendarViewModel.swift in Sources */,
-				0CA1974F3037F9CC0026BD76 /* WeekCalendarView.swift in Sources */,
-				0CA197503037F9CC0026BD76 /* CalendarStyle.swift in Sources */,
-				0CA197513037F9CC0026BD76 /* MonthCalendarView.swift in Sources */,
-				0CA197523037F9CC0026BD76 /* CalendarViewDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
