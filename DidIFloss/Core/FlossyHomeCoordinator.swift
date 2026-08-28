@@ -14,7 +14,8 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
     private let persistence: AppPreferencesProtocol
     private let recordsRepository: any FlossLogRepository
     private let notificationService: FlossyRemindersService?
-    private let logInteractionHandler: HandleLogInteractionUseCaseProtocol
+    private let addLogRecordUseCase: AddLogRecordUseCaseProtocol
+    private let removeLogRecordUseCase: RemoveLogRecordUseCaseProtocol
     private let streakAnalyzer: any StreakAnalyzer
     
     // Retain view models that act as delegates for sheets
@@ -30,10 +31,14 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
         self.notificationService = notificationService
         self.streakAnalyzer = streakAnalyzer
         
-        self.logInteractionHandler = HandleLogInteractionUseCase(
+        self.addLogRecordUseCase = AddLogRecordUseCase(
             recordsRepository: recordsRepository,
             notificationService: notificationService,
             streakAnalyzer: streakAnalyzer
+        )
+        self.removeLogRecordUseCase = RemoveLogRecordUseCase(
+            recordsRepository: recordsRepository,
+            notificationService: notificationService
         )
         
         // Inject dependencies into HomeViewModel
@@ -41,7 +46,7 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
             persistence: persistence,
             recordsRepository: recordsRepository,
             notificationService: notificationService,
-            logInteractionHandler: logInteractionHandler,
+            addLogRecordUseCase: self.addLogRecordUseCase,
             streakAnalyzer: streakAnalyzer
         )
         self.homeViewModel.coordinatorDelegate = self
@@ -95,7 +100,7 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
     
     func didTapAddLogButton() {
         let vm = AddFlossViewModel(
-            logRecordsHandler: self.logInteractionHandler,
+            addLogRecordUseCase: self.addLogRecordUseCase,
             coordinatorDelegate: self
         )
         presentingSheet = .addLogSheet(vm)
@@ -108,7 +113,7 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
     func didTapLogRecords() {
         let vm = LogRecordsViewModel(
             recordsRepository: self.recordsRepository,
-            logRecordsHandler: self.logInteractionHandler
+            removeLogRecordUseCase: self.removeLogRecordUseCase
         )
         path.append(NavigationOption.logRecords(vm))
     }

@@ -18,7 +18,7 @@ extension HomeViewModel: @MainActor CalendarViewDelegate {
         }
         
         if isLogDateValid(for: date) {
-            logInteractionHandler.handleLogRecord(for: date)
+            Task { try? await addLogRecordUseCase.execute(date: date) }
             showingCelebration = true
         }
     }

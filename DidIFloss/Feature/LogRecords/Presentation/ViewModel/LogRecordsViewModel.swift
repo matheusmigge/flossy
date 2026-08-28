@@ -17,17 +17,17 @@ class LogRecordsViewModel: ScreenViewModel {
     var selectedDate: Date?
     
     var recordsRepository: any FlossLogRepository
-    var logRecordsHandler: HandleLogInteractionUseCaseProtocol
+    var removeLogRecordUseCase: RemoveLogRecordUseCaseProtocol
     
     var records: [FlossLog] = []
     
     private var cancellables = Set<AnyCancellable>()
     
     init(recordsRepository: any FlossLogRepository = DefaultFlossLogRepositoryFactory.make(),
-         logRecordsHandler: HandleLogInteractionUseCaseProtocol = HandleLogInteractionUseCase()
+         removeLogRecordUseCase: RemoveLogRecordUseCaseProtocol = RemoveLogRecordUseCase()
     ) {
         self.recordsRepository = recordsRepository
-        self.logRecordsHandler = logRecordsHandler
+        self.removeLogRecordUseCase = removeLogRecordUseCase
         
         setupBindings()
     }
@@ -62,7 +62,7 @@ class LogRecordsViewModel: ScreenViewModel {
     
     func removeRecord(_ record: FlossLog) {
         
-        logRecordsHandler.removeLogRecord(for: record)
+        Task { try? await removeLogRecordUseCase.execute(record: record) }
         // Combine publisher will update records, no need to call loadRecords() here anymore if we want, but calling it is fine
         loadRecords()
     }

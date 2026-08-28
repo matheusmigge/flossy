@@ -38,7 +38,7 @@ struct AddFlossViewModelTests {
     
     @Test("addLogRecord calls usecase and coordinator when date is valid")
     func testAddLogRecordValid() {
-        let logHandlerMock = HandleLogInteractionUseCaseMock()
+        let logHandlerMock = AddLogRecordUseCaseMock()
         let coordinatorMock = HomeCoordinatorDelegateMock()
         let sut = AddFlossViewModel(
             logRecordsHandler: logHandlerMock,
@@ -49,14 +49,14 @@ struct AddFlossViewModelTests {
         sut.selectedDate = pastDate
         sut.addLogRecord()
         
-        #expect(logHandlerMock.didCallHandleLogRecord == true)
+        #expect(logHandlerMock.didCallExecute == true)
         #expect(logHandlerMock.passedDate == pastDate)
         #expect(coordinatorMock.addLogDidCompleteCallCount == 1)
     }
     
     @Test("addLogRecord does not call usecase when date is invalid")
     func testAddLogRecordInvalid() {
-        let logHandlerMock = HandleLogInteractionUseCaseMock()
+        let logHandlerMock = AddLogRecordUseCaseMock()
         let coordinatorMock = HomeCoordinatorDelegateMock()
         let sut = AddFlossViewModel(
             logRecordsHandler: logHandlerMock,
@@ -67,7 +67,7 @@ struct AddFlossViewModelTests {
         sut.selectedDate = futureDate
         sut.addLogRecord()
         
-        #expect(logHandlerMock.didCallHandleLogRecord == false)
+        #expect(logHandlerMock.didCallExecute == false)
         #expect(logHandlerMock.passedDate == nil)
         #expect(coordinatorMock.addLogDidCompleteCallCount == 0)
     }
