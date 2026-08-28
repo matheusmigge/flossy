@@ -50,14 +50,14 @@ class HomeViewModel: ScreenViewModel {
         self.addLogRecordUseCase = addLogRecordUseCase
         self.streakAnalyzer = streakAnalyzer
         let initialState = streakAnalyzer.analyze(logDates: [])
-        self.streakBoardViewModel = StreakBoardPresenter.makeViewModel(from: initialState)
+        self.streakBoardViewModel = StreakBoardViewModel(state: initialState)
         
         setupBindings()
     }
     
     private func makeStreakBoardViewModel() -> StreakBoardViewModel {
         let state = streakAnalyzer.analyze(logDates: flossRecords.map({ $0.date }))
-        return StreakBoardPresenter.makeViewModel(from: state)
+        return StreakBoardViewModel(state: state)
     }
     
     private func setupBindings() {
@@ -94,7 +94,7 @@ class HomeViewModel: ScreenViewModel {
     
     func presentShareSheet() {
         let state = streakAnalyzer.analyze(logDates: flossRecords.map{ $0.date })
-        let message = ShareStreakMessageFactory.makeMessage(from: state)
+        let message = state.shareMessage
         coordinatorDelegate?.didTapShareStreak(streakMessage: message)
     }
     
@@ -104,42 +104,17 @@ class HomeViewModel: ScreenViewModel {
     
 }
 
-
-extension HomeViewModel {
-    struct StreakBoardPresenter {
-        static func makeViewModel(from state: StreakState) -> StreakBoardViewModel {
-            switch state {
-            case .noHistory:
-                return .init(streakBoardContent: .noLogsRecorded, warmingBoardContent: .noLogsRecorded)
-            case .startedToday:
-                return .init(streakBoardContent: .firstDayOfPositiveStreak, warmingBoardContent: .userHadLoggedToday)
-            case .activePendingToday(let days):
-                return .init(streakBoardContent: .positiveStreak(count: days), warmingBoardContent: .userHasPositiveStreak)
-            case .activeCompletedToday(let days):
-                return .init(streakBoardContent: .positiveStreak(count: days), warmingBoardContent: .userHadLoggedToday)
-            case .inactive(let days):
-                let content: StreakBoardModel = days < 3
-                ? .shortNegativeStreak
-                : .longNegativeStreak(count: days)
-                
-                return .init(streakBoardContent: content, warmingBoardContent: .userHasNegativeStreak)
-            }
-        }
-    }
-    
-    struct ShareStreakMessageFactory {
-        static func makeMessage(from state: StreakState) -> String {
-            switch state {
-            case .noHistory:
-                return "I'm starting my flossing streak today!"
-            case .startedToday:
-                return "Look at me go! I started flossing today!"
-            case .activePendingToday(days: let days), .activeCompletedToday(days: let days):
-                return "Look at me go! I have been flossing for \(days) days straight!"
-            case .inactive(daysSinceLastLog: let days):
-                return "Oh no! I need to start flossing again! It's been \(days) days since the last time I've flossed"
-
-            }
+extension StreakState {
+    var shareMessage: String {
+        switch self {
+        case .noHistory:
+            return "I'm starting my flossing streak today!"
+        case .startedToday:
+            return "Look at me go! I started flossing today!"
+        case .activePendingToday(days: let days), .activeCompletedToday(days: let days):
+            return "Look at me go! I have been flossing for \(days) days straight!"
+        case .inactive(daysSinceLastLog: let days):
+            return "Oh no! I need to start flossing again! It's been \(days) days since the last time I've flossed"
         }
     }
 }
