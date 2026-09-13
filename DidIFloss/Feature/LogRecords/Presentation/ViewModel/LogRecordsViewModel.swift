@@ -7,27 +7,32 @@
 
 import Foundation
 import FlossyData
+import FlossyCore
 import SwiftUI
 
 import Combine
 
+@MainActor
 @Observable
 class LogRecordsViewModel: ScreenViewModel {
     
     var selectedDate: Date?
     
     var recordsRepository: any FlossLogRepository
-    var removeLogRecordUseCase: RemoveLogRecordUseCaseProtocol
+    var flossLogService: FlossLogServicing
+    let hapticsManager: HapticsManagerProtocol
     
     var records: [FlossLog] = []
     
     private var cancellables = Set<AnyCancellable>()
     
     init(recordsRepository: any FlossLogRepository = DefaultFlossLogRepositoryFactory.make(),
-         removeLogRecordUseCase: RemoveLogRecordUseCaseProtocol = RemoveLogRecordUseCase()
+         flossLogService: (any FlossLogServicing)? = nil,
+         hapticsManager: HapticsManagerProtocol? = nil
     ) {
         self.recordsRepository = recordsRepository
-        self.removeLogRecordUseCase = removeLogRecordUseCase
+        self.flossLogService = flossLogService ?? FlossLogServiceFactory.make()
+        self.hapticsManager = hapticsManager ?? HapticsManager()
         
         setupBindings()
     }
@@ -44,9 +49,7 @@ class LogRecordsViewModel: ScreenViewModel {
     private func loadRecords() {
         Task {
             guard let records = try? await recordsRepository.fetchLogs() else { return }
-            await MainActor.run {
-                self.records = records
-            }
+            self.records = records
         }
     }
     
@@ -62,9 +65,13 @@ class LogRecordsViewModel: ScreenViewModel {
     
     func removeRecord(_ record: FlossLog) async {
         
-        try? await removeLogRecordUseCase.execute(record: record)
-        // Combine publisher will update records, no need to call loadRecords() here anymore if we want, but calling it is fine
-        loadRecords()
+        do {
+            try await flossLogService.removeLogRecord(record)
+            hapticsManager.vibrateLogRemoval()
+            loadRecords()
+        } catch {
+            print("Failed to remove record")
+        }
     }
     
     

@@ -11,10 +11,10 @@ let package = Package(
         .library(
             name: "Flossy",
             targets: [
-                "Flossy",
                 "FlossyData",
-                "FlossyStreak",
-                "FlossyDesignSystem"
+                "FlossyCore",
+                "FlossyDesignSystem",
+                "FlossyReminders"
             ]
         ),
     ],
@@ -22,13 +22,11 @@ let package = Package(
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "Flossy"
-        ),
-        .target(
             name: "FlossyData"
         ),
         .target(
-            name: "FlossyStreak"
+            name: "FlossyCore",
+            dependencies: ["FlossyData", "FlossyReminders"]
         ),
         .target(
             name: "FlossyDesignSystem",
@@ -36,17 +34,20 @@ let package = Package(
                 .process("Resources")
             ]
         ),
-        .testTarget(
-            name: "FlossyTests",
-            dependencies: ["Flossy"]
+        .target(
+            name: "FlossyReminders"
         ),
         .testTarget(
             name: "FlossyDataTests",
             dependencies: ["FlossyData"]
         ),
         .testTarget(
-            name: "FlossyStreakTests",
-            dependencies: ["FlossyStreak"]
+            name: "FlossyCoreTests",
+            dependencies: ["FlossyCore"]
+        ),
+        .testTarget(
+            name: "FlossyRemindersTests",
+            dependencies: ["FlossyReminders"]
         )
     ],
     swiftLanguageModes: [.v6]

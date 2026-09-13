@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0C0FDC462FF08D520094E9BF /* Flossy in Frameworks */ = {isa = PBXBuildFile; productRef = 0C0FDC452FF08D520094E9BF /* Flossy */; };
-		0C0FDC492FF08D5E0094E9BF /* FlossyReminders in Frameworks */ = {isa = PBXBuildFile; productRef = 0C0FDC482FF08D5E0094E9BF /* FlossyReminders */; };
 		0C196DFF2B614E7600EDD0B3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C196DFE2B614E7600EDD0B3 /* Launch Screen.storyboard */; };
-		0C64B4C72FD06046007DAD94 /* FlossyReminders in Frameworks */ = {isa = PBXBuildFile; productRef = 0C64B4C62FD06046007DAD94 /* FlossyReminders */; };
 		0C6B98CE2FEDBC730081CF20 /* Flossy in Frameworks */ = {isa = PBXBuildFile; productRef = 0C6B98CD2FEDBC730081CF20 /* Flossy */; };
 		5625BFD52B439A5C006F88BD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5625BFD42B439A5C006F88BD /* README.md */; };
 		56C33DF72B3CAA1000D8DEB7 /* DidIFlossApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C33DF62B3CAA1000D8DEB7 /* DidIFlossApp.swift */; };
@@ -43,7 +41,6 @@
 /* Begin PBXFileReference section */
 		0C196DFE2B614E7600EDD0B3 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		0C2EF6592B710E0300AFF9D4 /* DidIFlossTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DidIFlossTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0C64B4C82FD06DF6007DAD94 /* FlossyReminders */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FlossyReminders; sourceTree = "<group>"; };
 		0C6B98CB2FEDB4BF0081CF20 /* Flossy */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Flossy; sourceTree = "<group>"; };
 		5625BFD42B439A5C006F88BD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		562749CE2B43A64C004F37A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -67,10 +64,8 @@
 		0C6CCCAD2FCFBCD2000E0DEE /* DidIFlossTests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (0C6CCCBC2FCFBCD3000E0DEE /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = DidIFlossTests; sourceTree = "<group>"; };
 		0C6CCCFD2FCFBCF0000E0DEE /* Core */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Core; sourceTree = "<group>"; };
 		0C6CCD122FCFBCF4000E0DEE /* UseCases */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = UseCases; sourceTree = "<group>"; };
-		0C6CCD172FCFBCF7000E0DEE /* Extensions */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Extensions; sourceTree = "<group>"; };
 		0C6CCD1C2FCFBCF9000E0DEE /* Fonts */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Fonts; sourceTree = "<group>"; };
 		0C6CCD1F2FCFBCFC000E0DEE /* Preview Content */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Preview Content"; sourceTree = "<group>"; };
-		0C6CCD2A2FCFBD02000E0DEE /* UserFeedback */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = UserFeedback; sourceTree = "<group>"; };
 		0C6CCD372FCFBD12000E0DEE /* AddFloss */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = AddFloss; sourceTree = "<group>"; };
 		0C6CCD402FCFBD16000E0DEE /* LogRecords */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = LogRecords; sourceTree = "<group>"; };
 		0C6CCD582FCFBD18000E0DEE /* Home */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Home; sourceTree = "<group>"; };
@@ -91,10 +86,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C0FDC492FF08D5E0094E9BF /* FlossyReminders in Frameworks */,
 				0C0FDC462FF08D520094E9BF /* Flossy in Frameworks */,
 				0C6B98CE2FEDBC730081CF20 /* Flossy in Frameworks */,
-				0C64B4C72FD06046007DAD94 /* FlossyReminders in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,7 +105,6 @@
 			isa = PBXGroup;
 			children = (
 				0CA19A223042375E0026BD76 /* AppPreferences */,
-				0C6CCD2A2FCFBD02000E0DEE /* UserFeedback */,
 				0C6CCD372FCFBD12000E0DEE /* AddFloss */,
 				0C6CCD402FCFBD16000E0DEE /* LogRecords */,
 				0C6CCD582FCFBD18000E0DEE /* Home */,
@@ -126,7 +118,6 @@
 			isa = PBXGroup;
 			children = (
 				0C6B98CB2FEDB4BF0081CF20 /* Flossy */,
-				0C64B4C82FD06DF6007DAD94 /* FlossyReminders */,
 				5625BFD42B439A5C006F88BD /* README.md */,
 				56C33DF52B3CAA1000D8DEB7 /* DidIFloss */,
 				0C6CCCAD2FCFBCD2000E0DEE /* DidIFlossTests */,
@@ -152,7 +143,6 @@
 				562749CE2B43A64C004F37A0 /* Info.plist */,
 				56C33DF62B3CAA1000D8DEB7 /* DidIFlossApp.swift */,
 				0C6CCD122FCFBCF4000E0DEE /* UseCases */,
-				0C6CCD172FCFBCF7000E0DEE /* Extensions */,
 				56C33DFA2B3CAA1500D8DEB7 /* Assets.xcassets */,
 				0C196DFE2B614E7600EDD0B3 /* Launch Screen.storyboard */,
 				56C33DFC2B3CAA1500D8DEB7 /* DidIFloss.entitlements */,
@@ -202,10 +192,8 @@
 			fileSystemSynchronizedGroups = (
 				0C6CCCFD2FCFBCF0000E0DEE /* Core */,
 				0C6CCD122FCFBCF4000E0DEE /* UseCases */,
-				0C6CCD172FCFBCF7000E0DEE /* Extensions */,
 				0C6CCD1C2FCFBCF9000E0DEE /* Fonts */,
 				0C6CCD1F2FCFBCFC000E0DEE /* Preview Content */,
-				0C6CCD2A2FCFBD02000E0DEE /* UserFeedback */,
 				0C6CCD372FCFBD12000E0DEE /* AddFloss */,
 				0C6CCD402FCFBD16000E0DEE /* LogRecords */,
 				0C6CCD582FCFBD18000E0DEE /* Home */,
@@ -215,10 +203,8 @@
 			);
 			name = DidIFloss;
 			packageProductDependencies = (
-				0C64B4C62FD06046007DAD94 /* FlossyReminders */,
 				0C6B98CD2FEDBC730081CF20 /* Flossy */,
 				0C0FDC452FF08D520094E9BF /* Flossy */,
-				0C0FDC482FF08D5E0094E9BF /* FlossyReminders */,
 			);
 			productName = DidIFloss;
 			productReference = 56C33DF32B3CAA1000D8DEB7 /* DidIFloss.app */;
@@ -596,14 +582,6 @@
 		0C0FDC452FF08D520094E9BF /* Flossy */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Flossy;
-		};
-		0C0FDC482FF08D5E0094E9BF /* FlossyReminders */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = FlossyReminders;
-		};
-		0C64B4C62FD06046007DAD94 /* FlossyReminders */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = FlossyReminders;
 		};
 		0C6B98CD2FEDBC730081CF20 /* Flossy */ = {
 			isa = XCSwiftPackageProductDependency;

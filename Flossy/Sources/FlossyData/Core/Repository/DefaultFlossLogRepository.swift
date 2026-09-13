@@ -9,6 +9,7 @@ import Foundation
 import Combine
 
 actor DefaultFlossLogRepository {
+    static let shared = DefaultFlossLogRepository(dataSource: SwiftDataFlossRecordDataSource.shared)
     
     private let dataSource: any FlossLogDataSource
     
@@ -59,14 +60,22 @@ extension DefaultFlossLogRepository: FlossLogRepository {
     
     func addLog(_ flossLog: FlossLog) async throws {
         try await dataSource.insertLog(flossLog)
-        cachedLogs?.append(flossLog)
-        cachedLogs = cachedLogs?.sorted{ $0.date > $1.date }
+        if cachedLogs == nil {
+            _ = try? await fetchLogs() // populate cache if nil
+        } else {
+            cachedLogs?.append(flossLog)
+            cachedLogs = cachedLogs?.sorted{ $0.date > $1.date }
+        }
         notifyObservers()
     }
     
     func deleteLog(id: String) async throws {
         try await dataSource.deleteLog(id: id)
-        cachedLogs?.removeAll { $0.id == id }
+        if cachedLogs == nil {
+            _ = try? await fetchLogs()
+        } else {
+            cachedLogs?.removeAll { $0.id == id }
+        }
         notifyObservers()
     }
     

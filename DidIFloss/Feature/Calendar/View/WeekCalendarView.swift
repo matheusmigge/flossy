@@ -1,4 +1,5 @@
 import SwiftUI
+import FlossyCore
 import FlossyDesignSystem
 
 struct WeekCalendarView: View {

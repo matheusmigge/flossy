@@ -1,7 +1,7 @@
 import SwiftUI
 import FlossyReminders
 import FlossyData
-import FlossyStreak
+import FlossyCore
 
 @MainActor
 @Observable
@@ -14,9 +14,8 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
     private let persistence: AppPreferencesProtocol
     private let recordsRepository: any FlossLogRepository
     private let notificationService: FlossyRemindersService?
-    private let addLogRecordUseCase: AddLogRecordUseCaseProtocol
-    private let removeLogRecordUseCase: RemoveLogRecordUseCaseProtocol
     private let streakAnalyzer: any StreakAnalyzer
+    private let flossLogService: FlossLogServicing
     
     // Retain view models that act as delegates for sheets
     var homeViewModel: HomeViewModel = HomeViewModel()
@@ -24,31 +23,22 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
     init(persistence: AppPreferencesProtocol = AppPreferences.shared,
          recordsRepository: any FlossLogRepository = DefaultFlossLogRepositoryFactory.make(),
          notificationService: FlossyRemindersService = FlossyRemindersServiceFactory.make(),
-         streakAnalyzer: any StreakAnalyzer = DefaultStreakAnalyzer()) {
+         streakAnalyzer: any StreakAnalyzer = DefaultStreakAnalyzer(),
+         flossLogService: (any FlossLogServicing)? = nil) {
         
         self.persistence = persistence
         self.recordsRepository = recordsRepository
         self.notificationService = notificationService
         self.streakAnalyzer = streakAnalyzer
-        
-        self.addLogRecordUseCase = AddLogRecordUseCase(
-            recordsRepository: recordsRepository,
-            notificationService: notificationService,
-            streakAnalyzer: streakAnalyzer
-        )
-        self.removeLogRecordUseCase = RemoveLogRecordUseCase(
-            recordsRepository: recordsRepository,
-            notificationService: notificationService
-        )
+        self.flossLogService = flossLogService ?? FlossLogServiceFactory.make()
         
         // Inject dependencies into HomeViewModel
         self.homeViewModel = HomeViewModel(
             persistence: persistence,
             recordsRepository: recordsRepository,
             notificationService: notificationService,
-            addLogRecordUseCase: self.addLogRecordUseCase,
-            removeLogRecordUseCase: self.removeLogRecordUseCase,
-            streakAnalyzer: streakAnalyzer
+            streakAnalyzer: streakAnalyzer,
+            flossLogService: self.flossLogService
         )
         self.homeViewModel.coordinatorDelegate = self
         checkForOnboarding()
@@ -98,7 +88,7 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
     
     func didTapAddLogButton() {
         let vm = AddFlossViewModel(
-            addLogRecordUseCase: self.addLogRecordUseCase,
+            flossLogService: self.flossLogService,
             coordinatorDelegate: self
         )
         presentingSheet = .addLogSheet(vm)
@@ -109,7 +99,7 @@ final class FlossyHomeCoordinator: HomeCoordinatorDelegate {
     func didTapLogRecords() {
         let vm = LogRecordsViewModel(
             recordsRepository: self.recordsRepository,
-            removeLogRecordUseCase: self.removeLogRecordUseCase
+            flossLogService: self.flossLogService
         )
         path.append(NavigationOption.logRecords(vm))
     }

@@ -1,6 +1,6 @@
 import Foundation
-import FlossyStreak
-
+import FlossyCore
+import SwiftUI
 struct StreakBoardViewModel {
     let streakBoardContent: StreakBoardModel
     let warmingBoardContent: WarningBannerModel

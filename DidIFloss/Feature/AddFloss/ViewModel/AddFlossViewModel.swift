@@ -6,6 +6,7 @@
 import Foundation
 import SwiftUI
 import Observation
+import FlossyCore
 
 @MainActor
 @Observable
@@ -13,24 +14,29 @@ class AddFlossViewModel: ScreenViewModel {
     
     var selectedDate: Date = .now
     
-    private let addLogRecordUseCase: AddLogRecordUseCaseProtocol
+    private let flossLogService: FlossLogServicing
+    private let hapticsManager: HapticsManagerProtocol
     private weak var coordinatorDelegate: HomeCoordinatorDelegate?
     
-    init(addLogRecordUseCase: AddLogRecordUseCaseProtocol = AddLogRecordUseCase(),
+    @MainActor
+    init(flossLogService: (any FlossLogServicing)? = nil,
+         hapticsManager: HapticsManagerProtocol? = nil,
          coordinatorDelegate: HomeCoordinatorDelegate? = nil) {
-        self.addLogRecordUseCase = addLogRecordUseCase
+        self.flossLogService = flossLogService ?? FlossLogServiceFactory.make()
+        self.hapticsManager = hapticsManager ?? HapticsManager()
         self.coordinatorDelegate = coordinatorDelegate
     }
     
     var isSelectedDateValid: Bool {
-        addLogRecordUseCase.isDateValid(selectedDate)
+        flossLogService.isDateValid(selectedDate)
     }
     
     func addLogRecord() async {
         guard isSelectedDateValid else { return }
         
         do {
-            try await addLogRecordUseCase.execute(date: selectedDate)
+            try await flossLogService.addLogRecord(date: selectedDate)
+            hapticsManager.vibrateAddLogCelebration()
             coordinatorDelegate?.addLogDidComplete()
         } catch {
             // Handle error if needed

@@ -1,6 +1,8 @@
 import Foundation
+import FlossyCore
 import SwiftUI
 
+@MainActor
 @Observable
 class CalendarViewModel {
     var currentCalendar: Date = .now

@@ -7,7 +7,7 @@
 
 import FlossyReminders
 import FlossyData
-import FlossyStreak
+import FlossyCore
 import SwiftUI
 
 import Foundation
@@ -31,27 +31,29 @@ class HomeViewModel: ScreenViewModel {
     weak var persistence: AppPreferencesProtocol?
     var recordsRepository: any FlossLogRepository
     let notificationService: FlossyRemindersService?
-    let addLogRecordUseCase: AddLogRecordUseCaseProtocol
-    let removeLogRecordUseCase: RemoveLogRecordUseCaseProtocol
     let streakAnalyzer: any StreakAnalyzer
+    let hapticsManager: HapticsManagerProtocol
+    
+    var flossLogService: (any FlossLogServicing)
     
     private var cancellables = Set<AnyCancellable>()
     
     var streakBoardViewModel: StreakBoardViewModel
     
+    @MainActor
     init(persistence: AppPreferencesProtocol = AppPreferences.shared,
          recordsRepository: any FlossLogRepository = DefaultFlossLogRepositoryFactory.make(),
          notificationService: FlossyRemindersService = FlossyRemindersServiceFactory.make(),
-         addLogRecordUseCase: AddLogRecordUseCaseProtocol = AddLogRecordUseCase(),
-         removeLogRecordUseCase: RemoveLogRecordUseCaseProtocol = RemoveLogRecordUseCase(),
-         streakAnalyzer: any StreakAnalyzer = DefaultStreakAnalyzer()
+         streakAnalyzer: any StreakAnalyzer = DefaultStreakAnalyzer(),
+         hapticsManager: HapticsManagerProtocol? = nil,
+         flossLogService: (any FlossLogServicing)? = nil
     ) {
         self.persistence = persistence
         self.recordsRepository = recordsRepository
         self.notificationService = notificationService
-        self.addLogRecordUseCase = addLogRecordUseCase
-        self.removeLogRecordUseCase = removeLogRecordUseCase
         self.streakAnalyzer = streakAnalyzer
+        self.hapticsManager = hapticsManager ?? HapticsManager()
+        self.flossLogService = flossLogService ?? FlossLogServiceFactory.make()
         let initialState = streakAnalyzer.analyze(logDates: [])
         self.streakBoardViewModel = StreakBoardViewModel(state: initialState)
         
