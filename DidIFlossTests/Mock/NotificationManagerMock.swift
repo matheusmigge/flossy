@@ -6,9 +6,10 @@
 //
 
 import Foundation
-@testable import Notification
+import FlossyCore
+@testable import FlossyReminders
 
-class NotificationManagerMock: FlossRemindersService {
+final class NotificationManagerMock: FlossyRemindersService, @unchecked Sendable {
     
     var didCallRequestAuth: Bool = false
     var didScheduleDailyNotification: Bool = false
@@ -17,11 +18,6 @@ class NotificationManagerMock: FlossRemindersService {
 
     var didRemoveAllPendingNotifications: Bool = false
     var didRemovePendingDailyNotification: Bool = false
-
-    
-    static func current() -> FlossRemindersService {
-        return NotificationManagerMock()
-    }
     
     func requestAuthorizationToNotificate(provisional: Bool) {
         didCallRequestAuth = true

@@ -1,0 +1,75 @@
+import Testing
+import Foundation
+import FlossyCore
+@testable import DidIFloss
+
+@MainActor
+@Suite("AddFlossViewModel Tests")
+struct AddFlossViewModelTests {
+    
+    class HomeCoordinatorDelegateMock: HomeCoordinatorDelegate {
+        var didTapAddLogButtonCallCount = 0
+        func didTapAddLogButton() {}
+        func didTapDeveloperOptions() {}
+                func didTapLogRecords() {}
+        func onboardingDidComplete() {}
+        
+        var addLogDidCompleteCallCount = 0
+        func addLogDidComplete() {
+            addLogDidCompleteCallCount += 1
+        }
+    }
+    
+    @Test("isSelectedDateValid returns false when date is in the future")
+    func testIsSelectedDateValidFuture() {
+        let sut = AddFlossViewModel()
+        sut.selectedDate = Date().addingTimeInterval(3600) // 1 hour in the future
+        
+        #expect(sut.isSelectedDateValid == false)
+    }
+    
+    @Test("isSelectedDateValid returns true when date is in the past")
+    func testIsSelectedDateValidPast() {
+        let sut = AddFlossViewModel()
+        sut.selectedDate = Date().addingTimeInterval(-3600) // 1 hour in the past
+        
+        #expect(sut.isSelectedDateValid == true)
+    }
+    
+    @Test("addLogRecord calls usecase and coordinator when date is valid")
+    func testAddLogRecordValid() async {
+        let logHandlerMock = FlossLogServiceMock()
+        let coordinatorMock = HomeCoordinatorDelegateMock()
+        let sut = AddFlossViewModel(
+            flossLogService: logHandlerMock,
+            coordinatorDelegate: coordinatorMock
+        )
+        let pastDate = Date().addingTimeInterval(-3600)
+        
+        sut.selectedDate = pastDate
+        await sut.addLogRecord()
+        
+        #expect(logHandlerMock.didCallAddLog == true)
+        #expect(logHandlerMock.passedDate == pastDate)
+        #expect(coordinatorMock.addLogDidCompleteCallCount == 1)
+    }
+    
+    @Test("addLogRecord does not call usecase when date is invalid")
+    func testAddLogRecordInvalid() async {
+        let logHandlerMock = FlossLogServiceMock()
+        let coordinatorMock = HomeCoordinatorDelegateMock()
+        let sut = AddFlossViewModel(
+            flossLogService: logHandlerMock,
+            coordinatorDelegate: coordinatorMock
+        )
+        let futureDate = Date().addingTimeInterval(3600)
+        logHandlerMock.isDateValidResult = false
+        
+        sut.selectedDate = futureDate
+        await sut.addLogRecord()
+        
+        #expect(logHandlerMock.didCallAddLog == false)
+        #expect(logHandlerMock.passedDate == nil)
+        #expect(coordinatorMock.addLogDidCompleteCallCount == 0)
+    }
+}
