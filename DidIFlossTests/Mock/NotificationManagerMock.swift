@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import FlossyCore
 @testable import FlossyReminders
 
-class NotificationManagerMock: FlossyRemindersService {
+final class NotificationManagerMock: FlossyRemindersService, @unchecked Sendable {
     
     var didCallRequestAuth: Bool = false
     var didScheduleDailyNotification: Bool = false

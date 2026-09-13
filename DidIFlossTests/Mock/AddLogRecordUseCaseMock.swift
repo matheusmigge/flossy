@@ -1,7 +1,8 @@
 import Foundation
+import FlossyCore
 @testable import DidIFloss
 
-class AddLogRecordUseCaseMock: AddLogRecordUseCaseProtocol {
+final class AddLogRecordUseCaseMock: AddLogRecordUseCaseProtocol, @unchecked Sendable {
     
     var didCallExecute = false
     var passedDate: Date?

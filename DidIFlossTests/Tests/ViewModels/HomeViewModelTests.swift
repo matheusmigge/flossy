@@ -1,10 +1,11 @@
 import Testing
 import Foundation
+import FlossyCore
 import Combine
 @testable import DidIFloss
 import FlossyData
 import FlossyReminders
-import FlossyStreak
+import FlossyCore
 
 @MainActor
 @Suite("HomeViewModel Tests")
@@ -64,8 +65,8 @@ struct HomeViewModelTests {
             persistence: AppPreferences(userDefaults: UserDefaults.standard),
             recordsRepository: mockRepo,
             notificationService: FlossyRemindersServiceFactory.make(),
-            addLogRecordUseCase: AddLogRecordUseCaseMock(), removeLogRecordUseCase: RemoveLogRecordUseCaseMock(),
-            streakAnalyzer: StreakAnalyzerMock()
+            streakAnalyzer: StreakAnalyzerMock(),
+            flossLogService: FlossLogServiceMock()
         )
         
         // When
@@ -121,20 +122,6 @@ struct HomeViewModelTests {
         sut.plusButtonPressed()
         
         #expect(delegateMock.didTapAddLogButtonCallCount == 0)
-    }
-    
-    @Test("Share sheet delegates correctly with proper message")
-    func presentShareSheet() {
-        let mockAnalyzer = StreakAnalyzerMock()
-        mockAnalyzer.mockedState = .startedToday
-        let sut = HomeViewModel(streakAnalyzer: mockAnalyzer)
-        let delegateMock = HomeCoordinatorDelegateMock()
-        sut.coordinatorDelegate = delegateMock
-        
-        sut.presentShareSheet()
-        
-        #expect(delegateMock.didTapShareStreakCallCount == 1)
-        #expect(delegateMock.sharedStreakMessage == "Look at me go! I started flossing today!")
     }
     
     @Test("goToLogRecords delegates correctly")

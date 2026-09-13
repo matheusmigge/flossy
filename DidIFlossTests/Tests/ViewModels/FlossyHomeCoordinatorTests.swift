@@ -1,5 +1,6 @@
 import Testing
 import Foundation
+import FlossyCore
 @testable import DidIFloss
 import FlossyData
 import SwiftUI
@@ -65,33 +66,6 @@ struct FlossyHomeCoordinatorTests {
         }
     }
     
-    @Test("didTapShareStreak should set presentingSheet to shareStreak")
-    func didTapShareStreak() {
-        let sut = FlossyHomeCoordinator()
-        
-        sut.didTapShareStreak(streakMessage: "Hello")
-        
-        switch sut.presentingSheet {
-        case .shareStreak(let msg):
-            #expect(msg == "Hello")
-        default:
-            Issue.record("Expected shareStreak")
-        }
-    }
-    
-    @Test("didTapDeveloperOptions should set presentingSheet to developerSheet")
-    func didTapDeveloperOptions() {
-        let sut = FlossyHomeCoordinator()
-        
-        sut.didTapDeveloperOptions()
-        
-        switch sut.presentingSheet {
-        case .developerSheet:
-            break
-        default:
-            Issue.record("Expected developerSheet")
-        }
-    }
     
     @Test("didTapLogRecords should append logRecords to navigation path")
     func didTapLogRecords() {

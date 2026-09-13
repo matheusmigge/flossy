@@ -1,5 +1,6 @@
 import Testing
 import Foundation
+import FlossyCore
 @testable import DidIFloss
 import FlossyData
 
@@ -9,17 +10,17 @@ struct LogRecordsViewModelTests {
     
     @Test("removeRecord calls usecase execute")
     func removeRecordCallsUseCase() async {
-        let removeUseCaseMock = RemoveLogRecordUseCaseMock()
+        let removeUseCaseMock = FlossLogServiceMock()
         let sut = LogRecordsViewModel(
             recordsRepository: FlossLogRepositoryMock(),
-            removeLogRecordUseCase: removeUseCaseMock
+            flossLogService: removeUseCaseMock
         )
         
         let record = FlossLog(flossDate: Date())
         
         await sut.removeRecord(record)
         
-        #expect(removeUseCaseMock.didCallExecuteRecord == true)
+        #expect(removeUseCaseMock.didCallRemoveLog == true)
         #expect(removeUseCaseMock.passedRecord?.id == record.id)
     }
     
@@ -32,10 +33,10 @@ struct LogRecordsViewModelTests {
         // Setup initial state
         mockRepo.fetchedLogs = [record1, record2]
         
-        let removeUseCaseMock = RemoveLogRecordUseCaseMock()
+        let removeUseCaseMock = FlossLogServiceMock()
         let sut = LogRecordsViewModel(
             recordsRepository: mockRepo,
-            removeLogRecordUseCase: removeUseCaseMock
+            flossLogService: removeUseCaseMock
         )
         sut.records = [record1, record2]
         
@@ -43,7 +44,7 @@ struct LogRecordsViewModelTests {
         let indexSet = IndexSet(integer: 0)
         await sut.removeRecordAt(indexSet: indexSet)
         
-        #expect(removeUseCaseMock.didCallExecuteRecord == true)
+        #expect(removeUseCaseMock.didCallRemoveLog == true)
         #expect(removeUseCaseMock.passedRecord?.id == record1.id)
     }
 }

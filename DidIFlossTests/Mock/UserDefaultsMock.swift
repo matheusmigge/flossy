@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FlossyCore
 @testable import DidIFloss
 
 final class UserDefaultsMock: UserDefaultable {

@@ -7,12 +7,12 @@
 
 import Foundation
 import Testing
-@testable import FlossyStreak
+@testable import FlossyCore
 
 @Suite("DefaultStreakAnalyzer Testing")
 struct DefaultStreakAnalyzerTests {
     
-    final class MockStreakRule: StreakRule {
+    final class MockStreakRule: StreakRule, @unchecked Sendable {
         let result: StreakState?
         var resolveCallCount: Int
         var capturedContext: StreakContext?

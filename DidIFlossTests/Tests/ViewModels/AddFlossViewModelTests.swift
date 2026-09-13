@@ -1,5 +1,6 @@
 import Testing
 import Foundation
+import FlossyCore
 @testable import DidIFloss
 
 @MainActor
@@ -37,10 +38,10 @@ struct AddFlossViewModelTests {
     
     @Test("addLogRecord calls usecase and coordinator when date is valid")
     func testAddLogRecordValid() async {
-        let logHandlerMock = AddLogRecordUseCaseMock()
+        let logHandlerMock = FlossLogServiceMock()
         let coordinatorMock = HomeCoordinatorDelegateMock()
         let sut = AddFlossViewModel(
-            addLogRecordUseCase: logHandlerMock,
+            flossLogService: logHandlerMock,
             coordinatorDelegate: coordinatorMock
         )
         let pastDate = Date().addingTimeInterval(-3600)
@@ -48,25 +49,26 @@ struct AddFlossViewModelTests {
         sut.selectedDate = pastDate
         await sut.addLogRecord()
         
-        #expect(logHandlerMock.didCallExecute == true)
+        #expect(logHandlerMock.didCallAddLog == true)
         #expect(logHandlerMock.passedDate == pastDate)
         #expect(coordinatorMock.addLogDidCompleteCallCount == 1)
     }
     
     @Test("addLogRecord does not call usecase when date is invalid")
     func testAddLogRecordInvalid() async {
-        let logHandlerMock = AddLogRecordUseCaseMock()
+        let logHandlerMock = FlossLogServiceMock()
         let coordinatorMock = HomeCoordinatorDelegateMock()
         let sut = AddFlossViewModel(
-            addLogRecordUseCase: logHandlerMock,
+            flossLogService: logHandlerMock,
             coordinatorDelegate: coordinatorMock
         )
         let futureDate = Date().addingTimeInterval(3600)
+        logHandlerMock.isDateValidResult = false
         
         sut.selectedDate = futureDate
         await sut.addLogRecord()
         
-        #expect(logHandlerMock.didCallExecute == false)
+        #expect(logHandlerMock.didCallAddLog == false)
         #expect(logHandlerMock.passedDate == nil)
         #expect(coordinatorMock.addLogDidCompleteCallCount == 0)
     }

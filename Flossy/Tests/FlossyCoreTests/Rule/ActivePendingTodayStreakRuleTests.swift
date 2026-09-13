@@ -6,7 +6,7 @@
 //
 
 import Testing
-@testable import FlossyStreak
+@testable import FlossyCore
 import Foundation
 
 @Suite("ActivePendingTodayStreakRule Testing")

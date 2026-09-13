@@ -1,4 +1,5 @@
 import Foundation
+import FlossyCore
 import Combine
 @testable import DidIFloss
 import FlossyData

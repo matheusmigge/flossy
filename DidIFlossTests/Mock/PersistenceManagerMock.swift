@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FlossyCore
 @testable import DidIFloss
 
 class PersistenceManagerMock: AppPreferencesProtocol {

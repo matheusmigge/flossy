@@ -7,7 +7,7 @@
 
 import Testing
 import Foundation
-@testable import FlossyStreak
+@testable import FlossyCore
 
 @Suite("StreakContext Testing")
 struct StreakContextTests {

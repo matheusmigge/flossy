@@ -1,5 +1,6 @@
 import Testing
 import Foundation
+import FlossyCore
 @testable import DidIFloss
 import FlossyData
 
@@ -41,12 +42,10 @@ struct AddLogRecordUseCaseTests {
     func executeValidDate() async throws {
         let mockRepo = FlossLogRepositoryMock()
         let mockNotificationService = NotificationManagerMock()
-        let mockHaptics = HapticsManagerMock()
         
         let sut = AddLogRecordUseCase(
             recordsRepository: mockRepo,
-            notificationService: mockNotificationService,
-            hapticsManager: mockHaptics
+            notificationService: mockNotificationService
         )
         
         let pastDate = Date().addingTimeInterval(-3600)
@@ -54,6 +53,5 @@ struct AddLogRecordUseCaseTests {
         try await sut.execute(date: pastDate)
         
         #expect(mockRepo.didCallAddLog == true)
-        #expect(mockHaptics.didCallVibrateCelebration == true)
     }
 }

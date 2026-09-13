@@ -1,8 +1,9 @@
 import Foundation
+import FlossyCore
 import FlossyData
 @testable import DidIFloss
 
-class RemoveLogRecordUseCaseMock: RemoveLogRecordUseCaseProtocol {
+final class RemoveLogRecordUseCaseMock: RemoveLogRecordUseCaseProtocol, @unchecked Sendable {
     
     var didCallExecuteRecord = false
     var passedRecord: FlossLog?
