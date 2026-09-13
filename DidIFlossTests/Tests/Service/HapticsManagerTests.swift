@@ -6,9 +6,10 @@
 //
 
 import XCTest
+import FlossyCore
 @testable import DidIFloss
 
-final class HapticsManagerTests: XCTestCase {
+ @MainActor final class HapticsManagerTests: XCTestCase {
     
     var feedbackGenerator: UINotificationFeedbackGeneratorMock!
     var hapticsManager: HapticsManager!

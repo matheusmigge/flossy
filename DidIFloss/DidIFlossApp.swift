@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FlossyReminders
+import FlossyDesignSystem
 
 @main
 struct DidIFlossApp: App {
@@ -14,7 +15,7 @@ struct DidIFlossApp: App {
     
     var body: some Scene {
         WindowGroup {
-            RootView()
+            RootScreen()
         }
     }
 }
@@ -22,6 +23,8 @@ struct DidIFlossApp: App {
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        FlossyFonts.registerFonts()
+        
         let notificationService = FlossyRemindersServiceFactory.make()
         notificationService.requestAuthorizationToNotificate(provisional: true)
         

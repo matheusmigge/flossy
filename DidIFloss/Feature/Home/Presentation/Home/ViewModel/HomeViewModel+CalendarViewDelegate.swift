@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import FlossyDesignSystem
+import FlossyCore
 
-extension HomeViewModel: CalendarViewDelegate {
+extension HomeViewModel: @MainActor CalendarViewDelegate {
     func didSelectDate(_ date: Date) {
         if flossRecordsContains(date: date) {
             self.focusedDate = date
@@ -17,18 +19,27 @@ extension HomeViewModel: CalendarViewDelegate {
         }
         
         if isLogDateValid(for: date) {
-            addLogRecord(date: date)
+            Task { 
+                try? await flossLogService.addLogRecord(date: date) 
+                hapticsManager.vibrateAddLogCelebration()
+            }
+            showingCelebration = true
         }
     }
 
     func removeRecordsForFocusedDate() {
         guard let date = focusedDate else { return }
         
-        logInteractionHandler.removeAllLogRecords(for: date)
+        removeRecordFor(date: date)
      
-        
         alertDismiss()
-        self.loadData()
+    }
+    
+    func removeRecordFor(date: Date) {
+        Task { 
+            try? await flossLogService.removeLogs(removeAllFor: date) 
+            hapticsManager.vibrateLogRemoval()
+        }
     }
     
     func alertDismiss() {

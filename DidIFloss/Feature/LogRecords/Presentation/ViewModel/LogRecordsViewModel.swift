@@ -6,29 +6,50 @@
 //
 
 import Foundation
+import FlossyData
+import FlossyCore
 import SwiftUI
 
-class LogRecordsViewModel: ObservableObject {
+import Combine
+
+@MainActor
+@Observable
+class LogRecordsViewModel: ScreenViewModel {
     
-    @Published var selectedDate: Date?
+    var selectedDate: Date?
     
-    weak var recordsRepository: FlossRecordsRepositoryProtocol?
-    var logRecordsHandler: HandleLogInteractionUseCaseProtocol
+    var recordsRepository: any FlossLogRepository
+    var flossLogService: FlossLogServicing
+    let hapticsManager: HapticsManagerProtocol
     
-    @Published var records: [FlossRecord] = []
+    var records: [FlossLog] = []
     
-    init(persistenceService: FlossRecordsRepositoryProtocol = PersistenceManager.shared,
-         logRecordsHandler: HandleLogInteractionUseCaseProtocol = HandleLogInteractionUseCase()
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(recordsRepository: any FlossLogRepository = DefaultFlossLogRepositoryFactory.make(),
+         flossLogService: (any FlossLogServicing)? = nil,
+         hapticsManager: HapticsManagerProtocol? = nil
     ) {
-        self.recordsRepository = persistenceService
-        self.logRecordsHandler = logRecordsHandler
+        self.recordsRepository = recordsRepository
+        self.flossLogService = flossLogService ?? FlossLogServiceFactory.make()
+        self.hapticsManager = hapticsManager ?? HapticsManager()
+        
+        setupBindings()
+    }
+    
+    private func setupBindings() {
+        recordsRepository.logsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] logs in
+                self?.records = logs
+            }
+            .store(in: &cancellables)
     }
     
     private func loadRecords() {
-        guard let safePersistence = recordsRepository else { return }
-        
-        safePersistence.getFlossRecords { [weak self] result in
-            self?.records = result
+        Task {
+            guard let records = try? await recordsRepository.fetchLogs() else { return }
+            self.records = records
         }
     }
     
@@ -36,20 +57,25 @@ class LogRecordsViewModel: ObservableObject {
         self.loadRecords()
     }
     
-    func removeRecordAt(indexSet: IndexSet) {
+    func removeRecordAt(indexSet: IndexSet) async {
         guard let index = indexSet.first else { return }
         
-        removeRecord(sectionRecords[index])
+        await removeRecord(sectionRecords[index])
     }
     
-    func removeRecord(_ record: FlossRecord) {
+    func removeRecord(_ record: FlossLog) async {
         
-        logRecordsHandler.removeLogRecord(for: record)
-        loadRecords()
+        do {
+            try await flossLogService.removeLogRecord(record)
+            hapticsManager.vibrateLogRemoval()
+            loadRecords()
+        } catch {
+            print("Failed to remove record")
+        }
     }
     
     
-    var sectionRecords: [FlossRecord] {
+    var sectionRecords: [FlossLog] {
         let descendingSortedRecords = records.sorted(by: {$0.date > $1.date})
         
         if let date = selectedDate {

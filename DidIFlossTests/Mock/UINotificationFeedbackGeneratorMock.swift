@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FlossyCore
 import UIKit
 @testable import DidIFloss
 

@@ -39,39 +39,6 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0C7E75402B67DF1500C123DB"
-               BuildableName = "testeTests.xctest"
-               BlueprintName = "testeTests"
-               ReferencedContainer = "container:DidIFloss.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0C1650DD2B67E64200AB9293"
-               BuildableName = "NotificationServiceTests.xctest"
-               BlueprintName = "NotificationServiceTests"
-               ReferencedContainer = "container:DidIFloss.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0CCEE1DC2B67EBDC0084C9DC"
-               BuildableName = "NotificationTests.xctest"
-               BlueprintName = "NotificationTests"
-               ReferencedContainer = "container:DidIFloss.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "0C2EF6582B710E0300AFF9D4"
                BuildableName = "DidIFlossTests.xctest"
                BlueprintName = "DidIFlossTests"

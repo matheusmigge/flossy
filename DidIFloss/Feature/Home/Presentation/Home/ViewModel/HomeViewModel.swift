@@ -6,93 +6,119 @@
 //
 
 import FlossyReminders
+import FlossyData
+import FlossyCore
 import SwiftUI
 
-class HomeViewModel: ObservableObject {
+import Foundation
+
+import Combine
+
+@MainActor
+@Observable
+class HomeViewModel: ScreenViewModel {
     
-    @Published var sheetView: Sheet?
-    @Published var showingCelebration: Bool = false
+    weak var coordinatorDelegate: HomeCoordinatorDelegate?
+    var showingCelebration: Bool = false
     
-    @Published var showingAlert: Bool = false
+    var showingAlert: Bool = false
     var focusedDate: Date?
     
     // MARK: Floss records
     
-    @Published var flossRecords: [FlossRecord] = []
+    var flossRecords: [FlossLog] = []
     
-    weak var persistence: PersistenceManagerProtocol?
-    var notificationService: FlossyRemindersService?
-    var logInteractionHandler: HandleLogInteractionUseCaseProtocol
+    weak var persistence: AppPreferencesProtocol?
+    var recordsRepository: any FlossLogRepository
+    let notificationService: FlossyRemindersService?
+    let streakAnalyzer: any StreakAnalyzer
+    let hapticsManager: HapticsManagerProtocol
     
-    var streakBoardViewModel: StreakBoardViewModel {
-        let streakInfo = StreakCalculator.calculateCurrentStreak(logsDates: flossRecords.map({$0.date}))
-        return StreakCalculator.createStreakBoardViewModel(info: streakInfo)
-    }
+    var flossLogService: (any FlossLogServicing)
     
-    init(persistence: PersistenceManagerProtocol = PersistenceManager.shared,
+    private var cancellables = Set<AnyCancellable>()
+    
+    var streakBoardViewModel: StreakBoardViewModel
+    
+    @MainActor
+    init(persistence: AppPreferencesProtocol = AppPreferences.shared,
+         recordsRepository: any FlossLogRepository = DefaultFlossLogRepositoryFactory.make(),
          notificationService: FlossyRemindersService = FlossyRemindersServiceFactory.make(),
-         logInteractionHandler: HandleLogInteractionUseCaseProtocol = HandleLogInteractionUseCase()
+         streakAnalyzer: any StreakAnalyzer = DefaultStreakAnalyzer(),
+         hapticsManager: HapticsManagerProtocol? = nil,
+         flossLogService: (any FlossLogServicing)? = nil
     ) {
         self.persistence = persistence
+        self.recordsRepository = recordsRepository
         self.notificationService = notificationService
-        self.logInteractionHandler = logInteractionHandler
+        self.streakAnalyzer = streakAnalyzer
+        self.hapticsManager = hapticsManager ?? HapticsManager()
+        self.flossLogService = flossLogService ?? FlossLogServiceFactory.make()
+        let initialState = streakAnalyzer.analyze(logDates: [])
+        self.streakBoardViewModel = StreakBoardViewModel(state: initialState)
+        
+        setupBindings()
+    }
+    
+    private func makeStreakBoardViewModel() -> StreakBoardViewModel {
+        let state = streakAnalyzer.analyze(logDates: flossRecords.map({ $0.date }))
+        return StreakBoardViewModel(state: state)
+    }
+    
+    private func setupBindings() {
+        recordsRepository.logsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] logs in
+                guard let self else { return }
+                self.flossRecords = logs
+                self.streakBoardViewModel = self.makeStreakBoardViewModel()
+            }
+            .store(in: &cancellables)
     }
     
     // MARK: Did Appear
     
-    func viewDidAppear() {
-        self.checkForOnboarding()
-        self.persistence?.delegate = self
-        
-        self.loadData()
+    func viewDidAppear() async {
+        await self.loadData()
     }
     
-    func loadData() {
-        persistence?.getFlossRecords { [weak self] records in
-            self?.flossRecords = records
+    func loadData() async {
+        guard let records = try? await recordsRepository.fetchLogs() else { return }
+        await MainActor.run {
+            self.flossRecords = records
+            self.streakBoardViewModel = self.makeStreakBoardViewModel()
         }
     }
     
-    private func checkForOnboarding() {
-        // should show onboard?
-        guard let safePersistence = persistence else { return }
-        
-        if safePersistence.checkIfIsNewUser() {
-            self.sheetView = .welcomeSheet
-        }
-    }
-    
-    func onboardingOver() {
-        notificationService?.requestAuthorizationToNotificate(provisional: false)
-        
-    }
-    
+
     func plusButtonPressed() {
         if !showingCelebration {
-            sheetView = .addLogSheet
+            coordinatorDelegate?.didTapAddLogButton()
         }
     }
     
-    func goToDeveloperView() {
-#if DEBUG
-        sheetView = .developerSheet
-#endif
-        
+    var shareStreakMessage: String {
+        let state = streakAnalyzer.analyze(logDates: flossRecords.map{ $0.date })
+        return state.shareMessage
     }
     
-    func presentShareSheet() {
-        let streak = StreakCalculator.calculateCurrentStreak(logsDates: self.flossRecords.map({ $0.date }))
-        
-        if streak.streak == .negative || streak.streak == .empty {
-            let message = "Oh no! I need to start flossing again! It's been \(streak.days) days since the last time I've flossed"
-            sheetView = .shareStreak(streakInfo: message)
-        }
-        
-        if streak.streak == .positive || streak.streak == .positiveMissingToday {
-            let message = "Look at me go!! I have been flossing for \(streak.days) days straight!"
-            sheetView = .shareStreak(streakInfo: message)
-        }
+    func goToLogRecords() {
+        coordinatorDelegate?.didTapLogRecords()
     }
     
 }
 
+extension StreakState {
+    var shareMessage: String {
+        switch self {
+        case .noHistory:
+            return "I'm starting my flossing streak today!"
+        case .startedToday:
+            return "Look at me go! I started flossing today!"
+        case .activePendingToday(days: let days), .activeCompletedToday(days: let days):
+            return "Look at me go! I have been flossing for \(days) days straight!"
+        case .inactive(daysSinceLastLog: let days):
+            return "Oh no! I need to start flossing again! It's been \(days) days since the last time I've flossed"
+        }
+    }
+}
